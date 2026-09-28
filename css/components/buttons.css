@@ -1,6 +1,6 @@
 /* ==========================================================================
    SPAREFINDER — BUTTON COMPONENTS (BEM)
-   Consistent Heights, Padding, Hover & Active Micro-interactions
+   Consistent Heights, Padding, Restrained Industrial Micro-interactions
    ========================================================================== */
 
 .c-btn {
@@ -10,10 +10,11 @@
     gap: 0.5rem;
     font-family: var(--font-sans);
     font-size: 0.875rem;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.625rem;
+    min-height: 40px;
+    padding: 0.55rem 1.25rem;
+    border-radius: 6px;
     border: 1px solid transparent;
     cursor: pointer;
     text-decoration: none;
@@ -21,12 +22,7 @@
     user-select: none;
     transition: background-color var(--transition-fast), 
                 border-color var(--transition-fast), 
-                box-shadow var(--transition-fast), 
-                transform 100ms ease;
-}
-
-.c-btn:active {
-    transform: scale(0.99);
+                color var(--transition-fast);
 }
 
 .c-btn:focus-visible {
@@ -38,15 +34,17 @@
 .c-btn--primary {
     background-color: var(--color-brand-primary);
     color: #FFFFFF;
-    border-color: var(--color-brand-primary);
-    box-shadow: 0 1px 3px rgba(22, 119, 255, 0.25);
+    border-color: transparent;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
 }
 
 .c-btn--primary:hover {
     background-color: var(--color-brand-primary-hover);
-    border-color: var(--color-brand-primary-hover);
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(22, 119, 255, 0.35);
+}
+
+.c-btn--primary:active {
+    background-color: var(--color-brand-primary-dark);
 }
 
 /* Secondary Button */
@@ -54,6 +52,7 @@
     background-color: #FFFFFF;
     color: var(--color-text-primary);
     border-color: var(--color-border-default);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
 }
 
 .c-btn--secondary:hover {
@@ -62,19 +61,25 @@
     color: var(--color-text-primary);
 }
 
+.c-btn--secondary:active {
+    background-color: var(--color-bg-muted);
+}
+
 /* Emergency Breakdown Action */
 .c-btn--emergency {
     background-color: var(--color-emergency);
     color: #FFFFFF;
-    border-color: var(--color-emergency);
-    box-shadow: 0 1px 3px rgba(234, 88, 12, 0.25);
+    border-color: transparent;
+    box-shadow: 0 1px 2px rgba(232, 117, 25, 0.2);
 }
 
 .c-btn--emergency:hover {
     background-color: var(--color-emergency-hover);
-    border-color: var(--color-emergency-hover);
     color: #FFFFFF;
-    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+}
+
+.c-btn--emergency:active {
+    background-color: #B5520A;
 }
 
 /* Utility Sizes */
@@ -83,14 +88,14 @@
 }
 
 .c-btn--lg {
-    padding: 0.875rem 1.5rem;
+    min-height: 44px;
+    padding: 0.65rem 1.5rem;
     font-size: 0.9375rem;
-    border-radius: 0.75rem;
 }
 
 .c-btn--sm {
-    padding: 0.45rem 0.875rem;
+    min-height: 34px;
+    padding: 0.4rem 0.875rem;
     font-size: 0.8125rem;
-    border-radius: 0.5rem;
 }
 

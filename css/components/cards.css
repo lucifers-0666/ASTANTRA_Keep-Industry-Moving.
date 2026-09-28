@@ -1,27 +1,27 @@
 /* ==========================================================================
    SPAREFINDER — CARD COMPONENTS (BEM)
-   Clean Industrial Surfaces, Soft Physical Elevation, Stat Cards
+   Clean Industrial White Surfaces on #F1F3F5 Canvas
    ========================================================================== */
 
 .c-card {
     background-color: var(--color-bg-surface);
     border: 1px solid var(--color-border-default);
-    border-radius: 0.75rem;
+    border-radius: 8px;
     padding: 1.5rem;
     box-shadow: var(--shadow-card);
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .c-card--interactive:hover {
-    border-color: var(--color-brand-primary);
+    border-color: var(--color-border-strong);
     box-shadow: var(--shadow-lifted);
 }
 
-/* Metric / Stat Card */
+/* Metric / Stat Card (Used only where purposeful) */
 .c-stat-card {
     background-color: var(--color-bg-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 0.5rem;
+    border: 1px solid var(--color-border-default);
+    border-radius: 6px;
     padding: 0.875rem 1rem;
     text-align: left;
 }
@@ -29,22 +29,17 @@
 .c-stat-card__value {
     font-family: var(--font-mono);
     font-size: 1.25rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--color-text-primary);
     line-height: 1;
     margin-bottom: 0.25rem;
 }
 
-.c-stat-card__value span {
-    color: var(--color-brand-primary);
-    font-size: 0.9em;
-}
-
 .c-stat-card__label {
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    font-weight: 700;
-    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }

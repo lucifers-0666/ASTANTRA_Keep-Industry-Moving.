@@ -1,67 +1,80 @@
 /* ==========================================================================
    SPAREFINDER INDUSTRIAL PROCUREMENT NETWORK — DESIGN TOKENS
-   Single Source of Truth for Brand Palette & Layout Scale (Light Industrial Theme)
+   Single Source of Truth for Industrial B2B Visual System
    ========================================================================== */
 
 :root {
-    /* Brand & Primary Actions (From Logo & Main CTAs) */
-    --color-brand-primary: #1677FF;
-    --color-brand-primary-hover: #0958D9;
-    --color-brand-primary-dark: #003EB3;
-    --color-brand-primary-light: #E6F4FF;
-    --color-brand-primary-ring: rgba(22, 119, 255, 0.20);
+    /* Brand & Primary Actions (Restrained Industrial Blue) */
+    --color-brand-primary: #1769E0;
+    --color-brand-primary-hover: #1358BE;
+    --color-brand-primary-dark: #0E47A1;
+    --color-brand-primary-light: #EBF3FC;
+    --color-brand-primary-ring: rgba(23, 105, 224, 0.18);
 
-    /* Emergency Breakdown Accent (Safety Orange) */
-    --color-emergency: #EA580C;
-    --color-emergency-hover: #C2410C;
-    --color-emergency-bg: #FFF7ED;
-    --color-emergency-border: #FED7AA;
-    --color-emergency-text: #9A3412;
+    /* Emergency Breakdown Accent (Restrained Industrial Orange) */
+    --color-emergency: #E87519;
+    --color-emergency-hover: #D06410;
+    --color-emergency-bg: #FEF3EB;
+    --color-emergency-border: #FCD5B5;
+    --color-emergency-text: #9E4504;
 
-    /* Light Industrial Surfaces & Page Canvas (Step 4 Requirement) */
-    --color-bg-page: #F8FAFC;
+    /* Industrial Canvas & Surfaces */
+    --color-bg-page: #F1F3F5;
     --color-bg-surface: #FFFFFF;
-    --color-bg-subtle: #F1F5F9;
-    --color-bg-muted: #E2E8F0;
+    --color-bg-subtle: #E9ECEF;
+    --color-bg-muted: #DEE2E6;
     --color-bg-input: #FFFFFF;
     --color-bg-input-focus: #FFFFFF;
 
-    /* Structural Borders & Dividers */
-    --color-border-subtle: #E2E8F0;
-    --color-border-default: #CBD5E1;
-    --color-border-strong: #94A3B8;
-    --color-border-focus: #1677FF;
+    /* Dark Authority / Technical Sections */
+    --color-bg-dark: #101C2C;
+    --color-bg-dark-surface: #17263A;
+    --color-bg-dark-border: #22354E;
 
-    /* High-Contrast Typography */
-    --color-text-primary: #0F172A;     /* 100% Dark Slate Headings */
-    --color-text-body: #334155;        /* Slate-700 High-Readability Body */
-    --color-text-secondary: #475569;   /* Slate-600 Supporting Text */
-    --color-text-muted: #64748B;       /* Slate-500 Form Placeholders & Hints */
-    --color-text-dim: #94A3B8;         /* Slate-400 Subtle Accents */
+    /* Structural Borders & Dividers */
+    --color-border-subtle: #E5E9EE;
+    --color-border-default: #D9DEE5;
+    --color-border-strong: #BDC6D1;
+    --color-border-focus: #1769E0;
+
+    /* High-Contrast B2B Typography */
+    --color-text-primary: #111827;     /* High-authority headings */
+    --color-text-body: #172033;        /* Readable dark slate body */
+    --color-text-secondary: #5F6B7A;   /* Structured secondary metadata */
+    --color-text-muted: #7E8B9B;       /* Placeholders and hints */
+    --color-text-dim: #9EAAB7;         /* Subtle borders / icons */
     --color-text-inverse: #FFFFFF;
 
     /* Operational Status Signals */
-    --color-status-success: #059669;
-    --color-status-success-bg: #ECFDF5;
-    --color-status-success-border: #A7F3D0;
-    --color-status-warning: #D97706;
-    --color-status-warning-bg: #FFFBEB;
+    --color-status-success: #18865B;
+    --color-status-success-bg: #E8F5EE;
+    --color-status-success-border: #BEE5D3;
+    --color-status-warning: #B45309;
+    --color-status-warning-bg: #FEF3C7;
     --color-status-warning-border: #FDE68A;
     --color-status-error: #DC2626;
     --color-status-error-bg: #FEF2F2;
     --color-status-error-border: #FECACA;
 
     /* Typography Stacks */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-    /* Shadows & Elevation */
-    --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-    --shadow-lifted: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    /* Restrained Industrial Radii (6px-8px) */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 10px;
 
-    /* Transitions & Dynamics */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    /* Restrained Elevation & Shadows (No Glowing Blobs) */
+    --shadow-subtle: 0 1px 2px rgba(16, 24, 40, 0.04);
+    --shadow-card: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+    --shadow-lifted: 0 4px 12px rgba(16, 24, 40, 0.08);
+
+    /* Precise Industrial Transitions */
+    --transition-fast: 150ms ease-out;
+    --transition-normal: 200ms ease-out;
+
+    /* Global Layout Constraints */
+    --layout-max-width: 1220px;
 }
 
