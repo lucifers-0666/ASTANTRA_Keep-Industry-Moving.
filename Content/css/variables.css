@@ -1,0 +1,51 @@
+/* ==========================================================================
+   SPAREFINDER - CENTRAL DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+    /* Colors - Backgrounds & Surfaces */
+    --sf-bg: #F1F3F5;
+    --sf-surface: #FFFFFF;
+    --sf-surface-subtle: #F8F9FA;
+    
+    /* Colors - Text */
+    --sf-text: #111827;
+    --sf-text-muted: #5F6B7A;
+    --sf-text-light: #7E8B9B;
+
+    /* Colors - Borders */
+    --sf-border: #D9DEE5;
+    --sf-border-light: #E5E9EE;
+
+    /* Colors - Brand & Actions */
+    --sf-primary: #1769E0;
+    --sf-primary-hover: #1358BE;
+    --sf-navy: #101C2C;
+    --sf-navy-hover: #1E293B;
+
+    /* Colors - Status */
+    --sf-emergency: #E87519;
+    --sf-emergency-hover: #D06410;
+    --sf-success: #18865B;
+    --sf-warning: #B45309;
+
+    /* Spacing & Sizing */
+    --sf-radius-sm: 6px;
+    --sf-radius-md: 8px;
+    --sf-radius-lg: 12px;
+
+    /* Shadows */
+    --sf-shadow-sm: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+    --sf-shadow-md: 0 4px 6px -1px rgba(16, 24, 40, 0.05), 0 2px 4px -1px rgba(16, 24, 40, 0.03);
+
+    /* Layout */
+    --sf-container: 1240px;
+    --sf-header-height: 64px;
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --sf-header-height: 60px;
+    }
+}
+

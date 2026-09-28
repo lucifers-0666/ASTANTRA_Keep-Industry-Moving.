@@ -35,82 +35,65 @@ namespace IndustrialSparePartPortal.MasterPages
         /// <summary>
         /// navHome control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navHome;
 
         /// <summary>
         /// navParts control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navParts;
 
         /// <summary>
         /// navSuppliers control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navSuppliers;
 
         /// <summary>
         /// navTechnicians control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navTechnicians;
 
         /// <summary>
         /// navHowItWorks control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navHowItWorks;
 
         /// <summary>
         /// navWhyUs control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navWhyUs;
 
         /// <summary>
         /// navEmergency control.
         /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navEmergency;
-
-        /// <summary>
-        /// navLogin control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navLogin;
-
-        /// <summary>
-        /// navRegister control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navRegister;
-
-        /// <summary>
-        /// navMobHome control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobHome;
-
-        /// <summary>
-        /// navMobParts control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobParts;
-
-        /// <summary>
-        /// navMobSuppliers control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobSuppliers;
-
-        /// <summary>
-        /// navMobTechnicians control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobTechnicians;
-
-        /// <summary>
-        /// navMobHowItWorks control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobHowItWorks;
-
-        /// <summary>
-        /// navMobWhyUs control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobWhyUs;
-
-        /// <summary>
-        /// navMobEmergency control.
-        /// </summary>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobEmergency;
 
         /// <summary>
         /// phAnonymous control.
@@ -120,6 +103,24 @@ namespace IndustrialSparePartPortal.MasterPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phAnonymous;
+
+        /// <summary>
+        /// navLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navLogin;
+
+        /// <summary>
+        /// navRegister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navRegister;
 
         /// <summary>
         /// phAuthenticated control.
@@ -138,6 +139,69 @@ namespace IndustrialSparePartPortal.MasterPages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkDashboard;
+
+        /// <summary>
+        /// navMobHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobHome;
+
+        /// <summary>
+        /// navMobParts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobParts;
+
+        /// <summary>
+        /// navMobSuppliers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobSuppliers;
+
+        /// <summary>
+        /// navMobTechnicians control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobTechnicians;
+
+        /// <summary>
+        /// navMobHowItWorks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobHowItWorks;
+
+        /// <summary>
+        /// navMobWhyUs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobWhyUs;
+
+        /// <summary>
+        /// navMobEmergency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMobEmergency;
 
         /// <summary>
         /// MainContent control.

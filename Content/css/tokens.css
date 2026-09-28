@@ -1,0 +1,67 @@
+/* Design tokens for SPAREFINDER - colors, typography, spacing */
+:root{
+  /* Colors */
+  --bg: #F1F3F5;
+  --surface: #FFFFFF;
+  --text-primary: #111827;
+  --text-secondary: #5F6B7A;
+  --border: #D9DEE5;
+  --brand: #1769E0;
+  --deep-navy: #101C2C;
+  --darker-navy: #0B1422;
+  --emergency: #E87519;
+  --success: #18865B;
+  --subtle-blue: #EEF5FF;
+  --subtle-orange: #FFF4EA;
+
+  /* Typography (Inter system) */
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+
+  /* Type scale */
+  --display: 56px;
+  --h1: 48px;
+  --h2: 32px;
+  --h3: 22px;
+  --h4: 18px;
+  --body-lg: 17px;
+  --body: 15px;
+  --small: 13px;
+
+  /* Spacing (px) */
+  --s-0: 0;
+  --s-8: 8px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-24: 24px;
+  --s-32: 32px;
+  --s-48: 48px;
+  --s-64: 64px;
+  --s-80: 80px;
+  --s-96: 96px;
+
+  /* Radii */
+  --r-card: 10px;
+  --r-btn: 8px;
+  --r-input: 8px;
+
+  /* Shadows */
+  --shadow-base: 0 2px 8px rgba(16,24,40,.05);
+  --shadow-elevated: 0 8px 24px rgba(16,24,40,.08);
+  --shadow-hero: 0 12px 32px rgba(16,24,40,.10);
+
+  /* Timing */
+  --timing-fast: 140ms;
+  --timing-medium: 240ms;
+  --timing-smooth: 420ms;
+
+  /* Breakpoints */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  :root{ --timing-fast: 1ms; --timing-medium: 1ms; --timing-smooth: 1ms; }
+}

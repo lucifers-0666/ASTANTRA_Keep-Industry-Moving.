@@ -1,137 +1,67 @@
-<%@ Page Title="How It Works - Industrial Procurement Workflow" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="HowItWorks.aspx.cs" Inherits="IndustrialSparePartPortal.Public.HowItWorks" %>
+﻿<%@ Page Title="How SPAREFINDER Works" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="HowItWorks.aspx.cs" Inherits="IndustrialSparePartPortal.Public.HowItWorks" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="description" content="Step-by-step industrial spare-part sourcing, supplier RFQ quotation, and emergency breakdown protocol workflow." />
+    <link href="<%= ResolveUrl("~/Content/css/public/how-it-works.css") %>" rel="stylesheet" />
+    <meta name="description" content="Understand the B2B industrial procurement workflow on SPAREFINDER, from RFQ to dispatch." />
+    <script src="<%= ResolveUrl("~/Content/js/ux-utils.js") %>"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
-    <!-- ============================================================================ -->
-    <!-- 1. HERO BANNER                                                               -->
-    <!-- ============================================================================ -->
-    <div class="bg-white border-b border-[#D9DEE5] py-8 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-2 text-left">
-            <span class="text-xs font-mono font-bold text-[#1769E0] uppercase tracking-wider block">
-                Workflow Specification
+    <div style="background: var(--sf-surface); border-bottom: 1px solid var(--sf-border); padding: 48px 0;">
+        <div class="sf-container" style="max-width: 960px;">
+            <span style="font-size: 12px; font-weight: 700; color: var(--sf-primary); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px;">
+                Platform Workflow
             </span>
-            <h1 class="text-2xl sm:text-3xl font-bold text-[#111827] m-0">
-                How SPAREFINDER Works
-            </h1>
-            <p class="text-xs sm:text-sm text-[#5F6B7A] max-w-2xl leading-relaxed m-0">
-                A structured digital workflow connecting plant maintenance departments, regional parts stockists, and on-site service engineers to eliminate machine downtime.
+            <h1 style="font-size: 28px; color: var(--sf-navy); margin: 0 0 12px 0;">How SPAREFINDER Works</h1>
+            <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0; max-width: 600px;">
+                A centralized, transparent workflow designed specifically for industrial B2B spare-part procurement and emergency technical support.
             </p>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-        
-        <!-- ============================================================================ -->
-        <!-- 2. CORE 3-STEP PROCUREMENT WORKFLOW                                          -->
-        <!-- ============================================================================ -->
-        <section class="space-y-4">
-            <div class="text-left space-y-1">
-                <span class="text-xs font-mono font-bold text-[#1769E0] uppercase tracking-wider block">Standard Procurement Sequence</span>
-                <h2 class="text-xl font-bold text-[#111827] m-0">Three Steps from Part Inquiry to Delivery</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <!-- Step 1 -->
-                <div class="surface-card p-6 space-y-3 text-left">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-[#1769E0]">STEP 01</span>
-                        <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center font-bold text-sm">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-base font-bold text-[#111827] m-0">Find the Part</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Search indexed components by stamped OEM part number (e.g. 6210-2RS) or compatible machine model to review exact technical tolerances.
+    <div class="sf-container" style="max-width: 960px; padding-top: 64px; padding-bottom: 64px;">
+        <div style="display: flex; flex-direction: column; gap: 48px; position: relative;">
+            
+            <div style="display: flex; gap: 32px; align-items: flex-start; flex-direction: column; border-bottom: 1px solid var(--sf-border); padding-bottom: 32px;" class="md:flex-row">
+                <div style="font-size: 64px; font-weight: 800; color: var(--sf-surface-subtle); line-height: 1; margin-top: -8px;">01</div>
+                <div>
+                    <h2 style="font-size: 20px; color: var(--sf-navy); margin: 0 0 12px 0;">Identify &amp; Search</h2>
+                    <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0; max-width: 600px; line-height: 1.6;">
+                        Factory procurement teams search the indexed catalog using OEM part numbers, descriptions, or specific machine models. The system cross-references availability across all verified regional suppliers.
                     </p>
                 </div>
+            </div>
 
-                <!-- Step 2 -->
-                <div class="surface-card p-6 space-y-3 text-left">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-[#1769E0]">STEP 02</span>
-                        <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center font-bold text-sm">
-                            <i class="fa-solid fa-code-compare"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-base font-bold text-[#111827] m-0">Compare Suppliers</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Evaluate regional stockists side-by-side on confirmed shelf inventory, transit distance, and itemized quotation pricing.
+            <div style="display: flex; gap: 32px; align-items: flex-start; flex-direction: column; border-bottom: 1px solid var(--sf-border); padding-bottom: 32px;" class="md:flex-row">
+                <div style="font-size: 64px; font-weight: 800; color: var(--sf-surface-subtle); line-height: 1; margin-top: -8px;">02</div>
+                <div>
+                    <h2 style="font-size: 20px; color: var(--sf-navy); margin: 0 0 12px 0;">Compare Quotations</h2>
+                    <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0; max-width: 600px; line-height: 1.6;">
+                        Suppliers instantly provide pricing, lead times, and warranty terms. Buyers compare quotations side-by-side in their secure dashboard, factoring in the supplier's verified rating and geographic distance.
                     </p>
                 </div>
+            </div>
 
-                <!-- Step 3 -->
-                <div class="surface-card p-6 space-y-3 text-left">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-mono font-bold text-[#1769E0]">STEP 03</span>
-                        <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center font-bold text-sm">
-                            <i class="fa-solid fa-truck-fast"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-base font-bold text-[#111827] m-0">Procure the Part</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Confirm purchase orders, coordinate dedicated freight dispatch, and mobilize certified on-call field technicians if installation is required.
+            <div style="display: flex; gap: 32px; align-items: flex-start; flex-direction: column; border-bottom: 1px solid var(--sf-border); padding-bottom: 32px;" class="md:flex-row">
+                <div style="font-size: 64px; font-weight: 800; color: var(--sf-surface-subtle); line-height: 1; margin-top: -8px;">03</div>
+                <div>
+                    <h2 style="font-size: 20px; color: var(--sf-navy); margin: 0 0 12px 0;">Procure &amp; Dispatch</h2>
+                    <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0; max-width: 600px; line-height: 1.6;">
+                        Upon selection, a formal procurement order is generated. If installation assistance or troubleshooting is required, an independent, certified field technician can be booked concurrently.
                     </p>
                 </div>
-
-            </div>
-        </section>
-
-        <!-- ============================================================================ -->
-        <!-- 3. EMERGENCY FAST-TRACK PROTOCOL                                             -->
-        <!-- ============================================================================ -->
-        <section class="surface-card p-6 sm:p-8 space-y-5 text-left border-l-4 border-l-[#E87519]">
-            <div class="space-y-1">
-                <span class="text-xs font-mono font-bold text-[#E87519] uppercase tracking-wider block">
-                    Breakdown Fast-Track Protocol
-                </span>
-                <h2 class="text-xl font-bold text-[#111827] m-0">
-                    When Machine Breakdown Occurs
-                </h2>
-                <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 leading-relaxed max-w-2xl">
-                    Critical equipment stoppage requires immediate escalation. The Emergency Protocol bypasses multi-day procurement cycles through instant regional broadcasts.
-                </p>
             </div>
 
-            <!-- 4-Stage Horizontal Flow -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-                <div class="p-4 rounded bg-[#F8F9FA] border border-[#E5E9EE] space-y-1.5">
-                    <span class="text-[11px] font-mono font-bold text-[#E87519] block">STAGE 1</span>
-                    <strong class="text-xs font-bold text-[#111827] block">Machine Breakdown</strong>
-                    <p class="text-xs text-[#5F6B7A] m-0 leading-snug">Plant floor logs failed equipment and observed failure symptoms.</p>
-                </div>
-
-                <div class="p-4 rounded bg-[#F8F9FA] border border-[#E5E9EE] space-y-1.5">
-                    <span class="text-[11px] font-mono font-bold text-[#E87519] block">STAGE 2</span>
-                    <strong class="text-xs font-bold text-[#111827] block">Emergency Request</strong>
-                    <p class="text-xs text-[#5F6B7A] m-0 leading-snug">Priority alert broadcast with OEM part numbers and urgency severity.</p>
-                </div>
-
-                <div class="p-4 rounded bg-[#F8F9FA] border border-[#E5E9EE] space-y-1.5">
-                    <span class="text-[11px] font-mono font-bold text-[#E87519] block">STAGE 3</span>
-                    <strong class="text-xs font-bold text-[#111827] block">Vendor &amp; Tech Response</strong>
-                    <p class="text-xs text-[#5F6B7A] m-0 leading-snug">Regional stockists confirm ready stock; nearby technician is alerted.</p>
-                </div>
-
-                <div class="p-4 rounded bg-[#F8F9FA] border border-[#E5E9EE] space-y-1.5">
-                    <span class="text-[11px] font-mono font-bold text-[#E87519] block">STAGE 4</span>
-                    <strong class="text-xs font-bold text-[#111827] block">Rapid Resolution</strong>
-                    <p class="text-xs text-[#5F6B7A] m-0 leading-snug">Same-day transit and on-site fitting return the assembly line to operation.</p>
+            <div style="display: flex; gap: 32px; align-items: flex-start; flex-direction: column;" class="md:flex-row">
+                <div style="font-size: 64px; font-weight: 800; color: var(--sf-surface-subtle); line-height: 1; margin-top: -8px;">04</div>
+                <div>
+                    <h2 style="font-size: 20px; color: var(--sf-navy); margin: 0 0 12px 0;">Emergency Protocol</h2>
+                    <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0; max-width: 600px; line-height: 1.6;">
+                        For critical plant downtime, the Emergency Desk bypasses standard search. It blasts an immediate priority alert to all regional stockists and available on-call engineers to resolve the breakdown in hours, not days.
+                    </p>
                 </div>
             </div>
 
-            <div class="pt-2 flex items-center justify-between border-t border-[#D9DEE5]">
-                <span class="text-xs text-[#5F6B7A] font-mono">Response Target: &lt; 2 Hours for critical emergencies</span>
-                <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2 px-4">
-                    Open Emergency Desk →
-                </a>
-            </div>
-        </section>
-
+        </div>
     </div>
 </asp:Content>
-

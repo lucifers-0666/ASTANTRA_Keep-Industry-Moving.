@@ -1,229 +1,171 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="IndustrialSparePartPortal.MasterPages.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="IndustrialSparePartPortal.MasterPages.SiteMaster" %>
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#F1F3F5]">
+<html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - SPAREFINDER Industrial Procurement Network</title>
+    <title><%: Page.Title %> - SPAREFINDER</title>
     
-    <!-- Compiled Tailwind CSS & Industrial Design System -->
-    <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    
-    <!-- Modular Industrial Design System (BEM) -->
-    <link href="<%= ResolveUrl("~/css/variables.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/base.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/layout.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/components/buttons.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/components/forms.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/components/cards.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/components/badges.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/css/animations.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    
-    <!-- FontAwesome 6 Icons -->
+    <!-- New SPAREFINDER design system -->
+    <link href="<%= ResolveUrl("~/Content/css/tokens.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Content/css/base.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Content/css/components.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Content/css/animations.css") %>" rel="stylesheet" />
+
+    <!-- Page specific sheets will be loaded by pages when required -->
+    <link href="<%= ResolveUrl("~/Content/css/site-header.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Content/css/site-footer.css") %>" rel="stylesheet" />
+
+    <!-- Legacy / fallback CSS (will be removed after migration) -->
+    <link href="<%= ResolveUrl("~/css/site-header-enhanced.css") %>" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <!-- Google Fonts Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
-<body class="h-full flex flex-col font-['Inter',system-ui,sans-serif] antialiased text-[#111827] bg-[#F1F3F5]">
-    <form id="form1" runat="server" class="flex flex-col min-h-full">
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+        <script src="<%= ResolveUrl("~/Content/js/ux-utils.js") %>"></script>
 
-        <!-- ============================================================================ -->
-        <!-- AUTHORITATIVE CLEAN MASTER HEADER (.site-header)                             -->
-        <!-- Solid white surface, thin border, route-aware active indicators             -->
-        <!-- ============================================================================ -->
-        <header id="headerWrapper" class="site-header" role="banner">
-            <div class="site-header-inner">
-                
-                <!-- Brand Identity -->
-                <a href="~/Default.aspx" runat="server" class="site-brand" aria-label="SPAREFINDER Home">
-                    <div class="site-brand-icon">
-                        <i class="fa-solid fa-gears text-sm"></i>
-                    </div>
-                    <div class="site-brand-text">
-                        <span class="site-brand-title">SPARE<span>FINDER</span></span>
-                        <span class="site-brand-sub">Industrial Procurement</span>
-                    </div>
+        <header class="sf-header" role="banner">
+            <div class="sf-container sf-header-container">
+                <a href="~/Default.aspx" runat="server" class="sf-brand">
+                    <i class="fa-solid fa-gears"></i> SPAREFINDER <span class="sf-brand-tagline">Industrial Procurement</span>
                 </a>
 
-                <!-- Desktop Primary Navigation with Route-Aware Active Indicators -->
-                <nav class="site-desktop-nav" aria-label="Main Navigation">
-                    <a id="navHome" href="~/Default.aspx" runat="server" class="site-nav-link">Home</a>
-                    <a id="navParts" href="~/Public/Parts.aspx" runat="server" class="site-nav-link">Spare Parts</a>
-                    <a id="navSuppliers" href="~/Public/Suppliers.aspx" runat="server" class="site-nav-link">Suppliers</a>
-                    <a id="navTechnicians" href="~/Public/Technicians.aspx" runat="server" class="site-nav-link">Technicians</a>
-                    <a id="navHowItWorks" href="~/Public/HowItWorks.aspx" runat="server" class="site-nav-link">How It Works</a>
-                    <a id="navWhyUs" href="~/Public/WhyUs.aspx" runat="server" class="site-nav-link">Why Us</a>
-                    <a id="navEmergency" href="~/Public/Emergency.aspx" runat="server" class="site-nav-link site-nav-link-emergency">
-                        <i class="fa-solid fa-bolt text-xs"></i> Emergency Desk
-                    </a>
+                <nav class="sf-nav-desktop" aria-label="Main Navigation">
+                    <a id="navHome" href="~/Default.aspx" runat="server" class="sf-nav-link">Home</a>
+                    <a id="navParts" href="~/Public/Parts.aspx" runat="server" class="sf-nav-link">Spare Parts</a>
+                    <a id="navSuppliers" href="~/Public/Suppliers.aspx" runat="server" class="sf-nav-link">Suppliers</a>
+                    <a id="navTechnicians" href="~/Public/Technicians.aspx" runat="server" class="sf-nav-link">Technicians</a>
+                    <a id="navHowItWorks" href="~/Public/HowItWorks.aspx" runat="server" class="sf-nav-link">How It Works</a>
+                    <a id="navWhyUs" href="~/Public/WhyUs.aspx" runat="server" class="sf-nav-link">Why Us</a>
                 </nav>
 
-                <!-- Action Controls: Authentication -->
-                <div class="site-header-actions">
+                <div class="sf-nav-actions">
+                    <a id="navEmergency" href="~/Public/Emergency.aspx" runat="server" class="sf-btn sf-btn-emergency" style="padding: 6px 12px; font-size: 12px;">
+                        <i class="fa-solid fa-bolt"></i> Emergency Desk
+                    </a>
                     <asp:PlaceHolder ID="phAnonymous" runat="server">
-                        <a id="navLogin" href="~/Account/Login.aspx" runat="server" class="site-btn-signin">
-                            Sign In
-                        </a>
-                        <a id="navRegister" href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2 px-3.5">
-                            Register
-                        </a>
+                        <a id="navLogin" href="~/Account/Login.aspx" runat="server" class="sf-nav-link">Sign In</a>
+                        <a id="navRegister" href="~/Account/Register.aspx" runat="server" class="sf-btn sf-btn-primary" style="padding: 6px 12px; font-size: 12px;">Register</a>
                     </asp:PlaceHolder>
-
                     <asp:PlaceHolder ID="phAuthenticated" runat="server" Visible="false">
-                        <a id="lnkDashboard" runat="server" href="#" class="btn-secondary text-xs py-2 px-3">
-                            <i class="fa-solid fa-gauge-high text-xs"></i> Workspace
-                        </a>
-                        <a href="~/Account/Logout.aspx" runat="server" class="text-xs text-red-600 hover:text-red-700 font-semibold px-2 py-1 transition-colors">Logout</a>
+                        <a id="lnkDashboard" href="~/Default.aspx" runat="server" class="sf-btn sf-btn-primary" style="padding: 6px 12px; font-size: 12px;">Dashboard</a>
+                        <a href="~/Account/Logout.aspx" runat="server" class="sf-nav-link" style="color: #dc2626;">Logout</a>
                     </asp:PlaceHolder>
                 </div>
 
-                <!-- Mobile Menu Hamburger Button (< 1024px) -->
-                <button type="button" id="btnMobileToggle" class="site-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+                <button type="button" id="btnMobileToggle" class="sf-mobile-toggle" aria-expanded="false">
                     <i class="fa-solid fa-bars" id="iconMenu"></i>
                 </button>
-
             </div>
-
-            <!-- Mobile Navigation Drawer Overlay (< 1024px) -->
-            <div id="mobileDrawer" class="site-mobile-menu" aria-label="Mobile Navigation">
-                <nav class="flex flex-col space-y-1 text-sm font-semibold text-[#111827]">
-                    <a id="navMobHome" href="~/Default.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Home</a>
-                    <a id="navMobParts" href="~/Public/Parts.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Spare Parts</a>
-                    <a id="navMobSuppliers" href="~/Public/Suppliers.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Suppliers</a>
-                    <a id="navMobTechnicians" href="~/Public/Technicians.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Technicians</a>
-                    <a id="navMobHowItWorks" href="~/Public/HowItWorks.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">How It Works</a>
-                    <a id="navMobWhyUs" href="~/Public/WhyUs.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Why Us</a>
-                    <a id="navMobEmergency" href="~/Public/Emergency.aspx" runat="server" class="px-3.5 py-2.5 rounded bg-orange-50 text-[#E87519] font-bold border border-orange-200 mt-1">
-                        <i class="fa-solid fa-bolt mr-2"></i> Emergency Desk
-                    </a>
-                </nav>
-
-                <div class="pt-4 mt-4 border-t border-[#D9DEE5] flex flex-col gap-2.5">
-                    <a href="~/Account/Login.aspx" runat="server" class="btn-secondary w-full justify-center text-xs py-2.5">Sign In</a>
-                    <a href="~/Account/Register.aspx" runat="server" class="btn-primary w-full justify-center text-xs py-2.5">Register Account</a>
+            
+            <div id="mobileDrawer" class="sf-mobile-menu">
+                <a id="navMobHome" href="~/Default.aspx" runat="server">Home</a>
+                <a id="navMobParts" href="~/Public/Parts.aspx" runat="server">Spare Parts</a>
+                <a id="navMobSuppliers" href="~/Public/Suppliers.aspx" runat="server">Suppliers</a>
+                <a id="navMobTechnicians" href="~/Public/Technicians.aspx" runat="server">Technicians</a>
+                <a id="navMobHowItWorks" href="~/Public/HowItWorks.aspx" runat="server">How It Works</a>
+                <a id="navMobWhyUs" href="~/Public/WhyUs.aspx" runat="server">Why Us</a>
+                <a id="navMobEmergency" href="~/Public/Emergency.aspx" runat="server" style="color: var(--sf-emergency);"><i class="fa-solid fa-bolt"></i> Emergency Desk</a>
+                <div style="border-top: 1px solid var(--sf-border); margin-top: 12px; padding-top: 12px;">
+                    <a href="~/Account/Login.aspx" runat="server">Sign In</a>
+                    <a href="~/Account/Register.aspx" runat="server" style="color: var(--sf-primary);">Register</a>
                 </div>
             </div>
         </header>
 
-        <!-- Mobile Drawer Backdrop Overlay -->
-        <div id="mobileDrawerBackdrop" class="site-mobile-backdrop"></div>
+        <div id="mobileDrawerBackdrop" class="sf-backdrop"></div>
 
-        <!-- ============================================================================ -->
-        <!-- MAIN CONTENT AREA                                                            -->
-        <!-- ============================================================================ -->
-        <main class="flex-1" role="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+        <main role="main" class="flex-1">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
         </main>
 
-        <!-- ============================================================================ -->
-        <!-- CONTEXTUAL PRE-FOOTER EMERGENCY CALLOUT                                      -->
-        <!-- Shown on high-level discovery pages (Home, Why Us); suppressed on Login/Reg  -->
-        <!-- ============================================================================ -->
         <asp:PlaceHolder ID="phPreFooterEmergency" runat="server">
-            <section class="bg-white border-t border-b border-[#D9DEE5] py-8 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                    <div class="space-y-1.5 max-w-2xl text-left">
-                        <div class="flex items-center gap-2">
-                            <span class="spec-tag spec-tag-orange"><i class="fa-solid fa-bolt"></i> EMERGENCY PROTOCOL</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-[#111827] m-0">Critical machine stopped on your plant floor?</h3>
-                        <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 leading-relaxed">
-                            Broadcast urgent OEM replacement requirements across regional verified stockists and on-call field technicians.
-                        </p>
+            <section style="background: var(--sf-surface); border-top: 1px solid var(--sf-border); border-bottom: 1px solid var(--sf-border); padding: 48px 0;">
+                <div class="sf-container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+                    <div>
+                        <div style="color: var(--sf-emergency); font-size: 12px; font-weight: 700; margin-bottom: 8px;"><i class="fa-solid fa-bolt"></i> EMERGENCY PROTOCOL</div>
+                        <h3 style="font-size: 20px; color: var(--sf-text); margin: 0 0 8px 0;">Critical machine stopped on your plant floor?</h3>
+                        <p style="margin: 0; max-width: 600px;">Broadcast urgent OEM replacement requirements across regional verified stockists and on-call field technicians.</p>
                     </div>
-                    <div class="flex items-center gap-3 shrink-0">
-                        <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2.5 px-5 font-semibold whitespace-nowrap">
-                            <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Submit Breakdown Alert
-                        </a>
-                    </div>
+                    <a href="~/Public/Emergency.aspx" runat="server" class="sf-btn sf-btn-emergency">Submit Breakdown Alert</a>
                 </div>
             </section>
         </asp:PlaceHolder>
 
-        <!-- ============================================================================ -->
-        <!-- REDESIGNED INDUSTRIAL FOOTER (#101C2C)                                       -->
-        <!-- Clean 4-column architecture, honest MCA academic disclosure, clear hierarchy  -->
-        <!-- ============================================================================ -->
-        <footer id="siteFooter" class="site-footer" role="contentinfo">
-            <div class="site-footer-container">
-                <div class="site-footer-main">
-                    
-                    <!-- Column 1: Brand & Project Context -->
-                    <div class="site-footer-brand-col">
-                        <div class="site-footer-brand">
-                            <div class="site-footer-brand-icon">
-                                <i class="fa-solid fa-gears"></i>
-                            </div>
-                            <div>
-                                <span class="site-footer-brand-title">SPARE<span>FINDER</span></span>
-                                <span class="site-footer-brand-tagline">Industrial Procurement Network</span>
-                            </div>
-                        </div>
-                        <p class="site-footer-desc">
-                            B2B platform for industrial spare-part discovery, multi-supplier quotation comparison, breakdown alerts, and certified field technician dispatch.
-                        </p>
+        <footer class="sf-footer">
+            <div class="sf-container">
+                <div class="sf-footer-grid">
+                    <div>
+                        <div class="sf-footer-brand"><i class="fa-solid fa-gears"></i> SPAREFINDER</div>
+                        <p class="sf-footer-desc">B2B platform for industrial spare-part discovery, multi-supplier quotation comparison, breakdown alerts, and certified field technician dispatch.</p>
                     </div>
-
-                    <!-- Column 2: Sourcing -->
-                    <div class="site-footer-col">
-                        <h4 class="site-footer-heading">Sourcing</h4>
-                        <ul class="site-footer-links">
+                    <div>
+                        <h4 class="sf-footer-heading">Sourcing</h4>
+                        <ul class="sf-footer-links">
                             <li><a href="~/Public/Parts.aspx" runat="server">Spare Parts Catalog</a></li>
                             <li><a href="~/Public/Suppliers.aspx" runat="server">Verified Suppliers</a></li>
-                            <li><a href="~/Public/Emergency.aspx" runat="server" class="site-footer-emergency-link">
-                                <i class="fa-solid fa-bolt text-[10px]"></i> Emergency Desk
-                            </a></li>
+                            <li><a href="~/Public/Emergency.aspx" runat="server"><i class="fa-solid fa-bolt"></i> Emergency Desk</a></li>
                         </ul>
                     </div>
-
-                    <!-- Column 3: Services -->
-                    <div class="site-footer-col">
-                        <h4 class="site-footer-heading">Services</h4>
-                        <ul class="site-footer-links">
+                    <div>
+                        <h4 class="sf-footer-heading">Services</h4>
+                        <ul class="sf-footer-links">
                             <li><a href="~/Public/Technicians.aspx" runat="server">Field Technicians</a></li>
                             <li><a href="~/Public/HowItWorks.aspx" runat="server">How It Works</a></li>
                             <li><a href="~/Public/WhyUs.aspx" runat="server">Why Us</a></li>
                         </ul>
                     </div>
-
-                    <!-- Column 4: Account Access -->
-                    <div class="site-footer-col">
-                        <h4 class="site-footer-heading">Workspace</h4>
-                        <ul class="site-footer-links">
+                    <div>
+                        <h4 class="sf-footer-heading">Workspace</h4>
+                        <ul class="sf-footer-links">
                             <li><a href="~/Account/Login.aspx" runat="server">Sign In</a></li>
                             <li><a href="~/Account/Register.aspx" runat="server">Register Entity</a></li>
                         </ul>
                     </div>
-
                 </div>
-
-                <!-- Footer Bottom Disclaimer & Technical Stack -->
-                <div class="site-footer-bottom">
-                    <p class="m-0">
-                        &copy; <%: DateTime.Now.Year %> SPAREFINDER &middot; MCA Project Demonstration
-                    </p>
-                    <p class="site-footer-academic m-0">
-                        ASP.NET Web Forms &middot; C# &middot; SQL Server &middot; ADO.NET
-                    </p>
+                <div class="sf-footer-bottom">
+                    <div class="sf-footer-copy">&copy; <%: DateTime.Now.Year %> SPAREFINDER &middot; MCA Project Demonstration</div>
+                    <div class="sf-footer-mca">ASP.NET Web Forms &middot; C# &middot; SQL Server &middot; ADO.NET</div>
                 </div>
             </div>
         </footer>
     </form>
 
-    <!-- Public Shell JavaScript -->
-    <script src="<%= ResolveUrl("~/Content/js/site-shell.js") %>?v=<%= DateTime.Now.Ticks %>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <asp:ContentPlaceHolder ID="ScriptsContent" runat="server">
-    </asp:ContentPlaceHolder>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('btnMobileToggle');
+            const menu = document.getElementById('mobileDrawer');
+            const backdrop = document.getElementById('mobileDrawerBackdrop');
+            const icon = document.getElementById('iconMenu');
+
+            if(btn && menu && backdrop) {
+                const toggleMenu = () => {
+                    const isOpen = menu.classList.contains('open');
+                    if (isOpen) {
+                        menu.classList.remove('open');
+                        backdrop.classList.remove('open');
+                        btn.setAttribute('aria-expanded', 'false');
+                        icon.classList.remove('fa-xmark');
+                        icon.classList.add('fa-bars');
+                    } else {
+                        menu.classList.add('open');
+                        backdrop.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-xmark');
+                    }
+                };
+                btn.addEventListener('click', toggleMenu);
+                backdrop.addEventListener('click', toggleMenu);
+            }
+        });
+    </script>
+    <asp:ContentPlaceHolder ID="ScriptsContent" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>
-
