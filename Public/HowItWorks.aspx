@@ -9,11 +9,8 @@
     <!-- 1. Header Banner -->
     <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto space-y-2 text-left">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="spec-tag spec-tag-blue font-mono text-xs">
-                    <i class="fa-solid fa-route"></i> ARCHITECTURAL WORKFLOW SPECIFICATION
-                </span>
-                <span class="text-xs text-[#5F6B7A] font-mono">End-to-End Resolution Pipeline</span>
+            <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
+                End-to-End Procurement Workflow
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
                 How Industrial Procurement Works
@@ -37,7 +34,7 @@
                 </div>
             </div>
             <div class="lg:col-span-7 space-y-3 text-left">
-                <span class="spec-tag spec-tag-blue font-mono text-xs">STANDARDIZED SOURCING PIPELINE</span>
+                <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Procurement Lifecycle</span>
                 <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
                     From Part Identification to Plant Commissioning
                 </h2>

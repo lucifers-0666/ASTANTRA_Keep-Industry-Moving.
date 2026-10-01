@@ -92,3 +92,15 @@ When a new technical feature or non-trivial technique is introduced, add an entr
 - **Model Answer**: *"We specify a solid `#FFFFFF` fallback prior to the semi-transparent property. On older browsers, the element renders as an opaque white surface with hairline borders, maintaining 100% legibility."*
 - **Responsible Student**: Zed / Team
 
+### Anti-Template Industrial Copy & Information Hierarchy
+- **Goal (User problem it solves)**: Eliminates generic marketing clichés ("connected digital ecosystem", "architectural workflow specification") and visual badge fatigue, presenting clear, direct procurement tasks.
+- **Technical Summary**: Replaced repetitive decorative `<span class="spec-tag">` badges above section headings with subtle typographic uppercase indicators. Retained badges exclusively for authentic data (Part Numbers, In Stock / Pre-Order, Verified Supplier). Consolidated emergency support into one clear pre-footer module, eliminating duplicate alerts on the homepage.
+- **Why We Chose It**: Real enterprise B2B portals (like McMaster-Carr, Grainger, or Siemens Industry Mall) prioritize technical clarity over marketing buzzwords. Removing decorative pill badges elevates genuine data badges and reduces visual noise.
+- **How It Works**: Standardized typographic hierarchy with semantic CSS typography and clean HTML structure. Recomposed the 4-step procurement sequence into a unified linear track and refined the catalog matrix into a clean ruled ledger.
+- **Where It Lives**: `Default.aspx`, `Public/Parts.aspx`, `Public/Suppliers.aspx`, `Public/Technicians.aspx`, `Public/HowItWorks.aspx`, `Public/WhyUs.aspx`, `Public/Emergency.aspx`, `MasterPages/Site.Master`.
+- **What Would Break If Removed**: The interface would regress to looking like an AI-generated startup landing page with repetitive badge pills and duplicate emergency banners.
+- **Likely Faculty Question**: *"Why did you eliminate badge pills above every section heading?"*
+- **Model Answer**: *"When every heading has a decorative badge pill, the badges lose their informational value. In an engineering datasheet UI, badges are reserved strictly for critical data attributes—such as OEM part numbers and real-time inventory status—while headings rely on clear typographic hierarchy."*
+- **Responsible Student**: Zed / Jay
+
+

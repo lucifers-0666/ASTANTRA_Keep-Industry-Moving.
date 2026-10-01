@@ -9,11 +9,8 @@
     <!-- 1. Header Banner -->
     <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto space-y-2 text-left">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="spec-tag spec-tag-orange font-mono text-xs">
-                    <i class="fa-solid fa-triangle-exclamation"></i> HIGH-PRIORITY PROCUREMENT DESK
-                </span>
-                <span class="text-xs text-[#5F6B7A] font-mono">Unscheduled Machine Stoppage Fast-Track</span>
+            <div class="text-xs font-mono font-bold text-[#D9650E] tracking-wider uppercase">
+                Critical Breakdown Desk &middot; Priority Escalation
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
                 Emergency Breakdown Sourcing Desk
@@ -73,10 +70,10 @@
                         </div>
                         <div>
                             <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">Broadcast Emergency Request</h3>
-                            <span class="text-xs text-[#5F6B7A] font-mono">HIGH-PRIORITY NOTIFICATION DESK</span>
+                            <span class="text-xs text-[#5F6B7A] font-mono">PRIORITY NOTIFICATION DESK</span>
                         </div>
                     </div>
-                    <span class="spec-tag spec-tag-orange">CRITICAL ESCALATION</span>
+                    <span class="text-xs font-mono font-bold text-[#D9650E] uppercase tracking-wider">Priority Broadcast</span>
                 </div>
 
                 <asp:Panel ID="pnlNotice" runat="server" Visible="false" CssClass="p-3.5 rounded-[2px] bg-[#EBF2FD] border border-[#B6D4FA] text-xs text-[#17212F] space-y-1">
@@ -136,8 +133,8 @@
                 
                 <!-- Triage Checklist -->
                 <div class="bg-white p-5 sm:p-6 rounded-[3px] border border-[#D5DCE3] space-y-3 text-left">
-                    <div class="flex items-center gap-2">
-                        <span class="spec-tag spec-tag-blue font-mono text-xs"><i class="fa-solid fa-clipboard-check"></i> PRE-DISPATCH CHECKLIST</span>
+                    <div class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">
+                        Pre-Dispatch Checklist
                     </div>
                     <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">Plant Breakdown Triage Checklist</h3>
                     <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">

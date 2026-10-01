@@ -9,11 +9,8 @@
     <!-- 1. Header Banner -->
     <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto space-y-2 text-left">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="spec-tag spec-tag-blue font-mono text-xs">
-                    <i class="fa-solid fa-code-compare"></i> PLATFORM ARCHITECTURE
-                </span>
-                <span class="text-xs text-[#5F6B7A] font-mono">System Capabilities &amp; Technical Differentiators</span>
+            <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
+                Platform Capabilities &amp; Differentiators
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
                 Why Manufacturing Plants Choose SPAREFINDER
@@ -29,7 +26,7 @@
         <!-- 2. Traditional vs Platform Comparison Matrix -->
         <section class="space-y-4">
             <div class="space-y-1 text-left">
-                <span class="spec-tag spec-tag-blue font-mono text-xs">OPERATIONAL BENCHMARK</span>
+                <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Operational Benchmark</span>
                 <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
                     Traditional Offline Sourcing vs. SPAREFINDER Network
                 </h2>

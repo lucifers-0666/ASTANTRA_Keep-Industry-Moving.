@@ -132,18 +132,20 @@
             <section class="bg-[#E7EBEF] border-t border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div class="space-y-1.5 max-w-2xl text-left">
-                        <div class="flex items-center gap-2">
-                            <span class="spec-tag spec-tag-orange"><i class="fa-solid fa-bolt"></i> EMERGENCY PROTOCOL</span>
-                            <span class="text-xs text-[#5F6B7A] font-mono">CRITICAL DOWNTIME SOURCING</span>
+                        <div class="text-xs font-mono font-bold text-[#D9650E] tracking-wider uppercase">
+                            Emergency Breakdown Support
                         </div>
-                        <h3 class="text-xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">Critical machine stopped on your plant floor?</h3>
+                        <h3 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">Critical machinery stopped on your plant floor?</h3>
                         <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 leading-relaxed">
-                            Broadcast urgent OEM replacement requirements across regional verified stockists and on-call field technicians.
+                            Broadcast urgent OEM replacement requirements across regional verified stockists and mobilize certified on-call field technicians.
                         </p>
                     </div>
-                    <div class="flex items-center gap-3 shrink-0">
-                        <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2.5 px-5 font-bold shadow-xs whitespace-nowrap">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
+                        <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2.5 px-5 font-bold shadow-xs whitespace-nowrap justify-center">
                             <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Submit Breakdown Alert
+                        </a>
+                        <a href="~/Public/Technicians.aspx" runat="server" class="btn-secondary text-xs py-2.5 px-4 font-bold justify-center">
+                            <i class="fa-solid fa-user-gear mr-1.5"></i> Field Technicians
                         </a>
                     </div>
                 </div>

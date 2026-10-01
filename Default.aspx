@@ -17,19 +17,16 @@
                 <!-- Left Column: Purpose, Headline & Primary Action -->
                 <div class="lg:col-span-7 space-y-5 text-left">
                     
-                    <div class="flex items-center gap-2">
-                        <span class="spec-tag spec-tag-blue font-mono text-xs">
-                            <i class="fa-solid fa-industry"></i> B2B INDUSTRIAL NETWORK
-                        </span>
-                        <span class="text-xs text-[#5F6B7A] font-mono">Verified OEM Catalog &amp; On-Call Field Support</span>
+                    <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
+                        Industrial Sourcing &amp; Maintenance Network
                     </div>
 
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black font-['Archivo',sans-serif] tracking-tight text-[#17212F] leading-tight m-0">
-                        Industrial Spare Parts &amp; <span class="text-[#1769E0]">Emergency Procurement</span>
+                        Find the right industrial spare part.
                     </h1>
 
                     <p class="text-sm sm:text-base text-[#5F6B7A] leading-relaxed max-w-2xl m-0">
-                        A connected digital procurement ecosystem engineered for manufacturing facilities. Locate verified OEM replacement parts, compare regional supplier quotes, and mobilize on-call field technicians before downtime escalates.
+                        Search verified supplier inventory by OEM part number or machine model, compare quotes, and request emergency maintenance support.
                     </p>
 
                     <!-- Integrated Functional Search Box (Preserved Server Controls) -->
@@ -86,17 +83,17 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 2. FOUR-STEP PROCUREMENT RAIL                                                -->
-    <!-- Structured linear process line with technical milestone indicators            -->
+    <!-- 2. FOUR-STEP PROCUREMENT WORKFLOW RAIL                                       -->
+    <!-- Connected linear progression from spec matching to plant installation        -->
     <!-- ============================================================================ -->
     <section class="py-12 bg-white border-b border-[#D5DCE3]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left border-b border-[#D5DCE3] pb-4">
                 <div>
-                    <span class="spec-tag spec-tag-blue font-mono text-xs">WORKFLOW SEQUENCE</span>
+                    <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Order Lifecycle</span>
                     <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] mt-1 m-0">
-                        How Procurement Operates on SPAREFINDER
+                        How Procurement Works
                     </h2>
                 </div>
                 <a href="~/Public/HowItWorks.aspx" runat="server" class="text-xs font-bold text-[#1769E0] hover:underline font-mono">
@@ -104,13 +101,13 @@
                 </a>
             </div>
 
-            <!-- 4-Step Process Rail -->
+            <!-- Connected 4-Step Process Sequence -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0]">STEP 01</span>
-                        <i class="fa-solid fa-barcode text-[#5F6B7A] text-sm"></i>
+                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">STEP 01</span>
+                        <i class="fa-solid fa-barcode text-[#5F6B7A] text-xs"></i>
                     </div>
                     <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Match OEM Spec</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
@@ -120,8 +117,8 @@
 
                 <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0]">STEP 02</span>
-                        <i class="fa-solid fa-file-invoice text-[#5F6B7A] text-sm"></i>
+                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">STEP 02</span>
+                        <i class="fa-solid fa-file-invoice text-[#5F6B7A] text-xs"></i>
                     </div>
                     <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Request Quotations</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
@@ -131,8 +128,8 @@
 
                 <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0]">STEP 03</span>
-                        <i class="fa-solid fa-scale-balanced text-[#5F6B7A] text-sm"></i>
+                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">STEP 03</span>
+                        <i class="fa-solid fa-scale-balanced text-[#5F6B7A] text-xs"></i>
                     </div>
                     <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Compare Terms</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
@@ -142,8 +139,8 @@
 
                 <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#18865B]">STEP 04</span>
-                        <i class="fa-solid fa-truck-fast text-[#5F6B7A] text-sm"></i>
+                        <span class="font-mono text-xs font-bold text-[#18865B] bg-[#E8F5F0] px-2 py-0.5 rounded-[2px] border border-[#A7F3D0]">STEP 04</span>
+                        <i class="fa-solid fa-truck-fast text-[#5F6B7A] text-xs"></i>
                     </div>
                     <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">4. Dispatch &amp; Install</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
@@ -157,43 +154,7 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 3. EMERGENCY BREAKDOWN PROTOCOL PANEL                                        -->
-    <!-- Industrial gray canvas with high-visibility emergency card                   -->
-    <!-- ============================================================================ -->
-    <section class="py-12 bg-[#E7EBEF] border-b border-[#D7DDE4]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="p-6 sm:p-8 bg-white border border-[#D7DDE4] rounded-[3px] shadow-[0_2px_8px_-2px_rgba(20,35,55,0.06)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-                
-                <div class="space-y-2 max-w-2xl text-left">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 bg-[#FEF4EC] text-[#D9650E] border border-[#FAD7BE] font-mono text-[10px] font-bold uppercase rounded-[2px] tracking-wider">
-                            <i class="fa-solid fa-bolt mr-1"></i> CRITICAL DESK
-                        </span>
-                        <span class="text-xs text-[#667180] font-mono">PRIORITY ESCALATION PROTOCOL</span>
-                    </div>
-                    <h2 class="text-2xl sm:text-3xl font-black font-['Archivo',sans-serif] text-[#202833] tracking-tight m-0">
-                        Critical Machinery Stopped on the Plant Floor?
-                    </h2>
-                    <p class="text-xs sm:text-sm text-[#667180] leading-relaxed m-0">
-                        Do not waste hours calling individual vendors. Submit machine nameplate specifications to broadcast immediate replacement alerts across regional stockists and mobilize certified on-call field technicians.
-                    </p>
-                </div>
-
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
-                    <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-3 px-6 font-bold shadow-sm justify-center whitespace-nowrap">
-                        <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Submit Breakdown Alert
-                    </a>
-                    <a href="~/Public/Technicians.aspx" runat="server" class="btn-secondary text-xs py-3 px-5 font-bold justify-center">
-                        <i class="fa-solid fa-user-gear mr-1.5"></i> Find Field Technicians
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- 4. LIVE SOURCING DIRECTORY LEDGER                                            -->
+    <!-- 3. LIVE SOURCING DIRECTORY LEDGER                                            -->
     <!-- Ruled tabular preview of verified stockists, parts, and indicative pricing   -->
     <!-- ============================================================================ -->
     <section class="py-12 bg-[#F1F3F5] border-b border-[#D5DCE3]">
@@ -201,12 +162,12 @@
             
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left">
                 <div>
-                    <span class="spec-tag spec-tag-amber font-mono text-xs">CATALOG &amp; SUPPLIER PREVIEW</span>
+                    <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Live Sourcing Preview</span>
                     <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] mt-1 m-0">
-                        Regional Supplier Availability Matrix
+                        Regional Inventory &amp; Live Availability
                     </h2>
                     <p class="text-xs text-[#5F6B7A] m-0">
-                        Comparing physical inventory, location distance, and indicative pricing across regional industrial vendors.
+                        Direct stock availability, transit distance, and indicative pricing from regional verified distributors.
                     </p>
                 </div>
                 <div class="flex items-center gap-2">
@@ -298,17 +259,11 @@
                 </table>
             </div>
 
-            <!-- Authentic Academic Prototype Disclosure -->
-            <div class="p-3 bg-[#E7EBEF] border border-[#D5DCE3] rounded-[3px] text-xs text-[#5F6B7A] flex items-center justify-between">
-                <span><i class="fa-solid fa-circle-info text-[#1769E0] mr-1.5"></i> Demonstration records illustrate parameterized ADO.NET supplier and parts query logic.</span>
-                <span class="font-mono text-[11px]">MCA Academic Platform Prototype</span>
-            </div>
-
         </div>
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 5. CLOSING PORTAL ONBOARDING ACTION                                          -->
+    <!-- 4. CLOSING PORTAL ONBOARDING ACTION                                          -->
     <!-- Clean, professional procurement workspace callout in industrial gray         -->
     <!-- ============================================================================ -->
     <section class="py-12 bg-white">
@@ -316,12 +271,12 @@
             <div class="bg-[#F7F8FA] rounded-[3px] p-8 sm:p-10 border border-[#D7DDE4] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)]">
                 
                 <div class="space-y-2 max-w-2xl text-left">
-                    <span class="spec-tag spec-tag-blue font-mono text-[11px]">PORTAL ONBOARDING</span>
+                    <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Join Network</span>
                     <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
-                        Join the SPAREFINDER Industrial Procurement Network
+                        Connect Your Plant to Regional Suppliers
                     </h2>
                     <p class="text-xs sm:text-sm text-[#667180] m-0 leading-relaxed">
-                        Whether managing a factory maintenance department, operating an industrial spare-parts warehouse, or offering certified technician services, register your account today.
+                        Register your manufacturing facility, spare-parts distribution business, or field service team to participate in direct procurement.
                     </p>
                 </div>
 

@@ -9,11 +9,8 @@
     <!-- 1. Header Banner -->
     <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto space-y-2 text-left">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="spec-tag spec-tag-emerald font-mono text-xs">
-                    <i class="fa-solid fa-warehouse"></i> VERIFIED DISTRIBUTOR ROSTER
-                </span>
-                <span class="text-xs text-[#5F6B7A] font-mono">Regional Inventory &amp; Commercial Compliance Directory</span>
+            <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
+                Verified Industrial Suppliers &amp; Stockists
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
                 Compare Regional Spare-Part Suppliers

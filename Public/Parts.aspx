@@ -9,11 +9,8 @@
     <!-- 1. Technical Catalog Header Banner -->
     <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto space-y-2 text-left">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="spec-tag spec-tag-blue font-mono text-xs">
-                    <i class="fa-solid fa-barcode"></i> COMPONENT CATALOG INDEX
-                </span>
-                <span class="text-xs text-[#5F6B7A] font-mono">Verified OEM Specifications &amp; Machine Cross-References</span>
+            <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
+                OEM Parts &amp; Specifications
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
                 Industrial Spare Parts Catalog
@@ -58,7 +55,7 @@
 
             <!-- Quick Filter Chips -->
             <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-[#D7DDE4] text-xs text-[#667180]">
-                <span class="font-bold text-[#202833] font-mono text-[11px]">CLASSIFICATIONS:</span>
+                <span class="font-bold text-[#202833] font-mono text-[11px]">CATEGORIES:</span>
                 <asp:LinkButton ID="btnFilterHydraulics" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Hydraulics & Pneumatics" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Hydraulics &amp; Pneumatics</asp:LinkButton>
                 <asp:LinkButton ID="btnFilterMotors" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Motors & Drives" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Motors &amp; Drives</asp:LinkButton>
                 <asp:LinkButton ID="btnFilterBearings" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Bearings & Power Transmission" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Bearings</asp:LinkButton>
