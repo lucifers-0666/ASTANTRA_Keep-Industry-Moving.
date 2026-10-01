@@ -1,25 +1,21 @@
 /* ==========================================================================
    SPAREFINDER — ANIMATIONS & TRANSITIONS
-   Precise Micro-interactions & Smooth, Professional Entrance Animations
+   Precise 150-250ms Micro-interactions & 400-600ms Subtle Hero Entrance
    ========================================================================== */
 
-/* ========================================================================
-   FADE IN ANIMATIONS
-   ======================================================================== */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Hero Entrance Animations (400-600ms ease-out) */
+.hero-entrance-text {
+    animation: heroTextEntrance 500ms ease-out both;
 }
 
-@keyframes fadeInUp {
+.hero-entrance-image {
+    animation: heroImageEntrance 600ms ease-out both;
+}
+
+@keyframes heroTextEntrance {
     from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -27,10 +23,10 @@
     }
 }
 
-@keyframes fadeInDown {
+@keyframes heroImageEntrance {
     from {
         opacity: 0;
-        transform: translateY(-12px);
+        transform: translateY(8px);
     }
     to {
         opacity: 1;
@@ -38,368 +34,19 @@
     }
 }
 
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+/* Subtle image zoom on hover (1.01 - 1.02) */
+.img-subtle-zoom {
+    transition: transform 250ms ease-out;
 }
 
-.fade-in {
-    animation: fadeIn var(--transition-normal);
+.group:hover .img-subtle-zoom,
+.img-subtle-zoom:hover {
+    transform: scale(1.02);
 }
 
-.fade-in-up {
-    animation: fadeInUp var(--transition-normal);
-}
-
-.fade-in-down {
-    animation: fadeInDown var(--transition-normal);
-}
-
-.fade-in-left {
-    animation: fadeInLeft var(--transition-normal);
-}
-
-/* ========================================================================
-   SLIDE ANIMATIONS
-   ======================================================================== */
-
-@keyframes slideInFromLeft {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOutToLeft {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-}
-
-.slide-in-left {
-    animation: slideInFromLeft var(--transition-normal);
-}
-
-/* ========================================================================
-   SCALE & ZOOM ANIMATIONS
-   ======================================================================== */
-
-@keyframes scaleIn {
-    from {
-        transform: scale(0.95);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes scaleInCenter {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.scale-in {
-    animation: scaleIn var(--transition-normal);
-}
-
-.scale-in-center {
-    animation: scaleInCenter var(--transition-normal);
-}
-
-/* ========================================================================
-   PULSE & ATTENTION-GRABBING ANIMATIONS
-   ======================================================================== */
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-    }
-}
-
-@keyframes pulse-scale {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
-    }
-}
-
-.pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.pulse-scale {
-    animation: pulse-scale 2s ease-in-out infinite;
-}
-
-/* ========================================================================
-   SHIMMER / SKELETON LOADING
-   ======================================================================== */
-
-@keyframes shimmer {
-    0% {
-        background-position: -1000px 0;
-    }
-    100% {
-        background-position: 1000px 0;
-    }
-}
-
-.skeleton {
-    background: linear-gradient(90deg, var(--color-bg-subtle) 25%, var(--color-bg-muted) 50%, var(--color-bg-subtle) 75%);
-    background-size: 1000px 100%;
-    animation: shimmer 2s infinite;
-}
-
-/* ========================================================================
-   HOVER LIFT EFFECT
-   ======================================================================== */
-
-.lift-on-hover {
-    transition: all var(--transition-normal);
-}
-
-.lift-on-hover:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elevated);
-}
-
-/* ========================================================================
-   BUTTON & INTERACTIVE ANIMATIONS
-   ======================================================================== */
-
-.btn {
-    transition: all var(--transition-normal);
-}
-
-.btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lifted);
-}
-
-.btn:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-/* Ripple effect for buttons */
-@keyframes ripple {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-.ripple-effect::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: ripple 0.6s ease-out;
-}
-
-/* ========================================================================
-   CARD & CONTENT ANIMATIONS
-   ======================================================================== */
-
-.card {
-    transition: all var(--transition-normal);
-}
-
-.card:hover {
-    box-shadow: var(--shadow-elevated);
-    transform: translateY(-3px);
-}
-
-/* Staggered list animations */
-.list-item {
-    animation: fadeInUp var(--transition-normal);
-    animation-fill-mode: both;
-}
-
-.list-item:nth-child(1) { animation-delay: 0ms; }
-.list-item:nth-child(2) { animation-delay: 50ms; }
-.list-item:nth-child(3) { animation-delay: 100ms; }
-.list-item:nth-child(4) { animation-delay: 150ms; }
-.list-item:nth-child(5) { animation-delay: 200ms; }
-.list-item:nth-child(n+6) { animation-delay: 250ms; }
-
-/* ========================================================================
-   MODAL & OVERLAY ANIMATIONS
-   ======================================================================== */
-
-@keyframes modalSlideIn {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes backdropFadeIn {
-    from {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
-    to {
-        opacity: 1;
-        backdrop-filter: blur(4px);
-    }
-}
-
-.modal {
-    animation: modalSlideIn var(--transition-normal);
-}
-
-.modal-backdrop {
-    animation: backdropFadeIn var(--transition-normal);
-}
-
-/* ========================================================================
-   NAVIGATION ANIMATIONS
-   ======================================================================== */
-
-.sf-nav-link {
-    position: relative;
-    transition: color var(--transition-fast);
-}
-
-.sf-nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--color-brand-primary);
-    transition: width var(--transition-fast);
-}
-
-.sf-nav-link:hover::after {
-    width: 100%;
-}
-
-/* ========================================================================
-   SPINNER ANIMATION
-   ======================================================================== */
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.spinner {
-    animation: spin 1s linear infinite;
-}
-
-/* ========================================================================
-   FLOATING ANIMATIONS
-   ======================================================================== */
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
-}
-
-.float {
-    animation: float 3s ease-in-out infinite;
-}
-
-/* ========================================================================
-   BOUNCE ANIMATIONS
-   ======================================================================== */
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.bounce {
-    animation: bounce 2s ease-in-out infinite;
-}
-
-/* ========================================================================
-   GRADIENT SHIFT ANIMATION (For hero backgrounds)
-   ======================================================================== */
-
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.gradient-animate {
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
-}
-
-/* ========================================================================
-   PRINT STYLES
-   ======================================================================== */
-
-@media print {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
+/* Category Card Micro-interaction */
+.category-card {
+    transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
 }
 
 .category-card:hover {

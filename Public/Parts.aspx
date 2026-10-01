@@ -1,123 +1,177 @@
 <%@ Page Title="Industrial Spare Parts Catalog" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="Parts.aspx.cs" Inherits="IndustrialSparePartPortal.Public.Parts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="<%= ResolveUrl("~/Content/css/public/parts.css") %>" rel="stylesheet" />
     <meta name="description" content="Search indexed industrial spare parts by OEM part number, machine model, or category across regional verified suppliers." />
-    <script src="<%= ResolveUrl("~/Content/js/ux-utils.js") %>"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
-    <!-- PAGE HEADER -->
-    <div style="background: var(--sf-surface); border-bottom: 1px solid var(--sf-border); padding: 48px 0;">
-        <div class="sf-container" style="max-width: 960px;">
-            <span style="font-size: 12px; font-weight: 700; color: var(--sf-primary); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 8px;">
+    <!-- ============================================================================ -->
+    <!-- 1. CATALOG HEADER                                                            -->
+    <!-- Clean white surface banner with restrained typography                        -->
+    <!-- ============================================================================ -->
+    <div class="bg-white border-b border-[#D9DEE5] py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-2 text-left">
+            <span class="text-xs font-mono font-bold text-[#1769E0] uppercase tracking-wider block">
                 Catalog &amp; Inventory Index
             </span>
-            <h1 style="font-size: 28px; color: var(--sf-navy); margin: 0 0 12px 0;">Industrial Spare Parts</h1>
-            <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0; max-width: 600px;">
+            <h1 class="text-2xl sm:text-3xl font-bold text-[#111827] m-0">
+                Industrial Spare Parts
+            </h1>
+            <p class="text-xs sm:text-sm text-[#5F6B7A] max-w-2xl leading-relaxed m-0">
                 Search verified OEM mechanical, hydraulic, and electrical components with cross-referenced machine model compatibility.
             </p>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="sf-container" style="max-width: 960px; padding-top: 32px; padding-bottom: 64px;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         
-        <!-- SEARCH & FILTER -->
-        <div class="sf-card" style="margin-bottom: 24px;">
-            <div style="display: flex; flex-direction: column; gap: 16px;">
-                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                    
-                    <div style="flex: 1; min-width: 260px; position: relative;">
-                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 12px; color: var(--sf-text-light); font-size: 14px;"></i>
-                        <asp:TextBox ID="txtSearch" runat="server" CssClass="sf-input" style="padding-left: 38px;" Placeholder="Search by part name, part # (e.g. 6210-2RS), or model..."></asp:TextBox>
-                    </div>
-
-                    <div style="width: 240px; min-width: 200px;">
-                        <asp:DropDownList ID="ddlCategory" runat="server" CssClass="sf-input">
-                            <asp:ListItem Value="" Text="All Categories"></asp:ListItem>
-                            <asp:ListItem Value="Hydraulics & Pneumatics" Text="Hydraulics & Pneumatics"></asp:ListItem>
-                            <asp:ListItem Value="Motors & Drives" Text="Motors & Drives"></asp:ListItem>
-                            <asp:ListItem Value="Bearings & Power Transmission" Text="Bearings & Transmission"></asp:ListItem>
-                            <asp:ListItem Value="Electrical & Automation" Text="Electrical & Automation"></asp:ListItem>
-                            <asp:ListItem Value="Pumps & Valves" Text="Pumps & Valves"></asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-
-                    <div style="display: flex; gap: 8px;">
-                        <asp:Button ID="btnSearch" runat="server" Text="Filter Parts" OnClick="btnSearch_Click" CssClass="sf-btn sf-btn-primary" />
-                        <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" CssClass="sf-btn sf-btn-outline" />
-                    </div>
+        <!-- ============================================================================ -->
+        <!-- 2. SEARCH & FILTER SURFACE                                                   -->
+        <!-- Structured, clean white card without excessive padding or decorations        -->
+        <!-- ============================================================================ -->
+        <div class="surface-card p-5 sm:p-6 space-y-4">
+            <div class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+                
+                <!-- Search Box -->
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+                    <asp:TextBox ID="txtSearch" runat="server" CssClass="form-input pl-10" Placeholder="Search by part name, part # (e.g. 6210-2RS), or machine model..."></asp:TextBox>
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--sf-border); flex-wrap: wrap; font-size: 12px;">
-                    <span style="font-weight: 600; color: var(--sf-navy);">Quick Filter:</span>
-                    <asp:LinkButton ID="btnFilterHydraulics" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Hydraulics & Pneumatics" CssClass="sf-quick-filter">Hydraulics</asp:LinkButton>
-                    <asp:LinkButton ID="btnFilterMotors" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Motors & Drives" CssClass="sf-quick-filter">Motors & Drives</asp:LinkButton>
-                    <asp:LinkButton ID="btnFilterBearings" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Bearings & Power Transmission" CssClass="sf-quick-filter">Bearings</asp:LinkButton>
-                    <asp:LinkButton ID="btnFilterElectrical" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Electrical & Automation" CssClass="sf-quick-filter">Electrical & PLC</asp:LinkButton>
+                <!-- Category Filter Dropdown -->
+                <div class="w-full md:w-60">
+                    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-input font-medium">
+                        <asp:ListItem Value="" Text="All Categories"></asp:ListItem>
+                        <asp:ListItem Value="Hydraulics & Pneumatics" Text="Hydraulics & Pneumatics"></asp:ListItem>
+                        <asp:ListItem Value="Motors & Drives" Text="Motors & Drives"></asp:ListItem>
+                        <asp:ListItem Value="Bearings & Power Transmission" Text="Bearings & Transmission"></asp:ListItem>
+                        <asp:ListItem Value="Electrical & Automation" Text="Electrical & Automation"></asp:ListItem>
+                        <asp:ListItem Value="Pumps & Valves" Text="Pumps & Valves"></asp:ListItem>
+                    </asp:DropDownList>
                 </div>
+
+                <!-- Filter Actions -->
+                <div class="flex items-center gap-2 shrink-0">
+                    <asp:Button ID="btnSearch" runat="server" Text="Filter Parts" OnClick="btnSearch_Click" CssClass="btn-primary text-xs py-2 px-4" />
+                    <asp:Button ID="btnReset" runat="server" Text="Reset" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-2 px-3" />
+                </div>
+
+            </div>
+
+            <!-- Quick Filter Chips -->
+            <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-[#D9DEE5] text-xs text-[#5F6B7A]">
+                <span class="font-semibold text-[#111827]">Quick Filter:</span>
+                <asp:LinkButton ID="btnFilterHydraulics" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Hydraulics & Pneumatics" CssClass="px-2.5 py-1 rounded bg-[#E9ECEF] text-[#172033] hover:text-[#1769E0] transition-colors font-mono">Hydraulics</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterMotors" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Motors & Drives" CssClass="px-2.5 py-1 rounded bg-[#E9ECEF] text-[#172033] hover:text-[#1769E0] transition-colors font-mono">Motors &amp; Drives</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterBearings" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Bearings & Power Transmission" CssClass="px-2.5 py-1 rounded bg-[#E9ECEF] text-[#172033] hover:text-[#1769E0] transition-colors font-mono">Bearings</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterElectrical" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Electrical & Automation" CssClass="px-2.5 py-1 rounded bg-[#E9ECEF] text-[#172033] hover:text-[#1769E0] transition-colors font-mono">Electrical &amp; PLC</asp:LinkButton>
             </div>
         </div>
 
-        <!-- RESULTS METADATA -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 12px; color: var(--sf-text-muted);">
-            <asp:Label ID="lblResultsCount" runat="server" style="font-weight: 700; color: var(--sf-navy);"></asp:Label>
-            <div style="display: flex; align-items: center; gap: 6px;">
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--sf-success); display: inline-block;"></span>
-                Live Repository Index
+        <!-- ============================================================================ -->
+        <!-- 3. RESULTS STATUS BAR                                                        -->
+        <!-- ============================================================================ -->
+        <div class="flex justify-between items-center text-xs text-[#5F6B7A] px-1">
+            <div>
+                <asp:Label ID="lblResultsCount" runat="server" CssClass="font-bold text-[#111827] font-mono"></asp:Label>
+            </div>
+            <div class="flex items-center gap-1.5 font-mono text-[11px]">
+                <span class="w-2 h-2 rounded-full bg-[#18865B]"></span>
+                <span>Live Repository Index</span>
             </div>
         </div>
 
-        <!-- PARTS GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- ============================================================================ -->
+        <!-- 4. SPARE PARTS GRID                                                          -->
+        <!-- 3 cols desktop, 2 cols tablet, 1 col mobile. Clean, non-overloaded cards    -->
+        <!-- ============================================================================ -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <asp:Repeater ID="rptParts" runat="server">
                 <ItemTemplate>
-                    <div class="sf-card sf-card-hover" style="display: flex; flex-direction: column; justify-content: space-between; padding: 20px;">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                <span style="font-size: 11px; font-weight: 700; font-family: monospace; background: rgba(23, 105, 224, 0.1); color: var(--sf-primary); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(23, 105, 224, 0.2);">
+                    <div class="surface-card p-5 flex flex-col justify-between space-y-4 hover:border-[#1769E0] transition-colors text-left">
+                        
+                        <!-- Top Metadata -->
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-start gap-2">
+                                <span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-blue-50 text-[#1769E0] border border-blue-200">
                                     <%# Eval("PartNumber") %>
                                 </span>
-                                <span style='<%# Eval("AvailabilityStatus").ToString() == "InStock" ? "font-size: 11px; font-weight: 700; background: rgba(24, 134, 91, 0.1); color: var(--sf-success); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(24, 134, 91, 0.2);" : "font-size: 11px; font-weight: 700; background: rgba(180, 83, 9, 0.1); color: var(--sf-warning); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(180, 83, 9, 0.2);" %>'>
-                                    <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "In Stock" : "Limited Stock" %>
+                                <span class='<%# Eval("AvailabilityStatus").ToString() == "InStock" ? "px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-[#18865B] border border-emerald-200" : "px-2 py-0.5 rounded text-xs font-semibold bg-amber-50 text-[#B45309] border border-amber-200" %>'>
+                                    <i class='fa-solid <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "fa-circle-check text-[#18865B]" : "fa-clock text-[#B45309]" %> mr-1'></i>
+                                    <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "In Stock" : "Pre-Order" %>
                                 </span>
                             </div>
-                            
-                            <h3 style="font-size: 16px; margin: 0 0 4px 0; color: var(--sf-navy); line-height: 1.4;"><%# Eval("PartName") %></h3>
-                            <div style="font-size: 12px; color: var(--sf-text-muted); margin-bottom: 16px;"><%# Eval("CategoryName") %></div>
-                            
-                            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; font-size: 13px;">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span style="color: var(--sf-text-muted);">Machine Model:</span>
-                                    <span style="font-weight: 500;"><%# string.IsNullOrEmpty(Eval("MachineName") as string) ? "Universal" : Eval("MachineName") %></span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span style="color: var(--sf-text-muted);">Estimated Price:</span>
-                                    <span style="font-weight: 500;"><%# (Eval("UnitPrice") != null && Eval("UnitPrice") != DBNull.Value) ? "₹" + string.Format("{0:N0}", Eval("UnitPrice")) : "On Request" %></span>
-                                </div>
+
+                            <div>
+                                <span class="text-[10px] font-bold text-[#5F6B7A] uppercase tracking-wider block font-mono"><%# Eval("CategoryName") %></span>
+                                <h3 class="font-bold text-[#111827] text-base leading-snug m-0 mt-0.5"><%# Eval("PartName") %></h3>
+                            </div>
+
+                            <div class="text-xs text-[#5F6B7A]">
+                                <span class="text-[11px] block font-mono">Compatible Machine:</span>
+                                <strong class="text-[#111827] font-mono"><%# Eval("MachineName") %></strong>
                             </div>
                         </div>
 
-                        <div style="border-top: 1px solid var(--sf-border); margin: 0 -20px; padding: 16px 20px 0;">
-                            <!-- Placeholder action, in real system goes to part details/suppliers list -->
-                            <a href="~/Public/Suppliers.aspx" runat="server" class="sf-btn sf-btn-outline" style="width: 100%; justify-content: center; font-size: 13px; padding: 8px;">
-                                Find Suppliers for this Part
+                        <!-- Technical Specification Callout -->
+                        <div class="bg-[#F8F9FA] p-3 rounded border border-[#E5E9EE] text-xs text-[#172033] space-y-1 font-mono">
+                            <div class="text-[11px] text-[#5F6B7A]"><%# Eval("TechnicalSpecs") %></div>
+                            <div class="text-[10px] text-[#5F6B7A]">Supplier: <strong class="text-[#111827]"><%# Eval("SupplierName") %></strong></div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="flex justify-between items-center pt-3 border-t border-[#D9DEE5]">
+                            <div>
+                                <span class="text-[10px] text-[#5F6B7A] block font-mono uppercase">Price</span>
+                                <span class="text-sm font-bold text-[#111827] font-mono">
+                                    <%# Eval("UnitPrice") != DBNull.Value && Eval("UnitPrice") != null && Convert.ToDecimal(Eval("UnitPrice")) > 0 
+                                        ? "&#8377;" + Convert.ToDecimal(Eval("UnitPrice")).ToString("N0") 
+                                        : "<span class='text-xs text-[#1769E0] font-semibold'>Quote on Request</span>" %>
+                                </span>
+                            </div>
+                            <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Parts.aspx")) %>' class="btn-primary text-xs py-1.5 px-3">
+                                Request Quote
                             </a>
                         </div>
+
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
         </div>
-        
-        <!-- EMPTY STATE -->
-        <asp:Panel ID="pnlNoResults" runat="server" Visible="false" style="text-align: center; padding: 64px 0; background: var(--sf-surface); border: 1px dashed var(--sf-border); border-radius: var(--sf-radius-md); margin-top: 24px;">
-            <i class="fa-solid fa-box-open" style="font-size: 32px; color: var(--sf-border); margin-bottom: 16px;"></i>
-            <h3 style="font-size: 16px; color: var(--sf-navy); margin: 0 0 8px 0;">No matching parts found</h3>
-            <p style="font-size: 14px; color: var(--sf-text-muted); margin: 0 0 16px 0;">Try adjusting your search filters or clearing the search query.</p>
-            <asp:Button ID="btnResetNoResults" runat="server" Text="Clear Filters" OnClick="btnReset_Click" CssClass="sf-btn sf-btn-outline" />
+
+        <!-- ============================================================================ -->
+        <!-- 5. EMPTY STATE PANEL                                                         -->
+        <!-- ============================================================================ -->
+        <asp:Panel ID="pnlNoResults" runat="server" Visible="false" CssClass="text-center py-12 bg-white border border-[#D9DEE5] rounded-lg space-y-3">
+            <div class="w-10 h-10 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-lg">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3 class="text-base font-bold text-[#111827] m-0">No matching spare parts found</h3>
+            <p class="text-xs text-[#5F6B7A] max-w-sm mx-auto m-0 leading-relaxed">
+                Check OEM part number spelling or clear filters to view all catalog parts.
+            </p>
+            <div class="pt-1">
+                <asp:Button ID="btnResetNoResults" runat="server" Text="Clear Filters" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-1.5 px-4" />
+            </div>
         </asp:Panel>
-        
+
+        <!-- ============================================================================ -->
+        <!-- 6. EMERGENCY BREAKDOWN CALLOUT                                               -->
+        <!-- ============================================================================ -->
+        <div class="bg-white border border-[#D9DEE5] rounded-lg p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="space-y-1 text-left">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-mono font-bold text-[#E87519] uppercase tracking-wider">Emergency Breakdown Sourcing</span>
+                </div>
+                <h4 class="text-base font-bold text-[#111827] m-0">Can't locate your required component?</h4>
+                <p class="text-xs text-[#5F6B7A] m-0">Broadcast priority breakdown requirements to alert regional verified stockists with matching inventory.</p>
+            </div>
+            <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2 px-4 whitespace-nowrap shrink-0">
+                <i class="fa-solid fa-bolt mr-1"></i> Broadcast Emergency RFQ
+            </a>
+        </div>
+
     </div>
 </asp:Content>
+
