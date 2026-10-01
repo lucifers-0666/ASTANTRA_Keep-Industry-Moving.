@@ -79,7 +79,7 @@ namespace IndustrialSparePartPortal.MasterPages
             // Suppress on Login, Register, Emergency (already on emergency page), and Parts (has its own dedicated callout).
             if (phPreFooterEmergency != null)
             {
-                phPreFooterEmergency.Visible = (ActiveNavKey == "whyus");
+                phPreFooterEmergency.Visible = (ActiveNavKey == "home" || ActiveNavKey == "whyus");
             }
 
             ApplyActiveNav();
@@ -121,7 +121,7 @@ namespace IndustrialSparePartPortal.MasterPages
             if (link == null) return;
             if (isActive)
             {
-                link.Attributes["class"] = "px-3.5 py-2.5 rounded bg-slate-200/60 text-[#1769E0] font-bold border-l-4 border-[#1769E0]";
+                link.Attributes["class"] = "px-3.5 py-2.5 rounded-lg bg-slate-100 text-[#1D4ED8] font-bold border-l-4 border-[#1D4ED8]";
                 link.Attributes["aria-current"] = "page";
             }
         }

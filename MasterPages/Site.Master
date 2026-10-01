@@ -1,7 +1,7 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="IndustrialSparePartPortal.MasterPages.SiteMaster" %>
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#F1F3F5]">
+<html lang="en" class="h-full bg-[#F8FAFC]">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,20 +24,20 @@
     <!-- FontAwesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
-    <!-- Google Fonts Inter -->
+    <!-- Google Fonts Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="h-full flex flex-col font-['Inter',system-ui,sans-serif] antialiased text-[#111827] bg-[#F1F3F5]">
+<body class="h-full flex flex-col font-['Inter',sans-serif] antialiased text-[#0F172A] bg-[#F8FAFC]">
     <form id="form1" runat="server" class="flex flex-col min-h-full">
 
         <!-- ============================================================================ -->
-        <!-- AUTHORITATIVE CLEAN MASTER HEADER (.site-header)                             -->
-        <!-- Solid white surface, thin border, route-aware active indicators             -->
+        <!-- AUTHORITATIVE FIXED MASTER HEADER (.site-header)                             -->
+        <!-- Permanent viewport visibility, zero jump, route-aware active indicators      -->
         <!-- ============================================================================ -->
         <header id="headerWrapper" class="site-header" role="banner">
             <div class="site-header-inner">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="site-brand-text">
                         <span class="site-brand-title">SPARE<span>FINDER</span></span>
-                        <span class="site-brand-sub">Industrial Procurement</span>
+                        <span class="site-brand-sub">Procurement Network</span>
                     </div>
                 </a>
 
@@ -66,22 +66,22 @@
                     </a>
                 </nav>
 
-                <!-- Action Controls: Authentication -->
+                <!-- Action Controls: Workspace Authentication -->
                 <div class="site-header-actions">
                     <asp:PlaceHolder ID="phAnonymous" runat="server">
                         <a id="navLogin" href="~/Account/Login.aspx" runat="server" class="site-btn-signin">
                             Sign In
                         </a>
-                        <a id="navRegister" href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2 px-3.5">
-                            Register
+                        <a id="navRegister" href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2 px-3.5 font-bold shadow-xs">
+                            <i class="fa-solid fa-user-plus text-xs"></i> Register
                         </a>
                     </asp:PlaceHolder>
 
                     <asp:PlaceHolder ID="phAuthenticated" runat="server" Visible="false">
-                        <a id="lnkDashboard" runat="server" href="#" class="btn-secondary text-xs py-2 px-3">
+                        <a id="lnkDashboard" runat="server" href="#" class="btn-secondary text-xs py-2 px-3 font-bold">
                             <i class="fa-solid fa-gauge-high text-xs"></i> Workspace
                         </a>
-                        <a href="~/Account/Logout.aspx" runat="server" class="text-xs text-red-600 hover:text-red-700 font-semibold px-2 py-1 transition-colors">Logout</a>
+                        <a href="~/Account/Logout.aspx" runat="server" class="text-xs text-red-400 hover:text-red-300 font-bold px-2 py-1 transition-colors">Logout</a>
                     </asp:PlaceHolder>
                 </div>
 
@@ -94,21 +94,21 @@
 
             <!-- Mobile Navigation Drawer Overlay (< 1024px) -->
             <div id="mobileDrawer" class="site-mobile-menu" aria-label="Mobile Navigation">
-                <nav class="flex flex-col space-y-1 text-sm font-semibold text-[#111827]">
-                    <a id="navMobHome" href="~/Default.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Home</a>
-                    <a id="navMobParts" href="~/Public/Parts.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Spare Parts</a>
-                    <a id="navMobSuppliers" href="~/Public/Suppliers.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Suppliers</a>
-                    <a id="navMobTechnicians" href="~/Public/Technicians.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Technicians</a>
-                    <a id="navMobHowItWorks" href="~/Public/HowItWorks.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">How It Works</a>
-                    <a id="navMobWhyUs" href="~/Public/WhyUs.aspx" runat="server" class="px-3.5 py-2.5 rounded hover:bg-slate-100 transition-colors">Why Us</a>
-                    <a id="navMobEmergency" href="~/Public/Emergency.aspx" runat="server" class="px-3.5 py-2.5 rounded bg-orange-50 text-[#E87519] font-bold border border-orange-200 mt-1">
-                        <i class="fa-solid fa-bolt mr-2"></i> Emergency Desk
+                <nav class="flex flex-col space-y-1 text-sm font-semibold text-[#0F172A]">
+                    <a id="navMobHome" href="~/Default.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors">Home</a>
+                    <a id="navMobParts" href="~/Public/Parts.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors">Spare Parts Catalog</a>
+                    <a id="navMobSuppliers" href="~/Public/Suppliers.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors">Supplier Directory</a>
+                    <a id="navMobTechnicians" href="~/Public/Technicians.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors">Field Technicians</a>
+                    <a id="navMobHowItWorks" href="~/Public/HowItWorks.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors">How It Works</a>
+                    <a id="navMobWhyUs" href="~/Public/WhyUs.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg hover:bg-slate-100 transition-colors">Platform Comparison</a>
+                    <a id="navMobEmergency" href="~/Public/Emergency.aspx" runat="server" class="px-3.5 py-2.5 rounded-lg bg-orange-50 text-[#EA580C] font-bold border border-orange-200 mt-1">
+                        <i class="fa-solid fa-bolt mr-2"></i> Emergency Breakdown Desk
                     </a>
                 </nav>
 
-                <div class="pt-4 mt-4 border-t border-[#D9DEE5] flex flex-col gap-2.5">
-                    <a href="~/Account/Login.aspx" runat="server" class="btn-secondary w-full justify-center text-xs py-2.5">Sign In</a>
-                    <a href="~/Account/Register.aspx" runat="server" class="btn-primary w-full justify-center text-xs py-2.5">Register Account</a>
+                <div class="pt-4 mt-4 border-t border-[#CBD5E1] flex flex-col gap-2.5">
+                    <a href="~/Account/Login.aspx" runat="server" class="btn-secondary w-full justify-center text-xs py-2.5 font-bold">Sign In to Account</a>
+                    <a href="~/Account/Register.aspx" runat="server" class="btn-primary w-full justify-center text-xs py-2.5 font-bold">Register Portal Account</a>
                 </div>
             </div>
         </header>
@@ -129,19 +129,20 @@
         <!-- Shown on high-level discovery pages (Home, Why Us); suppressed on Login/Reg  -->
         <!-- ============================================================================ -->
         <asp:PlaceHolder ID="phPreFooterEmergency" runat="server">
-            <section class="bg-white border-t border-b border-[#D9DEE5] py-8 px-4 sm:px-6 lg:px-8">
+            <section class="bg-gradient-to-r from-orange-50 via-white to-amber-50 border-t border-b border-[#CBD5E1] py-10 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div class="space-y-1.5 max-w-2xl text-left">
                         <div class="flex items-center gap-2">
                             <span class="spec-tag spec-tag-orange"><i class="fa-solid fa-bolt"></i> EMERGENCY PROTOCOL</span>
+                            <span class="text-xs text-[#64748B] font-mono">CRITICAL DOWNTIME SOURCING</span>
                         </div>
-                        <h3 class="text-xl font-bold text-[#111827] m-0">Critical machine stopped on your plant floor?</h3>
-                        <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 leading-relaxed">
+                        <h3 class="text-xl font-bold text-[#0F172A] m-0">Critical machine stopped on your plant floor?</h3>
+                        <p class="text-xs sm:text-sm text-[#475569] m-0 leading-relaxed">
                             Broadcast urgent OEM replacement requirements across regional verified stockists and on-call field technicians.
                         </p>
                     </div>
                     <div class="flex items-center gap-3 shrink-0">
-                        <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2.5 px-5 font-semibold whitespace-nowrap">
+                        <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2.5 px-5 font-bold shadow-xs whitespace-nowrap">
                             <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Submit Breakdown Alert
                         </a>
                     </div>
@@ -150,14 +151,14 @@
         </asp:PlaceHolder>
 
         <!-- ============================================================================ -->
-        <!-- REDESIGNED INDUSTRIAL FOOTER (#101C2C)                                       -->
-        <!-- Clean 4-column architecture, honest MCA academic disclosure, clear hierarchy  -->
+        <!-- REDESIGNED CONCISE PUBLIC FOOTER (#0F172A)                                   -->
+        <!-- Concise 3-column architecture, honest academic disclosure, clean hierarchy   -->
         <!-- ============================================================================ -->
         <footer id="siteFooter" class="site-footer" role="contentinfo">
             <div class="site-footer-container">
                 <div class="site-footer-main">
                     
-                    <!-- Column 1: Brand & Project Context -->
+                    <!-- Column 1: Brand & Project Context (Spans 2 columns on desktop) -->
                     <div class="site-footer-brand-col">
                         <div class="site-footer-brand">
                             <div class="site-footer-brand-icon">
@@ -165,19 +166,25 @@
                             </div>
                             <div>
                                 <span class="site-footer-brand-title">SPARE<span>FINDER</span></span>
-                                <span class="site-footer-brand-tagline">Industrial Procurement Network</span>
+                                <span class="site-footer-brand-tagline">B2B Industrial Procurement Network</span>
                             </div>
                         </div>
                         <p class="site-footer-desc">
-                            B2B platform for industrial spare-part discovery, multi-supplier quotation comparison, breakdown alerts, and certified field technician dispatch.
+                            Academic demonstration platform for industrial spare-part discovery, multi-supplier quotation comparison, breakdown alerts, and certified field technician dispatch.
                         </p>
+                        <div class="site-footer-badges">
+                            <span class="site-footer-badge">MCA Project Prototype</span>
+                            <span class="site-footer-badge site-footer-badge-amber">ASP.NET Web Forms</span>
+                        </div>
                     </div>
 
-                    <!-- Column 2: Sourcing -->
+                    <!-- Column 2: Spare Parts & Sourcing -->
                     <div class="site-footer-col">
-                        <h4 class="site-footer-heading">Sourcing</h4>
+                        <h4 class="site-footer-heading">
+                            <i class="fa-solid fa-layer-group text-[#38BDF8] text-[10px]"></i> Sourcing
+                        </h4>
                         <ul class="site-footer-links">
-                            <li><a href="~/Public/Parts.aspx" runat="server">Spare Parts Catalog</a></li>
+                            <li><a href="~/Public/Parts.aspx" runat="server">Spare-Parts Catalog</a></li>
                             <li><a href="~/Public/Suppliers.aspx" runat="server">Verified Suppliers</a></li>
                             <li><a href="~/Public/Emergency.aspx" runat="server" class="site-footer-emergency-link">
                                 <i class="fa-solid fa-bolt text-[10px]"></i> Emergency Desk
@@ -185,21 +192,25 @@
                         </ul>
                     </div>
 
-                    <!-- Column 3: Services -->
+                    <!-- Column 3: Platform & Workflow -->
                     <div class="site-footer-col">
-                        <h4 class="site-footer-heading">Services</h4>
+                        <h4 class="site-footer-heading">
+                            <i class="fa-solid fa-compass text-emerald-400 text-[10px]"></i> Services
+                        </h4>
                         <ul class="site-footer-links">
                             <li><a href="~/Public/Technicians.aspx" runat="server">Field Technicians</a></li>
-                            <li><a href="~/Public/HowItWorks.aspx" runat="server">How It Works</a></li>
-                            <li><a href="~/Public/WhyUs.aspx" runat="server">Why Us</a></li>
+                            <li><a href="~/Public/HowItWorks.aspx" runat="server">Procurement Flow</a></li>
+                            <li><a href="~/Public/WhyUs.aspx" runat="server">Platform Comparison</a></li>
                         </ul>
                     </div>
 
                     <!-- Column 4: Account Access -->
                     <div class="site-footer-col">
-                        <h4 class="site-footer-heading">Workspace</h4>
+                        <h4 class="site-footer-heading">
+                            <i class="fa-solid fa-user-lock text-purple-400 text-[10px]"></i> Workspace
+                        </h4>
                         <ul class="site-footer-links">
-                            <li><a href="~/Account/Login.aspx" runat="server">Sign In</a></li>
+                            <li><a href="~/Account/Login.aspx" runat="server">Portal Sign In</a></li>
                             <li><a href="~/Account/Register.aspx" runat="server">Register Entity</a></li>
                         </ul>
                     </div>
@@ -209,10 +220,10 @@
                 <!-- Footer Bottom Disclaimer & Technical Stack -->
                 <div class="site-footer-bottom">
                     <p class="m-0">
-                        &copy; <%: DateTime.Now.Year %> SPAREFINDER &middot; MCA Project Demonstration
+                        &copy; <%: DateTime.Now.Year %> SPAREFINDER &middot; Master of Computer Applications (MCA) Project Demonstration
                     </p>
                     <p class="site-footer-academic m-0">
-                        ASP.NET Web Forms &middot; C# &middot; SQL Server &middot; ADO.NET
+                        Simulated demonstration data &middot; ASP.NET Web Forms &middot; C# &middot; SQL Server &middot; ADO.NET
                     </p>
                 </div>
             </div>

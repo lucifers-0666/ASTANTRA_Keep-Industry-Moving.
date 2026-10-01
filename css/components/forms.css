@@ -1,6 +1,6 @@
 /* ==========================================================================
    SPAREFINDER — FORM COMPONENTS (BEM)
-   Clean External Labels, High-Contrast Inputs, Restrained 6px Radius
+   Clean External Labels, High-Contrast Inputs, Zero Collision Architecture
    ========================================================================== */
 
 .c-form-group {
@@ -13,7 +13,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.45rem;
 }
 
 .c-form-label {
@@ -23,7 +23,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
 }
 
 .c-form-label__required {
@@ -32,27 +32,28 @@
 }
 
 .c-form-label__hint {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
     color: var(--color-text-muted);
 }
 
 /* Base Input Style */
 .c-form-input {
     width: 100%;
-    height: 42px;
-    padding: 0.55rem 0.875rem;
+    height: 2.875rem;
+    padding: 0.625rem 0.875rem;
     background-color: var(--color-bg-input);
     border: 1px solid var(--color-border-default);
-    border-radius: 6px;
+    border-radius: 0.5rem;
     color: var(--color-text-primary);
     font-family: var(--font-sans);
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.5;
     outline: none;
-    transition: border-color var(--transition-fast), 
-                box-shadow var(--transition-fast);
+    transition: border-color var(--transition-normal), 
+                box-shadow var(--transition-normal), 
+                background-color var(--transition-normal);
 }
 
 .c-form-input:hover {
@@ -66,7 +67,7 @@
 }
 
 .c-form-input::placeholder {
-    color: var(--color-text-muted);
+    color: var(--color-text-dim);
     font-weight: 400;
 }
 
@@ -89,7 +90,7 @@
     transform: translateY(-50%);
     width: 2rem;
     height: 2rem;
-    border-radius: 4px;
+    border-radius: 0.375rem;
     border: none;
     background: transparent;
     color: var(--color-text-muted);
@@ -97,10 +98,95 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color var(--transition-fast);
+    font-size: 0.875rem;
+    transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .c-password-toggle:hover {
     color: var(--color-text-primary);
+    background-color: var(--color-bg-subtle);
 }
 
+.c-password-toggle:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 1px;
+}
+
+/* Custom Checkbox */
+.c-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.8125rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.c-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.0625rem;
+    height: 1.0625rem;
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: all var(--transition-fast);
+}
+
+.c-checkbox:checked {
+    background-color: var(--color-brand-primary);
+    border-color: var(--color-brand-primary);
+}
+
+.c-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    border: solid #FFFFFF;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.c-checkbox:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-brand-primary-ring);
+}
+
+/* Alert Notification Panel */
+.c-alert {
+    padding: 0.875rem 1rem;
+    border-radius: 0.625rem;
+    font-size: 0.8125rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    text-align: left;
+}
+
+.c-alert--error {
+    background-color: var(--color-status-error-bg);
+    border: 1px solid var(--color-status-error-border);
+    color: #B91C1C;
+}
+
+.c-alert--success {
+    background-color: var(--color-status-success-bg);
+    border: 1px solid var(--color-status-success-border);
+    color: #065F46;
+}
+
+/* Autofill Readability Fix */
+.c-form-input:-webkit-autofill,
+.c-form-input:-webkit-autofill:hover,
+.c-form-input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+    -webkit-text-fill-color: var(--color-text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
