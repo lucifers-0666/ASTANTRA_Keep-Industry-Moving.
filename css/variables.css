@@ -1,67 +1,81 @@
 /* ==========================================================================
    SPAREFINDER INDUSTRIAL PROCUREMENT NETWORK — DESIGN TOKENS
-   Single Source of Truth for Brand Palette & Layout Scale (Light Industrial Theme)
+   Single Source of Truth for Brand Palette & Layout Scale (Industrial Precision)
    ========================================================================== */
 
 :root {
-    /* Brand & Primary Actions (From Logo & Main CTAs) */
-    --color-brand-primary: #1677FF;
-    --color-brand-primary-hover: #0958D9;
-    --color-brand-primary-dark: #003EB3;
-    --color-brand-primary-light: #E6F4FF;
-    --color-brand-primary-ring: rgba(22, 119, 255, 0.20);
-
-    /* Emergency Breakdown Accent (Safety Orange) */
-    --color-emergency: #EA580C;
-    --color-emergency-hover: #C2410C;
-    --color-emergency-bg: #FFF7ED;
-    --color-emergency-border: #FED7AA;
-    --color-emergency-text: #9A3412;
-
-    /* Light Industrial Surfaces & Page Canvas (Step 4 Requirement) */
-    --color-bg-page: #F8FAFC;
-    --color-bg-surface: #FFFFFF;
-    --color-bg-subtle: #F1F5F9;
-    --color-bg-muted: #E2E8F0;
+    /* Primary Page Background & Surfaces (Gray-First) */
+    --color-bg-page: #F1F3F5;             /* Main page canvas */
+    --color-bg-subtle: #E7EBEF;           /* Secondary gray sections */
+    --color-bg-surface: #FFFFFF;          /* Elevated cards, forms, functional panels */
+    --color-bg-muted: #D5DCE3;
     --color-bg-input: #FFFFFF;
     --color-bg-input-focus: #FFFFFF;
 
+    /* Brand & Primary Actions */
+    --color-brand-primary: #1769E0;       /* Confident B2B interaction blue */
+    --color-brand-primary-hover: #1255B8;
+    --color-brand-primary-dark: #0D4191;
+    --color-brand-primary-light: #EBF2FD;
+    --color-brand-primary-ring: rgba(23, 105, 224, 0.20);
+
+    /* Emergency Breakdown Accent (Urgent Actions ONLY) */
+    --color-emergency: #E87519;
+    --color-emergency-hover: #CF6411;
+    --color-emergency-bg: #FEF4EC;
+    --color-emergency-border: #FAD7BE;
+    --color-emergency-text: #964205;
+
+    /* Deep Navy (High-contrast structural band and footer) */
+    --color-deep-navy: #142337;
+    --color-deep-navy-dark: #0D1724;
+    --color-deep-navy-surface: #1E314B;
+
     /* Structural Borders & Dividers */
-    --color-border-subtle: #E2E8F0;
-    --color-border-default: #CBD5E1;
-    --color-border-strong: #94A3B8;
-    --color-border-focus: #1677FF;
+    --color-border-subtle: #E7EBEF;
+    --color-border-default: #D5DCE3;      /* Hairline 1px borders */
+    --color-border-strong: #B6C2CE;
+    --color-border-focus: #1769E0;
 
     /* High-Contrast Typography */
-    --color-text-primary: #0F172A;     /* 100% Dark Slate Headings */
-    --color-text-body: #334155;        /* Slate-700 High-Readability Body */
-    --color-text-secondary: #475569;   /* Slate-600 Supporting Text */
-    --color-text-muted: #64748B;       /* Slate-500 Form Placeholders & Hints */
-    --color-text-dim: #94A3B8;         /* Slate-400 Subtle Accents */
+    --color-text-primary: #17212F;        /* Deep navy-slate headings & content */
+    --color-text-body: #2C394B;           /* High readability body text */
+    --color-text-secondary: #5F6B7A;      /* Supporting text & metadata */
+    --color-text-muted: #7E8C9D;          /* Form placeholders & hints */
+    --color-text-dim: #9FAEB8;            /* Subtle accents */
     --color-text-inverse: #FFFFFF;
 
     /* Operational Status Signals */
-    --color-status-success: #059669;
-    --color-status-success-bg: #ECFDF5;
-    --color-status-success-border: #A7F3D0;
-    --color-status-warning: #D97706;
-    --color-status-warning-bg: #FFFBEB;
+    --color-status-success: #18865B;      /* Verified entity green */
+    --color-status-success-bg: #E8F5F0;
+    --color-status-success-border: #B7E4D3;
+    --color-status-warning: #B45309;
+    --color-status-warning-bg: #FEF3C7;
     --color-status-warning-border: #FDE68A;
-    --color-status-error: #DC2626;
-    --color-status-error-bg: #FEF2F2;
-    --color-status-error-border: #FECACA;
+    --color-status-error: #D93838;
+    --color-status-error-bg: #FEECEB;
+    --color-status-error-border: #FAC5C3;
 
     /* Typography Stacks */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-head: 'Archivo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', Consolas, "Courier New", monospace;
 
-    /* Shadows & Elevation */
-    --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-    --shadow-lifted: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    /* Geometry & Spacing (8px Base Scale) */
+    --radius-sm: 2px;
+    --radius-md: 3px;                     /* Standard 3px industrial radius */
+    --radius-lg: 4px;
+    --radius-xl: 6px;
+    --rule: 1px solid var(--color-border-default);
 
-    /* Transitions & Dynamics */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    /* Elevation: Restrained hairline borders preferred over heavy shadows */
+    --shadow-subtle: 0 1px 2px 0 rgba(20, 35, 55, 0.04);
+    --shadow-card: 0 2px 4px 0 rgba(20, 35, 55, 0.05);
+    --shadow-dropdown: 0 4px 12px 0 rgba(20, 35, 55, 0.10);
+
+    /* Motion Tokens */
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
 }
 

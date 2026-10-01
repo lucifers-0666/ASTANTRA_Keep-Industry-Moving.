@@ -1,7 +1,7 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="IndustrialSparePartPortal.MasterPages.SiteMaster" %>
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#F8FAFC]">
+<html lang="en" class="h-full bg-[#F1F3F5]">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,15 +24,15 @@
     <!-- FontAwesome 6 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
-    <!-- Google Fonts Inter & JetBrains Mono -->
+    <!-- Google Fonts: Archivo, IBM Plex Sans, IBM Plex Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="h-full flex flex-col font-['Inter',sans-serif] antialiased text-[#0F172A] bg-[#F8FAFC]">
+<body class="h-full flex flex-col font-['IBM_Plex_Sans',sans-serif] antialiased text-[#17212F] bg-[#F1F3F5]">
     <form id="form1" runat="server" class="flex flex-col min-h-full">
 
         <!-- ============================================================================ -->
@@ -129,15 +129,15 @@
         <!-- Shown on high-level discovery pages (Home, Why Us); suppressed on Login/Reg  -->
         <!-- ============================================================================ -->
         <asp:PlaceHolder ID="phPreFooterEmergency" runat="server">
-            <section class="bg-gradient-to-r from-orange-50 via-white to-amber-50 border-t border-b border-[#CBD5E1] py-10 px-4 sm:px-6 lg:px-8">
+            <section class="bg-[#E7EBEF] border-t border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
                 <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div class="space-y-1.5 max-w-2xl text-left">
                         <div class="flex items-center gap-2">
                             <span class="spec-tag spec-tag-orange"><i class="fa-solid fa-bolt"></i> EMERGENCY PROTOCOL</span>
-                            <span class="text-xs text-[#64748B] font-mono">CRITICAL DOWNTIME SOURCING</span>
+                            <span class="text-xs text-[#5F6B7A] font-mono">CRITICAL DOWNTIME SOURCING</span>
                         </div>
-                        <h3 class="text-xl font-bold text-[#0F172A] m-0">Critical machine stopped on your plant floor?</h3>
-                        <p class="text-xs sm:text-sm text-[#475569] m-0 leading-relaxed">
+                        <h3 class="text-xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">Critical machine stopped on your plant floor?</h3>
+                        <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 leading-relaxed">
                             Broadcast urgent OEM replacement requirements across regional verified stockists and on-call field technicians.
                         </p>
                     </div>

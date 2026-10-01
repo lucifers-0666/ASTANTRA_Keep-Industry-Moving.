@@ -59,3 +59,14 @@ When a new technical feature or non-trivial technique is introduced, add an entr
 - **Model Answer**: *"Force-pushing destroys published history and can break local working copies for other team members. Forward reverting is industry standard because it produces an immutable, reversible audit log of changes."*
 - **Responsible Student**: Zed / Team
 
+### Gray-First Light Industrial Design System (#F1F3F5)
+- **Goal (User problem it solves)**: Eliminates glaring white page canvases and generic SaaS card patterns, grounding technical procurement content in an authentic engineering datasheet aesthetic.
+- **Technical Summary**: Replaces `#FFFFFF` page backgrounds with `#F1F3F5` light cool gray, reserving pure white for functional surfaces (forms, tables, panels). Uses `Archivo` for bold headings, `IBM Plex Sans` for body, and `IBM Plex Mono` for OEM part numbers and specs.
+- **Why We Chose It (vs. rejected alternatives)**: High-contrast white surfaces on light gray provide strong visual hierarchy without relying on heavy artificial drop shadows or purple/indigo AI gradients.
+- **How It Works**: Defined as CSS custom properties in `css/variables.css` and `Content/css/site-shell.css`. All components reference semantic variables (`var(--color-bg-base)`, `var(--color-brand-primary)`).
+- **Where It Lives**: `css/variables.css`, `Content/css/site-shell.css`, `MasterPages/Site.Master`.
+- **What Would Break If Removed**: The visual hierarchy would collapse into flat, unguided white blocks with low contrast.
+- **Likely Faculty Question**: *"Why are part numbers in a monospace font?"*
+- **Model Answer**: *"In heavy manufacturing and engineering drawings, alphanumeric serial codes, tolerances, and dimensions are rendered in monospace so that characters like 0 and O, or 1 and I, cannot be confused by procurement staff or machinists."*
+- **Responsible Student**: Zed / Jay
+

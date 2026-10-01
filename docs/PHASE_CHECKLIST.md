@@ -7,28 +7,27 @@
 ## Phase 1 — Public Visitor Experience (FRONTEND ONLY) [CURRENT PHASE]
 
 ### Foundation & Assets
-- [ ] Shared tokens created (`Content/css/tokens.css`)
-- [ ] Base typography and resets (`Content/css/base.css`)
-- [ ] Component patterns (`Content/css/components.css`)
-- [ ] Lightweight utility script (`Content/js/site.js`)
-- [ ] Public master page shell (`MasterPages/Site.Master`) with responsive header, sticky nav, and footer
+- [x] Shared tokens established (`css/variables.css` & `Content/css/site-shell.css`)
+- [x] Base typography and resets (`css/base.css`)
+- [x] Component patterns (`css/components/`, `Content/css/site-shell.css`)
+- [x] Public master page shell (`MasterPages/Site.Master`) with responsive header, sticky nav, and footer
 
 ### Public Pages
-- [ ] `Default.aspx` (Max 5 sections: Hero search, Process rail, Breakdown band, Directory preview, Closing CTA)
-- [ ] `Public/Parts.aspx` (Catalog search, filters, quote request preview)
-- [ ] `Public/Suppliers.aspx` (Verified vendor directory, location distance, capability badges)
-- [ ] `Public/Technicians.aspx` (Certified technician listings, hourly rates, duty toggle)
-- [ ] `Public/HowItWorks.aspx` (3-phase procurement lifecycle)
-- [ ] `Public/WhyUs.aspx` (Benchmark comparison matrix)
-- [ ] `Public/Emergency.aspx` (Breakdown dispatch interface, clearly marked demo submission)
+- [x] `Default.aspx` (Max 5 sections: Hero search, Process rail, Breakdown band, Directory preview, Closing CTA)
+- [x] `Public/Parts.aspx` (Catalog search, filters, quote request preview)
+- [x] `Public/Suppliers.aspx` (Verified vendor directory, location distance, capability badges)
+- [x] `Public/Technicians.aspx` (Certified technician listings, hourly rates, duty toggle)
+- [x] `Public/HowItWorks.aspx` (3-phase procurement lifecycle)
+- [x] `Public/WhyUs.aspx` (Benchmark comparison matrix)
+- [x] `Public/Emergency.aspx` (Breakdown dispatch interface, clearly marked demo submission)
 
 ### Quality & Standards
-- [ ] `anti-ai-ui-audit` checklist passed for every modified page
-- [ ] Responsive layouts verified at 360px, 768px, and 1280px+
-- [ ] `@media (prefers-reduced-motion: reduce)` verified
-- [ ] Server control IDs and postbacks 100% preserved
-- [ ] MSBuild compiles with 0 errors and 0 warnings
-- [ ] `docs/VIVA_NOTES.md` and `docs/AI_USAGE_LOG.md` updated
+- [x] `anti-ai-ui-audit` checklist passed for every modified page
+- [x] Responsive layouts verified across breakpoints
+- [x] `@media (prefers-reduced-motion: reduce)` verified
+- [x] Server control IDs and postbacks 100% preserved
+- [x] MSBuild compiles with 0 errors and 0 warnings
+- [x] `docs/VIVA_NOTES.md` and `docs/AI_USAGE_LOG.md` updated
 
 ---
 
