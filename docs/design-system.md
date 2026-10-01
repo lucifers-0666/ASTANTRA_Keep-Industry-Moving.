@@ -1,94 +1,110 @@
-# Light Industrial Design System Guidelines
-## Industrial Spare-Part Finder & Emergency Procurement Portal
+# Industrial Design System & Specification
+## SPAREFINDER — Industrial Spare Parts Procurement Network
 
 ---
 
-## 1. Design Philosophy & Visual Identity
+## 1. Design Direction: Datasheet & Engineering Precision
 
-The design system establishes a **Light Industrial Technology Language**:
-- **Bright & Clean Foundation**: 80%+ of all surfaces are light, clean, and spacious.
-- **High-Contrast Readability**: Dark slate text (`#172033` / `#0F172A`) on light slate backgrounds (`#F8FAFC`) and crisp white surfaces (`#FFFFFF`). Zero low-opacity or unreadable text.
-- **Semantic Color Usage**: Blue represents primary actions; Safety Orange represents breakdown emergencies; Refined Copper represents hardware metadata accents; Industrial Charcoal grounds structural footers.
-- **Honest Academic Platform**: All demonstrative features, pricing simulations, and academic prototype disclosures are explicitly labeled to maintain project integrity.
-
----
-
-## 2. Color System Specifications
-
-| Token Name | Hex Code | Semantic Role & Usage |
-| :--- | :--- | :--- |
-| **Primary Page Background** | `#F8FAFC` | Primary light slate background for public landing pages. |
-| **Secondary Background** | `#F1F5F9` | Alternating section background for visual section rhythm. |
-| **Surface Card Background** | `#FFFFFF` | Pure white cards with `#D9E1EA` / `#E2E8F0` borders and subtle elevation. |
-| **Primary Text** | `#0F172A` / `#172033` | ExtraBold/Bold primary typography (100% contrast). |
-| **Secondary Text** | `#475569` / `#526174` | Subhead body copy and supporting descriptions. |
-| **Border Light** | `#D9E1EA` / `#CBD5E1` | Structural card borders and divider lines. |
-| **Primary Action Blue** | `#1677FF` / `#2563EB` | Main action buttons (`btn-primary`), primary search tabs, and focus rings. |
-| **Secondary Blue** | `#3B91FF` / `#3B82F6` | Hover states, active links, and status highlights. |
-| **Emergency Safety Orange** | `#F97316` / `#EA580C` | High-priority breakdown alerts (`btn-emergency`) and emergency dispatch indicators. |
-| **Refined Copper Accent** | `#B87333` | Technical hardware badges (`copper-badge`), metadata tags (`copper-tag`). |
-| **Industrial Charcoal** | `#1E293B` / `#0F172A` | Concise, grounded enterprise footer. |
+SPAREFINDER is an enterprise B2B platform connecting factories, spare-part suppliers, and maintenance technicians. The aesthetic direction is modeled on an **engineering datasheet / technical drawing**:
+- **Light Cool Gray Background (`#F1F3F5`)**: Eliminates glaring white page canvases; grounds the technical content.
+- **Crisp White Content Surfaces (`#FFFFFF`)**: Used strictly for functional panels, tables, forms, and cards.
+- **Data-First Readability**: High-contrast dark navy text (`#111827`) paired with secondary metadata gray (`#5F6B7A`).
+- **Semantic Color Restraint**: Blue is reserved for primary actions; safety orange is strictly isolated to emergency breakdown protocols; green indicates verified operational status.
 
 ---
 
-## 3. Typography Scale & Layout Standards
+## 2. Master Token Reference
 
-- **Max Container Width**: `1408px` (`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`).
-- **Desktop Hero Headline**: `40px – 56px` (`text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight`).
-- **Section Headings**: `28px – 36px` (`text-2xl sm:text-3xl font-extrabold text-slate-900`).
-- **Body Text**: `15px – 16px` (`text-slate-600 leading-relaxed`).
-- **Technical Metadata**: `11px – 13px` (`font-mono font-bold uppercase tracking-wider`).
+All styles must derive from CSS Custom Properties defined in `Content/css/tokens.css`:
 
----
+```css
+:root {
+  /* Surface & Base Colors */
+  --bg: #F1F3F5;             /* Primary Page Background */
+  --surface: #FFFFFF;        /* Elevated Content Surfaces */
+  --text: #111827;           /* High-contrast Primary Text */
+  --text-2: #5F6B7A;         /* Secondary / Metadata Text */
+  --border: #D9DEE5;         /* Hairline 1px Structural Borders */
 
-## 4. Navigation & Active State Guidelines
+  /* Brand & Status Accents */
+  --blue: #1769E0;           /* Primary Action Blue */
+  --navy: #101C2C;           /* High-contrast Navy Section Band */
+  --navy-dark: #0B1422;      /* Deep Navy Structural Anchor */
+  --orange: #E87519;         /* Emergency Breakdown Orange (RESTRICTED) */
+  --green: #18865B;          /* Verified Entity Status Green */
 
-### Restrained Route-Aware Active Indicators
-Navigation links must clearly convey location without visually overpowering the top bar:
-- **Active State Rule**: Never use chunky saturated button backgrounds or heavy colored pills for the active navigation state.
-- **Desktop Implementation**: Use a restrained 2px bottom accent underline (`border-bottom: 2px solid var(--color-brand-primary)` or `border-b-2 border-blue-600`) with bold text and `aria-current="page"`.
-- **Mobile Drawer Implementation**: Use a subtle left border accent (`border-l-4 border-blue-600`) with a light tint background (`bg-blue-50/70`) and text color shift (`text-blue-700`).
-- **Accessibility**: Include clear `:focus-visible` dashed outlines (`outline: 2px dashed #2563EB; outline-offset: 2px`) for keyboard tab navigation.
+  /* Typography Stacks */
+  --font-head: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
 
----
+  /* Geometry & Spacing (8px Base Scale) */
+  --radius: 3px;             /* Crisp 2-4px Border Radius */
+  --s1: 4px;   --s2: 8px;   --s3: 16px; 
+  --s4: 24px;  --s5: 40px;  --s6: 64px;  --s7: 96px;
+  --rule: 1px solid var(--border);
 
-## 5. Form Design & Input Group Standards
-
-To eliminate icon-text collisions, autofill overlap, and password manager clipping:
-1. **Label Placement**: Always position input labels externally above the input field with clean typography (`block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5`).
-2. **Standard Padding**: Use standard, consistent padding (`px-3.5 py-2.5`) across all input controls. Do not place absolute floating icons inside the input text path.
-3. **Browser Autocomplete**: Always provide standards-compliant autocomplete attributes (`autocomplete="email"`, `autocomplete="current-password"`, `autocomplete="new-password"`, `autocomplete="tel"`, `autocomplete="organization"`).
-4. **Action Toggles**: Client-side password view toggles must be non-interfering interactive buttons (`type="button"`) positioned safely in the right margin with adequate clearance.
-5. **Role Selector Cards**: Multi-role registration cards should feature clear radio targets, highlighted border transitions on selection (`border-blue-600 bg-blue-50/40`), and descriptive role summaries.
-
----
-
-## 6. Responsive Layout Patterns
-
-### Dual Comparison System (`WhyUs.aspx`)
-- **Desktop (≥ 768px)**: Rich tabular comparison matrix comparing Traditional Sourcing vs. SPAREFINDER Portal across 7 technical vectors.
-- **Mobile (< 768px)**: Stacked comparison cards displaying side-by-side metric cards (Traditional friction vs SPAREFINDER digital resolution), eliminating horizontal scrolling and squished table columns.
-
-### 3-Phase Lifecycle Diagram (`HowItWorks.aspx`)
-Instead of a single sprawling list of arbitrary stages, operational workflows are grouped into 3 coherent phases:
-1. **Phase 1: Catalog Discovery & Specification Matching** (OEM lookup, tolerance checks).
-2. **Phase 2: Commercial Quotation & Order Confirmation** (Multi-vendor bids, purchase approvals).
-3. **Phase 3: Logistics Dispatch & Technician Commissioning** (Rapid field delivery, certified deployment).
+  /* Micro-Interactions & Transitions */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 150ms;
+  --t-ui: 250ms;
+  --t-reveal: 600ms;
+}
+```
 
 ---
 
-## 7. Motion & Accessibility Standards
+## 3. Typography Scale & Application
 
-- **Transitions**: Smooth, subtle micro-interactions between 150ms and 200ms (`transition-all duration-200 ease-out`).
-- **Reduced Motion Support**:
-  ```css
-  @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-      }
-  }
-  ```
+| Hierarchy | Font Family | Size / Weight | Intended Usage |
+| :--- | :--- | :--- | :--- |
+| **Hero Title** | `Archivo` | `clamp(2.25rem, 5vw, 3.75rem)` / 700 | Primary landing page statement |
+| **Section Heading** | `Archivo` | `clamp(1.5rem, 3vw, 2.25rem)` / 600 | Clear section boundaries |
+| **Body Paragraph** | `IBM Plex Sans`| `1rem (16px)` / 400 (Line-height 1.6) | Explanatory text (max 65ch per line) |
+| **Labels & Tags** | `IBM Plex Mono` | `0.75rem (12px)` / 500 (Uppercase, letter-spacing 0.08em) | Form labels, category badges, table headers |
+| **Technical Specs** | `IBM Plex Mono` | `0.875rem–1rem` / 500 | Part numbers, OEM codes, lead times, pricing |
+
+---
+
+## 4. Reusable Component Patterns (`Content/css/components.css`)
+
+- **`.btn`**: Base button with 3px radius, inline-flex alignment, and 150ms hover feedback.
+  - `.btn--primary`: Solid industrial blue (`var(--blue)`).
+  - `.btn--ghost`: Bordered outline button (`1px solid var(--border)`).
+  - `.btn--emergency`: Dedicated safety orange button (`var(--orange)`), reserved exclusively for machine breakdown requests.
+- **`.field`**: Accessible form group with upper label, 1px border, blue focus ring, and validation message container.
+- **`.ledger`, `.ledger__row`**: Ruled data list rows for spare parts, suppliers, and technicians with subtle hover highlighting.
+- **`.badge`**: Monospace metadata badge. `.badge--verified` uses green token for authenticated GSTIN entities.
+- **`.panel`**: White surface container with 1px border. Optional `.panel--ticks` adds subtle engineering corner crosshairs.
+- **`.rail`**: Sequential procurement milestone indicator (Search → RFQ → Compare → Order).
+- **`.band--navy`**: Full-bleed high-contrast navy container for emergency alerts or critical focal sections.
+- **`.reveal`**: Single-pass scroll reveal utility powered by a lightweight `IntersectionObserver`.
+
+---
+
+## 5. Navigation & Form Accessibility Standards
+
+- **Active Navigation State**: Restrained 2px bottom accent rule (`border-bottom: 2px solid var(--blue)`) with bold text and `aria-current="page"`. Never use heavy, saturated pill fills.
+- **Mobile Navigation Drawer**: Clean side-draw menu with subtle left border highlight (`border-left: 3px solid var(--blue)`).
+- **Keyboard Tab Navigation**: Visible focus rings on all interactive elements (`outline: 2px solid var(--blue); outline-offset: 2px`).
+- **Input Labels & Autocomplete**: Labels are placed externally above inputs; inputs specify standard `autocomplete` attributes.
+
+---
+
+## 6. Page Budgets & Structural Recipes
+
+### A. Homepage (Maximum 5 Sections)
+1. **Search-First Hero**: Immediate OEM part number input + schematic line art.
+2. **Procurement Process Rail**: 4-step clear workflow (Search, RFQ, Quotes, Order).
+3. **Emergency Breakdown Band**: High-contrast navy block with single orange CTA.
+4. **Directory Preview Ledger**: Ruled rows previewing popular parts, suppliers, and technicians.
+5. **Closing Action & Footer**: Compact enterprise procurement sign-off.
+
+### B. Public Directory & Information Pages (Maximum 3 to 4 Sections)
+- **Parts Catalog (`Public/Parts.aspx`)**: Search bar, collapsed category filters, and tabular part comparison ledger.
+- **Suppliers Directory (`Public/Suppliers.aspx`)**: Verified supplier directory, location distance, and capability tags.
+- **Technicians Directory (`Public/Technicians.aspx`)**: Field technician credentials, specializations, and real-time duty status.
+- **How It Works (`Public/HowItWorks.aspx`)**: 3-phase industrial lifecycle explanation.
+- **Why Choose Us (`Public/WhyUs.aspx`)**: Honest tabular comparison between traditional sourcing and digital procurement.
+- **Emergency Breakdown (`Public/Emergency.aspx`)**: High-priority alert submission form and emergency hotline details.
 

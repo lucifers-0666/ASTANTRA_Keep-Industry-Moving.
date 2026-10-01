@@ -86,13 +86,15 @@ industrial-spare-part-portal/
 ## 🎨 UI Design System
 
 The platform features a **Light Industrial B2B Technology Design System**:
-- **Primary Background (`#F8FAFC`)**: Clean, light slate industrial surface.
-- **Secondary Background (`#F1F5F9`)**: Alternating section background.
-- **Cards (`#FFFFFF`)**: Pure white cards with `#D9E1EA` borders and soft physical shadows.
-- **Primary Action Blue (`#1677FF`)**: Confident B2B interaction blue for buttons and search tabs.
-- **Emergency Orange (`#F97316`)**: Reserved strictly for emergency breakdown dispatches.
-- **Subtle Copper Accent (`#B87333`)**: Technical hardware badges (`copper-badge`) and metadata tags.
-- **Industrial Charcoal (`#273444`)**: Compact enterprise footer anchor.
+- **Primary Page Background (`#F1F3F5`)**: Light cool gray surface grounding technical content.
+- **Surface Panels (`#FFFFFF`)**: Pure white surfaces with `#D9DEE5` 1px borders and 3px radius.
+- **Primary Text (`#111827`)**: High-contrast dark navy-slate.
+- **Secondary Text (`#5F6B7A`)**: Muted slate for subtext and metadata.
+- **Primary Action Blue (`#1769E0`)**: Confident B2B interaction blue for buttons and search tabs.
+- **Emergency Orange (`#E87519`)**: Reserved strictly for high-priority machine breakdown dispatches.
+- **Verified Green (`#18865B`)**: Authenticated entity badges and status indicators.
+- **Industrial Navy (`#101C2C`)**: High-impact section band and footer anchor.
+- **Typography**: Archivo (headings), IBM Plex Sans (body), IBM Plex Mono (part numbers & tolerances).
 
 ---
 
