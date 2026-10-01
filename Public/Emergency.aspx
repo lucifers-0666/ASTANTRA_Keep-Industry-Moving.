@@ -169,23 +169,23 @@
                     </div>
                 </div>
 
-                <!-- Emergency Protocol in Deep Navy -->
-                <div class="bg-[#142337] text-white rounded-[3px] p-5 sm:p-6 space-y-3 border border-[#24364D] text-left">
+                <!-- Emergency Protocol in Refined Industrial Surface -->
+                <div class="bg-white rounded-[3px] p-5 sm:p-6 space-y-3 border border-[#D7DDE4] shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)] text-left">
                     <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-[2px] bg-[#E87519] text-white flex items-center justify-center font-bold text-sm shrink-0">
+                        <div class="w-8 h-8 rounded-[2px] bg-[#FEF4EC] text-[#D9650E] border border-[#FAD7BE] flex items-center justify-center font-bold text-sm shrink-0">
                             <i class="fa-solid fa-tower-broadcast"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] text-[#E87519] font-mono font-bold uppercase tracking-wider block">DISPATCH PROTOCOL</span>
-                            <h4 class="text-sm font-bold font-['Archivo',sans-serif] text-white m-0">Rapid Breakdown Triage</h4>
+                            <span class="text-[10px] text-[#D9650E] font-mono font-bold uppercase tracking-wider block">DISPATCH PROTOCOL</span>
+                            <h4 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Rapid Breakdown Triage</h4>
                         </div>
                     </div>
-                    <p class="text-xs text-[#9FAEB8] leading-relaxed m-0">
+                    <p class="text-xs text-[#667180] leading-relaxed m-0">
                         Submitting an emergency request broadcasts machine specifications and stamped OEM part numbers directly to regional suppliers with matching inventory.
                     </p>
-                    <div class="p-2.5 bg-[#1E314B] border border-[#2A4365] rounded-[2px] text-xs text-[#9FAEB8] text-center font-mono">
-                        <span class="text-[#E87519] font-bold block mb-0.5">Target Response: &lt; 2 Hours</span>
-                        <span class="text-[10px] text-[#9FAEB8]">Simulated vendor notification active for academic demonstration</span>
+                    <div class="p-2.5 bg-[#F7F8FA] border border-[#D7DDE4] rounded-[2px] text-xs text-[#667180] text-center font-mono">
+                        <span class="text-[#D9650E] font-bold block mb-0.5">Target Response: &lt; 2 Hours</span>
+                        <span class="text-[10px] text-[#8792A0]">Active priority queue protocol across regional suppliers</span>
                     </div>
                 </div>
 

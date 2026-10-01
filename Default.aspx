@@ -157,33 +157,33 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 3. EMERGENCY BREAKDOWN NAVY BAND                                             -->
-    <!-- High-contrast #142337 section isolating emergency action                     -->
+    <!-- 3. EMERGENCY BREAKDOWN PROTOCOL PANEL                                        -->
+    <!-- Industrial gray canvas with high-visibility emergency card                   -->
     <!-- ============================================================================ -->
-    <section class="py-12 bg-[#142337] border-b border-[#0D1724] text-white">
+    <section class="py-12 bg-[#E7EBEF] border-b border-[#D7DDE4]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div class="p-6 sm:p-8 bg-white border border-[#D7DDE4] rounded-[3px] shadow-[0_2px_8px_-2px_rgba(20,35,55,0.06)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
                 
                 <div class="space-y-2 max-w-2xl text-left">
                     <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 bg-[#E87519] text-white font-mono text-[10px] font-bold uppercase rounded-[2px] tracking-wider">
-                            CRITICAL DESK
+                        <span class="px-2 py-0.5 bg-[#FEF4EC] text-[#D9650E] border border-[#FAD7BE] font-mono text-[10px] font-bold uppercase rounded-[2px] tracking-wider">
+                            <i class="fa-solid fa-bolt mr-1"></i> CRITICAL DESK
                         </span>
-                        <span class="text-xs text-[#9FAEB8] font-mono">PRIORITY ESCALATION PROTOCOL</span>
+                        <span class="text-xs text-[#667180] font-mono">PRIORITY ESCALATION PROTOCOL</span>
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-black font-['Archivo',sans-serif] text-white tracking-tight m-0">
+                    <h2 class="text-2xl sm:text-3xl font-black font-['Archivo',sans-serif] text-[#202833] tracking-tight m-0">
                         Critical Machinery Stopped on the Plant Floor?
                     </h2>
-                    <p class="text-xs sm:text-sm text-[#9FAEB8] leading-relaxed m-0">
+                    <p class="text-xs sm:text-sm text-[#667180] leading-relaxed m-0">
                         Do not waste hours calling individual vendors. Submit machine nameplate specifications to broadcast immediate replacement alerts across regional stockists and mobilize certified on-call field technicians.
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
-                    <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-3 px-6 font-bold shadow-md justify-center whitespace-nowrap">
+                    <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-3 px-6 font-bold shadow-sm justify-center whitespace-nowrap">
                         <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Submit Breakdown Alert
                     </a>
-                    <a href="~/Public/Technicians.aspx" runat="server" class="btn-secondary text-xs py-3 px-5 font-bold justify-center bg-[#1E314B] text-white border-[#2A4365] hover:bg-[#243B5A]">
+                    <a href="~/Public/Technicians.aspx" runat="server" class="btn-secondary text-xs py-3 px-5 font-bold justify-center">
                         <i class="fa-solid fa-user-gear mr-1.5"></i> Find Field Technicians
                     </a>
                 </div>
@@ -309,18 +309,18 @@
 
     <!-- ============================================================================ -->
     <!-- 5. CLOSING PORTAL ONBOARDING ACTION                                          -->
-    <!-- Clean, professional procurement workspace callout in deep navy               -->
+    <!-- Clean, professional procurement workspace callout in industrial gray         -->
     <!-- ============================================================================ -->
     <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-[#142337] text-white rounded-[3px] p-8 sm:p-10 border border-[#24364D] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div class="bg-[#F7F8FA] rounded-[3px] p-8 sm:p-10 border border-[#D7DDE4] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)]">
                 
                 <div class="space-y-2 max-w-2xl text-left">
                     <span class="spec-tag spec-tag-blue font-mono text-[11px]">PORTAL ONBOARDING</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-white m-0">
+                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
                         Join the SPAREFINDER Industrial Procurement Network
                     </h2>
-                    <p class="text-xs sm:text-sm text-[#9FAEB8] m-0 leading-relaxed">
+                    <p class="text-xs sm:text-sm text-[#667180] m-0 leading-relaxed">
                         Whether managing a factory maintenance department, operating an industrial spare-parts warehouse, or offering certified technician services, register your account today.
                     </p>
                 </div>
@@ -329,7 +329,7 @@
                     <a href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2.5 px-5 font-bold justify-center">
                         <i class="fa-solid fa-user-plus mr-1.5"></i> Register Entity Account
                     </a>
-                    <a href="~/Account/Login.aspx" runat="server" class="btn-secondary text-xs py-2.5 px-5 font-bold justify-center bg-[#1E314B] text-white border-[#2A4365] hover:bg-[#243B5A]">
+                    <a href="~/Account/Login.aspx" runat="server" class="btn-secondary text-xs py-2.5 px-5 font-bold justify-center">
                         <i class="fa-solid fa-right-to-bracket mr-1.5"></i> Sign In to Workspace
                     </a>
                 </div>

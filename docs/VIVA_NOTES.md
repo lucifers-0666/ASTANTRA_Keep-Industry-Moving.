@@ -70,3 +70,25 @@ When a new technical feature or non-trivial technique is introduced, add an entr
 - **Model Answer**: *"In heavy manufacturing and engineering drawings, alphanumeric serial codes, tolerances, and dimensions are rendered in monospace so that characters like 0 and O, or 1 and I, cannot be confused by procurement staff or machinists."*
 - **Responsible Student**: Zed / Jay
 
+### Dedicated Emergency Button Color Stability & Isolation
+- **Goal (User problem it solves)**: Ensures the critical breakdown button never turns blue on hover, preserving urgent recognition under stress.
+- **Technical Summary**: High-specificity CSS isolates `.site-nav-link-emergency` and `.btn-emergency`, preventing inheritance from standard navigation link hover states. It uses `#FEF4EC` warm light orange background, `#D9650E` text/border, and a 1.5px lift on hover.
+- **Why We Chose It (vs. rejected alternatives)**: Having an emergency breakdown trigger turn into the site's primary blue accent causes visual confusion and violates safety color conventions where orange signifies urgency.
+- **How It Works**: Configured with strict `!important` color rules and transition curves in `Content/css/site-shell.css`, overriding generic anchor hover selectors while providing focus rings for keyboard navigation.
+- **Where It Lives**: `Content/css/site-shell.css` (.site-nav-link-emergency, .btn-emergency).
+- **What Would Break If Removed**: The Emergency Desk button would inherit standard blue link styles on hover.
+- **Likely Faculty Question**: *"Why shouldn't the Emergency button turn blue like other links?"*
+- **Model Answer**: *"In industrial UI/UX design, emergency actions have distinct safety-critical semantics. Turning blue on hover dilutes urgency; maintaining an orange-tinted hover state provides clear interactive feedback without breaking the established color code."*
+- **Responsible Student**: Zed / Jay
+
+### Apple-Inspired Subtle Glass Material & Restrained Micro-Interactions
+- **Goal (User problem it solves)**: Adds modern tactile depth and responsive feedback across buttons, cards, and navigation without the readability pitfalls of generic glassmorphism.
+- **Technical Summary**: Combines semi-transparent white surfaces (`rgba(255, 255, 255, 0.92)`), `backdrop-filter: blur(12px)`, hairline borders (`#D7DDE4`), and 150-250ms Apple easing (`cubic-bezier(0.2, 0.8, 0.2, 1)`) with solid fallbacks for legacy browsers.
+- **Why We Chose It**: Pure frosted-glass templates often fail contrast ratios. By using 92-95% opacity and solid white fallbacks, we maintain strict WCAG AA contrast while creating subtle depth.
+- **How It Works**: CSS backdrop-filter is paired with standard background fallbacks. Micro-interactions animate only GPU-accelerated transforms (`translateY(-2px)`) and shadows, disabled when `prefers-reduced-motion` is active.
+- **Where It Lives**: `Content/css/site-shell.css`, `css/variables.css`.
+- **What Would Break If Removed**: The interface would feel static and mechanical without depth cues or tactile feedback.
+- **Likely Faculty Question**: *"What happens on browsers that do not support backdrop-filter?"*
+- **Model Answer**: *"We specify a solid `#FFFFFF` fallback prior to the semi-transparent property. On older browsers, the element renders as an opaque white surface with hairline borders, maintaining 100% legibility."*
+- **Responsible Student**: Zed / Team
+

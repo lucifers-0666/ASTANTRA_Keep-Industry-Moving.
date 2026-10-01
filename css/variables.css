@@ -1,58 +1,57 @@
 /* ==========================================================================
    SPAREFINDER INDUSTRIAL PROCUREMENT NETWORK — DESIGN TOKENS
-   Single Source of Truth for Brand Palette & Layout Scale (Industrial Precision)
+   Single Source of Truth for Brand Palette & Layout Scale (Phase 2 Refined)
+   Industrial Gray Foundation · Charcoal Typography · Restrained Electric Blue · Dedicated Emergency Orange
    ========================================================================== */
 
 :root {
-    /* Primary Page Background & Surfaces (Gray-First) */
-    --color-bg-page: #F1F3F5;             /* Main page canvas */
-    --color-bg-subtle: #E7EBEF;           /* Secondary gray sections */
-    --color-bg-surface: #FFFFFF;          /* Elevated cards, forms, functional panels */
-    --color-bg-muted: #D5DCE3;
+    /* Primary Page Background & Surfaces (Gray-First Industrial Foundation) */
+    --color-bg-page: #F1F3F5;             /* Primary page canvas */
+    --color-bg-subtle: #E7EBEF;           /* Secondary gray sections, footer */
+    --color-bg-surface: #FFFFFF;          /* Elevated cards, forms, panels */
+    --color-bg-surface-soft: #F7F8FA;     /* Inputs, subtle inner panels */
+    --color-bg-muted: #E2E7ED;
     --color-bg-input: #FFFFFF;
     --color-bg-input-focus: #FFFFFF;
 
-    /* Brand & Primary Actions */
-    --color-brand-primary: #1769E0;       /* Confident B2B interaction blue */
-    --color-brand-primary-hover: #1255B8;
-    --color-brand-primary-dark: #0D4191;
-    --color-brand-primary-light: #EBF2FD;
-    --color-brand-primary-ring: rgba(23, 105, 224, 0.20);
-
-    /* Emergency Breakdown Accent (Urgent Actions ONLY) */
-    --color-emergency: #E87519;
-    --color-emergency-hover: #CF6411;
-    --color-emergency-bg: #FEF4EC;
-    --color-emergency-border: #FAD7BE;
-    --color-emergency-text: #964205;
-
-    /* Deep Navy (High-contrast structural band and footer) */
-    --color-deep-navy: #142337;
-    --color-deep-navy-dark: #0D1724;
-    --color-deep-navy-surface: #1E314B;
+    /* High-Contrast Charcoal Typography */
+    --color-text-primary: #202833;        /* Headings and primary content */
+    --color-text-body: #2C384A;           /* High-readability body copy */
+    --color-text-secondary: #667180;      /* Descriptions and supporting info */
+    --color-text-muted: #8792A0;          /* Metadata, hints, tertiary labels */
+    --color-text-dim: #9FAEB8;
+    --color-text-inverse: #FFFFFF;
 
     /* Structural Borders & Dividers */
     --color-border-subtle: #E7EBEF;
-    --color-border-default: #D5DCE3;      /* Hairline 1px borders */
-    --color-border-strong: #B6C2CE;
+    --color-border-default: #D7DDE4;      /* Hairline 1px borders */
+    --color-border-strong: #C4CDD7;       /* Emphasized boundaries */
     --color-border-focus: #1769E0;
 
-    /* High-Contrast Typography */
-    --color-text-primary: #17212F;        /* Deep navy-slate headings & content */
-    --color-text-body: #2C394B;           /* High readability body text */
-    --color-text-secondary: #5F6B7A;      /* Supporting text & metadata */
-    --color-text-muted: #7E8C9D;          /* Form placeholders & hints */
-    --color-text-dim: #9FAEB8;            /* Subtle accents */
-    --color-text-inverse: #FFFFFF;
+    /* Brand & Primary Actions (Electric Blue Accent) */
+    --color-brand-primary: #1769E0;       /* Primary actions & active tabs */
+    --color-brand-hover: #1257BE;         /* Hover state */
+    --color-brand-primary-hover: #1257BE;
+    --color-brand-primary-dark: #0E479E;
+    --color-brand-primary-light: #EAF2FF; /* Selected items & blue tint */
+    --color-brand-tint: #EAF2FF;
+    --color-brand-primary-ring: rgba(23, 105, 224, 0.18);
+
+    /* Emergency Breakdown Accent (Urgent Actions ONLY) */
+    --color-emergency: #F07818;           /* Dedicated emergency orange */
+    --color-emergency-hover: #D9650E;     /* Warmer orange hover */
+    --color-emergency-bg: #FEF4EC;        /* Light orange tint background */
+    --color-emergency-border: #FAD7BE;    /* Soft orange border */
+    --color-emergency-text: #964205;
 
     /* Operational Status Signals */
-    --color-status-success: #18865B;      /* Verified entity green */
+    --color-status-success: #16845B;      /* Verified entity & in-stock green */
     --color-status-success-bg: #E8F5F0;
     --color-status-success-border: #B7E4D3;
-    --color-status-warning: #B45309;
+    --color-status-warning: #B96A13;      /* Caution & backorders */
     --color-status-warning-bg: #FEF3C7;
     --color-status-warning-border: #FDE68A;
-    --color-status-error: #D93838;
+    --color-status-error: #C53D45;        /* Destructive actions & errors */
     --color-status-error-bg: #FEECEB;
     --color-status-error-border: #FAC5C3;
 
@@ -68,14 +67,24 @@
     --radius-xl: 6px;
     --rule: 1px solid var(--color-border-default);
 
-    /* Elevation: Restrained hairline borders preferred over heavy shadows */
+    /* Apple-Inspired Material & Glass Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.92);
+    --glass-bg-elevated: rgba(255, 255, 255, 0.96);
+    --glass-border: var(--color-border-default);
+    --glass-blur: blur(12px);
+    --glass-shadow: 0 4px 20px -2px rgba(32, 40, 51, 0.05);
+
+    /* Elevation & Shadow Hierarchy */
     --shadow-subtle: 0 1px 2px 0 rgba(20, 35, 55, 0.04);
-    --shadow-card: 0 2px 4px 0 rgba(20, 35, 55, 0.05);
-    --shadow-dropdown: 0 4px 12px 0 rgba(20, 35, 55, 0.10);
+    --shadow-card: 0 1px 3px 0 rgba(20, 35, 55, 0.04);
+    --shadow-card-hover: 0 6px 16px -2px rgba(20, 35, 55, 0.08);
+    --shadow-dropdown: 0 6px 20px 0 rgba(20, 35, 55, 0.08);
 
-    /* Motion Tokens */
-    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    /* Motion & Transitions (150-250ms Apple Easing) */
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-apple: cubic-bezier(0.2, 0.8, 0.2, 1);
     --duration-fast: 150ms;
-    --duration-base: 250ms;
+    --duration-base: 200ms;
+    --duration-moderate: 250ms;
+    --transition-base: 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-
