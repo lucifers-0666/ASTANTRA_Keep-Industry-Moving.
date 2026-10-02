@@ -1,7 +1,7 @@
 <%@ Page Title="Register Portal Account" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="IndustrialSparePartPortal.Account.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="description" content="Register as a Factory Buyer, Spare-Part Supplier, or Certified Technician on SPAREFINDER." />
+    <meta name="description" content="Register as a Factory Buyer, Spare-Part Supplier, or Certified Technician on ASTANTRA." />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

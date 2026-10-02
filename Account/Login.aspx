@@ -1,7 +1,7 @@
 <%@ Page Title="Sign In to Portal" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="IndustrialSparePartPortal.Account.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="description" content="Sign in to your SPAREFINDER industrial procurement terminal." />
+    <meta name="description" content="Sign in to your ASTANTRA industrial procurement terminal." />
     <link href="<%= ResolveUrl("~/css/pages/sign-in.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
 </asp:Content>
 
@@ -20,7 +20,7 @@
                     <div class="p-signin-meta-header">
                         <div class="p-signin-node">
                             <span class="p-signin-node-dot"></span>
-                            <span class="p-signin-node-text">SPAREFINDER // MCA CAPSTONE</span>
+                            <span class="p-signin-node-text">ASTANTRA // MCA CAPSTONE</span>
                         </div>
                         <div class="p-signin-status-pill">
                             <span class="u-pulse-beacon"></span>
@@ -174,7 +174,7 @@
                     </h2>
 
                     <p class="p-signin-visual-desc">
-                        SPAREFINDER models a multi-vendor procurement network connecting industrial plant buyers, regional parts suppliers, and certified field technicians for RFQ comparison, catalog inquiries, and rapid equipment breakdown escalation.
+                        ASTANTRA models a multi-vendor procurement network connecting industrial plant buyers, regional parts suppliers, and certified field technicians for RFQ comparison, catalog inquiries, and rapid equipment breakdown escalation.
                     </p>
 
                     <!-- Real-Time Activity Feed Ticker (Simulated Demonstration) -->
@@ -224,7 +224,7 @@
                         <i class="fa-solid fa-shield-halved text-emerald-600" aria-hidden="true"></i>
                         <span>ROLE-BASED ACCESS CONTROL &middot; SECURE SESSION</span>
                     </div>
-                    <div>SPAREFINDER v2.4 // MCA DEMO</div>
+                    <div>ASTANTRA v2.4 // MCA DEMO</div>
                 </div>
 
             </div>

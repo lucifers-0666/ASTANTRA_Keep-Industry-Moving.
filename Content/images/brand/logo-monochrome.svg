@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 44" width="280" height="44" aria-label="ASTANTRA Industrial Procurement Network">
+    <defs>
+        <style>
+            .brand-title-mono { font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 20px; font-weight: 900; fill: #111827; letter-spacing: 0.08em; }
+            .brand-tagline-mono { font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 7.5px; font-weight: 700; fill: #4B5563; letter-spacing: 0.16em; }
+        </style>
+    </defs>
+    <g transform="translate(2, 3) scale(0.42)">
+        <path d="M 50 6 L 90 88 L 73 88 L 50 41 L 27 88 L 10 88 Z" fill="#111827" />
+        <path d="M 37 68 L 63 68 L 69 82 L 31 82 Z" fill="#4B5563" />
+    </g>
+    <text x="52" y="22" class="brand-title-mono">ASTANTRA</text>
+    <text x="53" y="34" class="brand-tagline-mono">KEEP INDUSTRY MOVING</text>
+</svg>

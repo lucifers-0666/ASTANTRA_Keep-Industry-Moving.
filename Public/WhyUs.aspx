@@ -1,7 +1,7 @@
 <%@ Page Title="Why Us - Industrial Platform Differentiators" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="WhyUs.aspx.cs" Inherits="IndustrialSparePartPortal.Public.WhyUs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="description" content="Why manufacturing facilities choose SPAREFINDER for industrial spare-part discovery, multi-supplier comparison, and emergency breakdown procurement." />
+    <meta name="description" content="Why manufacturing facilities choose ASTANTRA for industrial spare-part discovery, multi-supplier comparison, and emergency breakdown procurement." />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -13,7 +13,7 @@
                 Platform Capabilities &amp; Differentiators
             </div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
-                Why Manufacturing Plants Choose SPAREFINDER
+                Why Manufacturing Plants Choose ASTANTRA
             </h1>
             <p class="text-xs sm:text-sm text-[#5F6B7A] max-w-3xl leading-relaxed m-0">
                 Eliminating fragmented vendor phone calls, uncertain inventory availability, and days of idle machine downtime through a structured digital sourcing network.
@@ -28,7 +28,7 @@
             <div class="space-y-1 text-left">
                 <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Operational Benchmark</span>
                 <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
-                    Traditional Offline Sourcing vs. SPAREFINDER Network
+                    Traditional Offline Sourcing vs. ASTANTRA Network
                 </h2>
                 <p class="text-xs sm:text-sm text-[#667180] m-0">How digital part indexing and multi-supplier visibility transform plant maintenance.</p>
             </div>
@@ -40,7 +40,7 @@
                         <tr>
                             <th class="w-1/4">Procurement Vector</th>
                             <th class="w-3/8 text-[#964205] bg-[#FEF4EC]"><i class="fa-solid fa-xmark mr-1"></i> Traditional Offline Sourcing</th>
-                            <th class="w-3/8 text-[#1769E0] bg-[#EAF2FF]"><i class="fa-solid fa-check mr-1"></i> SPAREFINDER Digital Platform</th>
+                            <th class="w-3/8 text-[#1769E0] bg-[#EAF2FF]"><i class="fa-solid fa-check mr-1"></i> ASTANTRA Digital Platform</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-[#D7DDE4] text-xs">
@@ -82,7 +82,7 @@
                         <p class="m-0 leading-snug">Manual catalogs, vague verbal descriptions, high return rate.</p>
                     </div>
                     <div class="p-2.5 rounded-[2px] bg-[#EAF2FF] border border-[#BFDBFE] text-xs text-[#0D4191] space-y-0.5">
-                        <span class="font-bold block text-[10px] uppercase">SPAREFINDER Network</span>
+                        <span class="font-bold block text-[10px] uppercase">ASTANTRA Network</span>
                         <p class="m-0 leading-snug font-medium">OEM Part Number &amp; Machine Model cross-indexing.</p>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                         <p class="m-0 leading-snug">Limited to 2–3 local dealers with opaque, unverified shelf inventory.</p>
                     </div>
                     <div class="p-2.5 rounded-[2px] bg-[#EAF2FF] border border-[#BFDBFE] text-xs text-[#0D4191] space-y-0.5">
-                        <span class="font-bold block text-[10px] uppercase">SPAREFINDER Network</span>
+                        <span class="font-bold block text-[10px] uppercase">ASTANTRA Network</span>
                         <p class="m-0 leading-snug font-medium">Search verified regional supplier stock with distance metrics.</p>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <p class="m-0 leading-snug">Hours spent calling vendors while factory capacity remains idle.</p>
                     </div>
                     <div class="p-2.5 rounded-[2px] bg-[#EAF2FF] border border-[#BFDBFE] text-xs text-[#0D4191] space-y-0.5">
-                        <span class="font-bold block text-[10px] uppercase">SPAREFINDER Network</span>
+                        <span class="font-bold block text-[10px] uppercase">ASTANTRA Network</span>
                         <p class="m-0 leading-snug font-medium">Instant priority broadcast alert across regional stockists.</p>
                     </div>
                 </div>

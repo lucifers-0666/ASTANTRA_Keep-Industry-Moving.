@@ -5,8 +5,15 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - SPAREFINDER Industrial Procurement Network</title>
+    <title><%: Page.Title %> - ASTANTRA Industrial Procurement Network</title>
     
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="<%= ResolveUrl("~/Content/images/brand/favicon.svg") %>" />
+    <link rel="alternate icon" href="<%= ResolveUrl("~/favicon.ico") %>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= ResolveUrl("~/Content/images/brand/favicon-32.png") %>" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= ResolveUrl("~/Content/images/brand/favicon-16.png") %>" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
+
     <!-- Compiled Tailwind CSS & Industrial Design System -->
     <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
@@ -43,13 +50,13 @@
             <div class="site-header-inner">
                 
                 <!-- Brand Identity -->
-                <a href="~/Default.aspx" runat="server" class="site-brand" aria-label="SPAREFINDER Home">
+                <a href="~/Default.aspx" runat="server" class="site-brand" aria-label="ASTANTRA Home">
                     <div class="site-brand-icon">
-                        <i class="fa-solid fa-gears text-sm"></i>
+                        <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol.svg") %>" alt="ASTANTRA Symbol" class="w-6 h-6 object-contain" />
                     </div>
                     <div class="site-brand-text">
-                        <span class="site-brand-title">SPARE<span>FINDER</span></span>
-                        <span class="site-brand-sub">Procurement Network</span>
+                        <span class="site-brand-title">ASTANTRA</span>
+                        <span class="site-brand-sub">KEEP INDUSTRY MOVING</span>
                     </div>
                 </a>
 
@@ -164,11 +171,11 @@
                     <div class="site-footer-brand-col">
                         <div class="site-footer-brand">
                             <div class="site-footer-brand-icon">
-                                <i class="fa-solid fa-gears"></i>
+                                <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol.svg") %>" alt="ASTANTRA Symbol" class="w-6 h-6 object-contain" />
                             </div>
                             <div>
-                                <span class="site-footer-brand-title">SPARE<span>FINDER</span></span>
-                                <span class="site-footer-brand-tagline">Industrial Spare Parts Procurement Network</span>
+                                <span class="site-footer-brand-title">ASTANTRA</span>
+                                <span class="site-footer-brand-tagline">KEEP INDUSTRY MOVING &middot; Procurement Network</span>
                             </div>
                         </div>
                         <p class="site-footer-desc">
@@ -218,7 +225,7 @@
                 <!-- Footer Bottom: Clean Industrial Copyright Line -->
                 <div class="site-footer-bottom">
                     <p class="m-0">
-                        &copy; <%: DateTime.Now.Year %> SPAREFINDER. Industrial Spare Parts Procurement Network. All rights reserved.
+                        &copy; <%: DateTime.Now.Year %> ASTANTRA. Industrial Spare Parts Procurement Network. All rights reserved.
                     </p>
                     <p class="m-0 text-xs text-[#8792A0]">
                         Plant Maintenance &amp; Industrial Spare-Parts Sourcing Platform

@@ -56,5 +56,6 @@ desktop.ini
 
 # Local scratch and attachments
 files/
+*.zip
 
 

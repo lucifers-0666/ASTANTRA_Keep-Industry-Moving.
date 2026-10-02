@@ -1,11 +1,13 @@
 # Industrial Design System & Specification
-## SPAREFINDER — Industrial Spare Parts Procurement Network
+## ASTANTRA — Industrial Spare Parts Procurement Network
+
+> **Official Brand Guide**: See [`docs/brand-guide.md`](file:///E:/ASP.NET%20MCA/docs/brand-guide.md) for complete logo system, vector assets, and typography rules.
 
 ---
 
 ## 1. Design Direction: Datasheet & Engineering Precision
 
-SPAREFINDER is an enterprise B2B platform connecting factories, spare-part suppliers, and maintenance technicians. The aesthetic direction is modeled on an **engineering datasheet / technical drawing**:
+ASTANTRA is an enterprise B2B platform connecting factories, spare-part suppliers, and maintenance technicians. The aesthetic direction is modeled on an **engineering datasheet / technical drawing**:
 - **Light Cool Gray Background (`#F1F3F5`)**: Eliminates glaring white page canvases; grounds the technical content.
 - **Crisp White Content Surfaces (`#FFFFFF`)**: Used strictly for functional panels, tables, forms, and cards.
 - **Data-First Readability**: High-contrast dark navy text (`#111827`) paired with secondary metadata gray (`#5F6B7A`).

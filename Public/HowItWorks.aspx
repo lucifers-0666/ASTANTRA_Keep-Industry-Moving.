@@ -39,7 +39,7 @@
                     From Component Failure to Verified Commissioning
                 </h2>
                 <p class="text-xs sm:text-sm text-[#667180] leading-relaxed m-0">
-                    Traditional maintenance sourcing relies on unrecorded phone calls, approximate descriptions, and uncertain distributor inventory. SPAREFINDER replaces guesswork with verified OEM part indexing, direct RFQ quotations, and certified technician dispatch.
+                    Traditional maintenance sourcing relies on unrecorded phone calls, approximate descriptions, and uncertain distributor inventory. ASTANTRA replaces guesswork with verified OEM part indexing, direct RFQ quotations, and certified technician dispatch.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
                     <div class="p-3 bg-[#F7F8FA] rounded-[3px] border border-[#D7DDE4]">
@@ -139,7 +139,7 @@
                     What You Can Do Today vs. Account-Enabled Features
                 </h3>
                 <p class="text-xs text-[#667180] m-0">
-                    SPAREFINDER is being released in structured milestones. Here is what is active for public visitors today and what unlocks with a registered account.
+                    ASTANTRA is being released in structured milestones. Here is what is active for public visitors today and what unlocks with a registered account.
                 </p>
             </div>
 

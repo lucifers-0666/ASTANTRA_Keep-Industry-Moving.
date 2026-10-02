@@ -1,5 +1,5 @@
 /* ============================================================================
-   SPAREFINDER INDUSTRIAL PROCUREMENT NETWORK — GLOBAL SHELL ARCHITECTURE
+   ASTANTRA INDUSTRIAL PROCUREMENT NETWORK — GLOBAL SHELL ARCHITECTURE
    Visual Identity: Industrial Field Guide meets Modern Procurement Workspace
    ============================================================================ */
 
@@ -123,22 +123,18 @@ body.menu-open {
 }
 
 .site-brand-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 0.5rem;
-    background-color: #0F172A;
-    color: #FFFFFF;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 2px 4px rgba(15, 23, 42, 0.1);
     flex-shrink: 0;
-    border: 1px solid #334155;
 }
 
-.site-brand-icon i {
-    color: #38BDF8;
+.site-brand-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .site-brand-text {
@@ -148,10 +144,12 @@ body.menu-open {
 }
 
 .site-brand-title {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 900;
-    color: #0F172A;
-    letter-spacing: -0.03em;
+    font-family: 'Archivo', sans-serif;
+    color: #17212F;
+    letter-spacing: 0.05em;
+    line-height: 1;
 }
 
 .site-brand-title span {
@@ -159,13 +157,13 @@ body.menu-open {
 }
 
 .site-brand-sub {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 700;
-    color: var(--color-text-muted);
+    color: var(--color-brand-primary);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 0.25rem;
-    font-mono: monospace;
+    letter-spacing: 0.12em;
+    margin-top: 0.2rem;
+    font-family: 'Archivo', sans-serif;
 }
 
 /* 5. Desktop Navigation */
@@ -783,22 +781,25 @@ body.menu-open {
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 4px;
-    background-color: #FFFFFF;
-    border: 1px solid var(--color-border-default, #D7DDE4);
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-brand-primary, #1769E0);
-    font-size: 0.95rem;
     flex-shrink: 0;
-    box-shadow: 0 1px 2px rgba(20, 35, 55, 0.04);
+}
+
+.site-footer-brand-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .site-footer-brand-title {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     font-weight: 900;
-    letter-spacing: -0.025em;
-    color: var(--color-text-primary, #202833);
+    letter-spacing: 0.05em;
+    color: #17212F;
+    font-family: var(--font-heading);
     line-height: 1;
     display: block;
 }
@@ -808,14 +809,14 @@ body.menu-open {
 }
 
 .site-footer-brand-tagline {
-    font-size: 0.625rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    color: var(--color-text-muted, #8792A0);
-    letter-spacing: 0.08em;
+    color: var(--color-brand-primary, #1769E0);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     display: block;
     margin-top: 0.25rem;
-    font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+    font-family: var(--font-heading);
 }
 
 .site-footer-desc {

@@ -1,6 +1,6 @@
-# Antigravity Project Instructions — SPAREFINDER
+# Antigravity Project Instructions — ASTANTRA (formerly SPAREFINDER)
 
-This project uses the centralized instruction system defined in [`AGENTS.md`](file:///E:/ASP.NET%20MCA/AGENTS.md) and [`.agents/rules/`](file:///E:/ASP.NET%20MCA/.agents/rules).
+This project uses the centralized instruction system defined in [`AGENTS.md`](file:///E:/ASP.NET%20MCA/AGENTS.md), [`docs/brand-guide.md`](file:///E:/ASP.NET%20MCA/docs/brand-guide.md), and [`.agents/rules/`](file:///E:/ASP.NET%20MCA/.agents/rules).
 
 ## Quick Reference
 1. **Current Phase**: Phase 1 — Public Visitor Experience (FRONTEND ONLY).

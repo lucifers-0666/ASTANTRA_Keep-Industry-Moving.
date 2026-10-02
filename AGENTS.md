@@ -1,7 +1,8 @@
-# SPAREFINDER — Agent Instructions & Execution Rules
+# ASTANTRA (formerly SPAREFINDER) — Agent Instructions & Execution Rules
 
-SPAREFINDER is an MCA academic and enterprise B2B platform: an industrial spare-parts procurement and emergency maintenance portal built with **ASP.NET Web Forms (C# 7.3, .NET Framework 4.8), parameterized ADO.NET, SQL Server LocalDB, CSS Custom Properties / Tailwind CSS, and Vanilla JavaScript**.
+ASTANTRA is an MCA academic and enterprise B2B platform: an industrial spare-parts procurement and emergency maintenance portal built with **ASP.NET Web Forms (C# 7.3, .NET Framework 4.8), parameterized ADO.NET, SQL Server LocalDB, CSS Custom Properties / Tailwind CSS, and Vanilla JavaScript**.
 
+- **Official Brand Guide**: [`docs/brand-guide.md`](file:///E:/ASP.NET%20MCA/docs/brand-guide.md)
 - **Master Project SRS**: [`docs/project-definition.md`](file:///E:/ASP.NET%20MCA/docs/project-definition.md)
 - **Architecture & Directory Structure**: [`docs/project-structure.md`](file:///E:/ASP.NET%20MCA/docs/project-structure.md)
 - **Authoritative Design System**: [`docs/design-system.md`](file:///E:/ASP.NET%20MCA/docs/design-system.md)

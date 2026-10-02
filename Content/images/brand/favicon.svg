@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+    <style>
+        .wedge { fill: #17212F; }
+        @media (prefers-color-scheme: dark) {
+            .wedge { fill: #FFFFFF; }
+        }
+    </style>
+    <g transform="translate(1, 1) scale(0.30)">
+        <path d="M 50 4 L 92 90 L 72 90 L 50 41 L 28 90 L 8 90 Z" fill="#1769E0" />
+        <path d="M 36 68 L 64 68 L 70 84 L 30 84 Z" class="wedge" />
+    </g>
+</svg>
