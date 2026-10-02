@@ -1,4 +1,7 @@
-# Industrial Spare-Part Finder & Emergency Procurement Portal
+# ASTANTRA — Industrial Spare Parts Procurement & Maintenance Network
+
+> **Tagline**: Keep Industry Moving &middot; Industrial Parts &middot; Procurement &middot; Services  
+> **Official Brand Guide**: See [`docs/brand-guide.md`](docs/brand-guide.md) for brand identity tokens, vector logo assets, and viva voce defense notes.
 
 An enterprise B2B Web Application built with **ASP.NET Web Forms**, **C#**, **SQL Server (ADO.NET)**, and **Tailwind CSS**.
 
