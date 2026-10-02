@@ -70,61 +70,56 @@
             </div>
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#16845B]"></span>
-                <span class="font-mono text-[11px]">Regional Audited Suppliers</span>
+                <span class="text-[11px] text-[#5F6B7A]">Regional Verified Suppliers</span>
             </div>
         </div>
 
-        <!-- 4. Supplier Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 4. Supplier Directory Roster (Responsive 2-Column Industrial Directory) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <asp:Repeater ID="rptSuppliers" runat="server">
                 <ItemTemplate>
-                    <div class="supplier-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] flex flex-col justify-between space-y-4 text-left">
+                    <div class="supplier-card bg-white p-5 sm:p-6 rounded-[3px] border border-[#D7DDE4] flex flex-col justify-between space-y-4 text-left shadow-xs">
                         
                         <div class="space-y-3">
-                            <div class="flex justify-between items-start gap-2">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-[2px] bg-[#E7EBEF] text-[#1769E0] border border-[#D7DDE4] flex items-center justify-center font-bold text-sm shrink-0">
+                            <div class="flex justify-between items-start gap-3">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-[2px] bg-[#E7EBEF] text-[#1769E0] border border-[#D7DDE4] flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
                                         <i class="fa-solid fa-warehouse"></i>
                                     </div>
                                     <div>
                                         <h3 class="font-bold font-['Archivo',sans-serif] text-[#202833] text-base leading-snug m-0"><%# Eval("CompanyName") %></h3>
-                                        <span class="text-xs text-[#667180] font-mono flex items-center gap-1 mt-0.5">
-                                            <i class="fa-solid fa-location-dot text-[#8792A0]"></i> <%# Eval("City") %>, <%# Eval("State") %>
+                                        <span class="text-xs text-[#667180] flex items-center gap-1.5 mt-1">
+                                            <i class="fa-solid fa-location-dot text-[#8792A0] text-[11px]"></i> <%# Eval("City") %>, <%# Eval("State") %>
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Badges -->
-                            <div class="flex items-center justify-between pt-1">
-                                <span class='<%# Eval("VerificationStatus").ToString() == "Verified" ? "status-pill status-pill-verified text-[11px]" : "status-pill status-pill-demo text-[11px]" %>'>
+                                <span class='<%# Eval("VerificationStatus").ToString() == "Verified" ? "status-pill status-pill-verified text-[11px] shrink-0" : "status-pill status-pill-demo text-[11px] shrink-0" %>'>
                                     <i class='fa-solid <%# Eval("VerificationStatus").ToString() == "Verified" ? "fa-shield-halved text-emerald-600" : "fa-clock text-amber-600" %> mr-1'></i>
                                     <%# Eval("VerificationStatus").ToString() == "Verified" ? "Verified Supplier" : "Demo Profile" %>
-                                </span>
-                                <span class="text-xs font-bold text-[#202833] flex items-center gap-1 font-mono">
-                                    <i class="fa-solid fa-star text-amber-500"></i> <%# Eval("Rating") %>
                                 </span>
                             </div>
 
                             <!-- Specialization -->
-                            <div class="bg-[#F7F8FA] p-3 rounded-[2px] border border-[#D7DDE4] text-xs text-[#202833] space-y-0.5 font-mono">
-                                <span class="text-[10px] text-[#667180] uppercase block">Specialization:</span>
-                                <strong class="text-[#202833] block"><%# Eval("Specialization") %></strong>
+                            <div class="bg-[#F7F8FA] p-3 rounded-[2px] border border-[#D7DDE4] text-xs text-[#202833] space-y-1">
+                                <span class="text-[10px] text-[#667180] uppercase block font-semibold">Specialization:</span>
+                                <p class="text-xs text-[#202833] font-medium m-0 leading-relaxed"><%# Eval("Specialization") %></p>
                             </div>
                         </div>
 
                         <!-- Card Footer -->
-                        <div class="pt-3 border-t border-[#D7DDE4] flex items-center justify-between text-xs font-mono">
-                            <div>
-                                <span class="text-[10px] text-[#667180] block">Stocked Parts</span>
-                                <strong class="text-[#202833]"><%# Eval("InventoryCount") %> SKUs</strong>
+                        <div class="pt-3 border-t border-[#D7DDE4] flex items-center justify-between text-xs">
+                            <div class="flex items-center gap-4">
+                                <div>
+                                    <span class="text-[10px] text-[#667180] block font-mono">Catalog Breadth</span>
+                                    <strong class="text-[#202833] font-mono"><%# Eval("InventoryCount") %> SKUs</strong>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-[#667180] block font-mono">Avg Response</span>
+                                    <strong class="text-[#1769E0] font-mono"><%# Eval("LeadTime") %></strong>
+                                </div>
                             </div>
-                            <div>
-                                <span class="text-[10px] text-[#667180] block">Lead Time</span>
-                                <strong class="text-[#1769E0]"><%# Eval("LeadTime") %></strong>
-                            </div>
-                            <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Suppliers.aspx")) %>' class="btn-primary text-xs py-1.5 px-3 font-bold">
-                                Issue RFQ
+                            <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Suppliers.aspx")) %>' class="btn-primary text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-invoice text-xs"></i> Request RFQ
                             </a>
                         </div>
 

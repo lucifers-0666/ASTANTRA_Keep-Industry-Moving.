@@ -54,3 +54,7 @@ desktop.ini
 *.pem
 *.key
 
+# Local scratch and attachments
+files/
+
+

@@ -74,57 +74,53 @@
             </div>
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#16845B]"></span>
-                <span class="font-mono text-[11px]">Certified Service Roster</span>
+                <span class="text-[11px] text-[#5F6B7A]">Field Engineering Directory</span>
             </div>
         </div>
 
-        <!-- 4. Technician Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- 4. Field Technician Directory (Responsive 2-Column Layout) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <asp:Repeater ID="rptTechnicians" runat="server">
                 <ItemTemplate>
-                    <div class="technician-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] flex flex-col justify-between space-y-4 text-left">
+                    <div class="technician-card bg-white p-5 sm:p-6 rounded-[3px] border border-[#D7DDE4] flex flex-col justify-between space-y-4 text-left shadow-xs">
                         
                         <div class="space-y-3">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-[2px] bg-[#E7EBEF] text-[#1769E0] border border-[#D7DDE4] flex items-center justify-center font-bold text-sm shrink-0">
+                            <div class="flex justify-between items-start gap-3">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-10 h-10 rounded-[2px] bg-[#E7EBEF] text-[#1769E0] border border-[#D7DDE4] flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
                                         <i class="fa-solid fa-user-gear"></i>
                                     </div>
                                     <div>
                                         <h3 class="font-bold font-['Archivo',sans-serif] text-[#202833] text-base leading-snug m-0"><%# Eval("FullName") %></h3>
-                                        <span class="text-xs text-[#667180] font-mono flex items-center gap-1 mt-0.5">
-                                            <i class="fa-solid fa-location-dot text-[#8792A0]"></i> <%# Eval("City") %>, <%# Eval("State") %>
+                                        <span class="text-xs text-[#667180] flex items-center gap-1.5 mt-1">
+                                            <i class="fa-solid fa-location-dot text-[#8792A0] text-[11px]"></i> <%# Eval("City") %>, <%# Eval("State") %>
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Badges -->
-                            <div class="flex items-center justify-between pt-1">
-                                <span class='<%# Convert.ToBoolean(Eval("IsAvailable")) ? "status-pill status-pill-verified text-[11px]" : "status-pill status-pill-demo text-[11px]" %>'>
+                                <span class='<%# Convert.ToBoolean(Eval("IsAvailable")) ? "status-pill status-pill-verified text-[11px] shrink-0" : "status-pill status-pill-demo text-[11px] shrink-0" %>'>
                                     <i class='fa-solid <%# Convert.ToBoolean(Eval("IsAvailable")) ? "fa-circle-check text-emerald-600" : "fa-clock text-amber-600" %> mr-1'></i>
-                                    <%# Convert.ToBoolean(Eval("IsAvailable")) ? "On Duty / Available" : "On-Site Engaged" %>
-                                </span>
-                                <span class="text-xs font-mono font-bold text-[#1769E0]">
-                                    <%# Eval("ExperienceYears") %>+ Yrs Exp
+                                    <%# Convert.ToBoolean(Eval("IsAvailable")) ? "Available for Dispatch" : "Engaged on Site" %>
                                 </span>
                             </div>
 
-                            <!-- Skillset -->
-                            <div class="bg-[#F7F8FA] p-3 rounded-[2px] border border-[#D7DDE4] text-xs text-[#202833] space-y-0.5 font-mono">
-                                <span class="text-[10px] text-[#667180] uppercase block">Specialization:</span>
-                                <strong class="text-[#202833] block leading-snug"><%# Eval("SkillSummary") %></strong>
+                            <!-- Skills & Specialization -->
+                            <div class="bg-[#F7F8FA] p-3 rounded-[2px] border border-[#D7DDE4] text-xs text-[#202833] space-y-1">
+                                <div class="flex justify-between items-center text-[10px] text-[#667180] uppercase font-semibold">
+                                    <span>Specialization &amp; Expertise</span>
+                                    <span class="text-[#1769E0] font-mono"><%# Eval("ExperienceYears") %> Years Industry Experience</span>
+                                </div>
+                                <p class="text-xs text-[#202833] font-medium m-0 leading-relaxed"><%# Eval("SkillSummary") %></p>
                             </div>
                         </div>
 
                         <!-- Card Footer -->
-                        <div class="pt-3 border-t border-[#D7DDE4] flex items-center justify-between text-xs font-mono">
+                        <div class="pt-3 border-t border-[#D7DDE4] flex items-center justify-between text-xs">
                             <div>
-                                <span class="text-[10px] text-[#667180] block">Hourly Rate</span>
-                                <strong class="text-sm font-bold text-[#202833]">&#8377;<%# Eval("HourlyRate") %>/hr</strong>
+                                <span class="text-[10px] text-[#667180] block font-mono">Service Rate</span>
+                                <strong class="text-sm font-bold text-[#17212F] font-mono">&#8377;<%# Eval("HourlyRate") %>/hour</strong>
                             </div>
-                            <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Technicians.aspx")) %>' class="btn-primary text-xs py-1.5 px-3 font-bold">
-                                Book Service
+                            <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Technicians.aspx")) %>' class="btn-primary text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5">
+                                <i class="fa-solid fa-calendar-check text-xs"></i> Book Technician
                             </a>
                         </div>
 

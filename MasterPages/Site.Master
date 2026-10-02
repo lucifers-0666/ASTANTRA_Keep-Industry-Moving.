@@ -209,7 +209,7 @@
                         </h4>
                         <ul class="site-footer-links">
                             <li><a href="~/Account/Login.aspx" runat="server">Portal Sign In</a></li>
-                            <li><a href="~/Account/Register.aspx" runat="server">Register Entity</a></li>
+                            <li><a href="~/Account/Register.aspx" runat="server">Create Portal Account</a></li>
                         </ul>
                     </div>
 
@@ -220,8 +220,8 @@
                     <p class="m-0">
                         &copy; <%: DateTime.Now.Year %> SPAREFINDER. Industrial Spare Parts Procurement Network. All rights reserved.
                     </p>
-                    <p class="m-0 font-mono text-[11px] text-[#8792A0]">
-                        Industrial B2B Portal &middot; Reliable Spare Parts &amp; Maintenance Protocol
+                    <p class="m-0 text-xs text-[#8792A0]">
+                        Plant Maintenance &amp; Industrial Spare-Parts Sourcing Platform
                     </p>
                 </div>
             </div>

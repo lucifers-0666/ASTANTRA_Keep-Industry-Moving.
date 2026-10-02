@@ -103,4 +103,13 @@ When a new technical feature or non-trivial technique is introduced, add an entr
 - **Model Answer**: *"When every heading has a decorative badge pill, the badges lose their informational value. In an engineering datasheet UI, badges are reserved strictly for critical data attributes—such as OEM part numbers and real-time inventory status—while headings rely on clear typographic hierarchy."*
 - **Responsible Student**: Zed / Jay
 
-
+### Engineering Datasheet Ledger Table & Sparse Data Handling
+- **Goal (User problem it solves)**: Traditional 3-column e-commerce card grids look visually broken when a search filter returns only 1 or 2 parts, leaving two-thirds of the row as an awkward empty void. In heavy engineering procurement, technicians and purchasing agents scan tabulated lists with compact rows to compare specifications side-by-side.
+- **Technical Summary**: Replaced the 3-column card grid in `Public/Parts.aspx` with a responsive engineering datasheet ledger table (`.table-container` with `.table-custom`). Columns include Part # & Status, Component & Compatibility, Technical Specifications, Indicative Price, and Action.
+- **Why We Chose It (vs. rejected alternatives)**: A ruled ledger table looks structurally balanced whether rendering 1 item or 100 items. Card grids are suited for consumer fashion or media sites; technical procurement requires dense, aligned engineering parameters (tolerances, bore sizes, voltage).
+- **How It Works**: Rendered using `<asp:Repeater ID="rptParts">` producing standard semantic `<tr>` and `<td>` elements wrapped in a responsive overflow container. Client-side vanilla JS in `ScriptsContent` also checks `window.location.search` for `?q=` passed from the homepage, populates `txtSearch`, and triggers filtering seamlessly without violating the backend code-behind freeze.
+- **Where It Lives**: `Public/Parts.aspx`.
+- **What Would Break If Removed**: Filtering down to a single search result would leave a large blank space, and technical specifications would be scattered across inconsistent card heights.
+- **Likely Faculty Question**: *"Why use a table for spare parts instead of modern cards?"*
+- **Model Answer**: *"In industrial supply portals like McMaster-Carr or RS Components, engineers need to scan rows of technical specifications—such as bore diameter, operating pressure, and OEM numbers—side by side. A ruled table provides higher data density, instant comparison across rows, and maintains visual balance whether displaying 1 item or 50 items."*
+- **Responsible Student**: Zed / Jay

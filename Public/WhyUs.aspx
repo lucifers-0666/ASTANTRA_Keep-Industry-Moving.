@@ -118,21 +118,21 @@
             
             <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] space-y-2">
                 <div class="w-8 h-8 rounded-[2px] bg-[#EAF2FF] text-[#1769E0] flex items-center justify-center font-bold text-sm">
-                    <i class="fa-solid fa-database"></i>
+                    <i class="fa-solid fa-crosshairs"></i>
                 </div>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Direct ADO.NET Architecture</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">OEM Part Number Precision</h3>
                 <p class="text-xs text-[#667180] leading-relaxed m-0">
-                    Engineered with parameterized SQL Server queries for transparent execution, explicit SQL injection protection, and sub-millisecond query performance.
+                    Cross-reference stamped engineering codes (e.g. bearing clearance suffixes, hydraulic port sizes, motor frame numbers) to prevent costly wrong-part shipments and installation delays.
                 </p>
             </div>
 
             <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] space-y-2">
                 <div class="w-8 h-8 rounded-[2px] bg-[#E8F5F0] text-[#16845B] flex items-center justify-center font-bold text-sm">
-                    <i class="fa-solid fa-shield-halved"></i>
+                    <i class="fa-solid fa-location-dot"></i>
                 </div>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">GSTIN Entity Auditing</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Regional Supplier Transparency</h3>
                 <p class="text-xs text-[#667180] leading-relaxed m-0">
-                    Supplier and technician onboarding requires verified commercial documentation and trade credentials reviewed by platform administrators.
+                    Evaluate verified regional distributors by confirmed shelf stock, physical warehouse location, and transit distance rather than relying on unverified third-party brokers.
                 </p>
             </div>
 
@@ -140,9 +140,9 @@
                 <div class="w-8 h-8 rounded-[2px] bg-[#FEF4EC] text-[#F07818] flex items-center justify-center font-bold text-sm">
                     <i class="fa-solid fa-bolt"></i>
                 </div>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Emergency Fast-Track</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Dedicated Breakdown Channel</h3>
                 <p class="text-xs text-[#667180] leading-relaxed m-0">
-                    Dedicated emergency breakdown protocol alerts nearby stocking vendors and certified field technicians within a 2-hour response window.
+                    High-priority routing for halted assembly lines that notifies stocking vendors and on-call field technicians simultaneously to minimize production loss.
                 </p>
             </div>
 

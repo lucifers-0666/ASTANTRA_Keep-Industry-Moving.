@@ -23,11 +23,11 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
-        <!-- 2. Fast-Track Protocol Sequence (4 Steps) -->
+        <!-- 2. Breakdown Response Sequence (4 Steps) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#E87519] space-y-1.5 text-left">
                 <span class="font-mono text-xs font-bold text-[#E87519]">STEP 01</span>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Log Breakdown</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Log Stoppage</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
                     Submit machine model, stamped OEM part numbers, and observed failure symptoms.
                 </p>
@@ -35,25 +35,25 @@
 
             <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#E87519] space-y-1.5 text-left">
                 <span class="font-mono text-xs font-bold text-[#E87519]">STEP 02</span>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Supplier Broadcast</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Regional Broadcast</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                    Platform alerts regional stockists within proximity possessing matching inventory.
+                    Alert regional stockists within geographic proximity possessing matching inventory.
                 </p>
             </div>
 
             <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#E87519] space-y-1.5 text-left">
                 <span class="font-mono text-xs font-bold text-[#E87519]">STEP 03</span>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Rapid Quotation</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Stock Confirmation</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                    Suppliers confirm ready shelf stock, expedited pickup, or same-day freight.
+                    Suppliers verify shelf inventory, expedited courier pickup, or same-day freight.
                 </p>
             </div>
 
             <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#18865B] space-y-1.5 text-left">
                 <span class="font-mono text-xs font-bold text-[#18865B]">STEP 04</span>
-                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">4. Priority Fitting</h3>
+                <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">4. Dispatch &amp; Fitting</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                    Part is expedited to plant while on-call technicians are mobilized for on-site fitting.
+                    Part is expedited to plant while certified on-call technicians are mobilized for on-site fitting.
                 </p>
             </div>
         </div>
@@ -76,6 +76,15 @@
                     <span class="text-xs font-mono font-bold text-[#D9650E] uppercase tracking-wider">Priority Broadcast</span>
                 </div>
 
+                <!-- Upfront Authentication Context Banner -->
+                <div class="p-3 rounded-[2px] bg-[#F7F8FA] border border-[#D5DCE3] text-xs text-[#5F6B7A] flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-info text-[#1769E0] mt-0.5 shrink-0 text-sm"></i>
+                    <div>
+                        <strong class="text-[#202833] font-bold block mb-0.5">Factory Account Verification:</strong>
+                        <span>Emergency dispatching transmits live alerts to stocking vendors. You may enter equipment details below; you will be prompted to authenticate with a Factory account before final dispatch.</span>
+                    </div>
+                </div>
+
                 <asp:Panel ID="pnlNotice" runat="server" Visible="false" CssClass="p-3.5 rounded-[2px] bg-[#EBF2FD] border border-[#B6D4FA] text-xs text-[#17212F] space-y-1">
                     <strong class="font-bold block text-[#1769E0]"><i class="fa-solid fa-circle-info mr-1"></i> Sign In Required to Broadcast</strong>
                     <span>Your emergency request details are saved. Please sign in with your Factory account to dispatch the broadcast.</span>
@@ -83,7 +92,10 @@
 
                 <div class="space-y-3.5 text-xs">
                     <div>
-                        <label class="form-label" for="<%= txtMachineName.ClientID %>">Equipment / Machine Name <span class="text-red-500">*</span></label>
+                        <div class="flex items-center justify-between">
+                            <label class="form-label" for="<%= txtMachineName.ClientID %>">Equipment / Machine Name <span class="text-red-500">*</span></label>
+                            <span class="text-[11px] text-[#8792A0] font-mono">* Required fields</span>
+                        </div>
                         <asp:TextBox ID="txtMachineName" runat="server" CssClass="form-input" Placeholder="e.g. CNC Lathe X200, 500T Hydraulic Press, Air Compressor 75HP"></asp:TextBox>
                     </div>
 
@@ -128,7 +140,7 @@
                 </div>
             </div>
 
-            <!-- Right: Breakdown Triage Checklist & Protocol Details -->
+            <!-- Right: Breakdown Triage Checklist & Practical Advice -->
             <div class="lg:col-span-5 space-y-4">
                 
                 <!-- Triage Checklist -->
@@ -166,23 +178,24 @@
                     </div>
                 </div>
 
-                <!-- Emergency Protocol in Refined Industrial Surface -->
+                <!-- Plant Triage Advice -->
                 <div class="bg-white rounded-[3px] p-5 sm:p-6 space-y-3 border border-[#D7DDE4] shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)] text-left">
                     <div class="flex items-center gap-2.5">
                         <div class="w-8 h-8 rounded-[2px] bg-[#FEF4EC] text-[#D9650E] border border-[#FAD7BE] flex items-center justify-center font-bold text-sm shrink-0">
-                            <i class="fa-solid fa-tower-broadcast"></i>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] text-[#D9650E] font-mono font-bold uppercase tracking-wider block">DISPATCH PROTOCOL</span>
-                            <h4 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Rapid Breakdown Triage</h4>
+                            <span class="text-[10px] text-[#D9650E] font-mono font-bold uppercase tracking-wider block">PLANT SAFETY &amp; TRIAGE</span>
+                            <h4 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Immediate Actions While Sourcing</h4>
                         </div>
                     </div>
-                    <p class="text-xs text-[#667180] leading-relaxed m-0">
-                        Submitting an emergency request broadcasts machine specifications and stamped OEM part numbers directly to regional suppliers with matching inventory.
-                    </p>
-                    <div class="p-2.5 bg-[#F7F8FA] border border-[#D7DDE4] rounded-[2px] text-xs text-[#667180] text-center font-mono">
-                        <span class="text-[#D9650E] font-bold block mb-0.5">Target Response: &lt; 2 Hours</span>
-                        <span class="text-[10px] text-[#8792A0]">Active priority queue protocol across regional suppliers</span>
+                    <ul class="text-xs text-[#667180] leading-relaxed m-0 pl-4 list-disc space-y-1.5">
+                        <li><strong>Isolate Equipment:</strong> Apply Lockout/Tagout (LOTO) protocols to ensure plant personnel safety.</li>
+                        <li><strong>Photograph Nameplate:</strong> Capture clear images of motor/pump data plates and stamped component numbers.</li>
+                        <li><strong>Record Fault Codes:</strong> Note exact PLC, servo drive, or VFD alarm codes to assist responding technicians.</li>
+                    </ul>
+                    <div class="p-2.5 bg-[#F7F8FA] border border-[#D7DDE4] rounded-[2px] text-[11px] text-[#5F6B7A] text-center font-mono">
+                        <span>Regional stockist notifications are prioritized based on geographic proximity.</span>
                     </div>
                 </div>
 

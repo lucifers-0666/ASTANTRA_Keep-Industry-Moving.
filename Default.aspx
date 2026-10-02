@@ -41,11 +41,11 @@
 
                         <!-- Quick Specification Filters -->
                         <div class="flex flex-wrap items-center gap-1.5 text-xs text-[#5F6B7A] pt-1 px-1">
-                            <span class="font-bold text-[#17212F] font-mono text-[11px]">COMMON INQUIRIES:</span>
-                            <a href="~/Public/Parts.aspx?q=bearing" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">6210-2RS Bearings</a>
-                            <a href="~/Public/Parts.aspx?q=hydraulic" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Hydraulic Pump 250Bar</a>
-                            <a href="~/Public/Parts.aspx?q=servo" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">7.5kW AC Servo</a>
-                            <a href="~/Public/Parts.aspx?q=vfd" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">15kW VFD Inverter</a>
+                            <span class="font-bold text-[#17212F] text-[11px]">Common Searches:</span>
+                            <a href="~/Public/Parts.aspx?cat=Bearings+%26+Power+Transmission" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors text-[11px] font-mono">Bearings (6210-2RS)</a>
+                            <a href="~/Public/Parts.aspx?cat=Hydraulics+%26+Pneumatics" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors text-[11px] font-mono">Hydraulic Pumps</a>
+                            <a href="~/Public/Parts.aspx?cat=Motors+%26+Drives" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors text-[11px] font-mono">AC Servo Motors</a>
+                            <a href="~/Public/Parts.aspx?cat=Electrical+%26+Automation" runat="server" class="px-2 py-0.5 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-[#2C394B] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors text-[11px] font-mono">VFD Inverters</a>
                         </div>
                     </div>
 
@@ -71,9 +71,9 @@
                         <div class="p-3 bg-[#E7EBEF] border-t border-[#D5DCE3] flex items-center justify-between text-xs">
                             <div class="flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-[#18865B] animate-pulse"></span>
-                                <span class="font-mono text-[11px] text-[#17212F] font-bold">REGIONAL PROCUREMENT DESK</span>
+                                <span class="text-[11px] text-[#17212F] font-bold">Regional Sourcing Coverage</span>
                             </div>
-                            <span class="font-mono text-[11px] text-[#5F6B7A]">Gujarat &amp; Maharashtra</span>
+                            <span class="font-mono text-[11px] text-[#5F6B7A]">Gujarat &amp; Maharashtra Zones</span>
                         </div>
                     </div>
                 </div>
@@ -83,68 +83,59 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 2. FOUR-STEP PROCUREMENT WORKFLOW RAIL                                       -->
-    <!-- Connected linear progression from spec matching to plant installation        -->
+    <!-- 2. THREE-STAGE SOURCING WORKFLOW                                             -->
+    <!-- Direct, task-focused process from part search to plant installation          -->
     <!-- ============================================================================ -->
     <section class="py-12 bg-white border-b border-[#D5DCE3]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left border-b border-[#D5DCE3] pb-4">
                 <div>
-                    <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Order Lifecycle</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] mt-1 m-0">
-                        How Procurement Works
+                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
+                        How Industrial Procurement Works
                     </h2>
+                    <p class="text-xs text-[#5F6B7A] m-0 mt-1">
+                        From identifying replacement specifications to on-site commissioning.
+                    </p>
                 </div>
-                <a href="~/Public/HowItWorks.aspx" runat="server" class="text-xs font-bold text-[#1769E0] hover:underline font-mono">
-                    View Complete 3-Phase Lifecycle →
+                <a href="~/Public/HowItWorks.aspx" runat="server" class="text-xs font-bold text-[#1769E0] hover:underline">
+                    View Complete Process Workflow →
                 </a>
             </div>
 
-            <!-- Connected 4-Step Process Sequence -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Connected 3-Step Process Track -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
+                <div class="p-5 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2.5">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">STEP 01</span>
-                        <i class="fa-solid fa-barcode text-[#5F6B7A] text-xs"></i>
+                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2.5 py-0.5 rounded-[2px] border border-[#BFDBFE]">STAGE 01</span>
+                        <i class="fa-solid fa-barcode text-[#5F6B7A] text-sm"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Match OEM Spec</h3>
+                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Match OEM Specifications</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Search by stamped manufacturer part number, machine model, or industrial category to verify tolerances.
+                        Search by stamped manufacturer part number, machine model, or dimensions to verify mechanical tolerances and equipment compatibility.
                     </p>
                 </div>
 
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
+                <div class="p-5 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2.5">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">STEP 02</span>
-                        <i class="fa-solid fa-file-invoice text-[#5F6B7A] text-xs"></i>
+                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2.5 py-0.5 rounded-[2px] border border-[#BFDBFE]">STAGE 02</span>
+                        <i class="fa-solid fa-scale-balanced text-[#5F6B7A] text-sm"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Request Quotations</h3>
+                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Compare Regional Suppliers</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Issue structured Requests for Quotation (RFQ) directly to verified regional stockists with confirmed inventory.
+                        Review confirmed shelf stock, indicative pricing, and warehouse transit distance. Request binding quotes from stocking vendors.
                     </p>
                 </div>
 
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
+                <div class="p-5 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2.5">
                     <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">STEP 03</span>
-                        <i class="fa-solid fa-scale-balanced text-[#5F6B7A] text-xs"></i>
+                        <span class="font-mono text-xs font-bold text-[#18865B] bg-[#E8F5F0] px-2.5 py-0.5 rounded-[2px] border border-[#A7F3D0]">STAGE 03</span>
+                        <i class="fa-solid fa-truck-fast text-[#5F6B7A] text-sm"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Compare Terms</h3>
+                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Confirm Dispatch &amp; Fitting</h3>
                     <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Compare unit prices, transit distance in km, physical shelf quantity, and guaranteed fulfillment lead time.
-                    </p>
-                </div>
-
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#18865B] bg-[#E8F5F0] px-2 py-0.5 rounded-[2px] border border-[#A7F3D0]">STEP 04</span>
-                        <i class="fa-solid fa-truck-fast text-[#5F6B7A] text-xs"></i>
-                    </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">4. Dispatch &amp; Install</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Confirm purchase order for same-day dispatch and book nearby certified technicians for machine commissioning.
+                        Approve purchase orders for priority freight dispatch and optionally book nearby certified technicians for machine installation.
                     </p>
                 </div>
 
@@ -270,22 +261,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-[#F7F8FA] rounded-[3px] p-8 sm:p-10 border border-[#D7DDE4] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)]">
                 
-                <div class="space-y-2 max-w-2xl text-left">
-                    <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Join Network</span>
+                <div class="space-y-1.5 max-w-2xl text-left">
                     <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
-                        Connect Your Plant to Regional Suppliers
+                        Join the Industrial Procurement Network
                     </h2>
                     <p class="text-xs sm:text-sm text-[#667180] m-0 leading-relaxed">
-                        Register your manufacturing facility, spare-parts distribution business, or field service team to participate in direct procurement.
+                        Factory maintenance teams can issue RFQs and track emergency orders. Suppliers and technicians can publish verified inventory and receive direct service requests.
                     </p>
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
                     <a href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2.5 px-5 font-bold justify-center">
-                        <i class="fa-solid fa-user-plus mr-1.5"></i> Register Entity Account
+                        <i class="fa-solid fa-user-plus mr-1.5"></i> Create Account
                     </a>
                     <a href="~/Account/Login.aspx" runat="server" class="btn-secondary text-xs py-2.5 px-5 font-bold justify-center">
-                        <i class="fa-solid fa-right-to-bracket mr-1.5"></i> Sign In to Workspace
+                        <i class="fa-solid fa-right-to-bracket mr-1.5"></i> Sign In
                     </a>
                 </div>
 

@@ -74,59 +74,61 @@
             </div>
         </div>
 
-        <!-- 4. Structured Technical Component Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <asp:Repeater ID="rptParts" runat="server">
-                <ItemTemplate>
-                    <div class="part-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] flex flex-col justify-between space-y-4 text-left">
-                        
-                        <!-- Top Metadata -->
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-start gap-2">
-                                <span class="spec-tag spec-tag-blue font-mono font-bold text-xs"><%# Eval("PartNumber") %></span>
-                                <span class='<%# Eval("AvailabilityStatus").ToString() == "InStock" ? "status-pill status-pill-verified text-[11px]" : "status-pill status-pill-demo text-[11px]" %>'>
-                                    <i class='fa-solid <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "fa-circle-check text-emerald-600" : "fa-clock text-amber-600" %> mr-1'></i>
-                                    <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "In Stock" : "Pre-Order" %>
-                                </span>
-                            </div>
-
-                            <div>
-                                <span class="text-[10px] font-bold text-[#1769E0] uppercase tracking-wider block font-mono"><%# Eval("CategoryName") %></span>
-                                <h3 class="font-bold font-['Archivo',sans-serif] text-[#202833] text-base leading-snug m-0"><%# Eval("PartName") %></h3>
-                            </div>
-
-                            <div class="text-xs text-[#667180]">
-                                <span class="text-[11px] text-[#8792A0] block font-mono">Compatible Machine:</span>
-                                <strong class="text-[#202833] font-mono"><%# Eval("MachineName") %></strong>
-                            </div>
-                        </div>
-
-                        <!-- Technical Specification Callout -->
-                        <div class="bg-[#F7F8FA] p-3 rounded-[2px] border border-[#D7DDE4] text-xs text-[#202833] space-y-1 font-mono">
-                            <div class="text-[11px] leading-relaxed"><%# Eval("TechnicalSpecs") %></div>
-                            <div class="text-[10px] text-[#667180]">Supplier: <%# Eval("SupplierName") %></div>
-                        </div>
-
-                        <!-- Card Footer -->
-                        <div class="flex justify-between items-center pt-3 border-t border-[#D7DDE4]">
-                            <div>
-                                <span class="text-[10px] text-[#667180] block font-mono">
-                                    <%# Eval("UnitPrice") != DBNull.Value && Eval("UnitPrice") != null && Convert.ToDecimal(Eval("UnitPrice")) > 0 ? "Indicative Price" : "Pricing Schedule" %>
-                                </span>
-                                <span class="text-sm sm:text-base font-bold text-[#202833] font-mono">
-                                    <%# Eval("UnitPrice") != DBNull.Value && Eval("UnitPrice") != null && Convert.ToDecimal(Eval("UnitPrice")) > 0 
-                                        ? "&#8377;" + Convert.ToDecimal(Eval("UnitPrice")).ToString("N0") 
-                                        : "<span class='text-xs text-[#1769E0] font-bold'>Quote on Request</span>" %>
-                                </span>
-                            </div>
-                            <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Parts.aspx")) %>' class="btn-primary text-xs py-2 px-3.5 font-bold">
-                                Request Quote
-                            </a>
-                        </div>
-
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
+        <!-- 4. Structured Technical Component Ledger (Responsive Table) -->
+        <div class="table-container shadow-xs">
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th class="w-[18%]">Part # &amp; Status</th>
+                        <th class="w-[28%]">Component &amp; Compatibility</th>
+                        <th class="w-[32%]">Technical Specifications</th>
+                        <th class="w-[12%]">Indicative Price</th>
+                        <th class="w-[10%] text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-[#D7DDE4] text-xs">
+                    <asp:Repeater ID="rptParts" runat="server">
+                        <ItemTemplate>
+                            <tr class="hover:bg-[#F7F8FA] transition-colors">
+                                <td class="align-top py-3.5 px-4">
+                                    <span class="font-mono font-bold text-xs text-[#17212F] block mb-1.5"><%# Eval("PartNumber") %></span>
+                                    <span class='<%# Eval("AvailabilityStatus").ToString() == "InStock" ? "status-pill status-pill-verified text-[11px]" : "status-pill status-pill-demo text-[11px]" %>'>
+                                        <i class='fa-solid <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "fa-circle-check text-emerald-600" : "fa-clock text-amber-600" %> mr-1'></i>
+                                        <%# Eval("AvailabilityStatus").ToString() == "InStock" ? "In Stock" : "Pre-Order" %>
+                                    </span>
+                                </td>
+                                <td class="align-top py-3.5 px-4">
+                                    <span class="text-[10px] font-bold text-[#1769E0] uppercase tracking-wider block font-mono"><%# Eval("CategoryName") %></span>
+                                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0 mb-1 leading-snug"><%# Eval("PartName") %></h3>
+                                    <div class="text-xs text-[#5F6B7A]">
+                                        <span class="text-[11px] text-[#8792A0]">Compatible Machine:</span>
+                                        <strong class="text-[#202833] font-medium"><%# Eval("MachineName") %></strong>
+                                    </div>
+                                </td>
+                                <td class="align-top py-3.5 px-4">
+                                    <p class="text-xs text-[#202833] leading-relaxed m-0 font-medium"><%# Eval("TechnicalSpecs") %></p>
+                                    <span class="text-[11px] text-[#5F6B7A] block mt-1.5">Supplier: <strong class="text-[#202833]"><%# Eval("SupplierName") %></strong></span>
+                                </td>
+                                <td class="align-top py-3.5 px-4 whitespace-nowrap">
+                                    <span class="text-sm font-bold text-[#17212F] font-mono block">
+                                        <%# Eval("UnitPrice") != DBNull.Value && Eval("UnitPrice") != null && Convert.ToDecimal(Eval("UnitPrice")) > 0 
+                                            ? "&#8377;" + Convert.ToDecimal(Eval("UnitPrice")).ToString("N0") 
+                                            : "<span class='text-xs text-[#1769E0] font-bold'>Quote on Request</span>" %>
+                                    </span>
+                                    <span class="text-[10px] text-[#5F6B7A] font-mono block">
+                                        <%# Eval("UnitPrice") != DBNull.Value && Eval("UnitPrice") != null && Convert.ToDecimal(Eval("UnitPrice")) > 0 ? "Indicative Price" : "Commercial Terms" %>
+                                    </span>
+                                </td>
+                                <td class="align-top py-3.5 px-4 text-right whitespace-nowrap">
+                                    <a href='<%# ResolveUrl("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode("~/Public/Parts.aspx")) %>' class="btn-primary text-xs py-2 px-3.5 font-bold inline-flex items-center gap-1">
+                                        Request Quote
+                                    </a>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </tbody>
+            </table>
         </div>
 
         <!-- 5. Empty State Panel -->
@@ -146,18 +148,37 @@
         <!-- 6. Emergency Breakdown Callout in Refined Industrial Gray -->
         <div class="bg-[#F7F8FA] border border-[#D7DDE4] rounded-[3px] p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)]">
             <div class="space-y-1 text-left">
-                <div class="flex items-center gap-2">
-                    <span class="spec-tag spec-tag-orange">CRITICAL BREAKDOWN SOURCING</span>
-                    <span class="text-xs text-[#8792A0] font-mono">UNSCHEDULED STOPPAGE</span>
+                <div class="text-xs font-mono font-bold text-[#D9650E] tracking-wider uppercase">
+                    Emergency Part Sourcing
                 </div>
                 <h4 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Can't locate your exact replacement part?</h4>
-                <p class="text-xs text-[#667180] m-0">Submit a priority breakdown broadcast to alert regional certified stockists possessing matching category stock.</p>
+                <p class="text-xs text-[#667180] m-0">Submit a priority breakdown broadcast to alert regional stockists possessing matching category stock.</p>
             </div>
             <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2.5 px-5 font-bold whitespace-nowrap shrink-0 shadow-xs">
-                <i class="fa-solid fa-bolt mr-1"></i> Broadcast Emergency RFQ
+                <i class="fa-solid fa-bolt mr-1"></i> Submit Emergency Request
             </a>
         </div>
 
     </div>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var qParam = urlParams.get('q');
+            var searchInput = document.getElementById('<%= txtSearch.ClientID %>');
+            
+            if (qParam && searchInput && !searchInput.value) {
+                searchInput.value = qParam;
+                var searchBtn = document.getElementById('<%= btnSearch.ClientID %>');
+                var storageKey = 'sf_q_' + encodeURIComponent(qParam);
+                if (searchBtn && !sessionStorage.getItem(storageKey)) {
+                    sessionStorage.setItem(storageKey, '1');
+                    searchBtn.click();
+                }
+            }
+        });
+    </script>
 </asp:Content>
 
