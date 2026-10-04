@@ -1,67 +1,90 @@
 /* ==========================================================================
-   SPAREFINDER INDUSTRIAL PROCUREMENT NETWORK — DESIGN TOKENS
-   Single Source of Truth for Brand Palette & Layout Scale (Light Industrial Theme)
+   ASTANTRA INDUSTRIAL PROCUREMENT NETWORK — DESIGN TOKENS
+   Single Source of Truth for Brand Palette & Layout Scale (Phase 2 Refined)
+   Industrial Gray Foundation · Charcoal Typography · Restrained Electric Blue · Dedicated Emergency Orange
    ========================================================================== */
 
 :root {
-    /* Brand & Primary Actions (From Logo & Main CTAs) */
-    --color-brand-primary: #1677FF;
-    --color-brand-primary-hover: #0958D9;
-    --color-brand-primary-dark: #003EB3;
-    --color-brand-primary-light: #E6F4FF;
-    --color-brand-primary-ring: rgba(22, 119, 255, 0.20);
-
-    /* Emergency Breakdown Accent (Safety Orange) */
-    --color-emergency: #EA580C;
-    --color-emergency-hover: #C2410C;
-    --color-emergency-bg: #FFF7ED;
-    --color-emergency-border: #FED7AA;
-    --color-emergency-text: #9A3412;
-
-    /* Light Industrial Surfaces & Page Canvas (Step 4 Requirement) */
-    --color-bg-page: #F8FAFC;
-    --color-bg-surface: #FFFFFF;
-    --color-bg-subtle: #F1F5F9;
-    --color-bg-muted: #E2E8F0;
+    /* Primary Page Background & Surfaces (Gray-First Industrial Foundation) */
+    --color-bg-page: #F1F3F5;             /* Primary page canvas */
+    --color-bg-subtle: #E7EBEF;           /* Secondary gray sections, footer */
+    --color-bg-surface: #FFFFFF;          /* Elevated cards, forms, panels */
+    --color-bg-surface-soft: #F7F8FA;     /* Inputs, subtle inner panels */
+    --color-bg-muted: #E2E7ED;
     --color-bg-input: #FFFFFF;
     --color-bg-input-focus: #FFFFFF;
 
-    /* Structural Borders & Dividers */
-    --color-border-subtle: #E2E8F0;
-    --color-border-default: #CBD5E1;
-    --color-border-strong: #94A3B8;
-    --color-border-focus: #1677FF;
-
-    /* High-Contrast Typography */
-    --color-text-primary: #0F172A;     /* 100% Dark Slate Headings */
-    --color-text-body: #334155;        /* Slate-700 High-Readability Body */
-    --color-text-secondary: #475569;   /* Slate-600 Supporting Text */
-    --color-text-muted: #64748B;       /* Slate-500 Form Placeholders & Hints */
-    --color-text-dim: #94A3B8;         /* Slate-400 Subtle Accents */
+    /* High-Contrast Charcoal Typography */
+    --color-text-primary: #202833;        /* Headings and primary content */
+    --color-text-body: #2C384A;           /* High-readability body copy */
+    --color-text-secondary: #667180;      /* Descriptions and supporting info */
+    --color-text-muted: #8792A0;          /* Metadata, hints, tertiary labels */
+    --color-text-dim: #9FAEB8;
     --color-text-inverse: #FFFFFF;
 
+    /* Structural Borders & Dividers */
+    --color-border-subtle: #E7EBEF;
+    --color-border-default: #D7DDE4;      /* Hairline 1px borders */
+    --color-border-strong: #C4CDD7;       /* Emphasized boundaries */
+    --color-border-focus: #1769E0;
+
+    /* Brand & Primary Actions (Electric Blue Accent) */
+    --color-brand-primary: #1769E0;       /* Primary actions & active tabs */
+    --color-brand-hover: #1257BE;         /* Hover state */
+    --color-brand-primary-hover: #1257BE;
+    --color-brand-primary-dark: #0E479E;
+    --color-brand-primary-light: #EAF2FF; /* Selected items & blue tint */
+    --color-brand-tint: #EAF2FF;
+    --color-brand-primary-ring: rgba(23, 105, 224, 0.18);
+
+    /* Emergency Breakdown Accent (Urgent Actions ONLY) */
+    --color-emergency: #F07818;           /* Dedicated emergency orange */
+    --color-emergency-hover: #D9650E;     /* Warmer orange hover */
+    --color-emergency-bg: #FEF4EC;        /* Light orange tint background */
+    --color-emergency-border: #FAD7BE;    /* Soft orange border */
+    --color-emergency-text: #964205;
+
     /* Operational Status Signals */
-    --color-status-success: #059669;
-    --color-status-success-bg: #ECFDF5;
-    --color-status-success-border: #A7F3D0;
-    --color-status-warning: #D97706;
-    --color-status-warning-bg: #FFFBEB;
+    --color-status-success: #16845B;      /* Verified entity & in-stock green */
+    --color-status-success-bg: #E8F5F0;
+    --color-status-success-border: #B7E4D3;
+    --color-status-warning: #B96A13;      /* Caution & backorders */
+    --color-status-warning-bg: #FEF3C7;
     --color-status-warning-border: #FDE68A;
-    --color-status-error: #DC2626;
-    --color-status-error-bg: #FEF2F2;
-    --color-status-error-border: #FECACA;
+    --color-status-error: #C53D45;        /* Destructive actions & errors */
+    --color-status-error-bg: #FEECEB;
+    --color-status-error-border: #FAC5C3;
 
     /* Typography Stacks */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-head: 'Archivo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', Consolas, "Courier New", monospace;
 
-    /* Shadows & Elevation */
-    --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-card: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-    --shadow-lifted: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    /* Geometry & Spacing (8px Base Scale) */
+    --radius-sm: 2px;
+    --radius-md: 3px;                     /* Standard 3px industrial radius */
+    --radius-lg: 4px;
+    --radius-xl: 6px;
+    --rule: 1px solid var(--color-border-default);
 
-    /* Transitions & Dynamics */
-    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    /* Apple-Inspired Material & Glass Tokens */
+    --glass-bg: rgba(255, 255, 255, 0.92);
+    --glass-bg-elevated: rgba(255, 255, 255, 0.96);
+    --glass-border: var(--color-border-default);
+    --glass-blur: blur(12px);
+    --glass-shadow: 0 4px 20px -2px rgba(32, 40, 51, 0.05);
+
+    /* Elevation & Shadow Hierarchy */
+    --shadow-subtle: 0 1px 2px 0 rgba(20, 35, 55, 0.04);
+    --shadow-card: 0 1px 3px 0 rgba(20, 35, 55, 0.04);
+    --shadow-card-hover: 0 6px 16px -2px rgba(20, 35, 55, 0.08);
+    --shadow-dropdown: 0 6px 20px 0 rgba(20, 35, 55, 0.08);
+
+    /* Motion & Transitions (150-250ms Apple Easing) */
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-apple: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --duration-fast: 150ms;
+    --duration-base: 200ms;
+    --duration-moderate: 250ms;
+    --transition-base: 200ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-

@@ -5,7 +5,13 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Supplier Operations Hub</title>
+    <title><%: Page.Title %> - ASTANTRA Supplier Operations Hub</title>
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="<%= ResolveUrl("~/Content/images/brand/favicon.svg") %>" />
+    <link rel="alternate icon" href="<%= ResolveUrl("~/favicon.ico") %>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= ResolveUrl("~/Content/images/brand/favicon-32.png") %>" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= ResolveUrl("~/Content/images/brand/favicon-16.png") %>" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
     <link href="~/Content/css/site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/css/site-shell.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -76,7 +82,7 @@
         <!-- Footer -->
         <footer class="bg-white border-t border-[#CBD5E1] py-4 text-xs text-[#64748B] mt-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <p class="m-0">&copy; <%: DateTime.Now.Year %> SPAREFINDER &middot; Supplier Operations Hub</p>
+                <p class="m-0">&copy; <%: DateTime.Now.Year %> ASTANTRA &middot; Supplier Operations Hub</p>
                 <div class="flex items-center gap-4 text-xs">
                     <a href="~/Public/Parts.aspx" runat="server" class="hover:text-[#1D4ED8]">Catalog Index</a>
                     <a href="~/Public/Emergency.aspx" runat="server" class="text-[#EA580C] font-bold">Emergency Monitor</a>

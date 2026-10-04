@@ -1,5 +1,5 @@
 /* ============================================================================
-   SPAREFINDER INDUSTRIAL PROCUREMENT NETWORK — SHELL INTERACTION SCRIPT
+   ASTANTRA INDUSTRIAL PROCUREMENT NETWORK — SHELL INTERACTION SCRIPT
    Robust Fixed-Header, Accessible Mobile Drawer & Microinteractions
    ============================================================================ */
 

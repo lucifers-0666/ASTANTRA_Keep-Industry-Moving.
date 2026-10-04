@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 38" width="180" height="38" aria-label="ASTANTRA">
+    <defs>
+        <style>
+            .brand-compact-title { font-family: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 19px; font-weight: 900; fill: #17212F; letter-spacing: 0.06em; }
+            .brand-compact-sub { font-family: 'IBM Plex Mono', monospace; font-size: 7px; font-weight: 600; fill: #5F6B7A; letter-spacing: 0.14em; }
+        </style>
+    </defs>
+    <g transform="translate(1, 2) scale(0.38)">
+        <path d="M 50 6 L 90 88 L 73 88 L 50 41 L 27 88 L 10 88 Z" fill="#1769E0" />
+        <path d="M 37 68 L 63 68 L 69 82 L 31 82 Z" fill="#17212F" />
+    </g>
+    <text x="46" y="20" class="brand-compact-title">ASTANTRA</text>
+    <text x="47" y="31" class="brand-compact-sub">PROCUREMENT</text>
+</svg>
