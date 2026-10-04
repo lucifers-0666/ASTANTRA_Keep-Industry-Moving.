@@ -12,6 +12,18 @@ namespace IndustrialSparePartPortal.Public
         {
             if (!IsPostBack)
             {
+                string querySearch = Request.QueryString["q"] ?? Request.QueryString["search"];
+                if (!string.IsNullOrEmpty(querySearch))
+                {
+                    txtSearch.Text = querySearch.Trim();
+                }
+
+                string queryCity = Request.QueryString["city"];
+                if (!string.IsNullOrEmpty(queryCity) && ddlCity.Items.FindByValue(queryCity) != null)
+                {
+                    ddlCity.SelectedValue = queryCity;
+                }
+
                 LoadSuppliers(txtSearch.Text.Trim(), ddlCity.SelectedValue, ddlVerification.SelectedValue);
             }
         }

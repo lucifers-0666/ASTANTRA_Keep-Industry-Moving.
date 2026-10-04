@@ -41,22 +41,54 @@
                             <span>OPERATIONAL ENTITY:</span>
                             <span class="p-signin-roles__selected" id="lblSelectedRole">Factory Buyer</span>
                         </div>
-                        <div class="p-signin-roles__segments" role="tablist">
-                            <button type="button" class="p-signin-role-btn active" data-role="Factory" data-hint="Access RFQ Dispatch, Breakdown Escalations & Plant Equipment">
+                        <div class="p-signin-roles__segments" style="grid-template-columns: repeat(4, 1fr);" role="tablist">
+                            <button type="button" class="p-signin-role-btn active" data-role="Factory" data-email="factory@plant.com" data-pwd="Factory@123" data-hint="Access RFQ Dispatch, Breakdown Escalations & Plant Equipment">
                                 <i class="fa-solid fa-industry" aria-hidden="true"></i>
                                 <span>Factory</span>
                             </button>
-                            <button type="button" class="p-signin-role-btn" data-role="Supplier" data-hint="Manage Inventory Stock, Quote Submissions & Regional Deliveries">
+                            <button type="button" class="p-signin-role-btn" data-role="Supplier" data-email="supplier@parts.com" data-pwd="Supplier@123" data-hint="Manage Inventory Stock, Quote Submissions & Regional Deliveries">
                                 <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
                                 <span>Supplier</span>
                             </button>
-                            <button type="button" class="p-signin-role-btn" data-role="Technician" data-hint="View Service Dispatches, Work Orders & On-Call Deployment">
+                            <button type="button" class="p-signin-role-btn" data-role="Technician" data-email="tech@service.com" data-pwd="Tech@123" data-hint="View Service Dispatches, Work Orders & On-Call Deployment">
                                 <i class="fa-solid fa-wrench" aria-hidden="true"></i>
                                 <span>Engineer</span>
+                            </button>
+                            <button type="button" class="p-signin-role-btn" data-role="Admin" data-email="admin@sparepartportal.com" data-pwd="Admin@123" data-hint="Platform Administration, User Governance & System Audit">
+                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                                <span>Admin</span>
                             </button>
                         </div>
                         <div class="p-signin-roles__hint" id="roleHint">
                             Access RFQ Dispatch, Breakdown Escalations & Plant Equipment
+                        </div>
+                    </div>
+
+                    <!-- Demo Credentials Quick-Fill Strip -->
+                    <div class="mb-4 p-3 bg-[#F1F5F9] border border-[#CBD5E1] rounded-md text-xs">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-[#0F172A] uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+                                <i class="fa-solid fa-key text-[#1769E0]"></i> Demo Test Accounts (Click to Fill)
+                            </span>
+                            <span class="text-[10px] font-mono text-[#64748B]">Auto-Loads Form</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-[11px]">
+                            <button type="button" class="demo-fill-btn text-left p-2 bg-white hover:bg-blue-50 border border-slate-200 rounded transition flex flex-col" data-role="Factory" data-email="factory@plant.com" data-pwd="Factory@123">
+                                <span class="font-bold text-[#0F172A]">🏭 Factory Buyer</span>
+                                <span class="text-[10px] font-mono text-slate-500">factory@plant.com</span>
+                            </button>
+                            <button type="button" class="demo-fill-btn text-left p-2 bg-white hover:bg-emerald-50 border border-slate-200 rounded transition flex flex-col" data-role="Supplier" data-email="supplier@parts.com" data-pwd="Supplier@123">
+                                <span class="font-bold text-[#0F172A]">📦 Supplier Hub</span>
+                                <span class="text-[10px] font-mono text-slate-500">supplier@parts.com</span>
+                            </button>
+                            <button type="button" class="demo-fill-btn text-left p-2 bg-white hover:bg-amber-50 border border-slate-200 rounded transition flex flex-col" data-role="Technician" data-email="tech@service.com" data-pwd="Tech@123">
+                                <span class="font-bold text-[#0F172A]">🔧 Field Engineer</span>
+                                <span class="text-[10px] font-mono text-slate-500">tech@service.com</span>
+                            </button>
+                            <button type="button" class="demo-fill-btn text-left p-2 bg-white hover:bg-purple-50 border border-slate-200 rounded transition flex flex-col" data-role="Admin" data-email="admin@sparepartportal.com" data-pwd="Admin@123">
+                                <span class="font-bold text-[#0F172A]">🛡️ Administrator</span>
+                                <span class="text-[10px] font-mono text-slate-500">admin@sparepartportal.com</span>
+                            </button>
                         </div>
                     </div>
 
@@ -253,23 +285,48 @@
                 });
             }
 
-            // Role Segment switcher
+            // Role Segment switcher & Demo credentials autofill
             var roleButtons = document.querySelectorAll('.p-signin-role-btn');
+            var demoButtons = document.querySelectorAll('.demo-fill-btn');
             var lblSelectedRole = document.getElementById('lblSelectedRole');
             var roleHint = document.getElementById('roleHint');
+            var emailInput = document.getElementById('<%= txtEmail.ClientID %>');
+
+            function applyCredentials(role, email, pwd) {
+                if (emailInput && email) emailInput.value = email;
+                if (pwdInput && pwd) pwdInput.value = pwd;
+
+                roleButtons.forEach(function (b) {
+                    if (b.getAttribute('data-role') === role) {
+                        b.classList.add('active');
+                        var hint = b.getAttribute('data-hint');
+                        if (lblSelectedRole) {
+                            lblSelectedRole.textContent = role === 'Technician' ? 'Field Engineer' : (role === 'Admin' ? 'Administrator' : role + ' Buyer');
+                        }
+                        if (roleHint) {
+                            roleHint.textContent = hint;
+                        }
+                    } else {
+                        b.classList.remove('active');
+                    }
+                });
+            }
+
+            demoButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var role = btn.getAttribute('data-role');
+                    var email = btn.getAttribute('data-email');
+                    var pwd = btn.getAttribute('data-pwd');
+                    applyCredentials(role, email, pwd);
+                });
+            });
 
             roleButtons.forEach(function (btn) {
                 btn.addEventListener('click', function () {
-                    roleButtons.forEach(function (b) { b.classList.remove('active'); });
-                    btn.classList.add('active');
                     var role = btn.getAttribute('data-role');
-                    var hint = btn.getAttribute('data-hint');
-                    if (lblSelectedRole) {
-                        lblSelectedRole.textContent = role === 'Technician' ? 'Field Engineer' : (role + ' Buyer');
-                    }
-                    if (roleHint) {
-                        roleHint.textContent = hint;
-                    }
+                    var email = btn.getAttribute('data-email');
+                    var pwd = btn.getAttribute('data-pwd');
+                    applyCredentials(role, email, pwd);
                 });
             });
 

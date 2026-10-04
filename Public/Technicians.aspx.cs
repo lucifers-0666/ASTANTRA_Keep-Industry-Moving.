@@ -12,6 +12,24 @@ namespace IndustrialSparePartPortal.Public
         {
             if (!IsPostBack)
             {
+                string querySearch = Request.QueryString["q"] ?? Request.QueryString["search"];
+                if (!string.IsNullOrEmpty(querySearch))
+                {
+                    txtSearch.Text = querySearch.Trim();
+                }
+
+                string querySkill = Request.QueryString["skill"];
+                if (!string.IsNullOrEmpty(querySkill) && ddlSkill.Items.FindByValue(querySkill) != null)
+                {
+                    ddlSkill.SelectedValue = querySkill;
+                }
+
+                string queryCity = Request.QueryString["city"];
+                if (!string.IsNullOrEmpty(queryCity) && ddlCity.Items.FindByValue(queryCity) != null)
+                {
+                    ddlCity.SelectedValue = queryCity;
+                }
+
                 LoadTechnicians(txtSearch.Text.Trim(), ddlSkill.SelectedValue, ddlCity.SelectedValue);
             }
         }

@@ -25,32 +25,32 @@
         
         <!-- 2. Breakdown Response Sequence (4 Steps) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#E87519] space-y-1.5 text-left">
-                <span class="font-mono text-xs font-bold text-[#E87519]">STEP 01</span>
+            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] space-y-1.5 text-left shadow-xs">
+                <span class="font-mono text-[11px] font-bold text-[#E87519] bg-[#FFF3EB] px-2 py-0.5 rounded-[2px] border border-[#FED7AA]">STEP 01</span>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Log Stoppage</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
                     Submit machine model, stamped OEM part numbers, and observed failure symptoms.
                 </p>
             </div>
 
-            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#E87519] space-y-1.5 text-left">
-                <span class="font-mono text-xs font-bold text-[#E87519]">STEP 02</span>
+            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] space-y-1.5 text-left shadow-xs">
+                <span class="font-mono text-[11px] font-bold text-[#E87519] bg-[#FFF3EB] px-2 py-0.5 rounded-[2px] border border-[#FED7AA]">STEP 02</span>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Regional Broadcast</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
                     Alert regional stockists within geographic proximity possessing matching inventory.
                 </p>
             </div>
 
-            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#E87519] space-y-1.5 text-left">
-                <span class="font-mono text-xs font-bold text-[#E87519]">STEP 03</span>
+            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] space-y-1.5 text-left shadow-xs">
+                <span class="font-mono text-[11px] font-bold text-[#E87519] bg-[#FFF3EB] px-2 py-0.5 rounded-[2px] border border-[#FED7AA]">STEP 03</span>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Stock Confirmation</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
                     Suppliers verify shelf inventory, expedited courier pickup, or same-day freight.
                 </p>
             </div>
 
-            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] border-l-4 border-l-[#18865B] space-y-1.5 text-left">
-                <span class="font-mono text-xs font-bold text-[#18865B]">STEP 04</span>
+            <div class="bg-white p-4 rounded-[3px] border border-[#D5DCE3] space-y-1.5 text-left shadow-xs">
+                <span class="font-mono text-[11px] font-bold text-[#18865B] bg-[#E8F5F0] px-2 py-0.5 rounded-[2px] border border-[#A7F3D0]">STEP 04</span>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">4. Dispatch &amp; Fitting</h3>
                 <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
                     Part is expedited to plant while certified on-call technicians are mobilized for on-site fitting.
@@ -85,9 +85,20 @@
                     </div>
                 </div>
 
-                <asp:Panel ID="pnlNotice" runat="server" Visible="false" CssClass="p-3.5 rounded-[2px] bg-[#EBF2FD] border border-[#B6D4FA] text-xs text-[#17212F] space-y-1">
-                    <strong class="font-bold block text-[#1769E0]"><i class="fa-solid fa-circle-info mr-1"></i> Sign In Required to Broadcast</strong>
-                    <span>Your emergency request details are saved. Please sign in with your Factory account to dispatch the broadcast.</span>
+                <asp:Panel ID="pnlNotice" runat="server" Visible="false" CssClass="p-3.5 rounded-[2px] bg-[#EBF2FD] border border-[#B6D4FA] text-xs text-[#17212F] space-y-2">
+                    <div class="flex items-center gap-1.5 text-[#1769E0] font-bold">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Factory Sign In Required to Broadcast</span>
+                    </div>
+                    <p class="m-0 leading-relaxed text-[#5F6B7A]">Your equipment breakdown details are validated. Please sign in with your verified Factory Buyer account to dispatch this broadcast to stocking suppliers.</p>
+                    <div class="pt-1 flex items-center gap-2">
+                        <a href="~/Account/Login.aspx?returnUrl=~/Public/Emergency.aspx" runat="server" class="btn-primary text-xs py-1.5 px-3 font-bold inline-flex items-center gap-1">
+                            <i class="fa-solid fa-right-to-bracket text-[10px]"></i> Sign In to Dispatch →
+                        </a>
+                        <a href="~/Account/Register.aspx" runat="server" class="btn-secondary text-xs py-1.5 px-3 font-bold">
+                            Register Factory
+                        </a>
+                    </div>
                 </asp:Panel>
 
                 <div class="space-y-3.5 text-xs">
