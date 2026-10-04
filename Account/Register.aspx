@@ -1,22 +1,22 @@
 <%@ Page Title="Register Portal Account" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="IndustrialSparePartPortal.Account.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="description" content="Register as a Factory Buyer, Spare-Part Supplier, or Certified Technician on SPAREFINDER." />
+    <meta name="description" content="Register as a Factory Buyer, Spare-Part Supplier, or Certified Technician on ASTANTRA." />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="py-12 sm:py-16 bg-[#F8FAFC] flex items-center justify-center min-h-[calc(100vh-var(--site-header-height)-120px)] px-4 sm:px-6 lg:px-8">
+    <div class="py-12 sm:py-16 bg-[#F1F3F5] flex items-center justify-center min-h-[calc(100vh-var(--site-header-height)-120px)] px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl w-full">
-            <div class="surface-card p-6 sm:p-10 bg-white shadow-lg border border-[#CBD5E1] space-y-8">
+            <div class="surface-card p-6 sm:p-10 bg-white shadow-[0_4px_20px_-4px_rgba(20,35,55,0.06)] border border-[#D7DDE4] rounded-[4px] space-y-8">
                 
                 <!-- Registration Header -->
-                <div class="text-left space-y-2 border-b border-[#E2E8F0] pb-6">
+                <div class="text-left space-y-2 border-b border-[#D7DDE4] pb-6">
                     <div class="flex flex-wrap items-center gap-2">
                         <span class="spec-tag spec-tag-blue">ENTITY ONBOARDING</span>
                         <span class="spec-tag spec-tag-amber">ROLE VERIFICATION</span>
                     </div>
-                    <h1 class="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight m-0">Portal Account Registration</h1>
-                    <p class="text-xs sm:text-sm text-[#64748B] m-0">
+                    <h1 class="text-2xl sm:text-3xl font-black font-['Archivo',sans-serif] text-[#202833] tracking-tight m-0">Portal Account Registration</h1>
+                    <p class="text-xs sm:text-sm text-[#667180] m-0">
                         Join the industrial spare-parts procurement network. Select your business role and configure your authorized credentials.
                     </p>
                 </div>

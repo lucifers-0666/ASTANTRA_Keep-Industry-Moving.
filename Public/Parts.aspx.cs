@@ -13,6 +13,13 @@ namespace IndustrialSparePartPortal.Public
         {
             if (!IsPostBack)
             {
+                // Check for search query string (e.g. from homepage search redirect)
+                string querySearch = Request.QueryString["q"];
+                if (!string.IsNullOrEmpty(querySearch))
+                {
+                    txtSearch.Text = querySearch.Trim();
+                }
+
                 // Check for category query string
                 string queryCategory = Request.QueryString["cat"];
                 if (!string.IsNullOrEmpty(queryCategory) && ddlCategory.Items.FindByValue(queryCategory) != null)

@@ -7,180 +7,188 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- 1. Header Banner -->
-    <div class="bg-white border-b border-[#CBD5E1] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-3 text-left">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="spec-tag spec-tag-blue">
-                    <i class="fa-solid fa-route"></i> ARCHITECTURAL WORKFLOW SPECIFICATION
-                </span>
-                <span class="spec-tag spec-tag-emerald">
-                    END-TO-END PROCUREMENT LIFECYCLE
-                </span>
+    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto space-y-2 text-left">
+            <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
+                Procurement Workflow
             </div>
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] tracking-tight m-0">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
                 How Industrial Procurement Works
             </h1>
-            <p class="text-xs sm:text-sm text-[#475569] max-w-3xl leading-relaxed m-0">
-                A structured digital workflow connecting plant maintenance departments, regional parts stockists, and on-site service engineers to eliminate machine downtime.
+            <p class="text-xs sm:text-sm text-[#5F6B7A] max-w-3xl leading-relaxed m-0">
+                A structured digital workflow connecting plant maintenance departments, regional spare-part stockists, and on-site service engineers to eliminate machine downtime.
             </p>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
         
-        <!-- 2. Visual Stage Introduction with Real Warehouse Photography -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- 2. Visual Context Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-5">
-                <div class="rounded-2xl overflow-hidden border border-[#CBD5E1] shadow-md group">
+                <div class="rounded-[3px] overflow-hidden border border-[#D7DDE4] bg-white p-2 shadow-xs">
                     <img src="<%= ResolveUrl("~/Content/images/warehouse_inventory_racks.jpg") %>" 
                          alt="Organized heavy industrial spare parts warehouse racks with parts bins" 
-                         class="w-full h-[280px] sm:h-[320px] object-cover group-hover:scale-105 transition-transform duration-700" 
+                         class="w-full h-[240px] sm:h-[280px] object-cover rounded-[2px]" 
                          loading="lazy" />
                 </div>
             </div>
-            <div class="lg:col-span-7 space-y-4 text-left">
-                <span class="spec-tag spec-tag-blue">ZERO-AMBIGUITY SOURCING</span>
-                <h2 class="text-xl sm:text-2xl font-bold text-[#0F172A] m-0">From Part Identification to Plant Installation</h2>
-                <p class="text-xs sm:text-sm text-[#475569] leading-relaxed m-0">
-                    Traditional procurement relies on unrecorded phone calls, imprecise descriptions, and uncertain warehouse stock. SPAREFINDER standardizes every stage through OEM catalog indexing, multi-vendor RFQ bidding, and verified technician assignment.
+            <div class="lg:col-span-7 space-y-3 text-left">
+                <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Core Workflow</span>
+                <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
+                    From Component Failure to Verified Commissioning
+                </h2>
+                <p class="text-xs sm:text-sm text-[#667180] leading-relaxed m-0">
+                    Traditional maintenance sourcing relies on unrecorded phone calls, approximate descriptions, and uncertain distributor inventory. ASTANTRA replaces guesswork with verified OEM part indexing, direct RFQ quotations, and certified technician dispatch.
                 </p>
-                <div class="grid grid-cols-2 gap-4 pt-2 text-xs font-mono">
-                    <div class="p-3 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]">
-                        <span class="text-[#1D4ED8] font-bold block text-sm">&lt; 24 Hrs</span>
-                        <span class="text-[#64748B]">Standard RFQ Turnaround</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
+                    <div class="p-3 bg-[#F7F8FA] rounded-[3px] border border-[#D7DDE4]">
+                        <span class="text-[#1769E0] font-bold block text-xs uppercase tracking-wider font-mono">OEM Code Verification</span>
+                        <span class="text-[#667180] mt-0.5 block">Search by stamped bearing, seal, valve, or sensor code to eliminate mismatch returns.</span>
                     </div>
-                    <div class="p-3 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]">
-                        <span class="text-[#EA580C] font-bold block text-sm">&lt; 2 Hrs</span>
-                        <span class="text-[#64748B]">Emergency Broadcast Target</span>
+                    <div class="p-3 bg-[#F7F8FA] rounded-[3px] border border-[#D7DDE4]">
+                        <span class="text-[#16845B] font-bold block text-xs uppercase tracking-wider font-mono">Regional Stock Visibility</span>
+                        <span class="text-[#667180] mt-0.5 block">Compare suppliers by physical location, shelf inventory, and dispatch lead time.</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 3. Standard 8-Step Sourcing Workflow (Grouped into 3 Architectural Phases) -->
-        <section class="space-y-8">
-            <div class="space-y-1 text-left">
-                <div class="flex items-center gap-2">
-                    <span class="spec-tag spec-tag-blue">8-STAGE LIFECYCLE</span>
-                    <span class="text-xs text-[#64748B] font-mono">PLANNED B2B ARCHITECTURE</span>
-                </div>
-                <h2 class="text-xl sm:text-2xl font-bold text-[#0F172A] m-0">Standard Sourcing &amp; Procurement Sequence</h2>
-                <p class="text-xs sm:text-sm text-[#475569] m-0">The workflow model conceptualized for the SPAREFINDER procurement ecosystem.</p>
+        <!-- 3. Connected Three-Stage Procurement Workflow -->
+        <div class="space-y-4 text-left">
+            <div class="space-y-1">
+                <span class="text-xs font-mono font-bold text-[#1769E0] tracking-wider uppercase">Three-Stage Process</span>
+                <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
+                    The Procurement Journey
+                </h2>
+                <p class="text-xs sm:text-sm text-[#667180] m-0">
+                    Every procurement request moves through three transparent stages to ensure the right part arrives at the right machine.
+                </p>
             </div>
 
-            <!-- Phase 1: Technical Discovery (Stages 1-3) -->
-            <div class="space-y-3">
-                <div class="flex items-center gap-2 text-xs font-bold text-[#1D4ED8] uppercase tracking-wider font-mono">
-                    <span class="w-6 h-6 rounded-full bg-blue-100 text-[#1D4ED8] flex items-center justify-center text-xs">A</span>
-                    <span>Phase 1 · Identification &amp; Directory Discovery</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#1D4ED8] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#1D4ED8] block">STAGE 01</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Identify Requirement</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Plant engineer inspects failed equipment, recording OEM nameplate data and stamped component numbers (e.g. 6210-2RS).
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                
+                <!-- Stage 1 -->
+                <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] border-t-4 border-t-[#1769E0] flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2 py-0.5 rounded-[2px]">STAGE 01</span>
+                            <span class="text-xs text-[#8792A0] font-mono">Identification</span>
+                        </div>
+                        <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
+                            Specification Check &amp; Compatibility Matching
+                        </h3>
+                        <p class="text-xs text-[#667180] leading-relaxed m-0">
+                            The plant maintenance engineer notes the equipment nameplate details and stamped part numbers (e.g. 6210-2RS bearing, 24V DC solenoid valve). Search the catalog to verify mechanical tolerances, shaft diameters, and electrical ratings.
                         </p>
                     </div>
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#1D4ED8] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#1D4ED8] block">STAGE 02</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Search Indexed Catalog</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Buyer searches the platform by part number or machine model, reviewing mechanical tolerances and compatible cross-references.
-                        </p>
-                    </div>
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#1D4ED8] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#1D4ED8] block">STAGE 03</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Compare Regional Stockists</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Evaluate regional suppliers on confirmed shelf inventory, transit distance, verified compliance, and historical rating.
-                        </p>
+                    <div class="pt-3 border-t border-[#EDF1F5] text-[11px] text-[#5F6B7A]">
+                        <strong class="text-[#202833] block mb-0.5 font-bold">Key Outcome:</strong>
+                        Confirmed OEM part number and verified technical datasheet match.
                     </div>
                 </div>
+
+                <!-- Stage 2 -->
+                <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] border-t-4 border-t-[#16845B] flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs font-bold text-[#16845B] bg-[#E8F5F0] px-2 py-0.5 rounded-[2px]">STAGE 02</span>
+                            <span class="text-xs text-[#8792A0] font-mono">Quotation</span>
+                        </div>
+                        <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
+                            Multi-Vendor RFQ &amp; Terms Comparison
+                        </h3>
+                        <p class="text-xs text-[#667180] leading-relaxed m-0">
+                            Submit a digital Request for Quote (RFQ) specifying required quantity, delivery urgency, and plant receiving address. Regional stockists respond with confirmed shelf stock, itemized pricing, and freight delivery schedules.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#EDF1F5] text-[11px] text-[#5F6B7A]">
+                        <strong class="text-[#202833] block mb-0.5 font-bold">Key Outcome:</strong>
+                        Transparent price comparison matrix with confirmed delivery timelines.
+                    </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] border-t-4 border-t-[#E87519] flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs font-bold text-[#E87519] bg-[#FEF4EC] px-2 py-0.5 rounded-[2px]">STAGE 03</span>
+                            <span class="text-xs text-[#8792A0] font-mono">Dispatch &amp; Fitting</span>
+                        </div>
+                        <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
+                            Direct Dispatch &amp; Field Commissioning
+                        </h3>
+                        <p class="text-xs text-[#667180] leading-relaxed m-0">
+                            Once an order is confirmed, the supplier dispatches the verified component with test documentation. For complex installations, maintenance managers can book an on-call certified technician to inspect, fit, and align the unit.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-[#EDF1F5] text-[11px] text-[#5F6B7A]">
+                        <strong class="text-[#202833] block mb-0.5 font-bold">Key Outcome:</strong>
+                        Rapid plant restoration with certified technician sign-off.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 4. Current Visitor Experience vs Account-Enabled Portal Features -->
+        <div class="surface-card bg-white p-6 rounded-[3px] border border-[#D7DDE4] space-y-4 text-left shadow-xs">
+            <div class="space-y-1">
+                <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Platform Scope &amp; Availability</span>
+                <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">
+                    What You Can Do Today vs. Account-Enabled Features
+                </h3>
+                <p class="text-xs text-[#667180] m-0">
+                    ASTANTRA is being released in structured milestones. Here is what is active for public visitors today and what unlocks with a registered account.
+                </p>
             </div>
 
-            <!-- Phase 2: Commercial Quotation (Stages 4-6) -->
-            <div class="space-y-3">
-                <div class="flex items-center gap-2 text-xs font-bold text-[#059669] uppercase tracking-wider font-mono">
-                    <span class="w-6 h-6 rounded-full bg-emerald-100 text-[#059669] flex items-center justify-center text-xs">B</span>
-                    <span>Phase 2 · RFQ Quotation &amp; Commercial Award</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                <!-- Available Today -->
+                <div class="p-4 bg-[#F7F8FA] rounded-[3px] border border-[#D7DDE4] space-y-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#16845B]"></span>
+                        <strong class="text-xs font-bold text-[#202833] uppercase tracking-wider font-mono">Available Now (Public Visitor)</strong>
+                    </div>
+                    <ul class="text-xs text-[#5F6B7A] space-y-1.5 pl-4 list-disc m-0">
+                        <li>Browse indexed industrial spare parts catalog by category and part number.</li>
+                        <li>Search verified regional supplier directory by industrial hub and product line.</li>
+                        <li>Explore certified field service technicians by mechanical/electrical discipline.</li>
+                        <li>Draft emergency breakdown notifications with equipment nameplate data.</li>
+                    </ul>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#059669] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#059669] block">STAGE 04</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Submit Structured RFQ</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Issue a formal Request for Quotation specifying required quantity, delivery deadline, and plant receiving location.
-                        </p>
-                    </div>
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#059669] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#059669] block">STAGE 05</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Supplier Quotation</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Stockists submit itemized price quotes detailing unit pricing, freight charges, and estimated dispatch windows.
-                        </p>
-                    </div>
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#059669] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#059669] block">STAGE 06</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Quote Selection &amp; PO</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Factory buyer compares bids side-by-side, selects optimal commercial terms, and confirms procurement order.
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Phase 3: Logistics & Commissioning (Stages 7-8) -->
-            <div class="space-y-3">
-                <div class="flex items-center gap-2 text-xs font-bold text-[#EA580C] uppercase tracking-wider font-mono">
-                    <span class="w-6 h-6 rounded-full bg-orange-100 text-[#EA580C] flex items-center justify-center text-xs">C</span>
-                    <span>Phase 3 · Dispatch Logistics &amp; On-Site Fitting</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#EA580C] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#EA580C] block">STAGE 07</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Dispatch &amp; Technician Mobilize</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Supplier dispatches part via designated carrier. Simultaneously, an on-call field technician is scheduled for arrival.
-                        </p>
+                <!-- Account-Enabled Portal -->
+                <div class="p-4 bg-[#F7F8FA] rounded-[3px] border border-[#D7DDE4] space-y-2.5">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#1769E0]"></span>
+                        <strong class="text-xs font-bold text-[#202833] uppercase tracking-wider font-mono">Account-Enabled (Factory &amp; Supplier Portals)</strong>
                     </div>
-                    <div class="surface-card p-5 space-y-2 border-l-4 border-l-[#EA580C] text-left">
-                        <span class="font-mono text-[11px] font-bold text-[#EA580C] block">STAGE 08</span>
-                        <h3 class="text-sm font-bold text-[#0F172A] m-0">Installation &amp; Sign-Off</h3>
-                        <p class="text-xs text-[#475569] leading-relaxed m-0">
-                            Component is physically inspected, fitted to machine, test-run verified, and delivery confirmed in portal workspace.
-                        </p>
-                    </div>
+                    <ul class="text-xs text-[#5F6B7A] space-y-1.5 pl-4 list-disc m-0">
+                        <li>Issue formal multi-vendor Requests for Quote (RFQs) and compare incoming bids.</li>
+                        <li>Supplier catalog inventory upload and stock level management.</li>
+                        <li>Dispatch active emergency breakdown alerts to suppliers within geographic radius.</li>
+                        <li>Schedule and track field service technician bookings directly to factory floor.</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-        </section>
-
-        <!-- 4. Emergency Breakdown Fast-Track vs Standard Sourcing -->
-        <section class="surface-card p-6 sm:p-8 space-y-6" id="protocol">
-            <div class="flex items-center gap-2">
-                <span class="spec-tag spec-tag-orange">EMERGENCY PROTOCOL</span>
-                <span class="text-xs text-[#64748B] font-mono">CRITICAL BREAKDOWN BYPASS</span>
+        <!-- 5. Next Step Navigation -->
+        <div class="p-6 bg-white border border-[#D7DDE4] rounded-[3px] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)]">
+            <div class="text-left space-y-1">
+                <h4 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Ready to explore the spare-parts catalog?</h4>
+                <p class="text-xs text-[#667180] m-0">Search indexed components by OEM part number or browse regional supplier inventories.</p>
             </div>
-            <h2 class="text-xl font-bold text-[#0F172A] m-0">How the Emergency Protocol Bypasses Standard RFQ Delays</h2>
-            <p class="text-xs sm:text-sm text-[#475569] m-0 leading-relaxed max-w-3xl">
-                When a critical machine fails, standard 24-hour RFQ windows cannot be tolerated. The Emergency Protocol broadcasts simultaneously to all regional verified suppliers possessing category stock, alerting on-call coordinators within minutes.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-                <div class="p-4 bg-slate-50 rounded-xl border border-[#CBD5E1] space-y-2">
-                    <span class="font-bold text-[#0F172A] block text-sm font-sans">Standard Sourcing:</span>
-                    <div>&bull; Multi-day vendor inquiries</div>
-                    <div>&bull; 24-48 hr quotation turnaround</div>
-                    <div>&bull; Scheduled batch shipping</div>
-                </div>
-                <div class="p-4 bg-orange-50/70 rounded-xl border border-orange-200 space-y-2">
-                    <span class="font-bold text-[#EA580C] block text-sm font-sans">Emergency Protocol:</span>
-                    <div>&bull; Instant proximity broadcast alert</div>
-                    <div>&bull; &lt; 2 hour direct quote &amp; pickup confirmation</div>
-                    <div>&bull; Same-day expedited dedicated transit</div>
-                </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <a href="~/Public/Parts.aspx" runat="server" class="btn-primary text-xs py-2 px-4 font-bold">
+                    Browse Parts Catalog →
+                </a>
+                <a href="~/Public/Emergency.aspx" runat="server" class="btn-emergency text-xs py-2 px-4 font-bold">
+                    Emergency Desk →
+                </a>
             </div>
-        </section>
+        </div>
 
     </div>
 </asp:Content>

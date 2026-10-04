@@ -5,15 +5,24 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Supplier Operations Hub</title>
-    <link href="~/Content/css/site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/css/site-shell.css" rel="stylesheet" type="text/css" />
+    <title><%: Page.Title %> - ASTANTRA Supplier Operations Hub</title>
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="<%= ResolveUrl("~/Content/images/brand/favicon.svg") %>" />
+    <link rel="alternate icon" href="<%= ResolveUrl("~/favicon.ico") %>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= ResolveUrl("~/Content/images/brand/favicon-32.png") %>" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= ResolveUrl("~/Content/images/brand/favicon-16.png") %>" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
+    <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Archivo, IBM Plex Sans, IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="h-full flex flex-col font-['Inter',sans-serif] antialiased text-[#0F172A] bg-[#F8FAFC]">
+<body class="h-full flex flex-col font-['IBM_Plex_Sans',sans-serif] antialiased text-[#17212F] bg-[#F1F3F5]">
     <form id="form1" runat="server" class="flex flex-col min-h-full">
         
         <!-- Supplier Authoritative Header -->
@@ -21,33 +30,33 @@
             <div class="site-header-inner">
                 <!-- Brand Logo -->
                 <div class="flex items-center gap-3">
-                    <a href="~/Supplier/Dashboard.aspx" runat="server" class="site-brand">
+                    <a href="~/Supplier/Dashboard.aspx" runat="server" class="site-brand" aria-label="ASTANTRA Supplier Hub">
                         <div class="site-brand-icon">
-                            <i class="fa-solid fa-warehouse text-sm"></i>
+                            <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol.svg") %>" alt="ASTANTRA Symbol" class="w-6 h-6 object-contain" />
                         </div>
                         <div class="site-brand-text">
-                            <span class="site-brand-title">SUPPLIER<span>HUB</span></span>
-                            <span class="site-brand-sub">Inventory &amp; Quotations</span>
+                            <span class="site-brand-title">ASTANTRA</span>
+                            <span class="site-brand-sub">SUPPLIER HUB</span>
                         </div>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <nav class="site-desktop-nav">
-                    <a href="~/Supplier/Dashboard.aspx" runat="server" class="site-nav-link">Dashboard</a>
+                    <a href="~/Supplier/Dashboard.aspx" runat="server" class="site-nav-link active">Dashboard</a>
                     <a href="~/Public/Parts.aspx" runat="server" class="site-nav-link">My Catalog</a>
                     <a href="~/Public/Emergency.aspx" runat="server" class="site-nav-link site-nav-link-emergency">
                         <i class="fa-solid fa-bell text-xs"></i> Breakdown Alerts
                     </a>
-                    <a href="~/Public/WhyUs.aspx" runat="server" class="site-nav-link">Verification Standards</a>
+                    <a href="~/Public/WhyUs.aspx" runat="server" class="site-nav-link">Standards</a>
                 </nav>
 
                 <!-- Profile & Logout -->
                 <div class="site-header-actions">
                     <div class="hidden sm:flex flex-col text-right">
-                        <span class="text-xs font-bold text-[#0F172A]" id="lblSupplierName" runat="server">Spare-Part Supplier</span>
-                        <span class="spec-tag spec-tag-emerald text-[9px]" id="lblVerificationBadge" runat="server">
-                            <i class="fa-solid fa-shield-halved text-[7px]"></i> VERIFIED SUPPLIER
+                        <span class="text-xs font-bold text-[#17212F]" id="lblSupplierName" runat="server">Spare-Part Supplier</span>
+                        <span class="status-pill status-pill-verified text-[10px]" id="lblVerificationBadge" runat="server">
+                            <i class="fa-solid fa-shield-halved text-[9px] text-emerald-600 mr-1"></i> VERIFIED SUPPLIER
                         </span>
                     </div>
                     <a href="~/Account/Logout.aspx" runat="server" class="btn-secondary text-xs py-1.5 px-3 font-bold text-red-600 hover:text-red-700">
@@ -76,7 +85,7 @@
         <!-- Footer -->
         <footer class="bg-white border-t border-[#CBD5E1] py-4 text-xs text-[#64748B] mt-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <p class="m-0">&copy; <%: DateTime.Now.Year %> SPAREFINDER &middot; Supplier Operations Hub</p>
+                <p class="m-0">&copy; <%: DateTime.Now.Year %> ASTANTRA &middot; Supplier Operations Hub</p>
                 <div class="flex items-center gap-4 text-xs">
                     <a href="~/Public/Parts.aspx" runat="server" class="hover:text-[#1D4ED8]">Catalog Index</a>
                     <a href="~/Public/Emergency.aspx" runat="server" class="text-[#EA580C] font-bold">Emergency Monitor</a>
