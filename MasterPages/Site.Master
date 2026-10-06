@@ -136,8 +136,8 @@
         <!-- Shown on high-level discovery pages (Home, Why Us); suppressed on Login/Reg  -->
         <!-- ============================================================================ -->
         <asp:PlaceHolder ID="phPreFooterEmergency" runat="server">
-            <section class="bg-[#E7EBEF] border-t border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <section class="bg-[#E7EBEF] border-t border-b border-[#D5DCE3] py-10">
+                <div class="astantra-container flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div class="space-y-1.5 max-w-2xl text-left">
                         <div class="text-xs font-mono font-bold text-[#D9650E] tracking-wider uppercase">
                             Emergency Breakdown Support

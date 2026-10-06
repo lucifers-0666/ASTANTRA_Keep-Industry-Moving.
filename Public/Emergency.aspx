@@ -7,8 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- 1. Header Banner -->
-    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-2 text-left">
+    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10">
+        <div class="astantra-container space-y-2 text-left">
             <div class="text-xs font-mono font-bold text-[#D9650E] tracking-wider uppercase">
                 Critical Breakdown Desk &middot; Priority Escalation
             </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div class="astantra-container py-8 space-y-8">
         
         <!-- 2. Breakdown Response Sequence (4 Steps) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -65,7 +65,7 @@
             <div class="lg:col-span-7 bg-white p-6 sm:p-7 rounded-[3px] border border-[#D5DCE3] space-y-4 shadow-xs text-left">
                 <div class="flex items-center justify-between border-b border-[#D5DCE3] pb-3">
                     <div class="flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-[2px] bg-[#E87519] text-white flex items-center justify-center text-xs font-bold">
+                        <div class="card-icon-box--sm bg-[#E87519] text-white">
                             <i class="fa-solid fa-bolt"></i>
                         </div>
                         <div>
@@ -192,7 +192,7 @@
                 <!-- Plant Triage Advice -->
                 <div class="bg-white rounded-[3px] p-5 sm:p-6 space-y-3 border border-[#D7DDE4] shadow-[0_2px_8px_-2px_rgba(20,35,55,0.04)] text-left">
                     <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-[2px] bg-[#FEF4EC] text-[#D9650E] border border-[#FAD7BE] flex items-center justify-center font-bold text-sm shrink-0">
+                        <div class="card-icon-box--sm bg-[#FEF4EC] text-[#D9650E] border border-[#FAD7BE] shrink-0">
                             <i class="fa-solid fa-triangle-exclamation"></i>
                         </div>
                         <div>

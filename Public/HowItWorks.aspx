@@ -7,8 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- 1. Header Banner -->
-    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-2 text-left">
+    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10">
+        <div class="astantra-container space-y-2 text-left">
             <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
                 Procurement Workflow
             </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div class="astantra-container py-8 space-y-10">
         
         <!-- 2. Visual Context Section -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">

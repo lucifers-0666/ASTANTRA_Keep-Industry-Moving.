@@ -7,8 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- 1. Header Banner -->
-    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-2 text-left">
+    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10">
+        <div class="astantra-container space-y-2 text-left">
             <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
                 Platform Capabilities &amp; Differentiators
             </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div class="astantra-container py-8 space-y-10">
         
         <!-- 2. Traditional vs Platform Comparison Matrix -->
         <section class="space-y-4">
@@ -117,7 +117,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
             
             <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] space-y-2">
-                <div class="w-8 h-8 rounded-[2px] bg-[#EAF2FF] text-[#1769E0] flex items-center justify-center font-bold text-sm">
+                <div class="card-icon-box--sm bg-[#EAF2FF] text-[#1769E0]">
                     <i class="fa-solid fa-crosshairs"></i>
                 </div>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">OEM Part Number Precision</h3>
@@ -127,7 +127,7 @@
             </div>
 
             <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] space-y-2">
-                <div class="w-8 h-8 rounded-[2px] bg-[#E8F5F0] text-[#16845B] flex items-center justify-center font-bold text-sm">
+                <div class="card-icon-box--sm bg-[#E8F5F0] text-[#16845B]">
                     <i class="fa-solid fa-location-dot"></i>
                 </div>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Regional Supplier Transparency</h3>
@@ -137,7 +137,7 @@
             </div>
 
             <div class="surface-card bg-white p-5 rounded-[3px] border border-[#D7DDE4] space-y-2">
-                <div class="w-8 h-8 rounded-[2px] bg-[#FEF4EC] text-[#F07818] flex items-center justify-center font-bold text-sm">
+                <div class="card-icon-box--sm bg-[#FEF4EC] text-[#D9650E]">
                     <i class="fa-solid fa-bolt"></i>
                 </div>
                 <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#202833] m-0">Dedicated Breakdown Channel</h3>

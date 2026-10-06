@@ -7,8 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- 1. Technical Catalog Header Banner -->
-    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-2 text-left">
+    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10">
+        <div class="astantra-container space-y-2 text-left">
             <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
                 OEM Parts &amp; Specifications
             </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div class="astantra-container py-8 space-y-6">
         
         <!-- 2. Integrated Search & Filter Workspace (Preserved Server Controls) -->
         <div class="bg-white p-5 sm:p-6 rounded-[3px] border border-[#D7DDE4] space-y-4 shadow-xs">
@@ -56,10 +56,10 @@
             <!-- Quick Filter Chips -->
             <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-[#D7DDE4] text-xs text-[#667180]">
                 <span class="font-bold text-[#202833] font-mono text-[11px]">CATEGORIES:</span>
-                <asp:LinkButton ID="btnFilterHydraulics" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Hydraulics & Pneumatics" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Hydraulics &amp; Pneumatics</asp:LinkButton>
-                <asp:LinkButton ID="btnFilterMotors" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Motors & Drives" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Motors &amp; Drives</asp:LinkButton>
-                <asp:LinkButton ID="btnFilterBearings" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Bearings & Power Transmission" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Bearings</asp:LinkButton>
-                <asp:LinkButton ID="btnFilterElectrical" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Electrical & Automation" CssClass="px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D7DDE4] text-[#202833] hover:border-[#1769E0] hover:text-[#1769E0] transition-colors font-mono text-[11px]">Electrical &amp; PLC</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterHydraulics" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Hydraulics & Pneumatics" CssClass="search-chip">Hydraulics &amp; Pneumatics</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterMotors" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Motors & Drives" CssClass="search-chip">Motors &amp; Drives</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterBearings" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Bearings & Power Transmission" CssClass="search-chip">Bearings</asp:LinkButton>
+                <asp:LinkButton ID="btnFilterElectrical" runat="server" OnClick="btnQuickFilter_Click" CommandArgument="Electrical & Automation" CssClass="search-chip">Electrical &amp; PLC</asp:LinkButton>
             </div>
         </div>
 
@@ -133,7 +133,7 @@
 
         <!-- 5. Empty State Panel -->
         <asp:Panel ID="pnlNoResults" runat="server" Visible="false" CssClass="text-center py-12 bg-white border border-[#D7DDE4] rounded-[3px] space-y-3">
-            <div class="w-10 h-10 mx-auto rounded-[3px] bg-[#E7EBEF] flex items-center justify-center text-[#667180] text-lg">
+            <div class="card-icon-box mx-auto text-[#667180] text-lg">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">No matching spare parts in catalog</h3>

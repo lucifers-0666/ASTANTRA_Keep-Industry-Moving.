@@ -7,8 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
     <!-- 1. Header Banner -->
-    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto space-y-2 text-left">
+    <div class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-10">
+        <div class="astantra-container space-y-2 text-left">
             <div class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
                 Field Engineering &amp; Maintenance Services
             </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div class="astantra-container py-8 space-y-6">
         
         <!-- 2. Search & Filter Bar (Preserved Server Controls) -->
         <div class="bg-white p-5 sm:p-6 rounded-[3px] border border-[#D7DDE4] space-y-4 shadow-xs">
@@ -87,7 +87,7 @@
                         <div class="space-y-3">
                             <div class="flex justify-between items-start gap-3">
                                 <div class="flex items-start gap-3">
-                                    <div class="w-10 h-10 rounded-[2px] bg-[#E7EBEF] text-[#1769E0] border border-[#D7DDE4] flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+                                    <div class="card-icon-box shrink-0 mt-0.5">
                                         <i class="fa-solid fa-user-gear"></i>
                                     </div>
                                     <div>
@@ -131,7 +131,7 @@
 
         <!-- 5. Empty State Panel -->
         <asp:Panel ID="pnlNoResults" runat="server" Visible="false" CssClass="text-center py-12 bg-white border border-[#D7DDE4] rounded-[3px] space-y-3">
-            <div class="w-10 h-10 mx-auto rounded-[3px] bg-[#E7EBEF] flex items-center justify-center text-[#667180] text-lg">
+            <div class="card-icon-box mx-auto text-[#667180] text-lg">
                 <i class="fa-solid fa-user-gear"></i>
             </div>
             <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#202833] m-0">No matching technicians found</h3>

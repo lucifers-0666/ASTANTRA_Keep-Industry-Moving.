@@ -976,3 +976,294 @@ body.menu-open {
     }
 }
 
+/* ============================================================================
+   ASTANTRA HOMEPAGE ARCHITECTURE & RESILIENT LAYOUT UTILITIES
+   Bulletproof CSS Grid & Flex systems independent of utility framework builds
+   ============================================================================ */
+
+/* Global container with strict maximum width and consistent gutters */
+.astantra-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+@media (min-width: 640px) {
+    .astantra-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+@media (min-width: 1024px) {
+    .astantra-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* 1. Global Procurement Search Strip (Sticky Directly Below Master Header) */
+.global-search-strip {
+    position: -webkit-sticky;
+    position: sticky;
+    top: var(--site-header-height);
+    z-index: 800; /* below master header 1000, above page content */
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D5DCE3;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    box-shadow: 0 4px 12px -2px rgba(20, 35, 55, 0.06);
+}
+.search-strip-box {
+    background-color: #F8FAFC;
+    border: 1px solid #CBD5E1;
+    border-radius: 4px;
+    padding: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.search-strip-input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+@media (min-width: 640px) {
+    .search-strip-input-wrap {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+.search-input-field-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.search-input-icon {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7E8C9D;
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+.search-strip-input {
+    width: 100%;
+    padding: 0.5625rem 0.875rem 0.5625rem 2.35rem;
+    background-color: #FFFFFF;
+    border: 1px solid #D5DCE3;
+    border-radius: 3px;
+    font-size: 0.875rem;
+    color: #17212F;
+    font-weight: 500;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search-strip-input:focus {
+    outline: none;
+    border-color: #1769E0;
+    box-shadow: 0 0 0 2px rgba(23, 105, 224, 0.15);
+}
+.search-strip-input::placeholder {
+    color: #7E8C9D;
+    font-weight: 400;
+}
+/* Authoritative Monospace Stack for Technical Specs & Codes */
+.font-mono,
+code,
+kbd,
+samp,
+pre {
+    font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+}
+
+.search-queries-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.5rem;
+    padding-top: 0.5rem;
+    margin-top: 0.4rem;
+    border-top: 1px solid #E7EBEF;
+}
+.search-queries-label {
+    font-family: 'IBM Plex Mono', Consolas, monospace !important;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: #17212F;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.25rem;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+.search-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    background-color: #FFFFFF;
+    border: 1px solid #D5DCE3;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', Consolas, monospace !important;
+    font-size: 0.75rem;
+    color: #2C394B;
+    text-decoration: none;
+    line-height: 1.35;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+.search-chip:hover {
+    border-color: #1769E0;
+    color: #1769E0;
+    background-color: #EAF2FF;
+}
+.search-trust-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-top: 0.35rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+.search-trust-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+}
+.search-trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: #4A5568;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.search-trust-item i {
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+.search-emergency-link {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #E87519;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+.search-emergency-link:hover {
+    color: #C25E0E;
+    text-decoration: underline;
+}
+
+/* Icon container utilities */
+.card-icon-box {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    min-width: 2.25rem !important;
+    max-width: 2.25rem !important;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: 1px solid #D5DCE3;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #1769E0;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+.card-icon-box--sm {
+    width: 2rem !important;
+    height: 2rem !important;
+    min-width: 2rem !important;
+    max-width: 2rem !important;
+    border-radius: 3px;
+    font-size: 0.8125rem;
+}
+
+/* 2. Hero Split Grid */
+.hero-split-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+@media (min-width: 1024px) {
+    .hero-split-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 3rem;
+    }
+}
+.hero-split-grid > * {
+    min-width: 0;
+}
+
+/* 3. Category Bento Grid Architecture */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+@media (min-width: 640px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+.bento-card {
+    background-color: #F8FAFC;
+    border: 1px solid #D5DCE3;
+    border-radius: 4px;
+    padding: 1.25rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    min-width: 0;
+}
+.bento-card:hover {
+    background-color: #FFFFFF;
+    border-color: #1769E0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+@media (min-width: 1024px) {
+    .bento-card--featured {
+        grid-column: span 2;
+        background: linear-gradient(135deg, #FFFFFF 0%, #F4F8FD 100%);
+        border-color: #C3D9F8;
+    }
+    .bento-card--wide {
+        grid-column: span 2;
+    }
+}
+
+/* 4. Resilient Supplier Split Layout (Guaranteed No-Collapse 2-Column) */
+.supplier-split-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+@media (min-width: 1024px) {
+    .supplier-split-layout {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 2.5rem;
+    }
+}
+.supplier-split-layout > * {
+    min-width: 0; /* Prevents overflow blowout in CSS Grid */
+}
