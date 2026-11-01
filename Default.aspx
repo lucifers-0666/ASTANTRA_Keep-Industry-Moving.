@@ -1,145 +1,179 @@
 <%@ Page Title="Industrial Spare-Part Procurement & Emergency Sourcing" Language="C#" MasterPageFile="~/MasterPages/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="IndustrialSparePartPortal.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <meta name="description" content="Industrial spare-parts procurement and emergency sourcing portal connecting factory maintenance teams, verified suppliers, and certified field technicians." />
+    <meta name="description" content="ASTANTRA is a prototype industrial spare-parts sourcing portal for factory maintenance teams." />
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <!-- ============================================================================ -->
-    <!-- 1. GLOBAL PROCUREMENT SEARCH STRIP                                           -->
-    <!-- Positioned directly beneath navbar for high-velocity industrial part lookup  -->
+    <!-- SECTION 1: HERO + SEARCH                                                     -->
+    <!-- Buyer-first plain language, command search (M1), and inline SVG schematic (M2)-->
     <!-- Preserves txtSearchQuery and btnSearch ASP.NET server controls               -->
     <!-- ============================================================================ -->
-    <section class="global-search-strip">
-        <div class="astantra-container space-y-2.5">
+    <section class="home-section home-section--gray py-10 lg:py-14" id="searchSection">
+        <div class="home-container">
+            <div class="hero-grid">
 
-            <!-- Main Search Formulation Box -->
-            <div class="search-strip-box">
-                <div class="search-strip-input-wrap">
-                    <div class="search-input-field-container">
-                        <i class="fa-solid fa-magnifying-glass search-input-icon" aria-hidden="true"></i>
-                        <asp:TextBox ID="txtSearchQuery" runat="server"
-                            CssClass="search-strip-input"
-                            Placeholder="Search by OEM Part # (e.g. 6210-2RS, PART-HYD-001), description, or machine model..."></asp:TextBox>
-                    </div>
-                    <asp:Button ID="btnSearch" runat="server" Text="Search Catalog" OnClick="btnSearch_Click"
-                        CssClass="btn-primary text-xs py-2.5 px-6 font-bold shrink-0 cursor-pointer w-full sm:w-auto" />
-                </div>
-
-                <!-- Common Specification Filters -->
-                <div class="search-queries-row">
-                    <span class="search-queries-label">Common Queries:</span>
-                    <a href="~/Public/Parts.aspx?cat=Bearings+%26+Power+Transmission" runat="server" class="search-chip">Bearings (6210-2RS)</a>
-                    <a href="~/Public/Parts.aspx?cat=Hydraulics+%26+Pneumatics" runat="server" class="search-chip">Hydraulic Pumps</a>
-                    <a href="~/Public/Parts.aspx?cat=Motors+%26+Drives" runat="server" class="search-chip">AC Induction Motors</a>
-                    <a href="~/Public/Parts.aspx?cat=Electrical+%26+Automation" runat="server" class="search-chip">VFD Inverters</a>
-                    <a href="~/Public/Parts.aspx?cat=Pumps+%26+Valves" runat="server" class="search-chip">Pneumatic Valves</a>
-                </div>
-            </div>
-
-            <!-- Trust Bar / Key Technical Guarantees -->
-            <div class="search-trust-bar">
-                <div class="search-trust-group">
-                    <span class="search-trust-item">
-                        <i class="fa-solid fa-circle-check text-[#18865B]" aria-hidden="true"></i>
-                        <span>Verified Stockists Only</span>
-                    </span>
-                    <span class="search-trust-item">
-                        <i class="fa-solid fa-microchip text-[#1769E0]" aria-hidden="true"></i>
-                        <span>OEM Specification Matching</span>
-                    </span>
-                    <span class="search-trust-item">
-                        <i class="fa-solid fa-file-invoice text-[#475569]" aria-hidden="true"></i>
-                        <span>Transparent Direct Quotations</span>
-                    </span>
-                    <span class="search-trust-item">
-                        <i class="fa-solid fa-location-dot text-[#E87519]" aria-hidden="true"></i>
-                        <span>Proximity in km &amp; Dispatch Time</span>
-                    </span>
-                </div>
-                <div>
-                    <a href="~/Public/Emergency.aspx" runat="server" class="search-emergency-link">
-                        <i class="fa-solid fa-bolt" aria-hidden="true"></i> Emergency Breakdown Dispatch &rarr;
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- 2. HERO SECTION: INDUSTRIAL SOURCING WORKSPACE                               -->
-    <!-- High-clarity editorial focus (~55% copy, ~45% visual) with direct action CTAs-->
-    <!-- ============================================================================ -->
-    <section class="bg-[#F1F3F5] border-b border-[#D5DCE3] py-12 lg:py-16">
-        <div class="astantra-container">
-            <div class="hero-split-grid">
-
-                <!-- Left Column: Purpose, Headline & Primary CTAs -->
-                <div class="space-y-6 text-left">
-
-                    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-[2px] bg-[#E7EBEF] border border-[#D5DCE3] text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#1769E0]"></span>
-                        Industrial Spare-Parts &middot; Verified Sourcing
-                    </div>
-
-                    <div class="space-y-3">
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black font-['Archivo',sans-serif] tracking-tight text-[#17212F] leading-tight m-0">
-                            Find the right industrial spare part with verified lead times.
+                <!-- Left Column: Copy & Command Search Panel -->
+                <div class="hero-copy">
+                    <div class="headline-reveal">
+                        <span class="section-header__eyebrow">Gujarat Industrial Procurement</span>
+                        <h1 class="hero-title">
+                            Find a bearing, motor or valve near you.
                         </h1>
-
-                        <p class="text-sm sm:text-base text-[#5F6B7A] leading-relaxed max-w-2xl m-0">
-                            Connect factory maintenance and engineering teams directly with verified regional distributors across Gujarat &amp; Maharashtra industrial clusters. Source mission-critical bearings, motors, hydraulics, and switchgear with OEM cross-referencing.
-                        </p>
                     </div>
 
-                    <!-- Direct Action CTAs -->
-                    <div class="flex flex-wrap items-center gap-3 pt-2">
-                        <a href="~/Public/Parts.aspx" runat="server" class="btn-primary text-xs py-3 px-6 font-bold inline-flex items-center gap-2 shadow-xs">
-                            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
-                            Browse Parts Catalog &rarr;
-                        </a>
-                        <a href="~/Public/Emergency.aspx" runat="server" class="btn-secondary text-xs py-3 px-5 font-bold inline-flex items-center gap-2 border-[#E87519]/40 text-[#C25E0E] hover:bg-[#FEF4EC] transition-colors">
-                            <i class="fa-solid fa-bolt text-[#E87519]" aria-hidden="true"></i>
-                            Dispatch Emergency Breakdown Alert
-                        </a>
-                    </div>
-
-                    <!-- Key Operating Metrics / Honest Regional Facts -->
-                    <div class="pt-4 border-t border-[#D5DCE3] grid grid-cols-3 gap-4 text-left">
-                        <div>
-                            <div class="text-lg font-bold font-['Archivo',sans-serif] text-[#17212F]">50 km</div>
-                            <div class="text-[11px] text-[#5F6B7A] font-medium">Regional Dispatch Radius</div>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold font-['Archivo',sans-serif] text-[#17212F]">100%</div>
-                            <div class="text-[11px] text-[#5F6B7A] font-medium">GSTIN Verified Stockists</div>
-                        </div>
-                        <div>
-                            <div class="text-lg font-bold font-['Archivo',sans-serif] text-[#17212F]">OEM Spec</div>
-                            <div class="text-[11px] text-[#5F6B7A] font-medium">Cross-Referenced Parts</div>
-                        </div>
-                    </div>
+                    <p class="hero-subtitle subheadline-reveal">
+                        Search sample catalog entries by part number, category, or machine description.
+                    </p>
 
                 </div>
 
-                <!-- Right Column: Authentic Industrial Machining Context -->
-                <div>
-                    <div class="relative rounded-[4px] overflow-hidden border border-[#D5DCE3] bg-white p-2 shadow-sm">
-                        <img src="<%= ResolveUrl("~/Content/images/hero_plant_workshop.jpg") %>"
-                             alt="Modern precision CNC manufacturing workshop and industrial maintenance floor"
-                             class="w-full h-[320px] sm:h-[400px] object-cover rounded-[2px]"
-                             loading="eager" />
-
-                        <!-- Telemetry Field Note -->
-                        <div class="p-3 bg-[#E7EBEF] border-t border-[#D5DCE3] flex items-center justify-between text-xs">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-[#18865B] animate-pulse" aria-hidden="true"></span>
-                                <span class="text-[11px] text-[#17212F] font-bold">Regional Sourcing Coverage</span>
+                    <!-- Search Formulation Panel (M1 Command Style) -->
+                    <div class="hero-search-panel" id="searchPanel">
+                        <div class="search-input-group">
+                            <!-- Main Text Query Input -->
+                            <div class="search-box-wrap">
+                                <i class="fa-solid fa-magnifying-glass search-icon-inside" aria-hidden="true"></i>
+                                <asp:TextBox ID="txtSearchQuery" runat="server"
+                                    CssClass="hero-search-input"
+                                    placeholder="Search OEM part # (e.g. 6210-2RS, PART-HYD-001) or machine..."
+                                    aria-label="Search by OEM part number or description"></asp:TextBox>
+                                <span class="search-shortcut-badge">
+                                    <kbd class="search-keyhint" title="Press Ctrl+K or / to focus">Ctrl K</kbd>
+                                </span>
                             </div>
-                            <span class="font-mono text-[11px] text-[#5F6B7A]">Ahmedabad &middot; Sanand &middot; Rajkot &middot; Vadodara</span>
+
+                            <!-- Category Filter Dropdown (Client-Side Quick Routing) -->
+                            <select id="searchCategory" class="search-filter-select" aria-label="Filter by Component Category" onchange="if(this.value){ window.location.href='<%= ResolveUrl("~/Public/Parts.aspx?cat=") %>' + encodeURIComponent(this.value); }">
+                                <option value="">All Categories</option>
+                                <option value="Bearings & Power Transmission">Bearings</option>
+                                <option value="Motors & Drives">Motors & Drives</option>
+                                <option value="Hydraulics & Pneumatics">Hydraulics</option>
+                                <option value="Electrical & Automation">Electrical & Switchgear</option>
+                                <option value="Pumps & Valves">Pumps & Valves</option>
+                            </select>
+
+                            <!-- Location Filter Dropdown -->
+                            <select id="searchLocation" class="search-filter-select" aria-label="Filter by Regional Industrial Cluster">
+                                <option value="">All Gujarat Hubs</option>
+                                <option value="Ahmedabad">Ahmedabad (Naroda / Vatva)</option>
+                                <option value="Sanand">Sanand GIDC</option>
+                                <option value="Rajkot">Rajkot (Metoda / Shapar)</option>
+                                <option value="Vadodara">Vadodara (Makarpura)</option>
+                            </select>
+
+                            <!-- ASP.NET Server Button (Preserved Event Wiring) -->
+                            <asp:Button ID="btnSearch" runat="server" Text="Search Catalog" OnClick="btnSearch_Click"
+                                CssClass="btn btn--primary search-btn-main shrink-0" />
                         </div>
+
+                        <!-- M1 Suggestion Chips (Common Maintenance Inquiries) -->
+                        <div class="search-suggestions-row">
+                            <span class="search-suggestions-label">Suggestions:</span>
+                            <a href="#" class="chip" data-query="6205" data-bearing="6205" data-id="25" data-od="52" data-width="15">6205</a>
+                            <a href="#" class="chip" data-query="6208" data-bearing="6208" data-id="40" data-od="80" data-width="18">6208</a>
+                            <a href="#" class="chip" data-query="6210-2RS" data-bearing="6210-2RS" data-id="50" data-od="90" data-width="20">6210-2RS</a>
+                        </div>
+
+                        <!-- Secondary Emergency Gateway Link -->
+                        <div class="search-panel-footer">
+                            <span class="search-panel-note">Sample supplier listings for this prototype</span>
+                            <a href="~/Public/Emergency.aspx" runat="server" class="search-emergency-link">
+                                <i class="fa-solid fa-bolt" aria-hidden="true"></i> Emergency breakdown desk &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                <!-- Right Column: M2 Inline SVG Engineering Schematic (Under 6 KB) -->
+                <div>
+                    <div class="schematic-card">
+                        <div class="schematic-svg-wrap">
+                            <svg viewBox="0 0 380 340" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Engineering schematic drawing of deep groove ball bearing assembly">
+                                <!-- Background Center Reference Grid Lines -->
+                                <line x1="190" y1="20" x2="190" y2="300" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3,3" />
+                                <line x1="30" y1="160" x2="350" y2="160" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="3,3" />
+
+                                <g class="bearing-geometry">
+                                <!-- Outer Bearing Ring (OD = 90mm) -->
+                                <circle cx="190" cy="160" r="120" fill="none" stroke="#2C384A" stroke-width="2.5" class="schematic-draw" />
+                                <circle cx="190" cy="160" r="105" fill="none" stroke="#64748B" stroke-width="1" />
+
+                                <!-- Rolling Element Pitch Circle (PCD = 70mm, Dashed) -->
+                                <circle cx="190" cy="160" r="85" fill="none" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,4" />
+
+                                <!-- 8 Rolling Element Spheres (Balls) -->
+                                <g fill="#F1F5F9" stroke="#1E293B" stroke-width="1.5">
+                                    <circle cx="275" cy="160" r="15" />
+                                    <circle cx="250" cy="220" r="15" />
+                                    <circle cx="190" cy="245" r="15" />
+                                    <circle cx="130" cy="220" r="15" />
+                                    <circle cx="105" cy="160" r="15" />
+                                    <circle cx="130" cy="100" r="15" />
+                                    <circle cx="190" cy="75" r="15" />
+                                    <circle cx="250" cy="100" r="15" />
+                                </g>
+
+                                <!-- Inner Bearing Ring (ID = 50mm) -->
+                                <circle cx="190" cy="160" r="65" fill="none" stroke="#64748B" stroke-width="1" />
+                                <circle cx="190" cy="160" r="50" fill="#FFFFFF" stroke="#2C384A" stroke-width="2.5" class="schematic-draw" />
+
+                                <!-- Inner Bore Shaft Hole Crosshairs -->
+                                <circle cx="190" cy="160" r="2.5" fill="#1769E0" />
+                                </g>
+
+                                <!-- M2 Dimension 1: Outer Diameter (OD: ø90mm) -->
+                                <g id="dim-od" class="schematic-dim" stroke="#5F6B7A" stroke-width="1">
+                                    <!-- Left Extension Line -->
+                                    <line x1="70" y1="160" x2="35" y2="160" />
+                                    <line x1="310" y1="160" x2="345" y2="160" />
+                                    <!-- Dimension Arrow Line -->
+                                    <line x1="190" y1="295" x2="310" y2="295" class="schematic-draw-fast" />
+                                    <line x1="190" y1="295" x2="70" y2="295" class="schematic-draw-fast" />
+                                    <line x1="70" y1="280" x2="70" y2="305" />
+                                    <line x1="310" y1="280" x2="310" y2="305" />
+                                    <!-- Arrow Heads -->
+                                    <polygon points="70,295 78,292 78,298" fill="#5F6B7A" />
+                                    <polygon points="310,295 302,292 302,298" fill="#5F6B7A" />
+                                    <text id="schematic-od-label" x="190" y="312" font-family="'IBM Plex Mono', monospace" font-size="10" font-weight="600" fill="#111827" text-anchor="middle">OD ø90.00 mm</text>
+                                </g>
+
+                                <!-- M2 Dimension 2: Inner Bore Diameter (ID: ø50mm) -->
+                                <g id="dim-id" class="schematic-dim" stroke="#5F6B7A" stroke-width="1">
+                                    <line x1="140" y1="160" x2="240" y2="160" stroke="#1769E0" stroke-width="1.25" stroke-dasharray="2,2" />
+                                    <line x1="140" y1="150" x2="140" y2="170" stroke="#1769E0" stroke-width="1.5" />
+                                    <line x1="240" y1="150" x2="240" y2="170" stroke="#1769E0" stroke-width="1.5" />
+                                    <polygon points="140,160 148,157 148,163" fill="#1769E0" />
+                                    <polygon points="240,160 232,157 232,163" fill="#1769E0" />
+                                    <rect x="157" y="137" width="66" height="16" fill="#FFFFFF" />
+                                    <text id="schematic-id-label" x="190" y="149" font-family="'IBM Plex Mono', monospace" font-size="10" font-weight="700" fill="#1769E0" text-anchor="middle">ID ø50.00 mm</text>
+                                </g>
+
+                                <!-- M2 Dimension 3: Bearing Width (B: 20mm) -->
+                                <g id="dim-w" class="schematic-dim">
+                                    <line x1="310" y1="105" x2="334" y2="69" stroke="#5F6B7A" stroke-width="1" />
+                                    <rect x="315" y="45" width="45" height="24" rx="2" fill="#F8FAFC" stroke="#D9DEE5" stroke-width="1" />
+                                    <text id="schematic-width-label" x="337" y="61" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="600" fill="#5F6B7A" text-anchor="middle">B: 20 mm</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Hover Callout Triggers (Highlights Dimension Lines in SVG) -->
+                        <div class="flex items-center justify-center gap-2 pt-2 border-t border-[#EDF1F5] text-xs">
+                            <span class="font-mono text-xs text-[#5F6B7A] cursor-pointer hover:text-[#1769E0] transition-colors" data-dim-target="dim-id">
+                                [ID: 50mm]
+                            </span>
+                            <span class="text-slate-300">&middot;</span>
+                            <span class="font-mono text-xs text-[#5F6B7A] cursor-pointer hover:text-[#1769E0] transition-colors" data-dim-target="dim-od">
+                                [OD: 90mm]
+                            </span>
+                            <span class="text-slate-300">&middot;</span>
+                            <span class="font-mono text-xs text-[#5F6B7A] cursor-pointer hover:text-[#1769E0] transition-colors" data-dim-target="dim-w">
+                                [Width: 20mm]
+                            </span>
+                        </div>
+
+                        <span id="schematic-caption" class="schematic-caption">Illustrative drawing &middot; Open view &middot; Deep Groove Bearing 6210-2RS</span>
                     </div>
                 </div>
 
@@ -148,231 +182,147 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 3. POPULAR INDUSTRIAL CATEGORIES (Selective Bento Grid Architecture)         -->
-    <!-- Technical component classes mapping to real catalog database filters         -->
+    <!-- SECTION 2: CATEGORY INDEX                                                    -->
+    <!-- Ruled two-column list (not cards); counts omitted as LATER (M4 interactions) -->
     <!-- ============================================================================ -->
-    <section class="py-12 bg-white border-b border-[#D5DCE3]">
-        <div class="astantra-container space-y-6">
+    <section class="home-section home-section--white reveal-on-scroll">
+        <div class="home-container">
 
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left border-b border-[#D5DCE3] pb-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 text-left">
                 <div>
-                    <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Standardized Engineering Catalog</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0 mt-0.5">
-                        Popular Industrial Categories
+                    <h2 class="section-header__title">
+                        Browse by category
                     </h2>
-                    <p class="text-xs text-[#5F6B7A] m-0 mt-1">
-                        Procurement categories mapping factory machinery spares, motion drives, and actuation assemblies.
+                    <p class="section-header__desc">
+                        Bearings, motors, hydraulics, electrical and more.
                     </p>
                 </div>
-                <a href="~/Public/Parts.aspx" runat="server" class="text-xs font-bold text-[#1769E0] hover:underline flex items-center gap-1 shrink-0">
-                    View Complete Catalog &rarr;
+                <a href="~/Public/Parts.aspx" runat="server" class="btn btn--secondary text-xs shrink-0 self-start sm:self-auto">
+                    Full Catalog &rarr;
                 </a>
             </div>
 
-            <!-- Bento Grid of 8 Technical Categories with Varied Spans & Detailed Specs -->
-            <div class="bento-grid">
+            <!-- M4 Ruled Two-Column List (Tint, arrow shift +4px, spec chips fade-in) -->
+            <div class="category-index-list">
 
-                <!-- Card 1: Featured (Spans 2 columns on lg) - Power Transmission & Bearings -->
-                <a href="~/Public/Parts.aspx?cat=Bearings+%26+Power+Transmission" runat="server"
-                   class="bento-card bento-card--featured group">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <div class="w-9 h-9 rounded-[3px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                                <i class="fa-solid fa-circle-notch text-base" aria-hidden="true"></i>
-                            </div>
-                            <span class="status-pill status-pill-verified text-[10px] font-mono">HIGH DEMAND</span>
+                <!-- Row 1: Bearings & Power Transmission -->
+                <a href="~/Public/Parts.aspx?cat=Bearings+%26+Power+Transmission" runat="server" class="category-row group">
+                    <div class="category-row__main">
+                        <div class="category-row__icon">
+                            <i class="fa-solid fa-circle-notch" aria-hidden="true"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                                Bearings &amp; Power Transmission
-                            </h3>
-                            <p class="text-xs text-[#5F6B7A] m-0 mt-1 leading-relaxed">
-                                Precision-grade rotational components engineered for heavy radial/axial loads, continuous plant shafts, and conveyor assemblies. Verified OEM tolerances.
-                            </p>
-                        </div>
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="search-chip text-[10px]">Deep Groove (6200-6300)</span>
-                            <span class="search-chip text-[10px]">Spherical Roller</span>
-                            <span class="search-chip text-[10px]">Pillow Block Units</span>
-                            <span class="search-chip text-[10px]">Taper Lock Bushings</span>
-                        </div>
-                    </div>
-                    <span class="text-xs font-mono font-bold text-[#1769E0] mt-4 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
-                </a>
-
-                <!-- Card 2: Electric Motors & Drives -->
-                <a href="~/Public/Parts.aspx?cat=Motors+%26+Drives" runat="server"
-                   class="bento-card group">
-                    <div class="space-y-2.5">
-                        <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                            <i class="fa-solid fa-bolt text-sm" aria-hidden="true"></i>
-                        </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Electric Motors
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            3-Phase AC induction motors, high-torque servo actuators, and gearboxes.
-                        </p>
-                        <div class="flex flex-wrap gap-1 pt-0.5">
-                            <span class="search-chip text-[10px]">3-Phase AC</span>
-                            <span class="search-chip text-[10px]">Flange Mount</span>
-                        </div>
-                    </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
-                </a>
-
-                <!-- Card 3: Belts & Pulleys -->
-                <a href="~/Public/Parts.aspx?cat=Bearings+%26+Power+Transmission" runat="server"
-                   class="bento-card group">
-                    <div class="space-y-2.5">
-                        <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                            <i class="fa-solid fa-ring text-sm" aria-hidden="true"></i>
-                        </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Belts &amp; Pulleys
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            Classical V-belts, synchronous timing belts, and precision machined pulleys.
-                        </p>
-                        <div class="flex flex-wrap gap-1 pt-0.5">
-                            <span class="search-chip text-[10px]">Classical V</span>
-                            <span class="search-chip text-[10px]">HTD Timing</span>
-                        </div>
-                    </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
-                </a>
-
-                <!-- Card 4: Hydraulics & Cylinders -->
-                <a href="~/Public/Parts.aspx?cat=Hydraulics+%26+Pneumatics" runat="server"
-                   class="bento-card group">
-                    <div class="space-y-2.5">
-                        <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                            <i class="fa-solid fa-faucet-drip text-sm" aria-hidden="true"></i>
-                        </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Hydraulic Systems
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            High-pressure piston pumps, tie-rod cylinders, and directional valve manifolds.
-                        </p>
-                        <div class="flex flex-wrap gap-1 pt-0.5">
-                            <span class="search-chip text-[10px]">250-350 Bar</span>
-                            <span class="search-chip text-[10px]">Piston Pumps</span>
-                        </div>
-                    </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
-                </a>
-
-                <!-- Card 5: Centrifugal & Process Pumps -->
-                <a href="~/Public/Parts.aspx?cat=Pumps+%26+Valves" runat="server"
-                   class="bento-card group">
-                    <div class="space-y-2.5">
-                        <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                            <i class="fa-solid fa-arrows-rotate text-sm" aria-hidden="true"></i>
-                        </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Process Pumps
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            Chemical transfer pumps, mechanical cartridge seals, and cast impellers.
-                        </p>
-                        <div class="flex flex-wrap gap-1 pt-0.5">
-                            <span class="search-chip text-[10px]">Chemical Spec</span>
-                            <span class="search-chip text-[10px]">Cartridge Seals</span>
-                        </div>
-                    </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
-                </a>
-
-                <!-- Card 6: Industrial Electrical & Switchgear (Wide on lg) -->
-                <a href="~/Public/Parts.aspx?cat=Electrical+%26+Automation" runat="server"
-                   class="bento-card bento-card--wide group">
-                    <div class="space-y-2.5">
-                        <div class="flex items-center justify-between">
-                            <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                                <i class="fa-solid fa-toggle-on text-sm" aria-hidden="true"></i>
+                            <h3 class="category-row__title">Bearings &amp; Power Transmission</h3>
+                            <div class="category-row__specs">
+                                <span class="chip text-xs">Deep Groove (6200-6300)</span>
+                                <span class="chip text-xs">Spherical Roller</span>
+                                <span class="chip text-xs">Pillow Blocks</span>
                             </div>
-                            <span class="text-[10px] font-mono text-[#5F6B7A]">CONTROL &amp; PROTECTION</span>
-                        </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Switchgear, VFDs &amp; Motor Control
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            Variable Frequency Drives (VFDs), molded case circuit breakers (MCCB), contactors, and overload protection relays for industrial control panels.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 pt-0.5">
-                            <span class="search-chip text-[10px]">VFD Inverters</span>
-                            <span class="search-chip text-[10px]">MCCB Breakers</span>
-                            <span class="search-chip text-[10px]">Power Contactors</span>
                         </div>
                     </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
+                    <div class="category-row__arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </a>
 
-                <!-- Card 7: Pneumatic Automation & FRLs (Wide on lg) -->
-                <a href="~/Public/Parts.aspx?cat=Hydraulics+%26+Pneumatics" runat="server"
-                   class="bento-card bento-card--wide group">
-                    <div class="space-y-2.5">
-                        <div class="flex items-center justify-between">
-                            <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                                <i class="fa-solid fa-wind text-sm" aria-hidden="true"></i>
-                            </div>
-                            <span class="text-[10px] font-mono text-[#5F6B7A]">AIR PREPARATION</span>
+                <!-- Row 2: Motors & Drives -->
+                <a href="~/Public/Parts.aspx?cat=Motors+%26+Drives" runat="server" class="category-row group">
+                    <div class="category-row__main">
+                        <div class="category-row__icon">
+                            <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                         </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Pneumatic Valves, Cylinders &amp; FRLs
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            Directional control 5/2 &amp; 3/2 solenoid valves, modular air preparation filter-regulators, and quick-connect pneumatic fittings.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 pt-0.5">
-                            <span class="search-chip text-[10px]">Solenoid Banks</span>
-                            <span class="search-chip text-[10px]">Modular FRL Units</span>
-                            <span class="search-chip text-[10px]">ISO Cylinders</span>
+                        <div>
+                            <h3 class="category-row__title">Electric Motors &amp; Drives</h3>
+                            <div class="category-row__specs">
+                                <span class="chip text-xs">3-Phase AC Induction</span>
+                                <span class="chip text-xs">Servo Actuators</span>
+                                <span class="chip text-xs">Flange Mount</span>
+                            </div>
                         </div>
                     </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
+                    <div class="category-row__arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </a>
 
-                <!-- Card 8: Industrial Sensors & Encoders (Wide on lg) -->
-                <a href="~/Public/Parts.aspx?cat=Electrical+%26+Automation" runat="server"
-                   class="bento-card bento-card--wide group">
-                    <div class="space-y-2.5">
-                        <div class="flex items-center justify-between">
-                            <div class="w-8 h-8 rounded-[2px] bg-white group-hover:bg-[#EAF2FF] border border-[#D5DCE3] group-hover:border-[#BFDBFE] flex items-center justify-center text-[#1769E0] transition-colors">
-                                <i class="fa-solid fa-satellite-dish text-sm" aria-hidden="true"></i>
-                            </div>
-                            <span class="text-[10px] font-mono text-[#5F6B7A]">INSTRUMENTATION</span>
+                <!-- Row 3: Hydraulics & Pneumatics -->
+                <a href="~/Public/Parts.aspx?cat=Hydraulics+%26+Pneumatics" runat="server" class="category-row group">
+                    <div class="category-row__main">
+                        <div class="category-row__icon">
+                            <i class="fa-solid fa-faucet-drip" aria-hidden="true"></i>
                         </div>
-                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] group-hover:text-[#1769E0] transition-colors m-0">
-                            Proximity Sensors, Encoders &amp; Optics
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] m-0 leading-relaxed">
-                            Inductive proximity switches (M8, M12, M18), optical through-beam sensors, and incremental rotary encoders for position feedback.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 pt-0.5">
-                            <span class="search-chip text-[10px]">Inductive M12/M18</span>
-                            <span class="search-chip text-[10px]">Rotary Encoders</span>
-                            <span class="search-chip text-[10px]">Photoelectric</span>
+                        <div>
+                            <h3 class="category-row__title">Hydraulics &amp; Pneumatics</h3>
+                            <div class="category-row__specs">
+                                <span class="chip text-xs">250-350 Bar Piston Pumps</span>
+                                <span class="chip text-xs">Directional Valves</span>
+                                <span class="chip text-xs">FRLs</span>
+                            </div>
                         </div>
                     </div>
-                    <span class="text-[11px] font-mono font-bold text-[#1769E0] mt-3 block group-hover:translate-x-1 transition-transform">
-                        Explore Category &rarr;
-                    </span>
+                    <div class="category-row__arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
+                </a>
+
+                <!-- Row 4: Electrical & Switchgear -->
+                <a href="~/Public/Parts.aspx?cat=Electrical+%26+Automation" runat="server" class="category-row group">
+                    <div class="category-row__main">
+                        <div class="category-row__icon">
+                            <i class="fa-solid fa-toggle-on" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-row__title">Electrical &amp; Switchgear</h3>
+                            <div class="category-row__specs">
+                                <span class="chip text-xs">VFD Inverters</span>
+                                <span class="chip text-xs">MCCB Breakers</span>
+                                <span class="chip text-xs">Power Contactors</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-row__arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
+                </a>
+
+                <!-- Row 5: Pumps & Valves -->
+                <a href="~/Public/Parts.aspx?cat=Pumps+%26+Valves" runat="server" class="category-row group">
+                    <div class="category-row__main">
+                        <div class="category-row__icon">
+                            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-row__title">Process Pumps &amp; Valves</h3>
+                            <div class="category-row__specs">
+                                <span class="chip text-xs">Chemical Process Pumps</span>
+                                <span class="chip text-xs">Cartridge Seals</span>
+                                <span class="chip text-xs">Solenoids</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-row__arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
+                </a>
+
+                <!-- Row 6: Sensors & Instrumentation -->
+                <a href="~/Public/Parts.aspx?cat=Electrical+%26+Automation" runat="server" class="category-row group">
+                    <div class="category-row__main">
+                        <div class="category-row__icon">
+                            <i class="fa-solid fa-satellite-dish" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="category-row__title">Sensors &amp; Encoders</h3>
+                            <div class="category-row__specs">
+                                <span class="chip text-xs">Inductive M12/M18</span>
+                                <span class="chip text-xs">Rotary Encoders</span>
+                                <span class="chip text-xs">Optical Optics</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-row__arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </div>
                 </a>
 
             </div>
@@ -381,513 +331,492 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- 4. PROCUREMENT WORKFLOW (OPERATIONAL ARCHITECTURE)                           -->
-    <!-- Three-stage operational pipeline from OEM lookup to fitting and dispatch     -->
+    <!-- SECTION 3: PROCESS RAIL (M5)                                                 -->
+    <!-- Three steps on one line that animates on scroll; vertical on mobile           -->
     <!-- ============================================================================ -->
-    <section class="py-12 bg-[#F1F3F5] border-b border-[#D5DCE3]">
-        <div class="astantra-container space-y-6">
+    <section class="home-section home-section--gray reveal-on-scroll">
+        <div class="home-container">
 
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left border-b border-[#D5DCE3] pb-4">
-                <div>
-                    <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Operational Architecture</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0 mt-0.5">
-                        How Industrial Procurement Works
-                    </h2>
-                    <p class="text-xs text-[#5F6B7A] m-0 mt-1">
-                        From identifying replacement specifications to verified freight dispatch and commissioning.
-                    </p>
-                </div>
-                <a href="~/Public/HowItWorks.aspx" runat="server" class="text-xs font-bold text-[#1769E0] hover:underline flex items-center gap-1 shrink-0">
-                    View Complete Process Workflow &rarr;
-                </a>
-            </div>
-
-            <!-- Connected 3-Step Process Track -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-                <div class="p-5 bg-white border border-[#D5DCE3] rounded-[3px] text-left space-y-2.5 shadow-xs">
-                    <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2.5 py-0.5 rounded-[2px] border border-[#BFDBFE]">STAGE 01</span>
-                        <i class="fa-solid fa-barcode text-[#5F6B7A] text-sm" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">1. Match OEM Specifications</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Search by stamped manufacturer part number, machine model, or dimensions to verify mechanical tolerances and equipment compatibility.
-                    </p>
-                </div>
-
-                <div class="p-5 bg-white border border-[#D5DCE3] rounded-[3px] text-left space-y-2.5 shadow-xs">
-                    <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#1769E0] bg-[#EAF2FF] px-2.5 py-0.5 rounded-[2px] border border-[#BFDBFE]">STAGE 02</span>
-                        <i class="fa-solid fa-scale-balanced text-[#5F6B7A] text-sm" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">2. Compare Regional Suppliers</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Review confirmed shelf stock, indicative pricing, and warehouse transit distance. Request binding quotes from stocking vendors.
-                    </p>
-                </div>
-
-                <div class="p-5 bg-white border border-[#D5DCE3] rounded-[3px] text-left space-y-2.5 shadow-xs">
-                    <div class="flex items-center justify-between">
-                        <span class="font-mono text-xs font-bold text-[#18865B] bg-[#E8F5F0] px-2.5 py-0.5 rounded-[2px] border border-[#A7F3D0]">STAGE 03</span>
-                        <i class="fa-solid fa-truck-fast text-[#5F6B7A] text-sm" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">3. Confirm Dispatch &amp; Fitting</h3>
-                    <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                        Approve purchase orders for priority freight dispatch and optionally book nearby certified technicians for machine installation.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- 5. FEATURED URGENT REPLACEMENTS (Adapted from Figma Concept)                  -->
-    <!-- Compact engineering replacement cards backed by real catalog parts & specs   -->
-    <!-- ============================================================================ -->
-    <section class="py-12 bg-white border-b border-[#D5DCE3]">
-        <div class="astantra-container space-y-6">
-
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left border-b border-[#D5DCE3] pb-4">
-                <div>
-                    <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Priority Procurement</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0 mt-0.5">
-                        Featured Urgent Replacements with Live Stock
-                    </h2>
-                    <p class="text-xs text-[#5F6B7A] m-0 mt-1">
-                        High-demand industrial machinery components verified in regional distributor warehouses.
-                    </p>
-                </div>
-                <span class="text-xs font-mono text-[#5F6B7A]">
-                    Sorted by Availability &middot; Gujarat Hubs
-                </span>
-            </div>
-
-            <!-- 4 Verified Component Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                <!-- Part 1: Hydraulic Pump -->
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left flex flex-col justify-between hover:border-[#1769E0] transition-colors">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-[10px] font-bold text-[#1769E0] bg-white px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">
-                                HYD-SPEC-250
-                            </span>
-                            <span class="status-pill status-pill-verified text-[10px]">
-                                In Stock
-                            </span>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                                High-Pressure Hydraulic Pump
-                            </h3>
-                            <span class="font-mono text-xs text-[#5F6B7A] block">OEM Ref: PART-HYD-001</span>
-                        </div>
-                        <p class="text-[11px] text-[#5F6B7A] m-0 leading-relaxed">
-                            Axial piston pump 250Bar for industrial hydraulic press lines.
-                        </p>
-                        <div class="pt-2 border-t border-[#D5DCE3] text-xs space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[#5F6B7A]">Stockist:</span>
-                                <span class="font-bold text-[#17212F] text-right truncate max-w-[140px]">Apex Industrial Spares</span>
-                            </div>
-                            <div class="flex justify-between items-center font-mono">
-                                <span class="text-[#5F6B7A]">Lead Time:</span>
-                                <span class="text-[#18865B] font-bold">Same-Day Dispatch</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pt-3 mt-3 border-t border-[#D5DCE3] flex items-center justify-between">
-                        <div>
-                            <span class="text-[10px] text-[#5F6B7A] block uppercase font-mono">Indicative Price</span>
-                            <span class="font-mono font-bold text-sm text-[#17212F]">&#8377;42,500</span>
-                        </div>
-                        <a href="~/Public/Parts.aspx?q=hydraulic" runat="server" class="btn-primary text-xs py-1.5 px-3 font-bold">
-                            Request Quote
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Part 2: AC Servo Motor -->
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left flex flex-col justify-between hover:border-[#1769E0] transition-colors">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-[10px] font-bold text-[#1769E0] bg-white px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">
-                                MOT-3PH-7.5K
-                            </span>
-                            <span class="status-pill status-pill-verified text-[10px]">
-                                In Stock
-                            </span>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                                3-Phase AC Servo Motor 7.5kW
-                            </h3>
-                            <span class="font-mono text-xs text-[#5F6B7A] block">OEM Ref: PART-MOT-002</span>
-                        </div>
-                        <p class="text-[11px] text-[#5F6B7A] m-0 leading-relaxed">
-                            High-torque precision motor for CNC spindle drives and turning lines.
-                        </p>
-                        <div class="pt-2 border-t border-[#D5DCE3] text-xs space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[#5F6B7A]">Stockist:</span>
-                                <span class="font-bold text-[#17212F] text-right truncate max-w-[140px]">Apex Industrial Spares</span>
-                            </div>
-                            <div class="flex justify-between items-center font-mono">
-                                <span class="text-[#5F6B7A]">Lead Time:</span>
-                                <span class="text-[#1769E0] font-bold">Next-Morning Freight</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pt-3 mt-3 border-t border-[#D5DCE3] flex items-center justify-between">
-                        <div>
-                            <span class="text-[10px] text-[#5F6B7A] block uppercase font-mono">Indicative Price</span>
-                            <span class="font-mono font-bold text-sm text-[#17212F]">&#8377;68,000</span>
-                        </div>
-                        <a href="~/Public/Parts.aspx?q=servo" runat="server" class="btn-primary text-xs py-1.5 px-3 font-bold">
-                            Request Quote
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Part 3: Deep Groove Ball Bearing -->
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left flex flex-col justify-between hover:border-[#1769E0] transition-colors">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-[10px] font-bold text-[#1769E0] bg-white px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">
-                                BRG-6210-2RS
-                            </span>
-                            <span class="status-pill status-pill-verified text-[10px]">
-                                In Stock
-                            </span>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                                Deep Groove Ball Bearing
-                            </h3>
-                            <span class="font-mono text-xs text-[#5F6B7A] block">OEM Ref: PART-BRG-003</span>
-                        </div>
-                        <p class="text-[11px] text-[#5F6B7A] m-0 leading-relaxed">
-                            Heavy load sealed bearing 6210-2RS for heavy industrial shafts.
-                        </p>
-                        <div class="pt-2 border-t border-[#D5DCE3] text-xs space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[#5F6B7A]">Stockist:</span>
-                                <span class="font-bold text-[#17212F] text-right truncate max-w-[140px]">Apex Industrial Spares</span>
-                            </div>
-                            <div class="flex justify-between items-center font-mono">
-                                <span class="text-[#5F6B7A]">Lead Time:</span>
-                                <span class="text-[#18865B] font-bold">Ready for Pickup</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pt-3 mt-3 border-t border-[#D5DCE3] flex items-center justify-between">
-                        <div>
-                            <span class="text-[10px] text-[#5F6B7A] block uppercase font-mono">Indicative Price</span>
-                            <span class="font-mono font-bold text-sm text-[#17212F]">&#8377;1,850</span>
-                        </div>
-                        <a href="~/Public/Parts.aspx?q=bearing" runat="server" class="btn-primary text-xs py-1.5 px-3 font-bold">
-                            Request Quote
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Part 4: VFD Inverter -->
-                <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] text-left flex flex-col justify-between hover:border-[#1769E0] transition-colors">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-[10px] font-bold text-[#1769E0] bg-white px-2 py-0.5 rounded-[2px] border border-[#BFDBFE]">
-                                ELE-VFD-15KW
-                            </span>
-                            <span class="status-pill status-pill-demo text-[10px]">
-                                Backorder
-                            </span>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                                Industrial VFD Inverter 15kW
-                            </h3>
-                            <span class="font-mono text-xs text-[#5F6B7A] block">OEM Ref: PART-ELE-004</span>
-                        </div>
-                        <p class="text-[11px] text-[#5F6B7A] m-0 leading-relaxed">
-                            Variable Frequency Drive for high-efficiency process motor control.
-                        </p>
-                        <div class="pt-2 border-t border-[#D5DCE3] text-xs space-y-1">
-                            <div class="flex justify-between items-center">
-                                <span class="text-[#5F6B7A]">Stockist:</span>
-                                <span class="font-bold text-[#17212F] text-right truncate max-w-[140px]">Apex Industrial Spares</span>
-                            </div>
-                            <div class="flex justify-between items-center font-mono">
-                                <span class="text-[#5F6B7A]">Lead Time:</span>
-                                <span class="text-[#9A6700] font-bold">2 Business Days</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pt-3 mt-3 border-t border-[#D5DCE3] flex items-center justify-between">
-                        <div>
-                            <span class="text-[10px] text-[#5F6B7A] block uppercase font-mono">Indicative Price</span>
-                            <span class="font-mono font-bold text-sm text-[#17212F]">&#8377;34,200</span>
-                        </div>
-                        <a href="~/Public/Parts.aspx?q=vfd" runat="server" class="btn-secondary text-xs py-1.5 px-3 font-bold">
-                            Pre-Order
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- 6. REGIONAL INVENTORY & LIVE AVAILABILITY (THE CORE ASTANTRA TABLE)           -->
-    <!-- Ruled tabular ledger of verified stockists, parts, and indicative pricing   -->
-    <!-- ============================================================================ -->
-    <section class="py-12 bg-[#F1F3F5] border-b border-[#D5DCE3]">
-        <div class="astantra-container space-y-6">
-
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left">
-                <div>
-                    <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Live Sourcing Preview</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] mt-1 m-0">
-                        Regional Inventory &amp; Live Availability
-                    </h2>
-                    <p class="text-xs text-[#5F6B7A] m-0 mt-0.5">
-                        Direct shelf availability, warehouse transit distance, and indicative pricing from regional verified distributors.
-                    </p>
-                </div>
-                <div class="flex items-center gap-2">
-                    <a href="~/Public/Parts.aspx" runat="server" class="btn-secondary text-xs py-2 px-3.5 font-bold">
-                        Browse All Parts &rarr;
-                    </a>
-                    <a href="~/Public/Suppliers.aspx" runat="server" class="btn-secondary text-xs py-2 px-3.5 font-bold">
-                        All Suppliers &rarr;
-                    </a>
-                </div>
-            </div>
-
-            <!-- Structured Ruled Table on White Surface -->
-            <div class="table-container shadow-xs">
-                <table class="table-custom">
-                    <thead>
-                        <tr>
-                            <th>Part / Specification</th>
-                            <th>Stockist &amp; Location</th>
-                            <th>Stock Status</th>
-                            <th>Indicative Price</th>
-                            <th>Fulfillment Lead Time</th>
-                            <th>Distance</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-[#D5DCE3] text-xs">
-                        <tr>
-                            <td>
-                                <strong class="text-[#17212F] block font-mono font-bold text-xs">PART-HYD-001</strong>
-                                <span class="text-[#5F6B7A]">High-Pressure Hydraulic Pump 250Bar</span>
-                            </td>
-                            <td>
-                                <span class="font-bold text-[#17212F] block">Apex Industrial Spares &amp; Bearings Co.</span>
-                                <span class="text-[#5F6B7A] font-mono text-[11px]">Naroda GIDC, Ahmedabad, GJ</span>
-                            </td>
-                            <td><span class="text-[#18865B] font-bold"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i> In Stock (45 Pcs)</span></td>
-                            <td class="font-mono font-bold text-sm text-[#17212F]">&#8377;42,500</td>
-                            <td class="font-mono text-[#1769E0]">Same-Day Dispatch</td>
-                            <td class="font-mono text-[#5F6B7A]">12 km</td>
-                            <td><a href="~/Public/Parts.aspx?q=hydraulic" runat="server" class="btn-primary text-xs py-1.5 px-3">Inspect Part</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong class="text-[#17212F] block font-mono font-bold text-xs">PART-MOT-002</strong>
-                                <span class="text-[#5F6B7A]">3-Phase AC Servo Motor 7.5kW</span>
-                            </td>
-                            <td>
-                                <span class="font-bold text-[#17212F] block">Apex Industrial Spares &amp; Bearings Co.</span>
-                                <span class="text-[#5F6B7A] font-mono text-[11px]">Naroda GIDC, Ahmedabad, GJ</span>
-                            </td>
-                            <td><span class="text-[#18865B] font-bold"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i> In Stock (18 Pcs)</span></td>
-                            <td class="font-mono font-bold text-sm text-[#17212F]">&#8377;68,000</td>
-                            <td class="font-mono text-[#1769E0]">Next-Morning Freight</td>
-                            <td class="font-mono text-[#5F6B7A]">28 km</td>
-                            <td><a href="~/Public/Parts.aspx?q=servo" runat="server" class="btn-primary text-xs py-1.5 px-3">Inspect Part</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong class="text-[#17212F] block font-mono font-bold text-xs">PART-BRG-003</strong>
-                                <span class="text-[#5F6B7A]">Spherical Roller Bearing 6210-2RS</span>
-                            </td>
-                            <td>
-                                <span class="font-bold text-[#17212F] block">Apex Industrial Spares &amp; Bearings Co.</span>
-                                <span class="text-[#5F6B7A] font-mono text-[11px]">Naroda GIDC, Ahmedabad, GJ</span>
-                            </td>
-                            <td><span class="text-[#18865B] font-bold"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i> In Stock (120 Pcs)</span></td>
-                            <td class="font-mono font-bold text-sm text-[#17212F]">&#8377;1,850</td>
-                            <td class="font-mono text-[#1769E0]">Ready for Pickup</td>
-                            <td class="font-mono text-[#5F6B7A]">15 km</td>
-                            <td><a href="~/Public/Parts.aspx?q=bearing" runat="server" class="btn-primary text-xs py-1.5 px-3">Inspect Part</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong class="text-[#17212F] block font-mono font-bold text-xs">PART-ELE-004</strong>
-                                <span class="text-[#5F6B7A]">Industrial VFD Inverter 15kW</span>
-                            </td>
-                            <td>
-                                <span class="font-bold text-[#17212F] block">Apex Industrial Spares &amp; Bearings Co.</span>
-                                <span class="text-[#5F6B7A] font-mono text-[11px]">Naroda GIDC, Ahmedabad, GJ</span>
-                            </td>
-                            <td><span class="text-[#9A6700] font-bold"><i class="fa-solid fa-clock mr-1" aria-hidden="true"></i> Backorder (2 Days)</span></td>
-                            <td class="font-mono font-bold text-sm text-[#17212F]">&#8377;34,200</td>
-                            <td class="font-mono text-[#5F6B7A]">2 Business Days</td>
-                            <td class="font-mono text-[#5F6B7A]">42 km</td>
-                            <td><a href="~/Public/Parts.aspx?q=vfd" runat="server" class="btn-secondary text-xs py-1.5 px-3">Pre-Order</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Authentic Field Note -->
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-[#5F6B7A] px-1 gap-2">
-                <span>Indicative wholesale pricing subject to final supplier quotation &middot; Stamped physical inventory verified</span>
-                <span class="font-mono text-[11px] text-[#17212F]">LocalDB Relational Ledger &middot; ASTANTRA MCA Prototype</span>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- 7. REGIONAL SUPPLIER NETWORK & WAREHOUSE CONTEXT                             -->
-    <!-- Verified stockists, physical inventory verification, and industrial photo     -->
-    <!-- Uses bulletproof .supplier-split-layout to eliminate word-wrapping collapse  -->
-    <!-- ============================================================================ -->
-    <section class="py-12 bg-white border-b border-[#D5DCE3]">
-        <div class="astantra-container space-y-8">
-
-            <div class="supplier-split-layout">
-
-                <!-- Left: Procurement Context Story -->
-                <div class="space-y-4 text-left">
-                    <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Regional Stockist Network</span>
-                    <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                        Verified Industrial Suppliers &amp; Warehousing Hubs
-                    </h2>
-                    <p class="text-xs sm:text-sm text-[#5F6B7A] leading-relaxed m-0">
-                        ASTANTRA connects manufacturing plants directly with verified regional distributors across Ahmedabad, Sanand, Rajkot, and Vadodara industrial clusters. Every registered supplier maintains physical warehouse stock with verified GSTIN compliance.
-                    </p>
-
-                    <!-- Real Verified Supplier Highlight Box -->
-                    <div class="p-4 bg-[#F1F3F5] border border-[#D5DCE3] rounded-[3px] space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="font-bold text-xs text-[#17212F] flex items-center gap-1.5">
-                                <i class="fa-solid fa-warehouse text-[#1769E0]" aria-hidden="true"></i> Featured Verified Stockist
-                            </span>
-                            <span class="status-pill status-pill-verified text-[10px]">
-                                <i class="fa-solid fa-shield-halved text-[9px] text-emerald-600 mr-1" aria-hidden="true"></i> VERIFIED DISTRIBUTOR
-                            </span>
-                        </div>
-                        <h4 class="text-sm font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                            Apex Industrial Spares &amp; Bearings Co.
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-[#5F6B7A] pt-1">
-                            <div><strong class="text-[#17212F]">Location:</strong> Naroda GIDC, Ahmedabad, GJ</div>
-                            <div><strong class="text-[#17212F]">Coverage:</strong> Same-day dispatch within 50km</div>
-                            <div><strong class="text-[#17212F]">Specialization:</strong> Bearings, Hydraulics, Motors</div>
-                            <div><strong class="text-[#17212F]">Verification:</strong> Physical Stock Audited</div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3 pt-1">
-                        <a href="~/Public/Suppliers.aspx" runat="server" class="btn-primary text-xs py-2 px-4 font-bold">
-                            Explore Supplier Directory &rarr;
-                        </a>
-                        <a href="~/Public/WhyUs.aspx" runat="server" class="btn-secondary text-xs py-2 px-4 font-bold">
-                            Verification Standards
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right: High Quality Warehouse Image -->
-                <div>
-                    <div class="relative rounded-[3px] overflow-hidden border border-[#D5DCE3] bg-white p-2 shadow-xs">
-                        <img src="<%= ResolveUrl("~/Content/images/warehouse_inventory_racks.jpg") %>"
-                             alt="Organized industrial spare parts warehouse inventory racks with labeled storage bins"
-                             class="w-full h-[280px] sm:h-[340px] object-cover rounded-[2px]"
-                             loading="lazy" />
-                        <div class="p-3 bg-[#E7EBEF] border-t border-[#D5DCE3] flex items-center justify-between text-xs">
-                            <span class="font-bold text-[#17212F] text-[11px]">Physical Shelf Storage Audit</span>
-                            <span class="font-mono text-[11px] text-[#5F6B7A]">Direct OEM Packaging Verification</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- 8. DUAL-ROLE ONBOARDING & PORTAL TERMINAL ACCESS                             -->
-    <!-- Purpose-built side-by-side workspace action for buyers and suppliers         -->
-    <!-- ============================================================================ -->
-    <section class="py-14 bg-white">
-        <div class="astantra-container space-y-6">
-
-            <div class="text-left border-b border-[#D5DCE3] pb-4">
-                <span class="text-xs font-mono font-bold text-[#5F6B7A] tracking-wider uppercase">Enterprise Onboarding</span>
-                <h2 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0 mt-0.5">
-                    Join the Industrial Procurement Network
+            <div class="section-header">
+                <h2 class="section-header__title">
+                    How it works
                 </h2>
-                <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 mt-1">
-                    Select your operational role to access dedicated industrial workspaces, RFQ dispatch, and verified inventory tools.
+                <p class="section-header__desc">
+                    Search, ask for quotes, order.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- M5 Animated Process Rail Container -->
+            <div class="process-rail-wrap" aria-label="Search, ask for quotes, order">
+                <!-- Connecting Line Across Nodes (Desktop) -->
+                <div class="rail-connecting-line">
+                    <div class="rail-connecting-line-fill"></div>
+                </div>
 
-                <!-- Card 1: Factory Maintenance & Procurement Teams -->
-                <div class="p-6 sm:p-7 bg-[#F8FAFC] border border-[#D5DCE3] rounded-[4px] text-left flex flex-col justify-between space-y-4 hover:border-[#1769E0] transition-colors shadow-xs">
-                    <div class="space-y-2.5">
-                        <div class="card-icon-box">
-                            <i class="fa-solid fa-industry" aria-hidden="true"></i>
-                        </div>
-                        <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                            For Factory Maintenance Teams
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                            Issue urgent breakdown RFQs to verified regional stockists, compare quotes with guaranteed lead times, and dispatch certified field technicians with live tracking.
+                <div class="process-rail-track">
+
+                    <!-- Step 1 -->
+                    <div class="rail-step-card rail-node">
+                        <div class="rail-node-badge">01</div>
+                        <h3 class="rail-step-title">Search and compare</h3>
+                        <p class="rail-step-desc">
+                            Enter a part number, machine model, or dimensions to find sample listings.
                         </p>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2.5 pt-2 border-t border-[#E2E8F0]">
-                        <a href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5">
-                            <i class="fa-solid fa-user-plus text-[11px]" aria-hidden="true"></i> Create Factory Account
-                        </a>
-                        <a href="~/Account/Login.aspx" runat="server" class="btn-secondary text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5">
-                            <i class="fa-solid fa-right-to-bracket text-[11px]" aria-hidden="true"></i> Sign In to Terminal
-                        </a>
+
+                    <!-- Step 2 -->
+                    <div class="rail-step-card rail-node">
+                        <div class="rail-node-badge">02</div>
+                        <h3 class="rail-step-title">Request quotes</h3>
+                        <p class="rail-step-desc">
+                            Ask suppliers for price, availability, and dispatch details.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="rail-step-card rail-node">
+                        <div class="rail-node-badge">03</div>
+                        <h3 class="rail-step-title">Order and fit</h3>
+                        <p class="rail-step-desc">
+                            Confirm the order and arrange installation support if needed.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- SECTION 4: PARTS LEDGER (M6)                                                 -->
+    <!-- Ruled tabular data, sticky header, and expandable "other suppliers" drawer   -->
+    <!-- Visibly labeled "Sample data" per G4 / G18 governance rules                  -->
+    <!-- ============================================================================ -->
+    <section class="home-section home-section--white reveal-on-scroll">
+        <div class="home-container">
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 text-left">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="badge badge--sample">Sample data</span>
+                    </div>
+                    <h2 class="section-header__title mt-1">
+                        Parts in stock near you
+                    </h2>
+                    <p class="section-header__desc">
+                        Sample availability, indicative prices, and supplier options.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 self-start sm:self-auto">
+                    <div class="ledger-filters" aria-label="Sample parts filters">
+                        <button type="button" class="ledger-filter is-active" data-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="ledger-filter" data-filter="in-stock" aria-pressed="false">In stock</button>
+                        <button type="button" class="ledger-filter" data-filter="same-day" aria-pressed="false">Same-day</button>
+                    </div>
+                    <a href="~/Public/Parts.aspx" runat="server" class="btn btn--secondary text-xs">
+                        Browse All Parts &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ruled Table Container with Horizontal Scroll Isolation -->
+            <div class="ledger-card">
+                <div class="ledger-table-wrap">
+                    <table class="ledger-table">
+                        <thead>
+                            <tr>
+                                <th class="sticky-header">Part Number &amp; Description</th>
+                                <th class="sticky-header">Stockist &amp; Hub</th>
+                                <th class="sticky-header">Stock Status</th>
+                                <th class="sticky-header">Indicative Price</th>
+                                <th class="sticky-header">Lead Time</th>
+                                <th class="sticky-header text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <!-- Part 1: Hydraulic Pump -->
+                            <tr class="ledger-row" data-stock="in-stock same-day">
+                                <td>
+                                    <span class="ledger-part-no">PART-HYD-001</span>
+                                    <span class="ledger-part-desc">High-Pressure Hydraulic Pump 250Bar &middot; 45 L/min</span>
+                                </td>
+                                <td>
+                                    <strong class="ledger-supplier">Apex Industrial Spares</strong>
+                                    <span class="ledger-mono">Naroda GIDC, Ahmedabad</span>
+                                </td>
+                                <td>
+                                    <div class="ledger-status">
+                                        <span class="status-dot status-dot--in-stock"></span>
+                                        <span>In stock - 45</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="ledger-price">&#8377;42,500</span>
+                                </td>
+                                <td>
+                                    <span class="ledger-lead-time">Same-day dispatch</span>
+                                </td>
+                                <td class="ledger-action-cell">
+                                    <button type="button" class="ledger-expand-btn" aria-expanded="false" aria-controls="sub-drawer-1">
+                                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i> Compare
+                                    </button>
+                                    <a href="~/Public/Parts.aspx?q=hydraulic" runat="server" class="btn btn--primary ledger-action-button">
+                                        Request Quote
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- M6 Expandable Row Drawer for Part 1 -->
+                            <tr>
+                                <td colspan="6" class="p-0">
+                                    <div id="sub-drawer-1" class="ledger-expandable-wrapper" aria-hidden="true">
+                                        <div class="ledger-expandable-content">
+                                            <div class="sub-ledger-box">
+                                                <div class="sub-ledger-title">
+                                                    <span>Other Regional Suppliers for PART-HYD-001</span>
+                                                    <span class="badge badge--sample">Sample data</span>
+                                                </div>
+                                                <table class="sub-ledger-table">
+                                                    <thead>
+                                                        <tr class="text-slate-400 font-mono text-[10px]">
+                                                            <th>Supplier</th>
+                                                            <th>Hub</th>
+                                                            <th>Availability</th>
+                                                            <th>Unit Price</th>
+                                                            <th>Lead Time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Gujarat Hydraulic Solutions</td>
+                                                            <td class="font-mono">Vatva GIDC, Ahmedabad</td>
+                                                            <td><span class="text-[#18865B] font-medium">In Stock (12 Pcs)</span></td>
+                                                            <td class="font-mono font-bold text-[#111827]">&#8377;43,200</td>
+                                                            <td class="font-mono text-[#5F6B7A]">24 Hours</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Maruti Fluid Power Co.</td>
+                                                            <td class="font-mono">Metoda GIDC, Rajkot</td>
+                                                            <td><span class="text-[#D97706] font-medium">Pre-Order (3 Days)</span></td>
+                                                            <td class="font-mono font-bold text-[#111827]">&#8377;41,800</td>
+                                                            <td class="font-mono text-[#5F6B7A]">3 Business Days</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Part 2: AC Servo Motor -->
+                            <tr class="ledger-row" data-stock="in-stock">
+                                <td>
+                                    <span class="ledger-part-no">PART-MOT-002</span>
+                                    <span class="ledger-part-desc">3-Phase AC Servo Motor 7.5kW &middot; 3000 RPM 415V</span>
+                                </td>
+                                <td>
+                                    <strong class="ledger-supplier">Shreeji Motion Systems</strong>
+                                    <span class="ledger-mono">Naroda GIDC, Ahmedabad</span>
+                                </td>
+                                <td>
+                                    <div class="ledger-status">
+                                        <span class="status-dot status-dot--in-stock"></span>
+                                        <span>In stock - 18</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="ledger-price">&#8377;68,000</span>
+                                </td>
+                                <td>
+                                    <span class="ledger-lead-time">Next-day dispatch</span>
+                                </td>
+                                <td class="ledger-action-cell">
+                                    <button type="button" class="ledger-expand-btn" aria-expanded="false" aria-controls="sub-drawer-2">
+                                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i> Compare
+                                    </button>
+                                    <a href="~/Public/Parts.aspx?q=servo" runat="server" class="btn btn--primary ledger-action-button">
+                                        Request Quote
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- M6 Expandable Row Drawer for Part 2 -->
+                            <tr>
+                                <td colspan="6" class="p-0">
+                                    <div id="sub-drawer-2" class="ledger-expandable-wrapper" aria-hidden="true">
+                                        <div class="ledger-expandable-content">
+                                            <div class="sub-ledger-box">
+                                                <div class="sub-ledger-title">
+                                                    <span>Other Regional Suppliers for PART-MOT-002</span>
+                                                    <span class="badge badge--sample">Sample data</span>
+                                                </div>
+                                                <table class="sub-ledger-table">
+                                                    <thead>
+                                                        <tr class="text-slate-400 font-mono text-[10px]">
+                                                            <th>Supplier</th>
+                                                            <th>Hub</th>
+                                                            <th>Availability</th>
+                                                            <th>Unit Price</th>
+                                                            <th>Lead Time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Shreeji Motion Systems</td>
+                                                            <td class="font-mono">Makarpura, Vadodara</td>
+                                                            <td><span class="text-[#18865B] font-medium">In Stock (6 Pcs)</span></td>
+                                                            <td class="font-mono font-bold text-[#111827]">&#8377;69,500</td>
+                                                            <td class="font-mono text-[#5F6B7A]">Same-Day</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Part 3: Deep Groove Ball Bearing -->
+                            <tr class="ledger-row" data-stock="in-stock">
+                                <td>
+                                    <span class="ledger-part-no">PART-BRG-003</span>
+                                    <span class="ledger-part-desc">Deep Groove Ball Bearing 6210-2RS &middot; 50x90x20mm</span>
+                                </td>
+                                <td>
+                                    <strong class="ledger-supplier">Gujarat Bearing Corporation</strong>
+                                    <span class="ledger-mono">Naroda GIDC, Ahmedabad</span>
+                                </td>
+                                <td>
+                                    <div class="ledger-status">
+                                        <span class="status-dot status-dot--in-stock"></span>
+                                        <span>In stock - 120</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="ledger-price">&#8377;1,850</span>
+                                </td>
+                                <td>
+                                    <span class="ledger-lead-time">Ready for pickup</span>
+                                </td>
+                                <td class="ledger-action-cell">
+                                    <button type="button" class="ledger-expand-btn" aria-expanded="false" aria-controls="sub-drawer-3">
+                                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i> Compare
+                                    </button>
+                                    <a href="~/Public/Parts.aspx?q=bearing" runat="server" class="btn btn--primary ledger-action-button">
+                                        Request Quote
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- M6 Expandable Row Drawer for Part 3 -->
+                            <tr>
+                                <td colspan="6" class="p-0">
+                                    <div id="sub-drawer-3" class="ledger-expandable-wrapper" aria-hidden="true">
+                                        <div class="ledger-expandable-content">
+                                            <div class="sub-ledger-box">
+                                                <div class="sub-ledger-title">
+                                                    <span>Other Regional Suppliers for PART-BRG-003</span>
+                                                    <span class="badge badge--sample">Sample data</span>
+                                                </div>
+                                                <table class="sub-ledger-table">
+                                                    <thead>
+                                                        <tr class="text-slate-400 font-mono text-[10px]">
+                                                            <th>Supplier</th>
+                                                            <th>Hub</th>
+                                                            <th>Availability</th>
+                                                            <th>Unit Price</th>
+                                                            <th>Lead Time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Gujarat Bearing Corporation</td>
+                                                            <td class="font-mono">Shapar-Veraval, Rajkot</td>
+                                                            <td><span class="text-[#18865B] font-medium">In Stock (200 Pcs)</span></td>
+                                                            <td class="font-mono font-bold text-[#111827]">&#8377;1,820</td>
+                                                            <td class="font-mono text-[#5F6B7A]">Ready for Pickup</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Universal Transmissions</td>
+                                                            <td class="font-mono">Sanand GIDC</td>
+                                                            <td><span class="text-[#18865B] font-medium">In Stock (80 Pcs)</span></td>
+                                                            <td class="font-mono font-bold text-[#111827]">&#8377;1,890</td>
+                                                            <td class="font-mono text-[#5F6B7A]">24 Hours</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Part 4: VFD Inverter -->
+                            <tr class="ledger-row" data-stock="backorder">
+                                <td>
+                                    <span class="ledger-part-no">PART-ELE-004</span>
+                                    <span class="ledger-part-desc">Industrial VFD Inverter 15kW &middot; 3-Phase 415V 0-400Hz</span>
+                                </td>
+                                <td>
+                                    <strong class="ledger-supplier">Pioneer Power Control</strong>
+                                    <span class="ledger-mono">Naroda GIDC, Ahmedabad</span>
+                                </td>
+                                <td>
+                                    <div class="ledger-status ledger-status--backorder">
+                                        <span class="status-dot status-dot--backorder"></span>
+                                        <span>Backorder - 2 days</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="ledger-price">&#8377;34,200</span>
+                                </td>
+                                <td>
+                                    <span class="ledger-lead-time">2 business days</span>
+                                </td>
+                                <td class="ledger-action-cell">
+                                    <button type="button" class="ledger-expand-btn" aria-expanded="false" aria-controls="sub-drawer-4">
+                                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i> Compare
+                                    </button>
+                                    <a href="~/Public/Parts.aspx?q=vfd" runat="server" class="btn btn--primary ledger-action-button">
+                                        Pre-Order
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- M6 Expandable Row Drawer for Part 4 -->
+                            <tr>
+                                <td colspan="6" class="p-0">
+                                    <div id="sub-drawer-4" class="ledger-expandable-wrapper" aria-hidden="true">
+                                        <div class="ledger-expandable-content">
+                                            <div class="sub-ledger-box">
+                                                <div class="sub-ledger-title">
+                                                    <span>Other Regional Suppliers for PART-ELE-004</span>
+                                                    <span class="badge badge--sample">Sample data</span>
+                                                </div>
+                                                <table class="sub-ledger-table">
+                                                    <thead>
+                                                        <tr class="text-slate-400 font-mono text-[10px]">
+                                                            <th>Supplier</th>
+                                                            <th>Hub</th>
+                                                            <th>Availability</th>
+                                                            <th>Unit Price</th>
+                                                            <th>Lead Time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Pioneer Power Control</td>
+                                                            <td class="font-mono">Makarpura, Vadodara</td>
+                                                            <td><span class="text-[#18865B] font-medium">In Stock (2 Units)</span></td>
+                                                            <td class="font-mono font-bold text-[#111827]">&#8377;35,000</td>
+                                                            <td class="font-mono text-[#5F6B7A]">Next-Day</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <p class="ledger-empty-state" hidden>No sample parts match this filter.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-[#5F6B7A] mt-3 px-1 gap-2">
+                <span>Indicative wholesale pricing subject to final supplier quotation.</span>
+                <span class="font-mono text-xs text-[#111827]">ASTANTRA Procurement Prototype</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- SECTION 5: CLOSING (NAVY EMERGENCY BAND + M7 SEGMENTED ONBOARDING BLOCK)     -->
+    <!-- Navy emergency band with ONLY orange button on page; WAI-ARIA tab controls  -->
+    <!-- ============================================================================ -->
+    <section class="home-section home-section--gray reveal-on-scroll">
+        <div class="home-container">
+
+            <!-- Navy Emergency Band (The ONLY orange button on the page) -->
+            <div class="closing-navy-band">
+                <div>
+                    <span class="badge badge--emergency mb-2">Priority Breakdown Dispatch</span>
+                    <h3 class="closing-navy-title">Critical machine stopped on your plant floor?</h3>
+                    <p class="closing-navy-desc">
+                        Send an emergency part request to suppliers and request field support.
+                    </p>
+                </div>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="~/Public/Emergency.aspx" runat="server" class="btn btn--emergency w-full sm:w-auto text-xs py-2.5 px-5">
+                        <i class="fa-solid fa-triangle-exclamation mr-1" aria-hidden="true"></i> Submit Breakdown Alert &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- M7 Segmented Workspace Control: For Factories | For Suppliers -->
+            <div class="join-section text-left">
+                <div class="join-section__header">
+                    <div>
+                        <h2 class="text-xl font-bold font-['Archivo',sans-serif] text-[#111827] m-0">
+                            Create your account
+                        </h2>
+                    </div>
+
+                    <!-- M7 Accessible Tab Switcher (role="tablist") -->
+                    <div class="segmented-nav" role="tablist" aria-label="Onboarding Role Switcher">
+                        <span class="segmented-indicator" aria-hidden="true"></span>
+                        <button type="button" id="tab-factories" class="segmented-tab" role="tab" aria-selected="true" aria-controls="panel-factories" tabindex="0">
+                            For Factory Teams
+                        </button>
+                        <button type="button" id="tab-suppliers" class="segmented-tab" role="tab" aria-selected="false" aria-controls="panel-suppliers" tabindex="-1">
+                            For Industrial Suppliers
+                        </button>
                     </div>
                 </div>
 
-                <!-- Card 2: Industrial Suppliers & Stockists -->
-                <div class="p-6 sm:p-7 bg-[#F8FAFC] border border-[#D5DCE3] rounded-[4px] text-left flex flex-col justify-between space-y-4 hover:border-[#1769E0] transition-colors shadow-xs">
-                    <div class="space-y-2.5">
-                        <div class="card-icon-box">
-                            <i class="fa-solid fa-warehouse" aria-hidden="true"></i>
+                <!-- Panel 1: For Factory Teams (role="tabpanel") -->
+                <div id="panel-factories" class="segmented-panel" role="tabpanel" aria-labelledby="tab-factories" aria-hidden="false">
+                    <div class="workspace-card-grid">
+                        <div class="space-y-2">
+                            <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#111827] m-0">
+                                Plant Maintenance &amp; Procurement Workspaces
+                            </h3>
+                            <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
+                                Request quotes, compare sample supplier options, and arrange technician support when needed.
+                            </p>
                         </div>
-                        <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">
-                            For Industrial Suppliers &amp; Stockists
-                        </h3>
-                        <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
-                            Publish verified physical warehouse inventory, receive qualified RFQ enquiries from regional manufacturing plants, and expand distribution across GIDC industrial clusters.
-                        </p>
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 justify-end">
+                            <a href="~/Account/Register.aspx" runat="server" class="btn btn--primary text-xs py-2 px-4">
+                                <i class="fa-solid fa-user-plus mr-1"></i> Create Factory Account
+                            </a>
+                            <a href="~/Account/Login.aspx" runat="server" class="btn btn--secondary text-xs py-2 px-4">
+                                Sign In
+                            </a>
+                        </div>
                     </div>
-                    <div class="flex flex-wrap items-center gap-2.5 pt-2 border-t border-[#E2E8F0]">
-                        <a href="~/Account/Register.aspx" runat="server" class="btn-primary text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5">
-                            <i class="fa-solid fa-boxes-stacked text-[11px]" aria-hidden="true"></i> Register as Supplier
-                        </a>
-                        <a href="~/Public/WhyUs.aspx" runat="server" class="btn-secondary text-xs py-2 px-4 font-bold inline-flex items-center gap-1.5">
-                            Onboarding Standards
-                        </a>
+                </div>
+
+                <!-- Panel 2: For Industrial Suppliers (role="tabpanel") -->
+                <div id="panel-suppliers" class="segmented-panel" role="tabpanel" aria-labelledby="tab-suppliers" aria-hidden="true">
+                    <div class="workspace-card-grid">
+                        <div class="space-y-2">
+                            <h3 class="text-base font-bold font-['Archivo',sans-serif] text-[#111827] m-0">
+                                Distributor Inventory Publishing &amp; Sourcing Hub
+                            </h3>
+                            <p class="text-xs text-[#5F6B7A] leading-relaxed m-0">
+                                Publish stock information and receive procurement inquiries from factory teams.
+                            </p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 justify-end">
+                            <a href="~/Account/Register.aspx" runat="server" class="btn btn--primary text-xs py-2 px-4">
+                                <i class="fa-solid fa-boxes-stacked mr-1"></i> Register as Supplier
+                            </a>
+                            <a href="~/Public/WhyUs.aspx" runat="server" class="btn btn--secondary text-xs py-2 px-4">
+                                Onboarding Standards
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -895,5 +824,4 @@
 
         </div>
     </section>
-
 </asp:Content>

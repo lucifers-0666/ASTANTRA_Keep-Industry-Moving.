@@ -43,12 +43,13 @@
 
                 <!-- Navigation Links -->
                 <nav class="site-desktop-nav">
-                    <a href="~/Supplier/Dashboard.aspx" runat="server" class="site-nav-link active">Dashboard</a>
-                    <a href="~/Public/Parts.aspx" runat="server" class="site-nav-link">My Catalog</a>
+                    <a href="~/Supplier/Dashboard.aspx" runat="server" class="site-nav-link">Dashboard</a>
+                    <a href="~/Supplier/Inventory/ManageParts.aspx" runat="server" class="site-nav-link">My Inventory</a>
+                    <a href="~/Supplier/Quotations/IncomingRequests.aspx" runat="server" class="site-nav-link">Incoming RFQs</a>
+                    <a href="~/Supplier/Orders/ManageOrders.aspx" runat="server" class="site-nav-link">Fulfillment Orders</a>
                     <a href="~/Public/Emergency.aspx" runat="server" class="site-nav-link site-nav-link-emergency">
                         <i class="fa-solid fa-bell text-xs"></i> Breakdown Alerts
                     </a>
-                    <a href="~/Public/WhyUs.aspx" runat="server" class="site-nav-link">Standards</a>
                 </nav>
 
                 <!-- Profile & Logout -->

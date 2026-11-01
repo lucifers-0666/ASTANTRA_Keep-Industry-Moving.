@@ -1,6 +1,6 @@
+using IndustrialSparePartPortal.App_Code.Constants;
 using IndustrialSparePartPortal.App_Code.Helpers;
-using IndustrialSparePartPortal.App_Code.Repositories.Implementations;
-using IndustrialSparePartPortal.App_Code.Repositories.Interfaces;
+using IndustrialSparePartPortal.App_Code.Logic;
 using System;
 using System.Data;
 
@@ -8,12 +8,11 @@ namespace IndustrialSparePartPortal.Admin
 {
     public partial class Dashboard : BasePage
     {
-        private readonly IUserRepository _userRepository;
+        private readonly UserLogic _userLogic = new UserLogic();
 
         public Dashboard()
         {
-            RequiredRole = IndustrialSparePartPortal.App_Code.Constants.RoleConstants.Administrator;
-            _userRepository = new UserRepository();
+            RequiredRole = RoleConstants.Administrator;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,13 +25,16 @@ namespace IndustrialSparePartPortal.Admin
 
         private void LoadDashboardData()
         {
-            DataTable dtUsers = _userRepository.GetAllUsersWithRoles();
-            gvUsers.DataSource = dtUsers;
-            gvUsers.DataBind();
-
-            if (dtUsers != null)
+            DataSet dsUsers = _userLogic.selectAllUsers();
+            if (dsUsers != null && dsUsers.Tables.Count > 0)
             {
-                lblTotalUsers.InnerText = dtUsers.Rows.Count.ToString();
+                gvUsers.DataSource = dsUsers.Tables[0];
+                gvUsers.DataBind();
+                lblTotalUsers.InnerText = dsUsers.Tables[0].Rows.Count.ToString();
+            }
+            else
+            {
+                lblTotalUsers.InnerText = "0";
             }
         }
     }

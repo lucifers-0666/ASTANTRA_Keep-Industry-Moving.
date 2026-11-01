@@ -14,6 +14,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<%= ResolveUrl("~/Content/images/brand/favicon-16.png") %>" />
     <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
 
+    <!-- Progressive Enhancement JS Hook -->
+    <script>document.documentElement.classList.add('js');</script>
+
+    <!-- Authoritative Design Tokens & Component Stylesheets -->
+    <link href="<%= ResolveUrl("~/Content/css/tokens.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/css/components.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/css/animations.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/css/public/home.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+
     <!-- Compiled Tailwind CSS & Industrial Design System -->
     <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
@@ -136,7 +145,7 @@
         <!-- Shown on high-level discovery pages (Home, Why Us); suppressed on Login/Reg  -->
         <!-- ============================================================================ -->
         <asp:PlaceHolder ID="phPreFooterEmergency" runat="server">
-            <section class="bg-[#E7EBEF] border-t border-b border-[#D5DCE3] py-10">
+            <section class="site-prefooter-emergency bg-[#E7EBEF] border-t border-b border-[#D5DCE3] py-10">
                 <div class="astantra-container flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div class="space-y-1.5 max-w-2xl text-left">
                         <div class="text-xs font-mono font-bold text-[#D9650E] tracking-wider uppercase">
@@ -144,7 +153,7 @@
                         </div>
                         <h3 class="text-xl sm:text-2xl font-bold font-['Archivo',sans-serif] text-[#17212F] m-0">Critical machinery stopped on your plant floor?</h3>
                         <p class="text-xs sm:text-sm text-[#5F6B7A] m-0 leading-relaxed">
-                            Broadcast urgent OEM replacement requirements across regional verified stockists and mobilize certified on-call field technicians.
+                            Broadcast urgent OEM replacement requirements to regional suppliers and request on-call field support.
                         </p>
                     </div>
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
@@ -179,7 +188,7 @@
                             </div>
                         </div>
                         <p class="site-footer-desc">
-                            Industrial spare-parts sourcing, supplier discovery, and maintenance support in one place. Connecting verified distributors, factory procurement managers, and specialized field engineers.
+                            Industrial spare-parts sourcing, supplier discovery, and maintenance support in one place. Connecting distributors, factory procurement managers, and field engineers.
                         </p>
                     </div>
 
@@ -190,7 +199,7 @@
                         </h4>
                         <ul class="site-footer-links">
                             <li><a href="~/Public/Parts.aspx" runat="server">Spare Parts Catalog</a></li>
-                            <li><a href="~/Public/Suppliers.aspx" runat="server">Verified Suppliers</a></li>
+                            <li><a href="~/Public/Suppliers.aspx" runat="server">Suppliers</a></li>
                             <li><a href="~/Public/HowItWorks.aspx" runat="server">Procurement Process</a></li>
                         </ul>
                     </div>
@@ -235,8 +244,19 @@
         </footer>
     </form>
 
-    <!-- Public Shell JavaScript -->
+    <!-- Mobile Quick-Access Bottom Bar (M3) -->
+    <nav class="mobile-bottom-bar" aria-label="Mobile Quick Actions">
+        <a href="<%= ResolveUrl("~/Default.aspx#searchPanel") %>" class="mobile-bottom-btn mobile-bottom-btn--search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search Catalog
+        </a>
+        <a href="<%= ResolveUrl("~/Public/Emergency.aspx") %>" class="mobile-bottom-btn mobile-bottom-btn--emergency">
+            <i class="fa-solid fa-bolt" aria-hidden="true"></i> Emergency Desk
+        </a>
+    </nav>
+
+    <!-- Public Shell & Modern Kit JavaScript -->
     <script src="<%= ResolveUrl("~/Content/js/site-shell.js") %>?v=<%= DateTime.Now.Ticks %>"></script>
+    <script src="<%= ResolveUrl("~/Content/js/site.js") %>?v=<%= DateTime.Now.Ticks %>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <asp:ContentPlaceHolder ID="ScriptsContent" runat="server">
     </asp:ContentPlaceHolder>

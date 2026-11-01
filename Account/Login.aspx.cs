@@ -1,7 +1,5 @@
 using IndustrialSparePartPortal.App_Code.Helpers;
-using IndustrialSparePartPortal.App_Code.Models;
-using IndustrialSparePartPortal.App_Code.Services.Implementations;
-using IndustrialSparePartPortal.App_Code.Services.Interfaces;
+using IndustrialSparePartPortal.App_Code.Logic;
 using System;
 using System.Web.UI;
 
@@ -9,12 +7,7 @@ namespace IndustrialSparePartPortal.Account
 {
     public partial class Login : Page
     {
-        private readonly IAuthService _authService;
-
-        public Login()
-        {
-            _authService = new AuthService();
-        }
+        private readonly UserLogic _userLogic = new UserLogic();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,9 +29,12 @@ namespace IndustrialSparePartPortal.Account
             string email = txtEmail.Text.Trim();
             string password = txtPassword.Text.Trim();
             string errorMessage;
-            User user;
+            int userId;
+            string roleName;
+            string fullName;
+            bool isVerified;
 
-            if (_authService.Login(email, password, out errorMessage, out user))
+            if (_userLogic.authenticateUser(email, password, out errorMessage, out userId, out roleName, out fullName, out isVerified))
             {
                 string returnUrl = Request.QueryString["returnUrl"];
                 if (!string.IsNullOrEmpty(returnUrl))
@@ -47,7 +43,7 @@ namespace IndustrialSparePartPortal.Account
                 }
                 else
                 {
-                    Response.Redirect(SessionHelper.GetDashboardUrlByRole(user.RoleName));
+                    Response.Redirect(SessionHelper.GetDashboardUrlByRole(roleName));
                 }
             }
             else

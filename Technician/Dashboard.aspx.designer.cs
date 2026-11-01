@@ -9,18 +9,15 @@
 
 namespace IndustrialSparePartPortal.Technician
 {
-
-
     public partial class Dashboard
     {
-
-        /// <summary>
-        /// lblTechName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAlert;
+        protected global::System.Web.UI.WebControls.Label lblAlertMessage;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTechName;
+        protected global::System.Web.UI.WebControls.Button btnToggleAvailability;
+        protected global::System.Web.UI.WebControls.Label lblAssignedJobs;
+        protected global::System.Web.UI.WebControls.Label lblCompletedJobs;
+        protected global::System.Web.UI.WebControls.Label lblHourlyRate;
+        protected global::System.Web.UI.WebControls.Label lblDutyStatus;
     }
 }

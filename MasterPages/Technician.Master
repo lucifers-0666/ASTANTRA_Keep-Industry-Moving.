@@ -43,12 +43,12 @@
 
                 <!-- Navigation Links -->
                 <nav class="site-desktop-nav">
-                    <a href="~/Technician/Dashboard.aspx" runat="server" class="site-nav-link active">Dashboard</a>
+                    <a href="~/Technician/Dashboard.aspx" runat="server" class="site-nav-link">Dashboard</a>
+                    <a href="~/Technician/Requests/AssignedJobs.aspx" runat="server" class="site-nav-link">Assigned Jobs</a>
                     <a href="~/Public/Technicians.aspx" runat="server" class="site-nav-link">Directory Profile</a>
                     <a href="~/Public/Emergency.aspx" runat="server" class="site-nav-link site-nav-link-emergency">
                         <i class="fa-solid fa-bolt text-xs"></i> Breakdown Dispatch
                     </a>
-                    <a href="~/Public/Parts.aspx" runat="server" class="site-nav-link">Parts Catalog</a>
                 </nav>
 
                 <!-- Duty Status & Profile -->

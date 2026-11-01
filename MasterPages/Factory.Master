@@ -43,13 +43,14 @@
 
                 <!-- Navigation Links -->
                 <nav class="site-desktop-nav">
-                    <a href="~/Factory/Dashboard.aspx" runat="server" class="site-nav-link active">Dashboard</a>
-                    <a href="~/Public/Parts.aspx" runat="server" class="site-nav-link">Find Spare Parts</a>
+                    <a href="~/Factory/Dashboard.aspx" runat="server" class="site-nav-link">Dashboard</a>
+                    <a href="~/Factory/SpareParts/Search.aspx" runat="server" class="site-nav-link">Find Parts & RFQ</a>
+                    <a href="~/Factory/Quotations/MyRequests.aspx" runat="server" class="site-nav-link">My RFQs</a>
+                    <a href="~/Factory/Orders/MyOrders.aspx" runat="server" class="site-nav-link">My Orders</a>
+                    <a href="~/Factory/Technicians/ServiceRequests.aspx" runat="server" class="site-nav-link">Technicians</a>
                     <a href="~/Public/Emergency.aspx" runat="server" class="site-nav-link site-nav-link-emergency">
-                        <i class="fa-solid fa-bolt text-xs"></i> Emergency Breakdown
+                        <i class="fa-solid fa-bolt text-xs"></i> Emergency
                     </a>
-                    <a href="~/Public/Suppliers.aspx" runat="server" class="site-nav-link">Suppliers</a>
-                    <a href="~/Public/Technicians.aspx" runat="server" class="site-nav-link">Technicians</a>
                 </nav>
 
                 <!-- Profile & Account Info -->

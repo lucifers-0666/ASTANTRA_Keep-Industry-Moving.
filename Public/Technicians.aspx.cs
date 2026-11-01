@@ -1,13 +1,14 @@
+using IndustrialSparePartPortal.App_Code.Logic;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Web.UI;
-using IndustrialSparePartPortal.App_Code.Database;
 
 namespace IndustrialSparePartPortal.Public
 {
     public partial class Technicians : Page
     {
+        private readonly ServiceLogic _serviceLogic = new ServiceLogic();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -53,36 +54,11 @@ namespace IndustrialSparePartPortal.Public
 
             try
             {
-                string sql = @"
-                    SELECT t.TechnicianId, u.FullName, t.SkillSummary, t.ExperienceYears, t.HourlyRate,
-                           t.City, t.State, t.IsAvailable, t.VerificationStatus
-                    FROM Technicians t
-                    INNER JOIN Users u ON t.UserId = u.UserId
-                    WHERE (1 = 1)";
-
-                var paramList = new System.Collections.Generic.List<SqlParameter>();
-
-                if (!string.IsNullOrEmpty(search))
+                DataSet ds = _serviceLogic.selectAvailableTechnicians(skill, city);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    sql += " AND (u.FullName LIKE @Search OR t.SkillSummary LIKE @Search OR t.City LIKE @Search)";
-                    paramList.Add(new SqlParameter("@Search", "%" + search + "%"));
+                    dt = ds.Tables[0];
                 }
-
-                if (!string.IsNullOrEmpty(skill))
-                {
-                    sql += " AND t.SkillSummary LIKE @Skill";
-                    paramList.Add(new SqlParameter("@Skill", "%" + skill + "%"));
-                }
-
-                if (!string.IsNullOrEmpty(city))
-                {
-                    sql += " AND t.City = @City";
-                    paramList.Add(new SqlParameter("@City", city));
-                }
-
-                sql += " ORDER BY t.IsAvailable DESC, t.ExperienceYears DESC";
-
-                dt = DbFactory.ExecuteQuery(sql, paramList.Count > 0 ? paramList.ToArray() : null);
             }
             catch
             {

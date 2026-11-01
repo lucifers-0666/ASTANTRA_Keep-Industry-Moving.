@@ -1,13 +1,14 @@
+using IndustrialSparePartPortal.App_Code.Logic;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Web.UI;
-using IndustrialSparePartPortal.App_Code.Database;
 
 namespace IndustrialSparePartPortal.Public
 {
     public partial class Suppliers : Page
     {
+        private readonly AdminLogic _adminLogic = new AdminLogic();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -47,37 +48,11 @@ namespace IndustrialSparePartPortal.Public
 
             try
             {
-                string sql = @"
-                    SELECT s.SupplierId, s.CompanyName, s.City, s.State, s.VerificationStatus, s.Rating,
-                           'Industrial Spares & Components' AS Specialization,
-                           ISNULL((SELECT COUNT(*) FROM SupplierInventory si WHERE si.SupplierId = s.SupplierId), 25) AS InventoryCount,
-                           '~15-30 Mins' AS LeadTime
-                    FROM Suppliers s
-                    WHERE (1 = 1)";
-
-                var paramList = new System.Collections.Generic.List<SqlParameter>();
-
-                if (!string.IsNullOrEmpty(search))
+                DataSet ds = _adminLogic.selectPublicSuppliers(search, city, verification);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    sql += " AND (s.CompanyName LIKE @Search OR s.City LIKE @Search OR s.State LIKE @Search)";
-                    paramList.Add(new SqlParameter("@Search", "%" + search + "%"));
+                    dt = ds.Tables[0];
                 }
-
-                if (!string.IsNullOrEmpty(city))
-                {
-                    sql += " AND s.City = @City";
-                    paramList.Add(new SqlParameter("@City", city));
-                }
-
-                if (!string.IsNullOrEmpty(verification))
-                {
-                    sql += " AND s.VerificationStatus = @Verification";
-                    paramList.Add(new SqlParameter("@Verification", verification));
-                }
-
-                sql += " ORDER BY s.Rating DESC, s.SupplierId ASC";
-
-                dt = DbFactory.ExecuteQuery(sql, paramList.Count > 0 ? paramList.ToArray() : null);
             }
             catch
             {

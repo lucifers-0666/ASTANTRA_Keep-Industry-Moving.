@@ -1,14 +1,15 @@
+using IndustrialSparePartPortal.App_Code.Logic;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using IndustrialSparePartPortal.App_Code.Database;
 
 namespace IndustrialSparePartPortal.Public
 {
     public partial class Parts : Page
     {
+        private readonly PartLogic _partLogic = new PartLogic();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -63,44 +64,18 @@ namespace IndustrialSparePartPortal.Public
 
             try
             {
-                string sql = @"
-                    SELECT p.PartId, p.PartNumber, p.PartName, p.Description, p.TechnicalSpecs,
-                           c.CategoryName, ISNULL(m.MachineName, 'Universal Machinery') AS MachineName,
-                           si.UnitPrice,
-                           ISNULL(si.AvailabilityStatus, 'InStock') AS AvailabilityStatus,
-                           ISNULL(s.CompanyName, 'Verified Regional Supplier') AS SupplierName
-                    FROM SpareParts p
-                    INNER JOIN Categories c ON p.CategoryId = c.CategoryId
-                    LEFT JOIN Machines m ON p.MachineId = m.MachineId
-                    LEFT JOIN SupplierInventory si ON p.PartId = si.PartId
-                    LEFT JOIN Suppliers s ON si.SupplierId = s.SupplierId
-                    WHERE (1 = 1)";
-
-                var paramList = new System.Collections.Generic.List<SqlParameter>();
-
-                if (!string.IsNullOrEmpty(search))
+                DataSet ds = _partLogic.selectCatalog(search, category, machine: null);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    sql += " AND (p.PartNumber LIKE @Search OR p.PartName LIKE @Search OR m.MachineName LIKE @Search)";
-                    paramList.Add(new SqlParameter("@Search", "%" + search + "%"));
+                    dt = ds.Tables[0];
                 }
-
-                if (!string.IsNullOrEmpty(category))
-                {
-                    sql += " AND c.CategoryName = @Category";
-                    paramList.Add(new SqlParameter("@Category", category));
-                }
-
-                sql += " ORDER BY p.PartId ASC";
-
-                dt = DbFactory.ExecuteQuery(sql, paramList.Count > 0 ? paramList.ToArray() : null);
             }
             catch
             {
-                // Fallback handled below
                 dt = null;
             }
 
-            // If database table is empty or connection unavailable, provide seeded catalog data
+            // Fallback for offline demo integrity
             if (dt == null || dt.Rows.Count == 0)
             {
                 dt = GetFallbackPartsData(search, category);
@@ -128,7 +103,6 @@ namespace IndustrialSparePartPortal.Public
             dt.Columns.Add("AvailabilityStatus", typeof(string));
             dt.Columns.Add("SupplierName", typeof(string));
 
-            // Seeded items
             var items = new[]
             {
                 new { Id = 1, Num = "PART-HYD-001", Name = "High-Pressure Hydraulic Pump 250Bar", Cat = "Hydraulics & Pneumatics", Machine = "Hydraulic Stamping Press 500T", Specs = "Flow Rate: 45 L/min · Pressure: 250 Bar · Flange Mount", Price = 42500m, Status = "InStock", Supplier = "Apex Industrial Hydraulics" },
@@ -158,4 +132,3 @@ namespace IndustrialSparePartPortal.Public
         }
     }
 }
-

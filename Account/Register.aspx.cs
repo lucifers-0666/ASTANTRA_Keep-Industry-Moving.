@@ -1,20 +1,15 @@
+using IndustrialSparePartPortal.App_Code.Constants;
 using IndustrialSparePartPortal.App_Code.Helpers;
-using IndustrialSparePartPortal.App_Code.Models;
-using IndustrialSparePartPortal.App_Code.Services.Implementations;
-using IndustrialSparePartPortal.App_Code.Services.Interfaces;
+using IndustrialSparePartPortal.App_Code.Logic;
 using System;
+using System.Data;
 using System.Web.UI;
 
 namespace IndustrialSparePartPortal.Account
 {
     public partial class Register : Page
     {
-        private readonly IAuthService _authService;
-
-        public Register()
-        {
-            _authService = new AuthService();
-        }
+        private readonly UserLogic _userLogic = new UserLogic();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -51,62 +46,95 @@ namespace IndustrialSparePartPortal.Account
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            User user = new User
-            {
-                FullName = txtFullName.Text.Trim(),
-                Email = txtEmail.Text.Trim(),
-                PhoneNumber = txtPhone.Text.Trim()
-            };
-
+            string fullName = txtFullName.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string phone = txtPhone.Text.Trim();
             string password = txtPassword.Text.Trim();
-            bool success = false;
-            string errorMessage = string.Empty;
 
-            if (rdoFactory.Checked)
+            if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             {
-                FactoryProfile factory = new FactoryProfile
-                {
-                    CompanyName = txtFactoryCompany.Text.Trim(),
-                    IndustryType = txtIndustryType.Text.Trim(),
-                    City = txtFactoryCity.Text.Trim(),
-                    State = txtFactoryState.Text.Trim(),
-                    Gstin = txtFactoryGstin.Text.Trim(),
-                    ContactPerson = txtFullName.Text.Trim()
-                };
-                success = _authService.RegisterFactory(user, factory, password, out errorMessage);
-            }
-            else if (rdoSupplier.Checked)
-            {
-                SupplierProfile supplier = new SupplierProfile
-                {
-                    CompanyName = txtSupplierCompany.Text.Trim(),
-                    BusinessRegistrationNo = txtRegNo.Text.Trim(),
-                    City = txtSupplierCity.Text.Trim(),
-                    State = txtSupplierState.Text.Trim(),
-                    Gstin = txtSupplierGstin.Text.Trim()
-                };
-                success = _authService.RegisterSupplier(user, supplier, password, out errorMessage);
-            }
-            else if (rdoTechnician.Checked)
-            {
-                TechnicianProfile technician = new TechnicianProfile
-                {
-                    SkillSummary = txtSkills.Text.Trim(),
-                    ExperienceYears = int.TryParse(txtExperience.Text.Trim(), out int exp) ? exp : 0,
-                    HourlyRate = decimal.TryParse(txtHourlyRate.Text.Trim(), out decimal rate) ? rate : 0,
-                    City = txtTechCity.Text.Trim()
-                };
-                success = _authService.RegisterTechnician(user, technician, password, out errorMessage);
+                ShowError("Please complete all required fields.");
+                return;
             }
 
-            if (success)
+            // Check if email already registered
+            DataSet existingUser = _userLogic.getUserByEmail(email);
+            if (existingUser != null && existingUser.Tables.Count > 0 && existingUser.Tables[0].Rows.Count > 0)
+            {
+                ShowError("An account with this email address already exists.");
+                return;
+            }
+
+            int roleId = 2; // Default Factory
+            if (rdoSupplier.Checked) roleId = 3;
+            else if (rdoTechnician.Checked) roleId = 4;
+
+            string salt = PasswordHasher.GenerateSalt();
+            string passwordHash = PasswordHasher.HashPassword(password, salt);
+
+            int newUserId = _userLogic.insertUser(roleId, email, passwordHash, salt, fullName, phone, isActive: true, isVerified: false);
+            if (newUserId <= 0)
+            {
+                ShowError("Failed to create user account. Please retry.");
+                return;
+            }
+
+            bool profileSaved = false;
+            if (roleId == 2) // Factory
+            {
+                profileSaved = _userLogic.insertFactoryProfile(
+                    newUserId,
+                    txtFactoryCompany.Text.Trim(),
+                    txtIndustryType.Text.Trim(),
+                    address: null,
+                    city: txtFactoryCity.Text.Trim(),
+                    state: txtFactoryState.Text.Trim(),
+                    pincode: null,
+                    gstin: txtFactoryGstin.Text.Trim(),
+                    contactPerson: fullName
+                );
+            }
+            else if (roleId == 3) // Supplier
+            {
+                profileSaved = _userLogic.insertSupplierProfile(
+                    newUserId,
+                    txtSupplierCompany.Text.Trim(),
+                    txtRegNo.Text.Trim(),
+                    txtSupplierGstin.Text.Trim(),
+                    address: null,
+                    city: txtSupplierCity.Text.Trim(),
+                    state: txtSupplierState.Text.Trim(),
+                    pincode: null
+                );
+            }
+            else if (roleId == 4) // Technician
+            {
+                int experience = int.TryParse(txtExperience.Text.Trim(), out int exp) ? exp : 0;
+                decimal hourlyRate = decimal.TryParse(txtHourlyRate.Text.Trim(), out decimal rate) ? rate : 0;
+
+                profileSaved = _userLogic.insertTechnicianProfile(
+                    newUserId,
+                    txtSkills.Text.Trim(),
+                    experience,
+                    hourlyRate,
+                    address: null,
+                    city: txtTechCity.Text.Trim(),
+                    state: null,
+                    pincode: null
+                );
+            }
+
+            if (profileSaved)
             {
                 string loginErr;
-                User loggedInUser;
-                // Auto-login or redirect to login page with success notification
-                if (_authService.Login(user.Email, password, out loginErr, out loggedInUser))
+                int uid;
+                string roleName;
+                string uname;
+                bool isVer;
+
+                if (_userLogic.authenticateUser(email, password, out loginErr, out uid, out roleName, out uname, out isVer))
                 {
-                    Response.Redirect(SessionHelper.GetDashboardUrlByRole(loggedInUser.RoleName));
+                    Response.Redirect(SessionHelper.GetDashboardUrlByRole(roleName));
                 }
                 else
                 {
@@ -115,10 +143,15 @@ namespace IndustrialSparePartPortal.Account
             }
             else
             {
-                pnlAlert.Visible = true;
-                pnlAlert.CssClass = "mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2";
-                litAlertMessage.Text = errorMessage;
+                ShowError("Account registered, but profile initialization encountered an issue.");
             }
+        }
+
+        private void ShowError(string message)
+        {
+            pnlAlert.Visible = true;
+            pnlAlert.CssClass = "mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2";
+            litAlertMessage.Text = message;
         }
     }
 }

@@ -26,6 +26,9 @@ Work strictly within the currently active phase. Never commence subsequent phase
 
 Reading these files to inspect control IDs, data models, and event wiring is required; modifying them is forbidden.
 
+### Rule 01 Amendment (Backend Proposal Governance)
+Backend work is allowed from now on ONLY through a written "Backend Proposal" (item, why it is needed, files touched, DB change yes/no, risk, rollback). The agent must wait for the team's approval of each item. Never touch authentication, Account/, web.config or existing schema without a separate explicit approval. Frontend comes first; the page must look and behave correctly with sample data.
+
 ---
 
 ## 3. Autonomous Execution vs. Stop-and-Ask Boundaries

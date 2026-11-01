@@ -75,7 +75,7 @@
         </div>
 
         <!-- 4. Supplier Directory Roster (Responsive 2-Column Industrial Directory) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="supplier-directory-grid">
             <asp:Repeater ID="rptSuppliers" runat="server">
                 <ItemTemplate>
                     <div class="supplier-card bg-white p-5 sm:p-6 rounded-[3px] border border-[#D7DDE4] flex flex-col justify-between space-y-4 text-left shadow-xs">
@@ -107,8 +107,8 @@
                         </div>
 
                         <!-- Card Footer -->
-                        <div class="pt-3 border-t border-[#D7DDE4] flex items-center justify-between text-xs">
-                            <div class="flex items-center gap-4">
+                        <div class="supplier-card__footer pt-3 border-t border-[#D7DDE4] flex items-center justify-between text-xs">
+                            <div class="supplier-card__stats flex items-center gap-4">
                                 <div>
                                     <span class="text-[10px] text-[#667180] block font-mono">Catalog Breadth</span>
                                     <strong class="text-[#202833] font-mono"><%# Eval("InventoryCount") %> SKUs</strong>

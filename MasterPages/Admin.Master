@@ -43,44 +43,26 @@
 
                 <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">User Governance</div>
                 
-                <a href="~/Admin/Users/UserList.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="~/Admin/Users/ManageUsers.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
                     <i class="fa-solid fa-users w-5 text-center text-slate-400"></i> All System Users
                 </a>
-                <a href="~/Admin/Suppliers/SupplierList.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="~/Admin/Suppliers/Verification.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
                     <i class="fa-solid fa-warehouse w-5 text-center text-emerald-400"></i> Suppliers & Verification
                 </a>
-                <a href="~/Admin/Technicians/TechnicianList.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-user-gear w-5 text-center text-cyan-400"></i> Technicians Directory
-                </a>
 
-                <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">Catalog & Inventory</div>
+                <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">Catalog & Equipment</div>
                 
-                <a href="~/Admin/SpareParts/PartCatalog.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-gears w-5 text-center text-amber-400"></i> Spare Parts Catalog
+                <a href="~/Admin/Categories/ManageCategories.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-list-check w-5 text-center text-purple-400"></i> Categories & Machines
                 </a>
-                <a href="~/Admin/Categories/CategoryList.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-list-check w-5 text-center text-purple-400"></i> Part Categories
+                <a href="~/Admin/SpareParts/ManageParts.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-gears w-5 text-center text-amber-400"></i> Master Parts Catalog
                 </a>
 
                 <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">Procurement & Emergency</div>
                 
-                <a href="~/Admin/EmergencyRequests/EmergencyMonitor.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-red-400 hover:bg-slate-800 hover:text-red-300 transition-colors font-semibold">
-                    <i class="fa-solid fa-triangle-exclamation w-5 text-center text-red-500 animate-pulse"></i> Emergency Monitor
-                </a>
-                <a href="~/Admin/Quotations/RfqMonitor.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-slate-400"></i> RFQ & Bids Monitoring
-                </a>
-                <a href="~/Admin/Orders/OrderList.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-truck-fast w-5 text-center text-slate-400"></i> Procurement Orders
-                </a>
-
-                <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">Support & Audit</div>
-                
-                <a href="~/Admin/Complaints/ComplaintList.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-headset w-5 text-center text-slate-400"></i> Complaints & Helpdesk
-                </a>
-                <a href="~/Admin/Reports/SystemReports.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
-                    <i class="fa-solid fa-chart-line w-5 text-center text-slate-400"></i> System Reports
+                <a href="~/Admin/Orders/Oversight.aspx" runat="server" class="flex items-center gap-3 px-3 py-2 text-xs font-medium rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition-colors">
+                    <i class="fa-solid fa-truck-fast w-5 text-center text-blue-400"></i> Orders & SOS Oversight
                 </a>
             </nav>
 
