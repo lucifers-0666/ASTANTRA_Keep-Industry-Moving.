@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Header Section -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 admin-animate-enter">
         <div>
             <span class="text-[11px] font-mono uppercase font-bold text-[#64748B] tracking-wider">GLOBAL COMPONENT DIRECTORY</span>
             <h1 class="text-xl font-bold font-['Archivo',sans-serif] text-[#0F172A] mt-0.5">Master Spare Parts Catalog</h1>
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Alert / Toast Banner -->
-    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded border text-xs flex items-center justify-between">
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded border text-xs flex items-center justify-between admin-animate-enter">
         <div class="flex items-center gap-2">
             <i id="iconAlert" runat="server" class="fa-solid fa-circle-check text-emerald-600"></i>
             <asp:Label ID="lblAlertMessage" runat="server" Font-Bold="true"></asp:Label>
@@ -28,7 +28,7 @@
     </asp:Panel>
 
     <!-- Filter & Search Toolbar -->
-    <div class="surface-card p-4 mb-6">
+    <div class="surface-card p-4 mb-6 admin-animate-enter admin-stagger-1">
         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
             <!-- Search Keyword -->
             <div class="sm:col-span-5 relative">
@@ -61,7 +61,7 @@
     </div>
 
     <!-- Data Grid Container -->
-    <div class="table-container shadow-xs">
+    <div class="table-container shadow-xs admin-animate-enter admin-stagger-2">
         <div class="px-5 py-3.5 border-b border-[#CBD5E1] flex justify-between items-center bg-white">
             <h2 class="text-xs font-bold text-[#0F172A] uppercase tracking-wider font-mono m-0 flex items-center gap-2">
                 <i class="fa-solid fa-boxes-stacked text-[#EA580C]"></i> Master Component Catalog

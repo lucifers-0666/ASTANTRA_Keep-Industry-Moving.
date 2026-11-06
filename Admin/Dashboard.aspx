@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Page Header & Title Bar -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 admin-animate-enter">
         <div>
             <span class="text-[11px] font-mono uppercase font-bold text-[#64748B] tracking-wider">COMMAND &amp; CONTROL TELEMETRY</span>
             <h1 class="text-xl font-bold font-['Archivo',sans-serif] text-[#0F172A] mt-0.5">Platform Executive Overview</h1>
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Executive KPI Grid (8 Cards, High Density 4x2) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 admin-animate-enter admin-stagger-1">
         <!-- 1. Registered Users -->
         <div class="surface-card p-4 border-l-4 border-l-[#1769E0] flex flex-col justify-between">
             <div class="flex items-center justify-between">
@@ -137,7 +137,7 @@
     </div>
 
     <!-- Main Split Section: Live Emergency Alerts & System Roster -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 admin-animate-enter admin-stagger-2">
         <!-- Live Emergency SOS Monitor (High Priority Left/Top Column) -->
         <div class="lg:col-span-7 space-y-6">
             <div class="table-container shadow-xs">

@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Header Section -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 admin-animate-enter">
         <div>
             <span class="text-[11px] font-mono uppercase font-bold text-[#64748B] tracking-wider">CROSS-PLATFORM LOGISTICS &amp; INCIDENT TRIAGE</span>
             <h1 class="text-xl font-bold font-['Archivo',sans-serif] text-[#0F172A] mt-0.5">Procurement Orders &amp; Emergency SOS Console</h1>
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Alert / Toast Banner -->
-    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded border text-xs flex items-center justify-between">
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded border text-xs flex items-center justify-between admin-animate-enter">
         <div class="flex items-center gap-2">
             <i id="iconAlert" runat="server" class="fa-solid fa-circle-check text-emerald-600"></i>
             <asp:Label ID="lblAlertMessage" runat="server" Font-Bold="true"></asp:Label>
@@ -30,7 +30,7 @@
     </asp:Panel>
 
     <!-- SECTION 1: CRITICAL EMERGENCY BREAKDOWN SOS ALERTS -->
-    <div class="table-container shadow-xs mb-8">
+    <div class="table-container shadow-xs mb-8 admin-animate-enter admin-stagger-1">
         <div class="px-5 py-3.5 border-b border-[#CBD5E1] flex justify-between items-center bg-orange-50/40">
             <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-[#EA580C] animate-ping"></span>

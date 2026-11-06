@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Header Section -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 admin-animate-enter">
         <div>
             <span class="text-[11px] font-mono uppercase font-bold text-[#64748B] tracking-wider">SECURITY GOVERNANCE &amp; ACCOUNTABILITY</span>
             <h1 class="text-xl font-bold font-['Archivo',sans-serif] text-[#0F172A] mt-0.5">Platform Audit Trail &amp; Event Logs</h1>
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Filter & Search Toolbar -->
-    <div class="surface-card p-4 mb-6">
+    <div class="surface-card p-4 mb-6 admin-animate-enter admin-stagger-1">
         <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
             <!-- Action Filter -->
             <div class="sm:col-span-4">
@@ -90,7 +90,7 @@
     </div>
 
     <!-- Data Grid Container -->
-    <div class="table-container shadow-xs mb-8">
+    <div class="table-container shadow-xs mb-8 admin-animate-enter admin-stagger-2">
         <div class="px-5 py-3.5 border-b border-[#CBD5E1] flex justify-between items-center bg-white">
             <h2 class="text-xs font-bold text-[#0F172A] uppercase tracking-wider font-mono m-0 flex items-center gap-2">
                 <i class="fa-solid fa-clipboard-check text-[#E11D48]"></i> Security Audit Log Stream
@@ -162,3 +162,4 @@
         </p>
     </div>
 </asp:Content>
+

@@ -21,6 +21,45 @@ namespace IndustrialSparePartPortal.Admin.Users
         {
             if (!IsPostBack)
             {
+                LoadRoleMetrics();
+                LoadUsers();
+            }
+        }
+
+        private void LoadRoleMetrics()
+        {
+            try
+            {
+                int total, admins, factories, suppliers, techs;
+                _userLogic.getUserCountsByRole(out total, out admins, out factories, out suppliers, out techs);
+
+                lblCountAll.InnerText = total.ToString();
+                lblCountFactories.InnerText = factories.ToString();
+                lblCountSuppliers.InnerText = suppliers.ToString();
+                lblCountTechnicians.InnerText = techs.ToString();
+                lblCountAdmins.InnerText = admins.ToString();
+            }
+            catch
+            {
+                // Non-critical telemetry fallback
+            }
+        }
+
+        protected void btnSegment_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = sender as LinkButton;
+            if (btn != null)
+            {
+                string targetRole = btn.CommandArgument;
+                if (ddlRoleFilter.Items.FindByValue(targetRole) != null)
+                {
+                    ddlRoleFilter.SelectedValue = targetRole;
+                }
+                else
+                {
+                    ddlRoleFilter.SelectedIndex = 0;
+                }
+
                 LoadUsers();
             }
         }
@@ -104,6 +143,7 @@ namespace IndustrialSparePartPortal.Admin.Users
                 }
 
                 LoadUsers();
+                LoadRoleMetrics();
             }
             else if (e.CommandName == "EditUser")
             {
@@ -154,6 +194,7 @@ namespace IndustrialSparePartPortal.Admin.Users
                 }
 
                 LoadUsers();
+                LoadRoleMetrics();
             }
         }
 
@@ -196,6 +237,20 @@ namespace IndustrialSparePartPortal.Admin.Users
                 int newUserId = _userLogic.insertNewUser(fullName, email, phone, password, roleId, isActive, isVerified);
                 if (newUserId > 0)
                 {
+                    // Automatically provision corresponding entity profile if role is Factory, Supplier, or Technician
+                    if (roleId == 2)
+                    {
+                        _userLogic.insertFactoryProfile(newUserId, fullName, "Industrial Manufacturing", "Factory Plant Premises", "Ahmedabad", "Gujarat", "380001", "24AAAAA0000A1Z5", fullName);
+                    }
+                    else if (roleId == 3)
+                    {
+                        _userLogic.insertSupplierProfile(newUserId, fullName, "REG-" + newUserId, "24AABCS" + (1000 + newUserId) + "A1Z1", "Ahmedabad Central Hub", "Ahmedabad", "Gujarat", "380001");
+                    }
+                    else if (roleId == 4)
+                    {
+                        _userLogic.insertTechnicianProfile(newUserId, "Certified Industrial Machinery Specialist", 3, 750, "Central Workshop", "Ahmedabad", "Gujarat", "380001");
+                    }
+
                     _auditLogic.logAction(
                         SessionHelper.UserId,
                         "CREATE_USER",
@@ -209,6 +264,7 @@ namespace IndustrialSparePartPortal.Admin.Users
                     pnlAddModal.Visible = false;
                     ShowAlert(true, $"User '{fullName}' (#{newUserId}) registered successfully into the platform.");
                     LoadUsers();
+                    LoadRoleMetrics();
                 }
                 else
                 {
@@ -262,6 +318,7 @@ namespace IndustrialSparePartPortal.Admin.Users
                     pnlEditModal.Visible = false;
                     ShowAlert(true, $"User account #{userId} ({fullName}) updated successfully.");
                     LoadUsers();
+                    LoadRoleMetrics();
                 }
                 else
                 {

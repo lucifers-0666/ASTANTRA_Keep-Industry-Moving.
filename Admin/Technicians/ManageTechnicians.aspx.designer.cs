@@ -57,3 +57,4 @@ namespace IndustrialSparePartPortal.Admin.Technicians
         protected global::System.Web.UI.WebControls.Button btnSubmitEditTech;
     }
 }
+

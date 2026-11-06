@@ -466,6 +466,110 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                 }
             }
         }
+
+        public bool updateUserProfile(int userId, string fullName, string email, string phone)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    UPDATE Users 
+                    SET FullName = @FullName, 
+                        Email = @Email, 
+                        PhoneNumber = @PhoneNumber, 
+                        UpdatedAt = GETDATE()
+                    WHERE UserId = @UserId";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@FullName", SqlDbType.NVarChar, 100) { Value = fullName });
+                    cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = email });
+                    cmd.Parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.VarChar, 20) { Value = (object)phone ?? DBNull.Value });
+                    cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool changeUserPassword(int userId, string oldPassword, string newPassword, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < 6)
+            {
+                errorMessage = "New password must be at least 6 characters long.";
+                return false;
+            }
+
+            DataSet ds = getUserById(userId);
+            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+            {
+                errorMessage = "User account not found.";
+                return false;
+            }
+
+            DataRow row = ds.Tables[0].Rows[0];
+            string storedHash = row["PasswordHash"].ToString();
+            string storedSalt = row["Salt"].ToString();
+
+            if (!PasswordHasher.VerifyPassword(oldPassword, storedHash, storedSalt))
+            {
+                errorMessage = "Current password verification failed. Please check your password.";
+                return false;
+            }
+
+            string newSalt = PasswordHasher.GenerateSalt();
+            string newHash = PasswordHasher.HashPassword(newPassword, newSalt);
+
+            using (SqlConnection con = getcon())
+            {
+                string sql = "UPDATE Users SET PasswordHash = @PasswordHash, Salt = @Salt, UpdatedAt = GETDATE() WHERE UserId = @UserId";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@PasswordHash", SqlDbType.VarChar, 255) { Value = newHash });
+                    cmd.Parameters.Add(new SqlParameter("@Salt", SqlDbType.VarChar, 100) { Value = newSalt });
+                    cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public void getUserCountsByRole(out int totalCount, out int adminCount, out int factoryCount, out int supplierCount, out int technicianCount)
+        {
+            totalCount = 0;
+            adminCount = 0;
+            factoryCount = 0;
+            supplierCount = 0;
+            technicianCount = 0;
+
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT 
+                        COUNT(*) AS Total,
+                        ISNULL(SUM(CASE WHEN RoleId = 1 THEN 1 ELSE 0 END), 0) AS Admins,
+                        ISNULL(SUM(CASE WHEN RoleId = 2 THEN 1 ELSE 0 END), 0) AS Factories,
+                        ISNULL(SUM(CASE WHEN RoleId = 3 THEN 1 ELSE 0 END), 0) AS Suppliers,
+                        ISNULL(SUM(CASE WHEN RoleId = 4 THEN 1 ELSE 0 END), 0) AS Technicians
+                    FROM Users";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            totalCount = Convert.ToInt32(rdr["Total"]);
+                            adminCount = Convert.ToInt32(rdr["Admins"]);
+                            factoryCount = Convert.ToInt32(rdr["Factories"]);
+                            supplierCount = Convert.ToInt32(rdr["Suppliers"]);
+                            technicianCount = Convert.ToInt32(rdr["Technicians"]);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

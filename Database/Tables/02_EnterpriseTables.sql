@@ -84,3 +84,4 @@ IF NOT EXISTS (SELECT * FROM SystemSettings WHERE SettingKey = 'EmergencyBroadca
 IF NOT EXISTS (SELECT * FROM SystemSettings WHERE SettingKey = 'SupplierVerificationMandatory')
     INSERT INTO SystemSettings (SettingKey, SettingValue, Category, Description) VALUES ('SupplierVerificationMandatory', 'True', 'Security', 'Require admin verification before supplier can submit quotation bids');
 GO
+

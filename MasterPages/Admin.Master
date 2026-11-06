@@ -14,7 +14,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
     <!-- Core & Shell CSS -->
     <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Content/css/admin.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <!-- Icons and Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -24,14 +23,14 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="h-full font-['IBM_Plex_Sans',sans-serif] antialiased text-[#0F172A] bg-[#F1F5F9] flex overflow-hidden">
-    <form id="form1" runat="server" class="flex w-full h-full">
-        <!-- Sidebar Navigation (Authoritative Dark) -->
-        <aside class="w-64 bg-[#0F172A] text-slate-300 flex flex-col shrink-0 border-r border-slate-800 shadow-xl select-none">
-            <!-- Brand header -->
-            <div class="h-16 px-5 flex items-center justify-between border-b border-slate-800 bg-[#0B1120]">
-                <a href="~/Admin/Dashboard.aspx" runat="server" class="flex items-center gap-3 no-underline">
-                    <div class="w-8 h-8 rounded bg-[#1769E0] flex items-center justify-center text-white font-black text-sm shadow-sm">
+<body class="admin-body-shell h-full m-0 p-0 font-['IBM_Plex_Sans',sans-serif] antialiased text-[#0F172A] bg-[#F1F5F9] flex overflow-hidden">
+    <form id="form1" runat="server" class="flex w-full h-full m-0 p-0">
+        <!-- Sidebar Navigation (Authoritative Dark, Decongested & Spacious) -->
+        <aside class="w-72 bg-[#0F172A] text-slate-300 flex flex-col shrink-0 border-r border-slate-800 shadow-xl select-none">
+            <!-- Brand header (Flush top, height matched to main header) -->
+            <div class="h-16 px-6 flex items-center justify-between border-b border-slate-800/80 bg-[#0B1120]">
+                <a href="~/Admin/Dashboard.aspx" runat="server" class="flex items-center gap-3 no-underline group">
+                    <div class="w-8 h-8 rounded-md bg-[#1769E0] flex items-center justify-center text-white font-black text-sm shadow-md group-hover:bg-[#1254B7] transition-colors">
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <div class="flex flex-col text-left">
@@ -42,61 +41,121 @@
             </div>
 
             <!-- Sidebar Links Menu -->
-            <nav class="flex-1 px-3 py-5 space-y-1 overflow-y-auto text-left">
+            <nav class="flex-1 px-4 py-5 space-y-5 overflow-y-auto admin-nav-scroll text-left">
                 <!-- Group 1: Executive Dashboard -->
-                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-1 font-mono">Executive Console</div>
-                <a href="~/Admin/Dashboard.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-200 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-chart-line w-4 text-center text-[#38BDF8]"></i> Command Dashboard
-                </a>
+                <div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2 font-mono flex items-center justify-between">
+                        <span>Executive Console</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8]"></span>
+                    </div>
+                    <div class="space-y-1">
+                        <a href="~/Admin/Dashboard.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-[#38BDF8]">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </span>
+                            <span>Command Dashboard</span>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Group 2: User Governance & RBAC -->
-                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1 font-mono">Platform Roster &amp; RBAC</div>
-                <a href="~/Admin/Users/ManageUsers.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-users-gear w-4 text-center text-blue-400"></i> System User Directory
-                </a>
-                <a href="~/Admin/Factories/ManageFactories.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-industry w-4 text-center text-amber-400"></i> Industrial Plant Buyers
-                </a>
-                <a href="~/Admin/Suppliers/Verification.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-warehouse w-4 text-center text-emerald-400"></i> Suppliers &amp; Verification
-                </a>
-                <a href="~/Admin/Technicians/ManageTechnicians.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-user-wrench w-4 text-center text-cyan-400"></i> Service Technicians
-                </a>
+                <div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2 font-mono flex items-center justify-between">
+                        <span>Platform Roster &amp; RBAC</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                    </div>
+                    <div class="space-y-1">
+                        <a href="~/Admin/Users/ManageUsers.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-blue-400">
+                                <i class="fa-solid fa-users-gear"></i>
+                            </span>
+                            <span>System User Directory</span>
+                        </a>
+                        <a href="~/Admin/Factories/ManageFactories.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-amber-400">
+                                <i class="fa-solid fa-industry"></i>
+                            </span>
+                            <span>Industrial Plant Buyers</span>
+                        </a>
+                        <a href="~/Admin/Suppliers/Verification.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
+                                <i class="fa-solid fa-warehouse"></i>
+                            </span>
+                            <span>Suppliers &amp; Verification</span>
+                        </a>
+                        <a href="~/Admin/Technicians/ManageTechnicians.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-cyan-400">
+                                <i class="fa-solid fa-user-wrench"></i>
+                            </span>
+                            <span>Service Technicians</span>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Group 3: Catalog & Machinery Registry -->
-                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1 font-mono">Catalog &amp; Machinery</div>
-                <a href="~/Admin/Categories/ManageCategories.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-diagram-project w-4 text-center text-purple-400"></i> Categories &amp; Machines
-                </a>
-                <a href="~/Admin/SpareParts/ManageParts.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-boxes-stacked w-4 text-center text-orange-400"></i> Master Parts Catalog
-                </a>
+                <div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2 font-mono flex items-center justify-between">
+                        <span>Catalog &amp; Machinery</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                    </div>
+                    <div class="space-y-1">
+                        <a href="~/Admin/Categories/ManageCategories.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-purple-400">
+                                <i class="fa-solid fa-diagram-project"></i>
+                            </span>
+                            <span>Categories &amp; Machines</span>
+                        </a>
+                        <a href="~/Admin/SpareParts/ManageParts.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-orange-400">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                            </span>
+                            <span>Master Parts Catalog</span>
+                        </a>
+                    </div>
+                </div>
 
-                <!-- Group 4: Operations & Audit -->
-                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mt-4 mb-1 font-mono">Operations &amp; Security</div>
-                <a href="~/Admin/Orders/Oversight.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-truck-fast w-4 text-center text-emerald-400"></i> Orders &amp; Emergency SOS
-                </a>
-                <a href="~/Admin/Audit/AuditLogs.aspx" runat="server" class="flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-colors">
-                    <i class="fa-solid fa-clipboard-check w-4 text-center text-rose-400"></i> Platform Audit Trail
-                </a>
+                <!-- Group 4: Operations & Security -->
+                <div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-2 font-mono flex items-center justify-between">
+                        <span>Operations &amp; Security</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                    </div>
+                    <div class="space-y-1">
+                        <a href="~/Admin/Orders/Oversight.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </span>
+                            <span>Orders &amp; Emergency SOS</span>
+                        </a>
+                        <a href="~/Admin/Audit/AuditLogs.aspx" runat="server" class="admin-nav-item flex items-center gap-3 px-3 py-2.5 text-xs font-semibold rounded-md text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="w-6 h-6 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-rose-400">
+                                <i class="fa-solid fa-clipboard-check"></i>
+                            </span>
+                            <span>Platform Audit Trail</span>
+                        </a>
+                    </div>
+                </div>
             </nav>
 
-            <!-- Admin Profile Footbar -->
-            <div class="p-3.5 border-t border-slate-800 bg-[#0B1120] flex items-center justify-between text-left">
-                <div class="flex items-center gap-2.5 overflow-hidden">
-                    <div class="w-8 h-8 rounded bg-slate-700 text-white font-bold text-xs flex items-center justify-center shrink-0 border border-slate-600 font-mono">
+            <!-- Admin Profile Footbar (Comfortable Padding with Direct Profile Navigation) -->
+            <div class="h-18 px-4 py-3 border-t border-slate-800/80 bg-[#0B1120] flex items-center justify-between text-left">
+                <a href="~/Admin/Profile.aspx" runat="server" class="flex items-center gap-3 overflow-hidden no-underline group flex-1 mr-2" title="View & Edit Admin Profile">
+                    <div class="w-8 h-8 rounded-full bg-slate-700 group-hover:bg-[#1769E0] text-white font-bold text-xs flex items-center justify-center shrink-0 border border-slate-600 transition-colors font-mono">
                         SA
                     </div>
                     <div class="truncate">
-                        <span class="text-xs font-bold text-white block truncate" id="lblAdminName" runat="server">Superadmin</span>
-                        <span class="text-[10px] font-mono text-[#38BDF8] block">SUPERADMINISTRATOR</span>
+                        <span class="text-xs font-bold text-white block truncate group-hover:text-[#38BDF8] transition-colors" id="lblAdminName" runat="server">Superadmin</span>
+                        <span class="text-[9px] font-mono text-[#38BDF8] block tracking-wider uppercase font-semibold">SUPERADMINISTRATOR</span>
                     </div>
-                </div>
-                <a href="~/Account/Logout.aspx" runat="server" class="text-slate-400 hover:text-red-400 transition-colors p-1.5" title="Sign Out">
-                    <i class="fa-solid fa-right-from-bracket text-sm"></i>
                 </a>
+                <div class="flex items-center gap-1">
+                    <a href="~/Admin/Profile.aspx" runat="server" class="text-slate-400 hover:text-[#38BDF8] transition-colors p-2 rounded hover:bg-slate-800/80" title="Admin Profile & Security Settings">
+                        <i class="fa-solid fa-gear text-xs"></i>
+                    </a>
+                    <a href="~/Account/Logout.aspx" runat="server" class="text-slate-400 hover:text-rose-400 transition-colors p-2 rounded hover:bg-slate-800/80" title="Sign Out">
+                        <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                    </a>
+                </div>
             </div>
         </aside>
 
@@ -120,8 +179,8 @@
             </header>
 
             <!-- Scrollable Page Content Area -->
-            <main class="flex-1 overflow-y-auto p-6 lg:p-8 bg-[#F1F5F9]">
-                <div class="admin-content-container">
+            <main class="flex-1 overflow-y-auto p-6 lg:p-8 bg-[#F1F5F9] admin-viewport-scroll">
+                <div class="admin-content-container admin-animate-enter">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -129,6 +188,22 @@
         </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        (function() {
+            var currentPath = window.location.pathname.toLowerCase();
+            var navLinks = document.querySelectorAll('.admin-nav-item');
+            navLinks.forEach(function(link) {
+                var href = link.getAttribute('href');
+                if (href) {
+                    var normalizedHref = href.split('?')[0].toLowerCase();
+                    // Match end of path or file name
+                    if (currentPath.endsWith(normalizedHref) || (normalizedHref.length > 5 && currentPath.indexOf(normalizedHref) !== -1)) {
+                        link.classList.add('admin-nav-item--active');
+                    }
+                }
+            });
+        })();
+    </script>
     <asp:ContentPlaceHolder ID="ScriptsContent" runat="server">
     </asp:ContentPlaceHolder>
 </body>

@@ -16,6 +16,19 @@ namespace IndustrialSparePartPortal.Admin.Users
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl iconAlert;
         protected global::System.Web.UI.WebControls.Label lblAlertMessage;
         protected global::System.Web.UI.WebControls.LinkButton btnCloseAlert;
+
+        // Role Segment Switchers
+        protected global::System.Web.UI.WebControls.LinkButton btnSegmentAll;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCountAll;
+        protected global::System.Web.UI.WebControls.LinkButton btnSegmentFactories;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCountFactories;
+        protected global::System.Web.UI.WebControls.LinkButton btnSegmentSuppliers;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCountSuppliers;
+        protected global::System.Web.UI.WebControls.LinkButton btnSegmentTechnicians;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCountTechnicians;
+        protected global::System.Web.UI.WebControls.LinkButton btnSegmentAdmins;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCountAdmins;
+
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
         protected global::System.Web.UI.WebControls.DropDownList ddlRoleFilter;
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;

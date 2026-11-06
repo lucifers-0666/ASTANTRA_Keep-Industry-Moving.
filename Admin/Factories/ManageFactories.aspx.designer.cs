@@ -56,3 +56,4 @@ namespace IndustrialSparePartPortal.Admin.Factories
         protected global::System.Web.UI.WebControls.Button btnSubmitEditFactory;
     }
 }
+

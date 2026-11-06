@@ -20,3 +20,4 @@ namespace IndustrialSparePartPortal.Admin.Audit
         protected global::System.Web.UI.WebControls.GridView gvAuditLogs;
     }
 }
+
