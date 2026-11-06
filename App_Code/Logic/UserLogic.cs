@@ -299,6 +299,173 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
             return true;
         }
+
+        public DataSet searchUsers(string searchKeyword = null, string roleFilter = null, string statusFilter = null)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT u.UserId, u.Email, u.FullName, u.PhoneNumber, u.IsActive, u.IsVerified, u.CreatedAt,
+                           r.RoleId, r.RoleName,
+                           CASE 
+                               WHEN r.RoleName = 'Factory' THEN (SELECT CompanyName FROM Factories WHERE UserId = u.UserId)
+                               WHEN r.RoleName = 'Supplier' THEN (SELECT CompanyName FROM Suppliers WHERE UserId = u.UserId)
+                               WHEN r.RoleName = 'Technician' THEN (SELECT SkillSummary FROM Technicians WHERE UserId = u.UserId)
+                               ELSE 'Platform Administration'
+                           END AS EntityDetail
+                    FROM Users u
+                    INNER JOIN Roles r ON u.RoleId = r.RoleId
+                    WHERE (1 = 1)";
+
+                var paramList = new System.Collections.Generic.List<SqlParameter>();
+
+                if (!string.IsNullOrEmpty(searchKeyword))
+                {
+                    sql += " AND (u.FullName LIKE @Search OR u.Email LIKE @Search OR u.PhoneNumber LIKE @Search)";
+                    paramList.Add(new SqlParameter("@Search", SqlDbType.NVarChar, 100) { Value = "%" + searchKeyword.Trim() + "%" });
+                }
+
+                if (!string.IsNullOrEmpty(roleFilter))
+                {
+                    sql += " AND r.RoleName = @RoleName";
+                    paramList.Add(new SqlParameter("@RoleName", SqlDbType.VarChar, 50) { Value = roleFilter });
+                }
+
+                if (!string.IsNullOrEmpty(statusFilter))
+                {
+                    if (statusFilter == "Active")
+                    {
+                        sql += " AND u.IsActive = 1";
+                    }
+                    else if (statusFilter == "Inactive")
+                    {
+                        sql += " AND u.IsActive = 0";
+                    }
+                    else if (statusFilter == "Verified")
+                    {
+                        sql += " AND u.IsVerified = 1";
+                    }
+                    else if (statusFilter == "Unverified")
+                    {
+                        sql += " AND u.IsVerified = 0";
+                    }
+                }
+
+                sql += " ORDER BY u.UserId ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    if (paramList.Count > 0)
+                    {
+                        cmd.Parameters.AddRange(paramList.ToArray());
+                    }
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public bool updateUser(int userId, string fullName, string email, string phoneNumber, int roleId, bool isActive, bool isVerified)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    UPDATE Users 
+                    SET FullName = @FullName, 
+                        Email = @Email, 
+                        PhoneNumber = @PhoneNumber, 
+                        RoleId = @RoleId, 
+                        IsActive = @IsActive, 
+                        IsVerified = @IsVerified, 
+                        UpdatedAt = GETDATE()
+                    WHERE UserId = @UserId";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@FullName", SqlDbType.NVarChar, 100) { Value = fullName });
+                    cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = email });
+                    cmd.Parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.VarChar, 20) { Value = (object)phoneNumber ?? DBNull.Value });
+                    cmd.Parameters.Add(new SqlParameter("@RoleId", SqlDbType.Int) { Value = roleId });
+                    cmd.Parameters.Add(new SqlParameter("@IsActive", SqlDbType.Bit) { Value = isActive });
+                    cmd.Parameters.Add(new SqlParameter("@IsVerified", SqlDbType.Bit) { Value = isVerified });
+                    cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool deleteUser(int userId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                using (SqlTransaction tx = con.BeginTransaction())
+                {
+                    try
+                    {
+                        // Clean up child dependencies safely
+                        string sqlDelTokens = "DELETE FROM Notifications WHERE UserId = @UserId";
+                        using (SqlCommand cmd = new SqlCommand(sqlDelTokens, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        string sqlDelAudit = "DELETE FROM AuditLogs WHERE UserId = @UserId";
+                        using (SqlCommand cmd = new SqlCommand(sqlDelAudit, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Foreign keys to Factories, Suppliers, Technicians CASCADE on delete of Users
+                        string sqlDelUser = "DELETE FROM Users WHERE UserId = @UserId";
+                        using (SqlCommand cmd = new SqlCommand(sqlDelUser, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tx.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        tx.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public int insertNewUser(string fullName, string email, string phone, string plainPassword, int roleId, bool isActive, bool isVerified)
+        {
+            string salt = PasswordHasher.GenerateSalt();
+            string hash = PasswordHasher.HashPassword(plainPassword, salt);
+            return insertUser(roleId, email, hash, salt, fullName, phone, isActive, isVerified);
+        }
+
+        public DataSet selectAllRoles()
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = "SELECT RoleId, RoleName FROM Roles ORDER BY RoleId ASC";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
     }
 }
 

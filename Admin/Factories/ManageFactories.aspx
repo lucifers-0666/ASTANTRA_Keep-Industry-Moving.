@@ -1,0 +1,295 @@
+<%@ Page Title="Industrial Plant Buyer Registry" Language="C#" MasterPageFile="~/MasterPages/Admin.Master" AutoEventWireup="true" CodeBehind="ManageFactories.aspx.cs" Inherits="IndustrialSparePartPortal.Admin.Factories.ManageFactories" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <!-- Header Section -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+            <span class="text-[11px] font-mono uppercase font-bold text-[#64748B] tracking-wider">PROCUREMENT BUYER ECOSYSTEM</span>
+            <h1 class="text-xl font-bold font-['Archivo',sans-serif] text-[#0F172A] mt-0.5">Industrial Plant Buyer Registry</h1>
+            <p class="text-xs text-[#64748B] m-0">Oversee manufacturing facilities, chemical plants, and heavy engineering buyers actively issuing RFQs.</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <asp:Button ID="btnOpenAddModal" runat="server" Text="+ Register Industrial Plant" OnClick="btnOpenAddModal_Click" CssClass="btn-primary text-xs py-2 px-3 cursor-pointer" />
+        </div>
+    </div>
+
+    <!-- Alert / Toast Banner -->
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded border text-xs flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <i id="iconAlert" runat="server" class="fa-solid fa-circle-check text-emerald-600"></i>
+            <asp:Label ID="lblAlertMessage" runat="server" Font-Bold="true"></asp:Label>
+        </div>
+        <asp:LinkButton ID="btnCloseAlert" runat="server" OnClick="btnCloseAlert_Click" CssClass="text-slate-400 hover:text-slate-600 text-xs">
+            <i class="fa-solid fa-xmark"></i>
+        </asp:LinkButton>
+    </asp:Panel>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="surface-card p-4 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+            <!-- Search Input -->
+            <div class="sm:col-span-6 relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
+                <asp:TextBox ID="txtSearch" runat="server" placeholder="Search plant name, GSTIN, contact person, or email..." CssClass="form-input pl-8 text-xs py-2" />
+            </div>
+
+            <!-- City Filter -->
+            <div class="sm:col-span-3">
+                <asp:TextBox ID="txtCityFilter" runat="server" placeholder="Filter by City (e.g. Ahmedabad)" CssClass="form-input text-xs py-2" />
+            </div>
+
+            <!-- Search Action Buttons -->
+            <div class="sm:col-span-3 flex items-center gap-2">
+                <asp:Button ID="btnSearch" runat="server" Text="Filter Plants" OnClick="btnSearch_Click" CssClass="btn-secondary flex-1 text-xs py-2 cursor-pointer" />
+                <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-2 px-2.5 text-slate-500" ToolTip="Reset Filters">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </asp:LinkButton>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Grid Container -->
+    <div class="table-container shadow-xs">
+        <div class="px-5 py-3.5 border-b border-[#CBD5E1] flex justify-between items-center bg-white">
+            <h2 class="text-xs font-bold text-[#0F172A] uppercase tracking-wider font-mono m-0 flex items-center gap-2">
+                <i class="fa-solid fa-industry text-[#D97706]"></i> Registered Manufacturing Facilities
+            </h2>
+            <span class="text-xs font-mono font-bold text-[#64748B]">
+                Total: <asp:Label ID="lblFactoriesCount" runat="server" Text="0" CssClass="text-[#0F172A]"></asp:Label> plants
+            </span>
+        </div>
+
+        <asp:GridView ID="gvFactories" runat="server" AutoGenerateColumns="False" 
+            DataKeyNames="FactoryId,UserId,CompanyName,IndustryType,Address,City,State,Pincode,Gstin,ContactPerson,Email,PhoneNumber" 
+            OnRowCommand="gvFactories_RowCommand" 
+            CssClass="table-custom" GridLines="None" 
+            EmptyDataText="No registered industrial manufacturing plants match the current filter.">
+            <Columns>
+                <asp:BoundField DataField="FactoryId" HeaderText="ID" HeaderStyle-CssClass="w-12 font-mono" ItemStyle-CssClass="font-mono text-xs font-bold" />
+                
+                <asp:TemplateField HeaderText="Manufacturing Plant">
+                    <ItemTemplate>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-xs text-[#0F172A]"><%# Eval("CompanyName") %></span>
+                            <span class="text-[10px] text-[#64748B] font-mono"><%# Eval("City") %>, <%# Eval("State") %> - <%# Eval("Pincode") %></span>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Industry Sector">
+                    <ItemTemplate>
+                        <span class="spec-tag spec-tag-blue text-[10px] font-mono">
+                            <%# Eval("IndustryType") != DBNull.Value ? Eval("IndustryType") : "General Heavy Engineering" %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="GSTIN / Compliance">
+                    <ItemTemplate>
+                        <span class="font-mono text-xs text-[#1E293B]">
+                            <%# Eval("Gstin") != DBNull.Value && !string.IsNullOrEmpty(Eval("Gstin").ToString()) ? Eval("Gstin") : "NOT ENTERED" %>
+                        </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Authorized Liaison">
+                    <ItemTemplate>
+                        <div class="flex flex-col">
+                            <span class="font-semibold text-xs text-[#0F172A]"><%# Eval("ContactPerson") %></span>
+                            <span class="text-[10px] text-[#64748B] font-mono"><%# Eval("PhoneNumber") %> | <%# Eval("Email") %></span>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Procurement Telemetry">
+                    <ItemTemplate>
+                        <div class="flex items-center gap-2 text-[11px] font-mono">
+                            <span class="text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200">
+                                <%# Eval("TotalRfqs") %> RFQs
+                            </span>
+                            <span class="text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                                <%# Eval("TotalOrders") %> Orders
+                            </span>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Actions" ItemStyle-CssClass="text-right">
+                    <ItemTemplate>
+                        <div class="flex items-center justify-end gap-1.5">
+                            <asp:LinkButton ID="btnEdit" runat="server" 
+                                CommandName="EditFactory" 
+                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                CssClass="px-2 py-1 text-[11px] font-semibold rounded bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300" 
+                                ToolTip="Edit Facility Data">
+                                <i class="fa-solid fa-pen-to-square"></i> Edit
+                            </asp:LinkButton>
+
+                            <asp:LinkButton ID="btnDelete" runat="server" 
+                                CommandName="DeleteFactory" 
+                                CommandArgument='<%# Container.DataItemIndex %>' 
+                                OnClientClick="return confirm('WARNING: Are you sure you want to permanently delete this Industrial Plant and its user account?');" 
+                                CssClass="px-2 py-1 text-[11px] font-semibold rounded bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200" 
+                                ToolTip="Delete Plant Record">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+
+    <!-- MODAL 1: REGISTER NEW INDUSTRIAL PLANT -->
+    <asp:Panel ID="pnlAddModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+        <div class="surface-card w-full max-w-xl p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-industry"></i>
+                    </div>
+                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Register New Industrial Plant</h3>
+                </div>
+                <asp:LinkButton ID="btnCloseAddModal" runat="server" OnClick="btnCloseAddModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </asp:LinkButton>
+            </div>
+
+            <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label text-xs">Company / Plant Name <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddCompanyName" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Gujarat Heavy Machinery Works" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Industry Sector <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddIndustryType" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Petrochemical, Automotive, Steel" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label text-xs">Login Email <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddEmail" runat="server" TextMode="Email" CssClass="form-input text-xs py-2 font-mono" placeholder="procurement@plant.com" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Initial Password <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddPassword" runat="server" TextMode="Password" CssClass="form-input text-xs py-2 font-mono" placeholder="Minimum 6 characters" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label text-xs">Authorized Contact Person <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddContactPerson" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Rajesh Shah (Plant Head)" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Phone Number <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddPhone" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="+91 98250 12345" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label text-xs">Plant Facility Address</label>
+                    <asp:TextBox ID="txtAddAddress" runat="server" CssClass="form-input text-xs py-2" placeholder="Plot No. 42, GIDC Industrial Estate" />
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="form-label text-xs">City <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddCity" runat="server" CssClass="form-input text-xs py-2" placeholder="Ahmedabad" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">State</label>
+                        <asp:TextBox ID="txtAddState" runat="server" CssClass="form-input text-xs py-2" placeholder="Gujarat" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Pincode</label>
+                        <asp:TextBox ID="txtAddPincode" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="382445" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label text-xs">GSTIN Tax Registration Number</label>
+                    <asp:TextBox ID="txtAddGstin" runat="server" CssClass="form-input text-xs py-2 font-mono uppercase" placeholder="24AAACG1234F1Z5" />
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+                <asp:Button ID="btnCancelAdd" runat="server" Text="Cancel" OnClick="btnCloseAddModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
+                <asp:Button ID="btnSubmitAddFactory" runat="server" Text="Register Plant Facility" OnClick="btnSubmitAddFactory_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
+            </div>
+        </div>
+    </asp:Panel>
+
+    <!-- MODAL 2: EDIT INDUSTRIAL PLANT -->
+    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+        <div class="surface-card w-full max-w-xl p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+            <asp:HiddenField ID="hdnEditFactoryId" runat="server" />
+
+            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Edit Plant Profile</h3>
+                </div>
+                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </asp:LinkButton>
+            </div>
+
+            <div class="space-y-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label text-xs">Company / Plant Name <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtEditCompanyName" runat="server" CssClass="form-input text-xs py-2" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Industry Sector</label>
+                        <asp:TextBox ID="txtEditIndustryType" runat="server" CssClass="form-input text-xs py-2" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="form-label text-xs">Authorized Contact Person <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtEditContactPerson" runat="server" CssClass="form-input text-xs py-2" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">GSTIN Tax Registration</label>
+                        <asp:TextBox ID="txtEditGstin" runat="server" CssClass="form-input text-xs py-2 font-mono uppercase" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="form-label text-xs">Facility Address</label>
+                    <asp:TextBox ID="txtEditAddress" runat="server" CssClass="form-input text-xs py-2" />
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="form-label text-xs">City <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtEditCity" runat="server" CssClass="form-input text-xs py-2" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">State</label>
+                        <asp:TextBox ID="txtEditState" runat="server" CssClass="form-input text-xs py-2" />
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Pincode</label>
+                        <asp:TextBox ID="txtEditPincode" runat="server" CssClass="form-input text-xs py-2 font-mono" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+                <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCloseEditModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
+                <asp:Button ID="btnSubmitEditFactory" runat="server" Text="Update Facility" OnClick="btnSubmitEditFactory_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
+            </div>
+        </div>
+    </asp:Panel>
+</asp:Content>
