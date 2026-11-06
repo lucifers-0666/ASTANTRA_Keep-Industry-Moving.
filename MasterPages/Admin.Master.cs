@@ -18,6 +18,16 @@ namespace IndustrialSparePartPortal.MasterPages
 
             if (!IsPostBack)
             {
+                // Auto-populate breadcrumb label from the page's <title> tag
+                // Page.Title format: "Dashboard - ASTANTRA Administrator Console"
+                // Extract the first segment before " - " as the page-specific label
+                string pageTitle = Page.Title ?? string.Empty;
+                if (pageTitle.Contains(" - "))
+                {
+                    pageTitle = pageTitle.Substring(0, pageTitle.IndexOf(" - "));
+                }
+                lblPageHeader.InnerText = string.IsNullOrWhiteSpace(pageTitle) ? "Console" : pageTitle.Trim();
+
                 lblAdminName.InnerText = SessionHelper.FullName ?? "Administrator";
             }
         }

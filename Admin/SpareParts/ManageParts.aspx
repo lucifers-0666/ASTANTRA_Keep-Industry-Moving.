@@ -27,36 +27,26 @@
         </asp:LinkButton>
     </asp:Panel>
 
-    <!-- Filter & Search Toolbar -->
-    <div class="surface-card p-4 mb-6 admin-animate-enter admin-stagger-1">
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-            <!-- Search Keyword -->
-            <div class="sm:col-span-5 relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
-                <asp:TextBox ID="txtSearch" runat="server" placeholder="Search part number, description, or specs..." CssClass="form-input pl-8 text-xs py-2" />
-            </div>
+    <!-- Filter & Search Toolbar (Standard Reusable Pattern) -->
+    <div class="admin-toolbar rounded-md mb-6 admin-animate-enter admin-stagger-1">
+        <div class="admin-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search part number, description, or specs..." />
+        </div>
 
-            <!-- Category Filter -->
-            <div class="sm:col-span-3">
-                <asp:DropDownList ID="ddlFilterCategory" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2">
-                    <asp:ListItem Value="" Text="All Categories"></asp:ListItem>
-                </asp:DropDownList>
-            </div>
+        <div class="admin-filter-group">
+            <asp:DropDownList ID="ddlFilterCategory" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
+                <asp:ListItem Value="" Text="All Categories"></asp:ListItem>
+            </asp:DropDownList>
 
-            <!-- Machine Filter -->
-            <div class="sm:col-span-2">
-                <asp:DropDownList ID="ddlFilterMachine" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2">
-                    <asp:ListItem Value="" Text="All Machinery"></asp:ListItem>
-                </asp:DropDownList>
-            </div>
+            <asp:DropDownList ID="ddlFilterMachine" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
+                <asp:ListItem Value="" Text="All Machinery"></asp:ListItem>
+            </asp:DropDownList>
 
-            <!-- Action Buttons -->
-            <div class="sm:col-span-2 flex items-center gap-2">
-                <asp:Button ID="btnSearch" runat="server" Text="Filter" OnClick="btnSearch_Click" CssClass="btn-secondary flex-1 text-xs py-2 cursor-pointer" />
-                <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-2 px-2.5 text-slate-500" ToolTip="Reset Filters">
-                    <i class="fa-solid fa-rotate-left"></i>
-                </asp:LinkButton>
-            </div>
+            <asp:Button ID="btnSearch" runat="server" Text="Filter" OnClick="btnSearch_Click" CssClass="btn-admin-primary" />
+            <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-admin-secondary" ToolTip="Reset Filters">
+                <i class="fa-solid fa-rotate-left"></i>
+            </asp:LinkButton>
         </div>
     </div>
 

@@ -27,27 +27,19 @@
         </asp:LinkButton>
     </asp:Panel>
 
-    <!-- Filter & Search Toolbar -->
-    <div class="surface-card p-4 mb-6 admin-animate-enter admin-stagger-1">
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-            <!-- Search Input -->
-            <div class="sm:col-span-6 relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
-                <asp:TextBox ID="txtSearch" runat="server" placeholder="Search plant name, GSTIN, contact person, or email..." CssClass="form-input pl-8 text-xs py-2" />
-            </div>
+    <!-- Filter & Search Toolbar (Standard Reusable Pattern) -->
+    <div class="admin-toolbar rounded-md mb-6 admin-animate-enter admin-stagger-1">
+        <div class="admin-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search plant name, GSTIN, contact person, or email..." />
+        </div>
 
-            <!-- City Filter -->
-            <div class="sm:col-span-3">
-                <asp:TextBox ID="txtCityFilter" runat="server" placeholder="Filter by City (e.g. Ahmedabad)" CssClass="form-input text-xs py-2" />
-            </div>
-
-            <!-- Search Action Buttons -->
-            <div class="sm:col-span-3 flex items-center gap-2">
-                <asp:Button ID="btnSearch" runat="server" Text="Filter Plants" OnClick="btnSearch_Click" CssClass="btn-secondary flex-1 text-xs py-2 cursor-pointer" />
-                <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-2 px-2.5 text-slate-500" ToolTip="Reset Filters">
-                    <i class="fa-solid fa-rotate-left"></i>
-                </asp:LinkButton>
-            </div>
+        <div class="admin-filter-group">
+            <asp:TextBox ID="txtCityFilter" runat="server" placeholder="Filter by City (e.g. Ahmedabad)" CssClass="admin-filter-select" />
+            <asp:Button ID="btnSearch" runat="server" Text="Filter Plants" OnClick="btnSearch_Click" CssClass="btn-admin-primary" />
+            <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-admin-secondary" ToolTip="Reset Filters">
+                <i class="fa-solid fa-rotate-left"></i>
+            </asp:LinkButton>
         </div>
     </div>
 

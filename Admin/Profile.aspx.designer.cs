@@ -89,3 +89,4 @@ namespace IndustrialSparePartPortal.Admin {
         protected global::System.Web.UI.WebControls.Button btnChangePassword;
     }
 }
+

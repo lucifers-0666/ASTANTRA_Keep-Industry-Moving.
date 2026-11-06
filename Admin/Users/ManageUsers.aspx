@@ -28,106 +28,96 @@
     </asp:Panel>
 
     <!-- Role Segmentation Telemetry Cards (Interactive Segment Switchers) -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mb-6 admin-animate-enter admin-stagger-1">
+    <div class="admin-segment-grid admin-animate-enter admin-stagger-1">
         <!-- 1. All Users -->
-        <asp:LinkButton ID="btnSegmentAll" runat="server" OnClick="btnSegment_Click" CommandArgument="" CssClass="surface-card p-3.5 border-l-4 border-l-slate-700 hover:shadow-md transition-all text-left no-underline group block">
+        <asp:LinkButton ID="btnSegmentAll" runat="server" OnClick="btnSegment_Click" CommandArgument="" CssClass="admin-segment-card seg-all group">
             <div class="flex items-center justify-between text-slate-500">
                 <span class="text-[10px] font-mono uppercase font-bold text-[#64748B]">All Accounts</span>
                 <i class="fa-solid fa-users text-xs text-slate-400 group-hover:text-slate-700"></i>
             </div>
             <div class="mt-2">
-                <span class="text-xl font-black font-mono text-[#0F172A]" id="lblCountAll" runat="server">0</span>
+                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblCountAll" runat="server">0</span>
                 <span class="text-[10px] text-slate-500 block">Total registered</span>
             </div>
         </asp:LinkButton>
 
         <!-- 2. Factory Buyers -->
-        <asp:LinkButton ID="btnSegmentFactories" runat="server" OnClick="btnSegment_Click" CommandArgument="Factory" CssClass="surface-card p-3.5 border-l-4 border-l-amber-500 hover:shadow-md transition-all text-left no-underline group block">
+        <asp:LinkButton ID="btnSegmentFactories" runat="server" OnClick="btnSegment_Click" CommandArgument="Factory" CssClass="admin-segment-card seg-factory group">
             <div class="flex items-center justify-between text-slate-500">
                 <span class="text-[10px] font-mono uppercase font-bold text-amber-700">Factory Buyers</span>
                 <i class="fa-solid fa-industry text-xs text-amber-500 group-hover:text-amber-700"></i>
             </div>
             <div class="mt-2">
-                <span class="text-xl font-black font-mono text-[#0F172A]" id="lblCountFactories" runat="server">0</span>
+                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblCountFactories" runat="server">0</span>
                 <span class="text-[10px] text-slate-500 block">Industrial plants</span>
             </div>
         </asp:LinkButton>
 
         <!-- 3. Stocking Suppliers -->
-        <asp:LinkButton ID="btnSegmentSuppliers" runat="server" OnClick="btnSegment_Click" CommandArgument="Supplier" CssClass="surface-card p-3.5 border-l-4 border-l-emerald-500 hover:shadow-md transition-all text-left no-underline group block">
+        <asp:LinkButton ID="btnSegmentSuppliers" runat="server" OnClick="btnSegment_Click" CommandArgument="Supplier" CssClass="admin-segment-card seg-supplier group">
             <div class="flex items-center justify-between text-slate-500">
                 <span class="text-[10px] font-mono uppercase font-bold text-emerald-700">Suppliers</span>
                 <i class="fa-solid fa-warehouse text-xs text-emerald-500 group-hover:text-emerald-700"></i>
             </div>
             <div class="mt-2">
-                <span class="text-xl font-black font-mono text-[#0F172A]" id="lblCountSuppliers" runat="server">0</span>
+                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblCountSuppliers" runat="server">0</span>
                 <span class="text-[10px] text-slate-500 block">Part stockists</span>
             </div>
         </asp:LinkButton>
 
         <!-- 4. Field Technicians / Repair Workers -->
-        <asp:LinkButton ID="btnSegmentTechnicians" runat="server" OnClick="btnSegment_Click" CommandArgument="Technician" CssClass="surface-card p-3.5 border-l-4 border-l-cyan-500 hover:shadow-md transition-all text-left no-underline group block">
+        <asp:LinkButton ID="btnSegmentTechnicians" runat="server" OnClick="btnSegment_Click" CommandArgument="Technician" CssClass="admin-segment-card seg-tech group">
             <div class="flex items-center justify-between text-slate-500">
                 <span class="text-[10px] font-mono uppercase font-bold text-cyan-700">Repair Workers</span>
                 <i class="fa-solid fa-user-wrench text-xs text-cyan-500 group-hover:text-cyan-700"></i>
             </div>
             <div class="mt-2">
-                <span class="text-xl font-black font-mono text-[#0F172A]" id="lblCountTechnicians" runat="server">0</span>
+                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblCountTechnicians" runat="server">0</span>
                 <span class="text-[10px] text-slate-500 block">Field technicians</span>
             </div>
         </asp:LinkButton>
 
         <!-- 5. System Administrators -->
-        <asp:LinkButton ID="btnSegmentAdmins" runat="server" OnClick="btnSegment_Click" CommandArgument="Administrator" CssClass="surface-card p-3.5 border-l-4 border-l-blue-600 hover:shadow-md transition-all text-left no-underline group block">
+        <asp:LinkButton ID="btnSegmentAdmins" runat="server" OnClick="btnSegment_Click" CommandArgument="Administrator" CssClass="admin-segment-card seg-admin group">
             <div class="flex items-center justify-between text-slate-500">
                 <span class="text-[10px] font-mono uppercase font-bold text-blue-700">Administrators</span>
                 <i class="fa-solid fa-shield-halved text-xs text-blue-500 group-hover:text-blue-700"></i>
             </div>
             <div class="mt-2">
-                <span class="text-xl font-black font-mono text-[#0F172A]" id="lblCountAdmins" runat="server">0</span>
+                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblCountAdmins" runat="server">0</span>
                 <span class="text-[10px] text-slate-500 block">Console superadmins</span>
             </div>
         </asp:LinkButton>
     </div>
 
-    <!-- Filter & Search Toolbar (Industrial High-Density Pattern) -->
-    <div class="surface-card p-4 mb-6 admin-animate-enter admin-stagger-2">
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-            <!-- Search Keyword Input -->
-            <div class="sm:col-span-5 relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
-                <asp:TextBox ID="txtSearch" runat="server" placeholder="Search by name, email, or telephone..." CssClass="form-input pl-8 text-xs py-2" />
-            </div>
+    <!-- Filter & Search Toolbar (Standard Reusable Pattern) -->
+    <div class="admin-toolbar rounded-md mb-6 admin-animate-enter admin-stagger-2">
+        <div class="admin-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <asp:TextBox ID="txtSearch" runat="server" placeholder="Search by name, email, or telephone..." />
+        </div>
 
-            <!-- Role Filter -->
-            <div class="sm:col-span-3">
-                <asp:DropDownList ID="ddlRoleFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2 font-semibold">
-                    <asp:ListItem Value="" Text="All System Roles"></asp:ListItem>
-                    <asp:ListItem Value="Administrator" Text="System Administrator (Role 1)"></asp:ListItem>
-                    <asp:ListItem Value="Factory" Text="Factory Buyers (Role 2)"></asp:ListItem>
-                    <asp:ListItem Value="Supplier" Text="Stocking Suppliers (Role 3)"></asp:ListItem>
-                    <asp:ListItem Value="Technician" Text="Field Technicians / Repair Workers (Role 4)"></asp:ListItem>
-                </asp:DropDownList>
-            </div>
+        <div class="admin-filter-group">
+            <asp:DropDownList ID="ddlRoleFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
+                <asp:ListItem Value="" Text="All System Roles"></asp:ListItem>
+                <asp:ListItem Value="Administrator" Text="System Administrator (Role 1)"></asp:ListItem>
+                <asp:ListItem Value="Factory" Text="Factory Buyers (Role 2)"></asp:ListItem>
+                <asp:ListItem Value="Supplier" Text="Stocking Suppliers (Role 3)"></asp:ListItem>
+                <asp:ListItem Value="Technician" Text="Field Technicians / Repair Workers (Role 4)"></asp:ListItem>
+            </asp:DropDownList>
 
-            <!-- Status Filter -->
-            <div class="sm:col-span-2">
-                <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2">
-                    <asp:ListItem Value="" Text="All Account Statuses"></asp:ListItem>
-                    <asp:ListItem Value="Active" Text="Active Accounts"></asp:ListItem>
-                    <asp:ListItem Value="Inactive" Text="Deactivated Accounts"></asp:ListItem>
-                    <asp:ListItem Value="Verified" Text="Verified Credentials"></asp:ListItem>
-                    <asp:ListItem Value="Pending" Text="Unverified / Pending"></asp:ListItem>
-                </asp:DropDownList>
-            </div>
+            <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
+                <asp:ListItem Value="" Text="All Account Statuses"></asp:ListItem>
+                <asp:ListItem Value="Active" Text="Active Accounts"></asp:ListItem>
+                <asp:ListItem Value="Inactive" Text="Deactivated Accounts"></asp:ListItem>
+                <asp:ListItem Value="Verified" Text="Verified Credentials"></asp:ListItem>
+                <asp:ListItem Value="Pending" Text="Unverified / Pending"></asp:ListItem>
+            </asp:DropDownList>
 
-            <!-- Search Action Buttons -->
-            <div class="sm:col-span-2 flex items-center gap-2">
-                <asp:Button ID="btnSearch" runat="server" Text="Filter" OnClick="btnSearch_Click" CssClass="btn-secondary flex-1 text-xs py-2 cursor-pointer" />
-                <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-2 px-2.5 text-slate-500" ToolTip="Reset Search Filters">
-                    <i class="fa-solid fa-rotate-left"></i>
-                </asp:LinkButton>
-            </div>
+            <asp:Button ID="btnSearch" runat="server" Text="Filter" OnClick="btnSearch_Click" CssClass="btn-admin-primary" />
+            <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-admin-secondary" ToolTip="Reset Search Filters">
+                <i class="fa-solid fa-rotate-left"></i>
+            </asp:LinkButton>
         </div>
     </div>
 

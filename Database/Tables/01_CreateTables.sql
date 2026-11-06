@@ -92,6 +92,7 @@ BEGIN
         SkillSummary NVARCHAR(255) NULL,
         ExperienceYears INT NOT NULL DEFAULT 0,
         HourlyRate DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+        Address NVARCHAR(255) NULL,
         City NVARCHAR(50) NULL,
         State NVARCHAR(50) NULL,
         Pincode VARCHAR(10) NULL,

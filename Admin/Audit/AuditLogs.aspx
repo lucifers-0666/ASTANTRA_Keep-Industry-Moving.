@@ -18,14 +18,13 @@
         </div>
     </div>
 
-    <!-- Filter & Search Toolbar -->
-    <div class="surface-card p-4 mb-6 admin-animate-enter admin-stagger-1">
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-            <!-- Action Filter -->
-            <div class="sm:col-span-4">
-                <label class="form-label text-[10px] mb-1">Action Type Filter</label>
-                <asp:DropDownList ID="ddlActionFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2">
-                    <asp:ListItem Value="" Text="All Governance Action Types"></asp:ListItem>
+    <!-- Filter & Search Toolbar (Standard Reusable Pattern) -->
+    <div class="admin-toolbar rounded-md mb-6 admin-animate-enter admin-stagger-1">
+        <div class="admin-filter-group" style="width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="text-[11px] font-mono font-bold text-slate-500 uppercase">Filters:</span>
+                <asp:DropDownList ID="ddlActionFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
+                    <asp:ListItem Value="" Text="All Action Types"></asp:ListItem>
                     <asp:ListItem Value="CREATE_USER" Text="CREATE_USER"></asp:ListItem>
                     <asp:ListItem Value="UPDATE_USER" Text="UPDATE_USER"></asp:ListItem>
                     <asp:ListItem Value="DELETE_USER" Text="DELETE_USER"></asp:ListItem>
@@ -50,12 +49,8 @@
                     <asp:ListItem Value="UPDATE_SOS_STATUS" Text="UPDATE_SOS_STATUS"></asp:ListItem>
                     <asp:ListItem Value="UPDATE_ORDER_STATUS" Text="UPDATE_ORDER_STATUS"></asp:ListItem>
                 </asp:DropDownList>
-            </div>
 
-            <!-- Target Entity Filter -->
-            <div class="sm:col-span-4">
-                <label class="form-label text-[10px] mb-1">Target Entity Table</label>
-                <asp:DropDownList ID="ddlEntityFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2">
+                <asp:DropDownList ID="ddlEntityFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
                     <asp:ListItem Value="" Text="All Target Entities"></asp:ListItem>
                     <asp:ListItem Value="Users" Text="Users"></asp:ListItem>
                     <asp:ListItem Value="Factories" Text="Factories"></asp:ListItem>
@@ -67,22 +62,17 @@
                     <asp:ListItem Value="EmergencyRequests" Text="EmergencyRequests"></asp:ListItem>
                     <asp:ListItem Value="Orders" Text="Orders"></asp:ListItem>
                 </asp:DropDownList>
-            </div>
 
-            <!-- Record Scope -->
-            <div class="sm:col-span-2">
-                <label class="form-label text-[10px] mb-1">Scope</label>
-                <asp:DropDownList ID="ddlTopCount" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="form-input text-xs py-2 font-mono">
+                <asp:DropDownList ID="ddlTopCount" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select font-mono">
                     <asp:ListItem Value="50" Text="Top 50"></asp:ListItem>
                     <asp:ListItem Value="100" Text="Top 100" Selected="True"></asp:ListItem>
                     <asp:ListItem Value="250" Text="Top 250"></asp:ListItem>
                 </asp:DropDownList>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="sm:col-span-2 flex items-end gap-2 pt-4 sm:pt-0">
-                <asp:Button ID="btnFilter" runat="server" Text="Refresh" OnClick="btnFilter_Click" CssClass="btn-secondary flex-1 text-xs py-2 cursor-pointer" />
-                <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-secondary text-xs py-2 px-2.5 text-slate-500" ToolTip="Reset Filters">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <asp:Button ID="btnFilter" runat="server" Text="Refresh Stream" OnClick="btnFilter_Click" CssClass="btn-admin-primary" />
+                <asp:LinkButton ID="btnReset" runat="server" OnClick="btnReset_Click" CssClass="btn-admin-secondary" ToolTip="Reset Filters">
                     <i class="fa-solid fa-rotate-left"></i>
                 </asp:LinkButton>
             </div>

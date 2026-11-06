@@ -695,5 +695,191 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                 }
             }
         }
+
+        // =========================================================================
+        // ENTERPRISE GOVERNANCE MODULE METHODS (RBAC, SECURITY, SYSTEM, INTEGRITY)
+        // =========================================================================
+
+        public DataSet selectAllRoles()
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT r.RoleId, r.RoleName, r.Description,
+                           (SELECT COUNT(*) FROM Users u WHERE u.RoleId = r.RoleId) AS UserCount,
+                           (SELECT COUNT(*) FROM Users u WHERE u.RoleId = r.RoleId AND u.IsActive = 1) AS ActiveCount
+                    FROM Roles r
+                    ORDER BY r.RoleId ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public DataSet selectSecurityEvents(int topCount = 50)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = string.Format(@"
+                    SELECT TOP {0} a.LogId, a.UserId, a.ActionType, a.TargetEntity, a.EntityId, a.OldValue, a.NewValue, a.IpAddress, a.CreatedAt,
+                           ISNULL(u.FullName, 'System Service') AS ActorName,
+                           ISNULL(u.Email, 'system@local') AS ActorEmail,
+                           ISNULL(r.RoleName, 'SYSTEM') AS ActorRole
+                    FROM AuditLogs a
+                    LEFT JOIN Users u ON a.UserId = u.UserId
+                    LEFT JOIN Roles r ON u.RoleId = r.RoleId
+                    WHERE a.ActionType LIKE '%LOGIN%' 
+                       OR a.ActionType LIKE '%AUTH%' 
+                       OR a.ActionType LIKE '%PASSWORD%' 
+                       OR a.ActionType LIKE '%SECURITY%'
+                       OR a.ActionType LIKE '%TOGGLE%'
+                       OR a.ActionType LIKE '%DELETE%'
+                    ORDER BY a.CreatedAt DESC", topCount);
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public DataSet runDataIntegrityAudit(out int orphanedUsers, out int unverifiedSuppliers, out int pendingEmergencies, out int totalAuditRecords)
+        {
+            orphanedUsers = 0;
+            unverifiedSuppliers = 0;
+            pendingEmergencies = 0;
+            totalAuditRecords = 0;
+
+            using (SqlConnection con = getcon())
+            {
+                // Diagnostic metrics
+                string sqlCounts = @"
+                    SELECT 
+                        (SELECT COUNT(*) FROM Users u 
+                         WHERE u.RoleId = 2 AND NOT EXISTS (SELECT 1 FROM Factories f WHERE f.UserId = u.UserId)
+                            OR u.RoleId = 3 AND NOT EXISTS (SELECT 1 FROM Suppliers s WHERE s.UserId = u.UserId)
+                            OR u.RoleId = 4 AND NOT EXISTS (SELECT 1 FROM Technicians t WHERE t.UserId = u.UserId)) AS OrphanedUsers,
+                        (SELECT COUNT(*) FROM Suppliers WHERE VerificationStatus = 'Pending') AS UnverifiedSuppliers,
+                        (SELECT COUNT(*) FROM EmergencyRequests WHERE Status = 'Reported' OR Status = 'Dispatched') AS PendingEmergencies,
+                        (SELECT COUNT(*) FROM AuditLogs) AS TotalAuditRecords";
+
+                using (SqlCommand cmd = new SqlCommand(sqlCounts, con))
+                {
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            orphanedUsers = Convert.ToInt32(rdr["OrphanedUsers"]);
+                            unverifiedSuppliers = Convert.ToInt32(rdr["UnverifiedSuppliers"]);
+                            pendingEmergencies = Convert.ToInt32(rdr["PendingEmergencies"]);
+                            totalAuditRecords = Convert.ToInt32(rdr["TotalAuditRecords"]);
+                        }
+                    }
+                }
+
+                // Table row counts & health
+                string sqlTables = @"
+                    SELECT t.name AS TableName, p.rows AS RecordCount
+                    FROM sys.tables t
+                    INNER JOIN sys.partitions p ON t.object_id = p.object_id AND p.index_id IN (0, 1)
+                    WHERE t.is_ms_shipped = 0
+                    ORDER BY p.rows DESC, t.name ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sqlTables, con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public void getSystemHealthMetrics(out string sqlVersion, out int totalTables, out int totalDbRows, out bool isOperational)
+        {
+            sqlVersion = ".NET Framework 4.8 / SQL Server LocalDB";
+            totalTables = 0;
+            totalDbRows = 0;
+            isOperational = false;
+
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT 
+                        @@VERSION AS SqlVersion,
+                        (SELECT COUNT(*) FROM sys.tables WHERE is_ms_shipped = 0) AS TotalTables,
+                        (SELECT ISNULL(SUM(p.rows), 0) FROM sys.partitions p 
+                         INNER JOIN sys.tables t ON p.object_id = t.object_id 
+                         WHERE p.index_id IN (0, 1) AND t.is_ms_shipped = 0) AS TotalDbRows";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            string rawVer = rdr["SqlVersion"].ToString();
+                            sqlVersion = rawVer.Contains("-") ? rawVer.Substring(0, rawVer.IndexOf("-")).Trim() : rawVer;
+                            totalTables = Convert.ToInt32(rdr["TotalTables"]);
+                            totalDbRows = Convert.ToInt32(rdr["TotalDbRows"]);
+                            isOperational = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        public DataSet selectAllSystemSettings()
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = "SELECT SettingKey, SettingValue, Category, Description, UpdatedAt FROM SystemSettings ORDER BY Category ASC, SettingKey ASC";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public bool updateSystemSetting(string settingKey, string settingValue, int adminUserId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    UPDATE SystemSettings 
+                    SET SettingValue = @SettingValue, 
+                        LastUpdatedBy = @UserId, 
+                        UpdatedAt = GETDATE() 
+                    WHERE SettingKey = @SettingKey";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@SettingValue", SqlDbType.NVarChar, -1) { Value = settingValue });
+                    cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = adminUserId });
+                    cmd.Parameters.Add(new SqlParameter("@SettingKey", SqlDbType.VarChar, 50) { Value = settingKey });
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
     }
 }

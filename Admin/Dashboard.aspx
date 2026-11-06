@@ -22,117 +22,103 @@
     </div>
 
     <!-- Executive KPI Grid (8 Cards, High Density 4x2) -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 admin-animate-enter admin-stagger-1">
+    <div class="admin-kpi-grid admin-animate-enter admin-stagger-1">
         <!-- 1. Registered Users -->
-        <div class="surface-card p-4 border-l-4 border-l-[#1769E0] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Total Users</span>
-                <div class="w-7 h-7 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card kpi-blue">
+            <div class="admin-kpi-label">
+                Total Users
+                <div class="w-6 h-6 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-users"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblTotalUsers" runat="server">0</span>
-                <span class="text-[10px] text-[#64748B] block mt-0.5">Active ecosystem accounts</span>
+            <div class="admin-kpi-val" id="lblTotalUsers" runat="server">0</div>
+            <div class="admin-kpi-sub">
+                <i class="fa-solid fa-circle text-[8px] text-emerald-500"></i> Active ecosystem accounts
             </div>
         </div>
 
         <!-- 2. Verified Suppliers -->
-        <div class="surface-card p-4 border-l-4 border-l-[#059669] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Verified Suppliers</span>
-                <div class="w-7 h-7 rounded bg-emerald-50 text-[#059669] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card kpi-emerald">
+            <div class="admin-kpi-label">
+                Verified Suppliers
+                <div class="w-6 h-6 rounded bg-emerald-50 text-[#059669] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-warehouse"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#059669]" id="lblVerifiedSuppliers" runat="server">0</span>
-                <span class="text-[10px] text-[#64748B] block mt-0.5">GSTIN vetted vendors</span>
-            </div>
+            <div class="admin-kpi-val text-[#059669]" id="lblVerifiedSuppliers" runat="server">0</div>
+            <div class="admin-kpi-sub">GSTIN vetted vendors</div>
         </div>
 
         <!-- 3. Industrial Plants (Factories) -->
-        <div class="surface-card p-4 border-l-4 border-l-[#D97706] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Active Plants</span>
-                <div class="w-7 h-7 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card kpi-amber">
+            <div class="admin-kpi-label">
+                Active Plants
+                <div class="w-6 h-6 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-industry"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblActiveFactories" runat="server">0</span>
-                <span class="text-[10px] text-[#64748B] block mt-0.5">Procurement buyer units</span>
-            </div>
+            <div class="admin-kpi-val" id="lblActiveFactories" runat="server">0</div>
+            <div class="admin-kpi-sub">Procurement buyer units</div>
         </div>
 
         <!-- 4. Certified Technicians -->
-        <div class="surface-card p-4 border-l-4 border-l-[#0891B2] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Field Techs</span>
-                <div class="w-7 h-7 rounded bg-cyan-50 text-[#0891B2] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card" style="border-left-color: #0891B2;">
+            <div class="admin-kpi-label">
+                Field Techs
+                <div class="w-6 h-6 rounded bg-cyan-50 text-[#0891B2] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-user-wrench"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblActiveTechnicians" runat="server">0</span>
-                <span class="text-[10px] text-[#64748B] block mt-0.5">Available service engineers</span>
-            </div>
+            <div class="admin-kpi-val" id="lblActiveTechnicians" runat="server">0</div>
+            <div class="admin-kpi-sub">Available service engineers</div>
         </div>
 
         <!-- 5. Active Emergency SOS -->
-        <div class="surface-card p-4 border-l-4 border-l-[#EA580C] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#EA580C] uppercase">Emergency SOS</span>
-                <div class="w-7 h-7 rounded bg-orange-50 text-[#EA580C] flex items-center justify-center text-xs animate-pulse">
+        <div class="admin-kpi-card kpi-rose">
+            <div class="admin-kpi-label" style="color: #C2410C;">
+                Emergency SOS
+                <div class="w-6 h-6 rounded bg-orange-50 text-[#EA580C] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#EA580C]" id="lblActiveEmergency" runat="server">0</span>
-                <span class="text-[10px] text-[#EA580C] block mt-0.5">Open machine breakdowns</span>
-            </div>
+            <div class="admin-kpi-val text-[#EA580C]" id="lblActiveEmergency" runat="server">0</div>
+            <div class="admin-kpi-sub text-[#EA580C]">Open machine breakdowns</div>
         </div>
 
         <!-- 6. Open RFQs -->
-        <div class="surface-card p-4 border-l-4 border-l-[#6366F1] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Pending RFQs</span>
-                <div class="w-7 h-7 rounded bg-indigo-50 text-[#6366F1] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card kpi-purple">
+            <div class="admin-kpi-label">
+                Pending RFQs
+                <div class="w-6 h-6 rounded bg-indigo-50 text-[#6366F1] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblOpenRfqs" runat="server">0</span>
-                <span class="text-[10px] text-[#64748B] block mt-0.5">Quotations awaiting bids</span>
-            </div>
+            <div class="admin-kpi-val" id="lblOpenRfqs" runat="server">0</div>
+            <div class="admin-kpi-sub">Quotations awaiting bids</div>
         </div>
 
         <!-- 7. Total Orders -->
-        <div class="surface-card p-4 border-l-4 border-l-[#475569] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Total Orders</span>
-                <div class="w-7 h-7 rounded bg-slate-100 text-[#475569] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card" style="border-left-color: #475569;">
+            <div class="admin-kpi-label">
+                Total Orders
+                <div class="w-6 h-6 rounded bg-slate-100 text-[#475569] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-cart-flatbed"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblTotalOrders" runat="server">0</span>
-                <span class="text-[10px] text-[#64748B] block mt-0.5">Purchase consignments</span>
-            </div>
+            <div class="admin-kpi-val" id="lblTotalOrders" runat="server">0</div>
+            <div class="admin-kpi-sub">Purchase consignments</div>
         </div>
 
         <!-- 8. Platform GMV -->
-        <div class="surface-card p-4 border-l-4 border-l-[#10B981] flex flex-col justify-between">
-            <div class="flex items-center justify-between">
-                <span class="text-[11px] font-mono font-bold text-[#64748B] uppercase">Platform GMV</span>
-                <div class="w-7 h-7 rounded bg-emerald-50 text-[#10B981] flex items-center justify-center text-xs">
+        <div class="admin-kpi-card kpi-emerald">
+            <div class="admin-kpi-label">
+                Platform GMV
+                <div class="w-6 h-6 rounded bg-emerald-50 text-[#10B981] flex items-center justify-center text-xs">
                     <i class="fa-solid fa-indian-rupee-sign"></i>
                 </div>
             </div>
-            <div class="mt-2">
-                <span class="text-2xl font-black font-mono text-[#0F172A]" id="lblTotalGmv" runat="server">₹0</span>
-                <span class="text-[10px] text-[#059669] font-mono block mt-0.5">Total transaction volume</span>
-            </div>
+            <div class="admin-kpi-val" id="lblTotalGmv" runat="server">₹0</div>
+            <div class="admin-kpi-sub text-emerald-600 font-mono">Total transaction volume</div>
         </div>
     </div>
 
