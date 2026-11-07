@@ -1,4 +1,3 @@
-using IndustrialSparePartPortal.App_Code.Constants;
 using IndustrialSparePartPortal.App_Code.Helpers;
 using IndustrialSparePartPortal.App_Code.Logic;
 using System;
@@ -7,15 +6,9 @@ using System.Web.UI.WebControls;
 
 namespace IndustrialSparePartPortal.Factory.Quotations
 {
-    public partial class MyRequests : BasePage
+    public partial class MyRequests : FactoryBasePage
     {
         private readonly QuotationLogic _quotationLogic = new QuotationLogic();
-        private readonly UserLogic _userLogic = new UserLogic();
-
-        public MyRequests()
-        {
-            RequiredRole = RoleConstants.Factory;
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,14 +20,13 @@ namespace IndustrialSparePartPortal.Factory.Quotations
 
         private void LoadRequests()
         {
-            int factoryId = _userLogic.resolveFactoryId(SessionHelper.UserId.Value);
             string statusFilter = ddlStatusFilter.SelectedValue;
 
-            DataSet ds = _quotationLogic.selectRfqsByFactory(factoryId, statusFilter);
+            DataSet ds = _quotationLogic.selectRfqsByFactory(CurrentFactoryId, statusFilter);
             gvRequests.DataSource = (ds != null && ds.Tables.Count > 0) ? ds.Tables[0] : null;
             gvRequests.DataBind();
 
-            lblRequestsCount.Text = (ds != null && ds.Tables.Count > 0) ? ds.Tables[0].Rows.Count.ToString() : "0";
+            lblRequestsCount.InnerText = (ds != null && ds.Tables.Count > 0) ? ds.Tables[0].Rows.Count.ToString() : "0";
         }
 
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)

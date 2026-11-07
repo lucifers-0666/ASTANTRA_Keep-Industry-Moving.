@@ -1,7 +1,7 @@
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Factory.Master.cs" Inherits="IndustrialSparePartPortal.MasterPages.FactoryMaster" %>
 
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#F8FAFC]">
+<html lang="en" class="h-full bg-[#F1F3F5]">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,80 +12,166 @@
     <link rel="icon" type="image/png" sizes="32x32" href="<%= ResolveUrl("~/Content/images/brand/favicon-32.png") %>" />
     <link rel="icon" type="image/png" sizes="16x16" href="<%= ResolveUrl("~/Content/images/brand/favicon-16.png") %>" />
     <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
+    
+    <!-- CSS Dependencies -->
     <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/css/factory.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
     <!-- Google Fonts: Archivo, IBM Plex Sans, IBM Plex Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Local Chart.js for Factory Visual Analytics -->
+    <script src="<%= ResolveUrl("~/Content/lib/chartjs/chart.umd.min.js") %>"></script>
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="h-full flex flex-col font-['IBM_Plex_Sans',sans-serif] antialiased text-[#17212F] bg-[#F1F3F5]">
+<body class="h-full flex flex-col font-['IBM_Plex_Sans',sans-serif] antialiased text-[#0F172A] bg-[#F1F3F5]">
     <form id="form1" runat="server" class="flex flex-col min-h-full">
         
         <!-- Factory Authoritative Header -->
-        <header class="site-header" role="banner">
-            <div class="site-header-inner">
-                <!-- Brand Logo -->
-                <div class="flex items-center gap-3">
-                    <a href="~/Factory/Dashboard.aspx" runat="server" class="site-brand" aria-label="ASTANTRA Factory Workspace">
-                        <div class="site-brand-icon">
-                            <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol.svg") %>" alt="ASTANTRA Symbol" class="w-6 h-6 object-contain" />
+        <header class="factory-header no-print" role="banner">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    
+                    <!-- Left: Brand Logo & Workspace Identity -->
+                    <div class="flex items-center gap-6">
+                        <a href="~/Factory/Dashboard.aspx" runat="server" class="flex items-center gap-3 no-underline group" aria-label="ASTANTRA Factory Workspace">
+                            <div class="w-9 h-9 rounded-md bg-[#1769E0] flex items-center justify-center text-white shadow-xs group-hover:bg-[#1052B5] transition-colors">
+                                <i class="fa-solid fa-industry text-lg"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-['Archivo',sans-serif] font-black text-sm tracking-wider text-white">ASTANTRA</span>
+                                <span class="font-['IBM_Plex_Mono',monospace] text-[10px] uppercase font-bold text-sky-400 tracking-wider">Factory Workspace</span>
+                            </div>
+                        </a>
+
+                        <!-- Desktop Main Navigation -->
+                        <nav class="hidden lg:flex items-center gap-1" aria-label="Factory Navigation">
+                            <a id="navDashboard" runat="server" href="~/Factory/Dashboard.aspx" class="factory-nav-link">
+                                <i class="fa-solid fa-gauge-high text-xs"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            <a id="navSearch" runat="server" href="~/Factory/SpareParts/Search.aspx" class="factory-nav-link">
+                                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                                <span>Find Parts &amp; RFQ</span>
+                            </a>
+                            <a id="navRfqs" runat="server" href="~/Factory/Quotations/MyRequests.aspx" class="factory-nav-link">
+                                <i class="fa-solid fa-file-invoice text-xs"></i>
+                                <span>My RFQs</span>
+                            </a>
+                            <a id="navOrders" runat="server" href="~/Factory/Orders/MyOrders.aspx" class="factory-nav-link">
+                                <i class="fa-solid fa-boxes-packing text-xs"></i>
+                                <span>Purchase Orders</span>
+                            </a>
+                            <a id="navMachinery" runat="server" href="~/Factory/Machines/MyMachinery.aspx" class="factory-nav-link">
+                                <i class="fa-solid fa-gears text-xs"></i>
+                                <span>Plant Machinery</span>
+                            </a>
+                            <a id="navTechnicians" runat="server" href="~/Factory/Technicians/ServiceRequests.aspx" class="factory-nav-link">
+                                <i class="fa-solid fa-user-gear text-xs"></i>
+                                <span>Service Engineers</span>
+                            </a>
+                            <a id="navEmergency" runat="server" href="~/Public/Emergency.aspx" class="factory-nav-link factory-nav-link-emergency">
+                                <i class="fa-solid fa-triangle-exclamation text-xs text-orange-400 animate-pulse"></i>
+                                <span>Breakdown SOS</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Right: Buyer Identity & Quick Actions -->
+                    <div class="flex items-center gap-3">
+                        <div class="hidden sm:flex flex-col text-right">
+                            <div class="flex items-center justify-end gap-1.5">
+                                <span class="text-xs font-bold text-white truncate max-w-[200px]" id="lblFactoryName" runat="server">Industrial Buyer</span>
+                                <span class="px-1.5 py-0.5 rounded text-[9px] font-bold font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">VERIFIED</span>
+                            </div>
+                            <span class="text-[11px] text-slate-400 font-mono" id="lblFactoryLocation" runat="server">Operational Plant</span>
                         </div>
-                        <div class="site-brand-text">
-                            <span class="site-brand-title">ASTANTRA</span>
-                            <span class="site-brand-sub">FACTORY WORKSPACE</span>
-                        </div>
-                    </a>
+
+                        <!-- Profile Link -->
+                        <a href="~/Factory/Profile/PlantProfile.aspx" runat="server" class="w-8 h-8 rounded bg-slate-800 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white flex items-center justify-center text-xs transition-colors" title="Manage Plant Profile &amp; GSTIN">
+                            <i class="fa-solid fa-building-gear"></i>
+                        </a>
+
+                        <!-- Logout -->
+                        <a href="~/Account/Logout.aspx" runat="server" class="btn-secondary text-xs py-1.5 px-3 font-bold text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200" title="Sign out of factory portal">
+                            <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i>
+                            <span class="hidden sm:inline">Logout</span>
+                        </a>
+
+                        <!-- Mobile Hamburger Button -->
+                        <button type="button" class="lg:hidden text-slate-400 hover:text-white p-2 text-lg focus:outline-none" onclick="toggleFactoryMobileMenu()" aria-label="Toggle navigation">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Navigation Links -->
-                <nav class="site-desktop-nav">
-                    <a href="~/Factory/Dashboard.aspx" runat="server" class="site-nav-link">Dashboard</a>
-                    <a href="~/Factory/SpareParts/Search.aspx" runat="server" class="site-nav-link">Find Parts & RFQ</a>
-                    <a href="~/Factory/Quotations/MyRequests.aspx" runat="server" class="site-nav-link">My RFQs</a>
-                    <a href="~/Factory/Orders/MyOrders.aspx" runat="server" class="site-nav-link">My Orders</a>
-                    <a href="~/Factory/Technicians/ServiceRequests.aspx" runat="server" class="site-nav-link">Technicians</a>
-                    <a href="~/Public/Emergency.aspx" runat="server" class="site-nav-link site-nav-link-emergency">
-                        <i class="fa-solid fa-bolt text-xs"></i> Emergency
+                <!-- Mobile Responsive Drawer -->
+                <div id="factoryMobileNav" class="hidden lg:hidden py-3 border-t border-slate-800 space-y-1">
+                    <a href="~/Factory/Dashboard.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-gauge-high text-xs w-5"></i> Dashboard
                     </a>
-                </nav>
-
-                <!-- Profile & Account Info -->
-                <div class="site-header-actions">
-                    <div class="hidden sm:flex flex-col text-right">
-                        <span class="text-xs font-bold text-[#17212F]" id="lblFactoryName" runat="server">Industrial Buyer</span>
-                        <span class="status-pill status-pill-verified text-[10px]"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> VERIFIED BUYER</span>
-                    </div>
-                    <a href="~/Account/Logout.aspx" runat="server" class="btn-secondary text-xs py-1.5 px-3 font-bold text-red-600 hover:text-red-700">
-                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
+                    <a href="~/Factory/SpareParts/Search.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-magnifying-glass text-xs w-5"></i> Find Parts &amp; RFQ
+                    </a>
+                    <a href="~/Factory/Quotations/MyRequests.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-file-invoice text-xs w-5"></i> My RFQs
+                    </a>
+                    <a href="~/Factory/Orders/MyOrders.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-boxes-packing text-xs w-5"></i> Purchase Orders
+                    </a>
+                    <a href="~/Factory/Machines/MyMachinery.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-gears text-xs w-5"></i> Plant Machinery
+                    </a>
+                    <a href="~/Factory/Technicians/ServiceRequests.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-user-gear text-xs w-5"></i> Service Engineers
+                    </a>
+                    <a href="~/Public/Emergency.aspx" runat="server" class="factory-nav-link factory-nav-link-emergency w-full">
+                        <i class="fa-solid fa-triangle-exclamation text-xs w-5 text-orange-400"></i> Breakdown SOS
+                    </a>
+                    <a href="~/Factory/Profile/PlantProfile.aspx" runat="server" class="factory-nav-link w-full">
+                        <i class="fa-solid fa-building-gear text-xs w-5"></i> Plant Profile &amp; Settings
                     </a>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8" role="main">
+        <!-- Main Content Area -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6" role="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </main>
 
         <!-- Footer -->
-        <footer class="bg-white border-t border-[#D5DCE3] py-4 text-xs text-[#5F6B7A] mt-auto">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <p class="m-0">&copy; <%: DateTime.Now.Year %> ASTANTRA &middot; Factory Buyer Console &middot; Keep Industry Moving</p>
-                <div class="flex items-center gap-4 text-xs">
+        <footer class="bg-white border-t border-[#CBD5E1] py-4 text-xs text-[#64748B] mt-auto no-print">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="font-['Archivo',sans-serif] font-bold text-slate-800">ASTANTRA</span>
+                    <span>&copy; <%: DateTime.Now.Year %> &middot; Factory Buyer Procurement Workspace</span>
+                </div>
+                <div class="flex items-center gap-4 text-xs font-mono">
                     <a href="~/Public/WhyUs.aspx" runat="server" class="hover:text-[#1769E0]">Platform Differentiators</a>
-                    <a href="~/Public/Emergency.aspx" runat="server" class="text-[#E87519] font-bold">Emergency Protocol</a>
+                    <a href="~/Public/Emergency.aspx" runat="server" class="text-orange-600 font-bold hover:underline">Emergency Protocol</a>
+                    <a href="~/Factory/Profile/PlantProfile.aspx" runat="server" class="hover:text-[#1769E0]">Plant Profile</a>
                 </div>
             </div>
         </footer>
     </form>
-    <script src="<%= ResolveUrl("~/Content/js/site-shell.js") %>?v=<%= DateTime.Now.Ticks %>"></script>
+    
+    <script>
+        function toggleFactoryMobileMenu() {
+            var el = document.getElementById('factoryMobileNav');
+            if (el) {
+                el.classList.toggle('hidden');
+            }
+        }
+    </script>
     <asp:ContentPlaceHolder ID="ScriptsContent" runat="server">
     </asp:ContentPlaceHolder>
 </body>
 </html>
-

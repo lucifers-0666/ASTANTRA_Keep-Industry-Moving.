@@ -5,85 +5,95 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <!-- Page Header -->
-    <div class="bg-white rounded-[3px] border border-[#D5DCE3] p-6 mb-6 shadow-xs text-left">
+    <!-- Page Command Header -->
+    <div class="bg-white rounded-lg border border-[#CBD5E1] p-6 mb-6 shadow-xs text-left">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <span class="status-pill status-pill-verified text-[10px] mb-1.5 inline-block">COMMERCIAL RFQ MANAGEMENT</span>
-                <h1 class="text-xl sm:text-2xl font-black font-['Archivo',sans-serif] text-[#17212F] tracking-tight m-0">
-                    My Quotation Requests
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase bg-blue-100 text-blue-800 border border-blue-200 mb-1.5 inline-block">
+                    <i class="fa-solid fa-file-invoice mr-1"></i> Requisition Management
+                </span>
+                <h1 class="text-xl sm:text-2xl font-black font-['Archivo',sans-serif] text-slate-900 m-0">
+                    My Quotation Requests (RFQs)
                 </h1>
-                <p class="text-xs text-[#5F6B7A] m-0 mt-1">
-                    Monitor issued RFQs, check regional supplier quote activity, and compare binding price offers.
+                <p class="text-xs text-slate-500 m-0 mt-1 max-w-2xl">
+                    Monitor commercial RFQs broadcasted to verified suppliers, evaluate incoming competitive quotes, and award purchase orders.
                 </p>
             </div>
-            <a href="~/Factory/SpareParts/Search.aspx" runat="server" class="btn-primary text-xs py-2 px-4 font-bold">
-                <i class="fa-solid fa-plus mr-1"></i> New Request (RFQ)
+            <a href="~/Factory/SpareParts/Search.aspx" runat="server" class="btn-primary text-xs py-2 px-3.5 font-bold">
+                <i class="fa-solid fa-plus mr-1"></i> Issue New RFQ &rarr;
             </a>
         </div>
     </div>
 
-    <!-- Requests Table -->
-    <div class="bg-white rounded-[3px] border border-[#D5DCE3] shadow-xs overflow-hidden">
-        <div class="p-4 border-b border-[#D5DCE3] flex justify-between items-center bg-[#FAFAFA]">
-            <h2 class="text-xs font-bold font-['Archivo',sans-serif] uppercase tracking-wider text-[#17212F] m-0">
-                Active & Historical RFQs (<asp:Label ID="lblRequestsCount" runat="server" Text="0"></asp:Label>)
-            </h2>
-            <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged" CssClass="text-xs px-2.5 py-1.5 border border-[#D5DCE3] rounded-[3px]">
-                <asp:ListItem Value="" Text="All Statuses"></asp:ListItem>
-                <asp:ListItem Value="Pending" Text="Pending"></asp:ListItem>
-                <asp:ListItem Value="Quoted" Text="Quoted (Offers Available)"></asp:ListItem>
-                <asp:ListItem Value="Accepted" Text="Accepted"></asp:ListItem>
-                <asp:ListItem Value="Closed" Text="Closed"></asp:ListItem>
-            </asp:DropDownList>
+    <!-- Filter & Toolbar -->
+    <div class="factory-card mb-6">
+        <div class="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-mono font-bold uppercase text-slate-700">Filter RFQ Ledger</span>
+                <span class="text-xs text-slate-400 font-mono">Found: <strong id="lblRequestsCount" runat="server" class="text-slate-800">0</strong> requisitions</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <label class="text-xs text-slate-500 font-medium" for="<%= ddlStatusFilter.ClientID %>">Status:</label>
+                <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged" CssClass="form-select text-xs py-1.5 px-3">
+                    <asp:ListItem Value="" Text="All Statuses"></asp:ListItem>
+                    <asp:ListItem Value="Pending" Text="Pending (Broadcasting)"></asp:ListItem>
+                    <asp:ListItem Value="Quoted" Text="Quoted (Bids Ready)"></asp:ListItem>
+                    <asp:ListItem Value="Closed" Text="Closed / Awarded"></asp:ListItem>
+                </asp:DropDownList>
+            </div>
         </div>
 
-        <asp:GridView ID="gvRequests" runat="server" AutoGenerateColumns="False" DataKeyNames="RfqId" OnRowCommand="gvRequests_RowCommand" CssClass="w-full text-left text-xs border-collapse">
-            <HeaderStyle CssClass="bg-[#F1F3F5] text-[#5F6B7A] font-bold text-[11px] uppercase tracking-wider border-b border-[#D5DCE3] p-3" />
-            <RowStyle CssClass="border-b border-[#E1E6EB] hover:bg-[#F8FAFC]" />
-            <Columns>
-                <asp:TemplateField HeaderText="RFQ #" ItemStyle-CssClass="p-3 font-mono font-bold text-[#1769E0]">
-                    <ItemTemplate>
-                        RFQ-<%# Convert.ToInt32(Eval("RfqId")).ToString("D5") %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="PartNumber" HeaderText="Part Number" ItemStyle-CssClass="p-3 font-mono text-[#17212F]" />
-                <asp:BoundField DataField="PartName" HeaderText="Part Description" ItemStyle-CssClass="p-3 font-semibold text-[#17212F]" />
-                <asp:BoundField DataField="Quantity" HeaderText="Qty" ItemStyle-CssClass="p-3 text-center" />
-                <asp:TemplateField HeaderText="Target Price" ItemStyle-CssClass="p-3">
-                    <ItemTemplate>
-                        <%# Eval("TargetPrice") != DBNull.Value ? "₹" + Convert.ToDecimal(Eval("TargetPrice")).ToString("N2") : "<span class='text-slate-400'>Open</span>" %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Supplier Bids" ItemStyle-CssClass="p-3 text-center">
-                    <ItemTemplate>
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold <%# Convert.ToInt32(Eval("BidCount")) > 0 ? "bg-blue-100 text-blue-800" : "bg-slate-100 text-slate-600" %>">
-                            <%# Eval("BidCount") %> Quotes
-                        </span>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Status" ItemStyle-CssClass="p-3">
-                    <ItemTemplate>
-                        <span class="status-pill <%# Eval("Status").ToString() == "Pending" ? "bg-amber-100 text-amber-800 border-amber-300" : Eval("Status").ToString() == "Quoted" ? "bg-blue-100 text-blue-800 border-blue-300" : "bg-emerald-100 text-emerald-800 border-emerald-300" %> text-[10px]">
-                            <%# Eval("Status") %>
-                        </span>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="CreatedAt" HeaderText="Issued Date" DataFormatString="{0:dd-MMM-yyyy}" ItemStyle-CssClass="p-3 text-[#5F6B7A] text-[11px]" />
-                <asp:TemplateField HeaderText="Action" ItemStyle-CssClass="p-3 text-right">
-                    <ItemTemplate>
-                        <asp:Button ID="btnCompare" runat="server" Text="Compare Quotes" CommandName="CompareBids" CommandArgument='<%# Eval("RfqId") %>' Visible='<%# Convert.ToInt32(Eval("BidCount")) > 0 %>' CssClass="btn-primary text-[11px] py-1 px-2.5 font-bold cursor-pointer" />
-                        <span class="text-[11px] text-[#94A3B8]" style='<%# Convert.ToInt32(Eval("BidCount")) == 0 ? "" : "display:none;" %>'>Awaiting Bids</span>
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-            <EmptyDataTemplate>
-                <div class="p-8 text-center text-[#5F6B7A]">
-                    <i class="fa-solid fa-file-invoice text-2xl text-[#94A3B8] mb-2 block"></i>
-                    <p class="text-xs font-semibold m-0">No quotation requests found for this filter.</p>
-                </div>
-            </EmptyDataTemplate>
-        </asp:GridView>
+        <!-- RFQs Data Table -->
+        <div class="overflow-x-auto">
+            <asp:GridView ID="gvRequests" runat="server" AutoGenerateColumns="False" DataKeyNames="RfqId" OnRowCommand="gvRequests_RowCommand" CssClass="factory-table" GridLines="None">
+                <Columns>
+                    <asp:TemplateField HeaderText="RFQ Ref #" ItemStyle-CssClass="font-mono font-bold text-[#1769E0]">
+                        <ItemTemplate>
+                            RFQ-<%# Convert.ToInt32(Eval("RfqId")).ToString("D5") %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="PartNumber" HeaderText="Part Number" ItemStyle-CssClass="font-mono font-bold text-slate-800" />
+                    <asp:BoundField DataField="PartName" HeaderText="Component Description" ItemStyle-CssClass="font-semibold text-slate-900" />
+                    <asp:BoundField DataField="Quantity" HeaderText="Qty" ItemStyle-CssClass="font-mono font-bold text-center" />
+                    <asp:TemplateField HeaderText="Target Budget">
+                        <ItemTemplate>
+                            <%# Eval("TargetPrice") != DBNull.Value && Eval("TargetPrice") != null
+                                ? "₹" + Convert.ToDecimal(Eval("TargetPrice")).ToString("N0")
+                                : "<span class='text-slate-400'>Open Market</span>" %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Supplier Bids">
+                        <ItemTemplate>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-bold <%# Convert.ToInt32(Eval("BidCount")) > 0 ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-slate-100 text-slate-500 border border-slate-200" %>">
+                                <i class="fa-solid fa-tag mr-1 text-[9px]"></i>
+                                <%# Eval("BidCount") %> Quotes
+                            </span>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Status">
+                        <ItemTemplate>
+                            <span class='badge-status <%# Eval("Status").ToString() == "Quoted" ? "badge-quoted" : (Eval("Status").ToString() == "Closed" ? "badge-closed" : "badge-pending") %>'>
+                                <%# Eval("Status") %>
+                            </span>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="CreatedAt" HeaderText="Issued Date" DataFormatString="{0:dd MMM yyyy}" ItemStyle-CssClass="text-slate-500 font-mono text-[11px]" />
+                    <asp:TemplateField HeaderText="Actions" ItemStyle-CssClass="text-right">
+                        <ItemTemplate>
+                            <asp:Button ID="btnCompare" runat="server" Text="Compare Quotes &rarr;" CommandName="CompareBids" CommandArgument='<%# Eval("RfqId") %>' 
+                                        Visible='<%# Convert.ToInt32(Eval("BidCount")) > 0 %>' CssClass="btn-primary text-xs py-1 px-3" />
+                            <span class="text-[11px] text-slate-400 font-mono" style='<%# Convert.ToInt32(Eval("BidCount")) == 0 ? "" : "display:none;" %>'>Awaiting Bids</span>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <EmptyDataTemplate>
+                    <div class="p-8 text-center text-slate-400">
+                        <i class="fa-solid fa-file-invoice text-3xl mb-2 text-slate-300 block"></i>
+                        <p class="text-xs font-semibold text-slate-700 m-0">No quotation requests found for this filter.</p>
+                        <span class="text-[11px] text-slate-400">Issue an RFQ from the catalog to receive competitive price offers.</span>
+                    </div>
+                </EmptyDataTemplate>
+            </asp:GridView>
+        </div>
     </div>
 </asp:Content>
-

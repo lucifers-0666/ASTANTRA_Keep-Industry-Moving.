@@ -229,15 +229,90 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             }
         }
 
-        public bool acceptBidTransaction(int rfqId, int responseId, int factoryId, int supplierId, decimal totalAmount)
+        public int acceptBidTransaction(int rfqId, int responseId, int factoryId, int supplierId, decimal totalAmount)
         {
             using (SqlConnection con = getcon())
             {
-                using (SqlTransaction tx = con.BeginTransaction())
+                using (SqlTransaction tx = con.BeginTransaction(IsolationLevel.RepeatableRead))
                 {
                     try
                     {
-                        // 1. Mark selected response accepted
+                        // 1. Verify RFQ exists, belongs to this factory, and is still open for acceptance
+                        string sqlVerifyRfq = @"
+                            SELECT PartId, Quantity, Status 
+                            FROM QuotationRequests WITH (UPDLOCK, ROWLOCK)
+                            WHERE RfqId = @RfqId AND FactoryId = @FactoryId";
+
+                        int partId = 0;
+                        int quantity = 0;
+                        string rfqStatus = string.Empty;
+
+                        using (SqlCommand cmd = new SqlCommand(sqlVerifyRfq, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@RfqId", SqlDbType.Int) { Value = rfqId });
+                            cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
+                            using (SqlDataReader rdr = cmd.ExecuteReader())
+                            {
+                                if (rdr.Read())
+                                {
+                                    partId = Convert.ToInt32(rdr["PartId"]);
+                                    quantity = Convert.ToInt32(rdr["Quantity"]);
+                                    rfqStatus = rdr["Status"].ToString();
+                                }
+                                else
+                                {
+                                    // RFQ not found or does not belong to factory
+                                    tx.Rollback();
+                                    return 0;
+                                }
+                            }
+                        }
+
+                        if (rfqStatus != "Pending" && rfqStatus != "Quoted")
+                        {
+                            // Already closed, accepted, or cancelled - prevent duplicate acceptance
+                            tx.Rollback();
+                            return 0;
+                        }
+
+                        // 2. Verify selected bid belongs to this RFQ and fetch unit price
+                        string sqlVerifyBid = @"
+                            SELECT OfferedUnitPrice, Status 
+                            FROM QuotationResponses WITH (UPDLOCK, ROWLOCK)
+                            WHERE ResponseId = @ResponseId AND RfqId = @RfqId AND SupplierId = @SupplierId";
+
+                        decimal unitPrice = 0;
+                        string bidStatus = string.Empty;
+
+                        using (SqlCommand cmd = new SqlCommand(sqlVerifyBid, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@ResponseId", SqlDbType.Int) { Value = responseId });
+                            cmd.Parameters.Add(new SqlParameter("@RfqId", SqlDbType.Int) { Value = rfqId });
+                            cmd.Parameters.Add(new SqlParameter("@SupplierId", SqlDbType.Int) { Value = supplierId });
+                            using (SqlDataReader rdr = cmd.ExecuteReader())
+                            {
+                                if (rdr.Read())
+                                {
+                                    unitPrice = Convert.ToDecimal(rdr["OfferedUnitPrice"]);
+                                    bidStatus = rdr["Status"].ToString();
+                                }
+                                else
+                                {
+                                    // Bid does not match RFQ or supplier
+                                    tx.Rollback();
+                                    return 0;
+                                }
+                            }
+                        }
+
+                        if (bidStatus == "Accepted")
+                        {
+                            // Bid already accepted
+                            tx.Rollback();
+                            return 0;
+                        }
+
+                        // 3. Mark selected response accepted
                         string sqlAccept = "UPDATE QuotationResponses SET Status = 'Accepted' WHERE ResponseId = @ResponseId";
                         using (SqlCommand cmd = new SqlCommand(sqlAccept, con, tx))
                         {
@@ -245,7 +320,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                             cmd.ExecuteNonQuery();
                         }
 
-                        // 2. Mark remaining responses for this RFQ as rejected
+                        // 4. Mark remaining responses for this RFQ as rejected
                         string sqlRejectOthers = "UPDATE QuotationResponses SET Status = 'Rejected' WHERE RfqId = @RfqId AND ResponseId <> @ResponseId";
                         using (SqlCommand cmd = new SqlCommand(sqlRejectOthers, con, tx))
                         {
@@ -254,7 +329,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                             cmd.ExecuteNonQuery();
                         }
 
-                        // 3. Mark RFQ closed
+                        // 5. Mark RFQ closed
                         string sqlCloseRfq = "UPDATE QuotationRequests SET Status = 'Closed' WHERE RfqId = @RfqId AND FactoryId = @FactoryId";
                         using (SqlCommand cmd = new SqlCommand(sqlCloseRfq, con, tx))
                         {
@@ -263,27 +338,133 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                             cmd.ExecuteNonQuery();
                         }
 
-                        // 4. Generate order in Orders table
+                        // 6. Generate order in Orders table
+                        int newOrderId;
+                        string orderNo = string.Format("ORD-{0:yyyyMMdd}-{1:D4}", DateTime.Now, rfqId);
                         string sqlOrder = @"
                             INSERT INTO Orders (OrderNumber, FactoryId, SupplierId, TotalAmount, OrderStatus, IsEmergency, OrderDate)
-                            VALUES (@OrderNumber, @FactoryId, @SupplierId, @TotalAmount, 'Placed', 0, GETDATE())";
+                            VALUES (@OrderNumber, @FactoryId, @SupplierId, @TotalAmount, 'Placed', 0, GETDATE());
+                            SELECT SCOPE_IDENTITY();";
+
                         using (SqlCommand cmd = new SqlCommand(sqlOrder, con, tx))
                         {
-                            string orderNo = "ORD-" + DateTime.Now.ToString("yyyyMMdd") + "-" + rfqId;
                             cmd.Parameters.Add(new SqlParameter("@OrderNumber", SqlDbType.VarChar, 50) { Value = orderNo });
                             cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
                             cmd.Parameters.Add(new SqlParameter("@SupplierId", SqlDbType.Int) { Value = supplierId });
-                            cmd.Parameters.Add(new SqlParameter("@TotalAmount", SqlDbType.Decimal) { Value = totalAmount });
+                            cmd.Parameters.Add(new SqlParameter("@TotalAmount", SqlDbType.Decimal) { Value = totalAmount > 0 ? totalAmount : (unitPrice * quantity) });
+                            newOrderId = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        // 7. Insert line item into OrderItems table for complete traceability
+                        string sqlItem = @"
+                            INSERT INTO OrderItems (OrderId, PartId, Quantity, UnitPrice, TotalPrice, CreatedAt)
+                            VALUES (@OrderId, @PartId, @Quantity, @UnitPrice, @TotalPrice, GETDATE())";
+
+                        using (SqlCommand cmd = new SqlCommand(sqlItem, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@OrderId", SqlDbType.Int) { Value = newOrderId });
+                            cmd.Parameters.Add(new SqlParameter("@PartId", SqlDbType.Int) { Value = partId });
+                            cmd.Parameters.Add(new SqlParameter("@Quantity", SqlDbType.Int) { Value = quantity });
+                            cmd.Parameters.Add(new SqlParameter("@UnitPrice", SqlDbType.Decimal) { Value = unitPrice });
+                            cmd.Parameters.Add(new SqlParameter("@TotalPrice", SqlDbType.Decimal) { Value = (unitPrice * quantity) });
                             cmd.ExecuteNonQuery();
                         }
 
                         tx.Commit();
-                        return true;
+                        return newOrderId;
                     }
                     catch
                     {
                         tx.Rollback();
-                        return false;
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public DataSet getFactoryActivityTrend(int factoryId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT 
+                        CONVERT(VARCHAR(10), Dates.DateVal, 120) AS PeriodDate,
+                        ISNULL(RfqCounts.RfqTotal, 0) AS RfqCount,
+                        ISNULL(OrderCounts.OrderTotal, 0) AS OrderCount,
+                        ISNULL(OrderCounts.SpendTotal, 0.00) AS SpendTotal
+                    FROM (
+                        SELECT DISTINCT CAST(CreatedAt AS DATE) AS DateVal FROM QuotationRequests WHERE FactoryId = @FactoryId
+                        UNION
+                        SELECT DISTINCT CAST(OrderDate AS DATE) AS DateVal FROM Orders WHERE FactoryId = @FactoryId
+                    ) Dates
+                    LEFT JOIN (
+                        SELECT CAST(CreatedAt AS DATE) AS RDate, COUNT(*) AS RfqTotal
+                        FROM QuotationRequests
+                        WHERE FactoryId = @FactoryId
+                        GROUP BY CAST(CreatedAt AS DATE)
+                    ) RfqCounts ON Dates.DateVal = RfqCounts.RDate
+                    LEFT JOIN (
+                        SELECT CAST(OrderDate AS DATE) AS ODate, COUNT(*) AS OrderTotal, SUM(TotalAmount) AS SpendTotal
+                        FROM Orders
+                        WHERE FactoryId = @FactoryId
+                        GROUP BY CAST(OrderDate AS DATE)
+                    ) OrderCounts ON Dates.DateVal = OrderCounts.ODate
+                    ORDER BY Dates.DateVal ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public DataSet getFactoryOrderStatusCounts(int factoryId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT OrderStatus, COUNT(*) AS StatusCount
+                    FROM Orders
+                    WHERE FactoryId = @FactoryId
+                    GROUP BY OrderStatus";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public DataSet getFactoryServiceStatusCounts(int factoryId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT ServiceStatus, COUNT(*) AS StatusCount
+                    FROM ServiceRequests
+                    WHERE FactoryId = @FactoryId
+                    GROUP BY ServiceStatus";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
                     }
                 }
             }

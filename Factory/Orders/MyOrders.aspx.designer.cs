@@ -4,9 +4,8 @@ namespace IndustrialSparePartPortal.Factory.Orders
     {
         protected global::System.Web.UI.WebControls.Panel pnlAlert;
         protected global::System.Web.UI.WebControls.Label lblAlertMessage;
-        protected global::System.Web.UI.WebControls.Label lblOrdersCount;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOrdersCount;
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
         protected global::System.Web.UI.WebControls.GridView gvOrders;
     }
 }
-

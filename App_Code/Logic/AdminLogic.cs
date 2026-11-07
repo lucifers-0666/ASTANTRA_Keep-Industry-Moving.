@@ -169,7 +169,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             using (SqlConnection con = getcon())
             {
                 string sql = @"
-                    SELECT e.EmergencyRequestId, e.MachineName, e.PriorityLevel, e.LocationCity, e.Status, e.CreatedAt,
+                    SELECT e.EmergencyRequestId, e.MachineName, e.BreakdownDescription, e.PriorityLevel, e.LocationCity, e.Status, e.CreatedAt,
                            f.CompanyName AS FactoryCompany
                     FROM EmergencyRequests e
                     INNER JOIN Factories f ON e.FactoryId = f.FactoryId
@@ -198,7 +198,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             using (SqlConnection con = getcon())
             {
                 string sql = @"
-                    SELECT e.EmergencyRequestId, e.MachineName, e.PriorityLevel, e.LocationCity, e.Status, e.CreatedAt,
+                    SELECT e.EmergencyRequestId, e.MachineName, e.BreakdownDescription, e.PriorityLevel, e.LocationCity, e.Status, e.CreatedAt,
                            f.CompanyName AS FactoryCompany
                     FROM EmergencyRequests e
                     INNER JOIN Factories f ON e.FactoryId = f.FactoryId

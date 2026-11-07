@@ -1,0 +1,412 @@
+/* ==========================================================================
+   ASTANTRA — Factory Buyer Workspace Design System
+   Enterprise Procurement & Industrial Asset Management Styles
+   ========================================================================== */
+
+:root {
+    --factory-primary: #1769E0;
+    --factory-primary-hover: #1052B5;
+    --factory-primary-light: #EBF3FD;
+    --factory-navy: #0F172A;
+    --factory-surface: #FFFFFF;
+    --factory-bg: #F1F3F5;
+    --factory-border: #CBD5E1;
+    --factory-border-light: #E2E8F0;
+    --factory-text-dark: #0F172A;
+    --factory-text-muted: #64748B;
+    --factory-success: #059669;
+    --factory-success-bg: #ECFDF5;
+    --factory-warning: #D97706;
+    --factory-warning-bg: #FFFBEB;
+    --factory-danger: #DC2626;
+    --factory-danger-bg: #FEF2F2;
+    --factory-emergency: #EA580C;
+    --factory-emergency-bg: #FFF7ED;
+}
+
+/* 1. Global Shell & Navigation */
+.factory-header {
+    background: #0F172A;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.factory-nav-link {
+    color: #94A3B8;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 140ms ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.factory-nav-link:hover {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.factory-nav-link.active {
+    color: #FFFFFF;
+    background: rgba(23, 105, 224, 0.25);
+    border: 1px solid rgba(23, 105, 224, 0.4);
+}
+
+.factory-nav-link-emergency {
+    color: #FDBA74 !important;
+    background: rgba(234, 88, 12, 0.2) !important;
+    border: 1px solid rgba(234, 88, 12, 0.4) !important;
+}
+
+.factory-nav-link-emergency:hover {
+    background: rgba(234, 88, 12, 0.35) !important;
+    color: #FFFFFF !important;
+}
+
+/* 2. KPI Telemetry Cards */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+    background: var(--factory-surface);
+    border: 1px solid var(--factory-border-light);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-val {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--factory-text-dark);
+    font-family: 'Archivo', sans-serif;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.kpi-lbl {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--factory-text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 0.25rem;
+}
+
+.kpi-icon-wrap {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* 3. Surface Container Cards */
+.factory-card {
+    background: var(--factory-surface);
+    border: 1px solid var(--factory-border-light);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.factory-card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--factory-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FAFAFA;
+}
+
+.factory-card-title {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--factory-text-dark);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.factory-card-body {
+    padding: 1.25rem;
+}
+
+/* 4. Enterprise Data Tables */
+.factory-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.factory-table th {
+    background: #F8FAFC;
+    color: #475569;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--factory-border);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.factory-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--factory-border-light);
+    color: #1E293B;
+    vertical-align: middle;
+}
+
+.factory-table tr:hover td {
+    background-color: #F8FAFC;
+}
+
+/* 5. Status Badges */
+.badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.badge-operational,
+.badge-delivered,
+.badge-accepted {
+    background: var(--factory-success-bg);
+    color: var(--factory-success);
+    border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.badge-pending,
+.badge-placed,
+.badge-requested {
+    background: var(--factory-warning-bg);
+    color: var(--factory-warning);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.badge-processing,
+.badge-scheduled,
+.badge-quoted {
+    background: var(--factory-primary-light);
+    color: var(--factory-primary);
+    border: 1px solid rgba(23, 105, 224, 0.3);
+}
+
+.badge-shipped,
+.badge-dispatched {
+    background: #ECFEFF;
+    color: #0891B2;
+    border: 1px solid rgba(8, 145, 178, 0.3);
+}
+
+.badge-maintenance,
+.badge-critical {
+    background: var(--factory-emergency-bg);
+    color: var(--factory-emergency);
+    border: 1px solid rgba(234, 88, 12, 0.3);
+}
+
+.badge-offline,
+.badge-rejected,
+.badge-closed {
+    background: #F1F5F9;
+    color: #64748B;
+    border: 1px solid #CBD5E1;
+}
+
+/* 6. Form Controls & Buttons */
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #334155;
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin-bottom: 0.375rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    color: #0F172A;
+    background: #FFFFFF;
+    border: 1px solid var(--factory-border);
+    border-radius: 4px;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--factory-primary);
+    box-shadow: 0 0 0 2px rgba(23, 105, 224, 0.15);
+}
+
+.btn-primary {
+    background: var(--factory-primary) !important;
+    color: #FFFFFF !important;
+    border: 1px solid var(--factory-primary-hover) !important;
+    font-weight: 600 !important;
+    font-size: 0.8125rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: background 140ms ease !important;
+}
+
+.btn-primary:hover {
+    background: var(--factory-primary-hover) !important;
+}
+
+.btn-secondary {
+    background: #FFFFFF !important;
+    color: #334155 !important;
+    border: 1px solid var(--factory-border) !important;
+    font-weight: 600 !important;
+    font-size: 0.8125rem !important;
+    padding: 0.5rem 0.875rem !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: all 140ms ease !important;
+}
+
+.btn-secondary:hover {
+    background: #F8FAFC !important;
+    border-color: #94A3B8 !important;
+    color: #0F172A !important;
+}
+
+.btn-emergency {
+    background: var(--factory-emergency) !important;
+    color: #FFFFFF !important;
+    border: 1px solid #C2410C !important;
+    font-weight: 700 !important;
+    font-size: 0.8125rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.btn-emergency:hover {
+    background: #C2410C !important;
+}
+
+/* 7. Modal System */
+.factory-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 1rem;
+}
+
+.factory-modal-dialog {
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid var(--factory-border);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    animation: modalPop 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalPop {
+    0% { opacity: 0; transform: scale(0.96) translateY(4px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* 8. Print Stylesheet for Purchase Orders (A4 Document Format) */
+@media print {
+    .factory-header,
+    footer,
+    .no-print,
+    .btn-primary,
+    .btn-secondary,
+    .btn-emergency {
+        display: none !important;
+    }
+    
+    body, html {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 11pt !important;
+    }
+    
+    .print-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    
+    .factory-table th {
+        background: #F1F5F9 !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

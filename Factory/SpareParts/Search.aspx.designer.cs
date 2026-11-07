@@ -11,7 +11,7 @@ namespace IndustrialSparePartPortal.Factory.SpareParts
         protected global::System.Web.UI.WebControls.Button btnReset;
         protected global::System.Web.UI.WebControls.Panel pnlRfqModal;
         protected global::System.Web.UI.WebControls.Label lblModalPartName;
-        protected global::System.Web.UI.WebControls.Button btnCloseModal;
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseModal;
         protected global::System.Web.UI.WebControls.HiddenField hfSelectedPartId;
         protected global::System.Web.UI.WebControls.TextBox txtModalQuantity;
         protected global::System.Web.UI.WebControls.TextBox txtModalTargetPrice;
@@ -19,8 +19,7 @@ namespace IndustrialSparePartPortal.Factory.SpareParts
         protected global::System.Web.UI.WebControls.TextBox txtModalRemarks;
         protected global::System.Web.UI.WebControls.Button btnCancelModal;
         protected global::System.Web.UI.WebControls.Button btnSubmitModalRfq;
-        protected global::System.Web.UI.WebControls.Label lblPartsCount;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPartsCount;
         protected global::System.Web.UI.WebControls.GridView gvParts;
     }
 }
-

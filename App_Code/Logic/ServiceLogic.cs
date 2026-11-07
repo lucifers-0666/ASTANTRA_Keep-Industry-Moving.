@@ -58,6 +58,23 @@ namespace IndustrialSparePartPortal.App_Code.Logic
         {
             using (SqlConnection con = getcon())
             {
+                // Verify technician is active, verified, and currently on-duty
+                string verifySql = @"
+                    SELECT t.TechnicianId 
+                    FROM Technicians t
+                    INNER JOIN Users u ON t.UserId = u.UserId
+                    WHERE t.TechnicianId = @TechnicianId AND u.IsActive = 1 AND t.IsAvailable = 1";
+
+                using (SqlCommand verifyCmd = new SqlCommand(verifySql, con))
+                {
+                    verifyCmd.Parameters.Add(new SqlParameter("@TechnicianId", SqlDbType.Int) { Value = technicianId });
+                    object exists = verifyCmd.ExecuteScalar();
+                    if (exists == null || exists == DBNull.Value)
+                    {
+                        throw new InvalidOperationException("Selected service technician is currently not on duty or unavailable.");
+                    }
+                }
+
                 string sql = @"
                     INSERT INTO ServiceRequests (FactoryId, TechnicianId, ServiceType, IssueDescription, ScheduledDate, ServiceStatus, CreatedAt)
                     VALUES (@FactoryId, @TechnicianId, @ServiceType, @IssueDescription, @ScheduledDate, 'Requested', GETDATE());
@@ -77,23 +94,40 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             }
         }
 
-        public DataSet selectRequestsByFactory(int factoryId)
+        public DataSet selectRequestsByFactory(int factoryId, string statusFilter = null, string search = null)
         {
             using (SqlConnection con = getcon())
             {
                 string sql = @"
                     SELECT s.ServiceRequestId, s.ServiceType, s.IssueDescription, s.ScheduledDate, 
-                           s.ServiceStatus, s.CreatedAt,
-                           u.FullName AS TechnicianName, t.HourlyRate, t.City AS TechnicianCity
+                           s.ServiceStatus, s.CreatedAt, s.Notes,
+                           u.FullName AS TechnicianName, u.PhoneNumber AS TechnicianPhone,
+                           t.HourlyRate, t.City AS TechnicianCity, t.SkillSummary
                     FROM ServiceRequests s
                     INNER JOIN Technicians t ON s.TechnicianId = t.TechnicianId
                     INNER JOIN Users u ON t.UserId = u.UserId
-                    WHERE s.FactoryId = @FactoryId
-                    ORDER BY s.CreatedAt DESC";
+                    WHERE s.FactoryId = @FactoryId";
+
+                var paramList = new System.Collections.Generic.List<SqlParameter>();
+                paramList.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
+
+                if (!string.IsNullOrEmpty(statusFilter) && statusFilter != "All")
+                {
+                    sql += " AND s.ServiceStatus = @Status";
+                    paramList.Add(new SqlParameter("@Status", SqlDbType.VarChar, 20) { Value = statusFilter });
+                }
+
+                if (!string.IsNullOrEmpty(search))
+                {
+                    sql += " AND (s.ServiceType LIKE @Search OR s.IssueDescription LIKE @Search OR u.FullName LIKE @Search)";
+                    paramList.Add(new SqlParameter("@Search", SqlDbType.NVarChar, 100) { Value = "%" + search + "%" });
+                }
+
+                sql += " ORDER BY s.CreatedAt DESC";
 
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
-                    cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
+                    cmd.Parameters.AddRange(paramList.ToArray());
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         DataSet ds = new DataSet();

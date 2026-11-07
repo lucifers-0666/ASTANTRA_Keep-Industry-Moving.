@@ -9,54 +9,20 @@
 
 namespace IndustrialSparePartPortal.MasterPages
 {
-
-
     public partial class FactoryMaster
     {
-
-        /// <summary>
-        /// head control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// lblFactoryName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navDashboard;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navRfqs;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navOrders;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navMachinery;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navTechnicians;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor navEmergency;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFactoryName;
-
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblFactoryLocation;
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
-
-        /// <summary>
-        /// ScriptsContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptsContent;
     }
 }

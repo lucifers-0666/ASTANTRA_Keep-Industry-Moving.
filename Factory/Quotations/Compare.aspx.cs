@@ -1,4 +1,3 @@
-using IndustrialSparePartPortal.App_Code.Constants;
 using IndustrialSparePartPortal.App_Code.Helpers;
 using IndustrialSparePartPortal.App_Code.Logic;
 using System;
@@ -7,16 +6,10 @@ using System.Web.UI.WebControls;
 
 namespace IndustrialSparePartPortal.Factory.Quotations
 {
-    public partial class Compare : BasePage
+    public partial class Compare : FactoryBasePage
     {
         private readonly QuotationLogic _quotationLogic = new QuotationLogic();
-        private readonly UserLogic _userLogic = new UserLogic();
         private int _rfqId;
-
-        public Compare()
-        {
-            RequiredRole = RoleConstants.Factory;
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,8 +30,7 @@ namespace IndustrialSparePartPortal.Factory.Quotations
 
         private void LoadRfqSummary()
         {
-            int factoryId = _userLogic.resolveFactoryId(SessionHelper.UserId.Value);
-            DataSet ds = _quotationLogic.selectRfqById(_rfqId, factoryId);
+            DataSet ds = _quotationLogic.selectRfqById(_rfqId, CurrentFactoryId);
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -47,8 +39,8 @@ namespace IndustrialSparePartPortal.Factory.Quotations
                 lblPartName.InnerText = row["PartName"].ToString();
                 lblQuantity.InnerText = row["Quantity"].ToString();
                 lblTargetPrice.InnerText = row["TargetPrice"] != DBNull.Value 
-                    ? "₹" + Convert.ToDecimal(row["TargetPrice"]).ToString("N2") 
-                    : "Open";
+                    ? "₹" + Convert.ToDecimal(row["TargetPrice"]).ToString("N0") 
+                    : "Open Market";
             }
             else
             {
@@ -75,16 +67,16 @@ namespace IndustrialSparePartPortal.Factory.Quotations
                 decimal unitPrice = Convert.ToDecimal(gvBids.DataKeys[rowIndex].Values["OfferedUnitPrice"]);
                 int quantity = int.TryParse(lblQuantity.InnerText, out int q) ? q : 1;
                 decimal totalAmount = unitPrice * quantity;
-                int factoryId = _userLogic.resolveFactoryId(SessionHelper.UserId.Value);
 
-                if (_quotationLogic.acceptBidTransaction(_rfqId, responseId, factoryId, supplierId, totalAmount))
+                int orderId = _quotationLogic.acceptBidTransaction(_rfqId, responseId, CurrentFactoryId, supplierId, totalAmount);
+                if (orderId > 0)
                 {
-                    Response.Redirect("~/Factory/Orders/MyOrders.aspx?accepted=true");
+                    Response.Redirect(string.Format("~/Factory/Orders/OrderDetails.aspx?orderId={0}&created=true", orderId));
                 }
                 else
                 {
                     pnlAlert.Visible = true;
-                    lblAlertMessage.Text = "Failed to process quotation acceptance. Please retry.";
+                    lblAlertMessage.Text = "Failed to process quotation acceptance. The RFQ may have already been closed or the bid is no longer valid.";
                 }
             }
         }
