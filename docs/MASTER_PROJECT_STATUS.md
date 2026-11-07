@@ -130,3 +130,4 @@ For examination defense, the codebase demonstrates:
    - **Broken Access Control:** Server-side RBAC validation in `BasePage.cs` with dynamic clearance checks.
    - **Malicious Uploads:** Magic-byte inspection and server-side image re-encoding.
    - **Privilege Escalation:** Admin approval workflows required before vendor bidding or emergency dispatch.
+

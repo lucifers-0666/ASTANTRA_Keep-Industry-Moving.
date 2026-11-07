@@ -85,3 +85,4 @@ The database migrations are stored sequentially under `Database/Migrations/`:
 1. `01_Add_Technicians_Address.sql`: Added missing `Address NVARCHAR(255) NULL` column to `Technicians` table and updated baseline schema scripts.
 2. `02_Add_Users_ProfileImage.sql`: Added `ProfileImage NVARCHAR(350) NULL` column to `Users` table to support administrator profile portrait uploads.
 3. `03_Add_Permissions_And_RolePermissions.sql`: Added `Permissions` table, `RolePermissions` junction table with cascading foreign keys, and seeded 18 platform RBAC permissions.
+

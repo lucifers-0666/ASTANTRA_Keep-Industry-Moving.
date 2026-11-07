@@ -104,3 +104,4 @@ GO
 
 PRINT 'Granular permissions and role mappings seeded successfully.';
 GO
+
