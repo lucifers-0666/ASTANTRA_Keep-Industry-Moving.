@@ -66,3 +66,4 @@ In a multi-tenant B2B industrial procurement network, cross-tenant data leakage 
 | **SEC-T03** | Fleet asset isolation | Factory 1 & 2 query `MyMachinery.aspx` | Each factory sees only its own assets | **PASSED** |
 | **SEC-T04** | Profile isolation | Factory 1 & 2 query `PlantProfile.aspx` | Each factory sees only its own GSTIN/address | **PASSED** |
 | **SEC-T05** | Unauthorized role access | Unauthenticated / Supplier user queries `/Factory/*` | Redirected to `Login.aspx` or `AccessDenied.aspx` | **PASSED** |
+

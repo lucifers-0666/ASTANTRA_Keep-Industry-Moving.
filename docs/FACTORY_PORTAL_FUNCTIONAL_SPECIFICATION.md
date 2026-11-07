@@ -76,3 +76,4 @@ The Factory Buyer Workspace comprises 9 integrated Web Forms pages governed by `
    - Every read query includes `WHERE FactoryId = @FactoryId`.
    - Every write/update query includes `WHERE ... AND FactoryId = @FactoryId`.
    - Cross-tenant requests to `OrderDetails.aspx` or `Compare.aspx` return clean 404 / access restricted states without leaking metadata.
+

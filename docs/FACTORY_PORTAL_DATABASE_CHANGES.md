@@ -59,3 +59,4 @@ END;
    - `CreatedAt` and `UpdatedAt` timestamps tracked on all equipment records.
 4. **Order Items Atomic Population**:
    - `QuotationLogic.acceptBidTransaction` ensures that whenever an RFQ bid is accepted, both `Orders` and `OrderItems` records are inserted atomically within an ADO.NET SQL transaction, resolving previous empty order items anomalies.
+
