@@ -120,3 +120,4 @@
 | `Admin/Categories/ManageCategories.aspx` | 1440x900 | **PASS** | 5 part categories and 3 machine models display cleanly in dual tables. |
 | `Admin/Audit/AuditLogs.aspx` | 1440x900 | **PASS** | Real-time audit event stream displays timestamps, actors, and mutation payloads. |
 | MSBuild Compilation | Console | **PASS** | `IndustrialSparePartPortal -> bin\IndustrialSparePartPortal.dll` with 0 errors and 0 warnings. |
+

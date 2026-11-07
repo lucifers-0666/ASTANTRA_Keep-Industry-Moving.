@@ -217,66 +217,94 @@
     </div>
 
     <!-- MODAL 1: REGISTER NEW USER -->
-    <asp:Panel ID="pnlAddModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-lg p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
+    <asp:Panel ID="pnlAddModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-lg shadow-2xl">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs shadow-xs border border-blue-200">
                         <i class="fa-solid fa-user-plus"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Register New Platform User</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Register New Platform User</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">RBAC IDENTITY PROVISIONING &amp; CREDENTIAL SETUP</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseAddModal" runat="server" OnClick="btnCloseAddModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseAddModal" runat="server" OnClick="btnCloseAddModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <!-- Section 1: User Identity & Credentials -->
                 <div>
-                    <label class="form-label text-xs">Full Name / Entity Name <span class="text-rose-500">*</span></label>
-                    <asp:TextBox ID="txtAddFullName" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Ramesh Patel or Reliance Petrochem Ltd." />
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-id-card"></i> 1. Account Identity &amp; Sign-in Credentials
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Full Name / Entity Name <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddFullName" runat="server" CssClass="form-input text-xs" placeholder="e.g. Ramesh Patel or Reliance Petrochem Ltd." />
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Email Address <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddEmail" runat="server" TextMode="Email" CssClass="form-input text-xs font-mono" placeholder="user@domain.com" />
+                            <span class="admin-form-hint">Used as unique portal login identifier</span>
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Contact Phone Number</label>
+                            <asp:TextBox ID="txtAddPhone" runat="server" CssClass="form-input text-xs font-mono" placeholder="+91 98765 43210" />
+                            <span class="admin-form-hint">Direct contact for dispatch &amp; alerts</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label text-xs">Initial Password <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddPassword" runat="server" TextMode="Password" CssClass="form-input text-xs font-mono" placeholder="Minimum 6 characters" />
+                            <span class="admin-form-hint">Temporary credential; user changes on sign-in</span>
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Assigned System Role <span class="text-rose-500">*</span></label>
+                            <asp:DropDownList ID="ddlAddRole" runat="server" CssClass="form-input text-xs">
+                                <asp:ListItem Value="1" Text="1 - System Administrator"></asp:ListItem>
+                                <asp:ListItem Value="2" Text="2 - Factory Procurement Buyer"></asp:ListItem>
+                                <asp:ListItem Value="3" Text="3 - Stocking Spare-Part Supplier"></asp:ListItem>
+                                <asp:ListItem Value="4" Text="4 - Field Service Technician"></asp:ListItem>
+                            </asp:DropDownList>
+                            <span class="admin-form-hint">Enforces role-based UI access boundaries</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Email Address <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddEmail" runat="server" TextMode="Email" CssClass="form-input text-xs py-2 font-mono" placeholder="user@domain.com" />
+                <!-- Section 2: Platform Privileges & Verification Status -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-shield-halved"></i> 2. Platform Access &amp; Compliance Status
                     </div>
-                    <div>
-                        <label class="form-label text-xs">Phone Number</label>
-                        <asp:TextBox ID="txtAddPhone" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="+91 98765 43210" />
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="admin-checkbox-card flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-slate-800">
+                            <asp:CheckBox ID="chkAddIsActive" runat="server" Checked="true" />
+                            <div>
+                                <span class="block text-xs font-bold text-[#0F172A]">Account Active</span>
+                                <span class="block text-[10px] text-[#64748B]">Permits authentication and access to portal features</span>
+                            </div>
+                        </label>
+                        <label class="admin-checkbox-card flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-slate-800">
+                            <asp:CheckBox ID="chkAddIsVerified" runat="server" Checked="true" />
+                            <div>
+                                <span class="block text-xs font-bold text-[#0F172A]">Identity Verified</span>
+                                <span class="block text-[10px] text-[#64748B]">Vetted for transactions, RFQs and breakdown tickets</span>
+                            </div>
+                        </label>
                     </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Initial Password <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddPassword" runat="server" TextMode="Password" CssClass="form-input text-xs py-2 font-mono" placeholder="Minimum 6 characters" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">Assigned Role <span class="text-rose-500">*</span></label>
-                        <asp:DropDownList ID="ddlAddRole" runat="server" CssClass="form-input text-xs py-2">
-                            <asp:ListItem Value="1" Text="1 - Administrator"></asp:ListItem>
-                            <asp:ListItem Value="2" Text="2 - Factory Buyer"></asp:ListItem>
-                            <asp:ListItem Value="3" Text="3 - Spare-Part Supplier"></asp:ListItem>
-                            <asp:ListItem Value="4" Text="4 - Field Technician"></asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-6 pt-1">
-                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
-                        <asp:CheckBox ID="chkAddIsActive" runat="server" Checked="true" />
-                        Account Active
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
-                        <asp:CheckBox ID="chkAddIsVerified" runat="server" Checked="true" />
-                        Identity Verified
-                    </label>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelAdd" runat="server" Text="Cancel" OnClick="btnCloseAddModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSubmitAddUser" runat="server" Text="Save User Record" OnClick="btnSubmitAddUser_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>
@@ -284,62 +312,92 @@
     </asp:Panel>
 
     <!-- MODAL 2: EDIT USER RECORD -->
-    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-lg p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
+    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-lg shadow-2xl">
             <asp:HiddenField ID="hdnEditUserId" runat="server" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs shadow-xs border border-blue-200">
                         <i class="fa-solid fa-user-pen"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Edit User Account</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Edit User Account</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">UPDATE CREDENTIALS, ROLE PRIVILEGES &amp; SUSPENSION STATUS</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <!-- Section 1: Account Profile -->
                 <div>
-                    <label class="form-label text-xs">Full Name / Entity Name <span class="text-rose-500">*</span></label>
-                    <asp:TextBox ID="txtEditFullName" runat="server" CssClass="form-input text-xs py-2" />
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Email Address <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtEditEmail" runat="server" TextMode="Email" CssClass="form-input text-xs py-2 font-mono" />
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-id-card"></i> 1. Profile Information &amp; Assigned Role
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Full Name / Entity Name <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtEditFullName" runat="server" CssClass="form-input text-xs" />
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Email Address <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtEditEmail" runat="server" TextMode="Email" CssClass="form-input text-xs font-mono" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Phone Number</label>
+                            <asp:TextBox ID="txtEditPhone" runat="server" CssClass="form-input text-xs font-mono" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Role Assignment <span class="text-rose-500">*</span></label>
+                        <asp:DropDownList ID="ddlEditRole" runat="server" CssClass="form-input text-xs">
+                            <asp:ListItem Value="1" Text="1 - System Administrator"></asp:ListItem>
+                            <asp:ListItem Value="2" Text="2 - Factory Procurement Buyer"></asp:ListItem>
+                            <asp:ListItem Value="3" Text="3 - Stocking Spare-Part Supplier"></asp:ListItem>
+                            <asp:ListItem Value="4" Text="4 - Field Service Technician"></asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+
                     <div>
-                        <label class="form-label text-xs">Phone Number</label>
-                        <asp:TextBox ID="txtEditPhone" runat="server" CssClass="form-input text-xs py-2 font-mono" />
+                        <label class="form-label text-xs">Reset Account Password (Optional)</label>
+                        <asp:TextBox ID="txtEditPassword" runat="server" TextMode="Password" CssClass="form-input text-xs font-mono" placeholder="Leave empty to retain existing password" />
+                        <span class="admin-form-hint">Superadmin credential override: minimum 6 characters to reset access key.</span>
                     </div>
                 </div>
 
-                <div>
-                    <label class="form-label text-xs">Role Assignment <span class="text-rose-500">*</span></label>
-                    <asp:DropDownList ID="ddlEditRole" runat="server" CssClass="form-input text-xs py-2">
-                        <asp:ListItem Value="1" Text="1 - Administrator"></asp:ListItem>
-                        <asp:ListItem Value="2" Text="2 - Factory Buyer"></asp:ListItem>
-                        <asp:ListItem Value="3" Text="3 - Spare-Part Supplier"></asp:ListItem>
-                        <asp:ListItem Value="4" Text="4 - Field Technician"></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-
-                <div class="flex items-center gap-6 pt-1">
-                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
-                        <asp:CheckBox ID="chkEditIsActive" runat="server" />
-                        Account Active
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700">
-                        <asp:CheckBox ID="chkEditIsVerified" runat="server" />
-                        Identity Verified
-                    </label>
+                <!-- Section 2: Account Governance & Security -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-shield-halved"></i> 2. Platform Access &amp; Compliance Status
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="admin-checkbox-card flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-slate-800">
+                            <asp:CheckBox ID="chkEditIsActive" runat="server" />
+                            <div>
+                                <span class="block text-xs font-bold text-[#0F172A]">Account Active</span>
+                                <span class="block text-[10px] text-[#64748B]">Uncheck to deactivate/suspend user access immediately</span>
+                            </div>
+                        </label>
+                        <label class="admin-checkbox-card flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-slate-800">
+                            <asp:CheckBox ID="chkEditIsVerified" runat="server" />
+                            <div>
+                                <span class="block text-xs font-bold text-[#0F172A]">Identity Verified</span>
+                                <span class="block text-[10px] text-[#64748B]">Controls badge status across directories and RFQs</span>
+                            </div>
+                        </label>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCloseEditModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSubmitEditUser" runat="server" Text="Update Account" OnClick="btnSubmitEditUser_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>

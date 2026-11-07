@@ -137,71 +137,98 @@
     </div>
 
     <!-- MODAL: REGISTER / EDIT MASTER PART SPECIFICATION -->
-    <asp:Panel ID="pnlPartModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-xl p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+    <asp:Panel ID="pnlPartModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-xl shadow-2xl">
             <asp:HiddenField ID="hdnPartId" runat="server" Value="0" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-orange-50 text-[#EA580C] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-orange-50 text-[#EA580C] flex items-center justify-center text-xs shadow-xs border border-orange-200">
                         <i class="fa-solid fa-boxes-stacked"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0" id="lblPartModalTitle" runat="server">Master Part Record</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0" id="lblPartModalTitle" runat="server">Master Part Record</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">OEM CATALOG &amp; TECHNICAL COMPATIBILITY SPECIFICATION</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnClosePartModal" runat="server" OnClick="btnClosePartModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnClosePartModal" runat="server" OnClick="btnClosePartModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">OEM Part Number <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtPartNumber" runat="server" CssClass="form-input text-xs py-2 font-mono font-bold" placeholder="e.g. PART-BRG-005" />
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <!-- Section 1: Part Identity -->
+                <div>
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-barcode"></i> 1. Component Identity &amp; Nomenclature
                     </div>
-                    <div>
-                        <label class="form-label text-xs">Part Component Name <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtPartName" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Spherical Roller Bearing" />
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label text-xs">OEM Part Number <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtPartNumber" runat="server" CssClass="form-input text-xs font-mono font-bold" placeholder="e.g. PART-BRG-005" />
+                            <span class="admin-form-hint">Unique alphanumeric manufacturer identifier.</span>
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Part Component Name <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtPartName" runat="server" CssClass="form-input text-xs" placeholder="e.g. Spherical Roller Bearing" />
+                            <span class="admin-form-hint">Standard industrial technical naming.</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Category Taxonomy <span class="text-rose-500">*</span></label>
-                        <asp:DropDownList ID="ddlModalCategory" runat="server" CssClass="form-input text-xs py-2"></asp:DropDownList>
+                <!-- Section 2: Taxonomy & Equipment -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-sitemap"></i> 2. Category Taxonomy &amp; Compatibility
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Category Taxonomy <span class="text-rose-500">*</span></label>
+                            <asp:DropDownList ID="ddlModalCategory" runat="server" CssClass="form-input text-xs"></asp:DropDownList>
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Compatible Machinery</label>
+                            <asp:DropDownList ID="ddlModalMachine" runat="server" CssClass="form-input text-xs">
+                                <asp:ListItem Value="" Text="Universal (Any Industrial Machinery)"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
                     </div>
                     <div>
-                        <label class="form-label text-xs">Compatible Machinery</label>
-                        <asp:DropDownList ID="ddlModalMachine" runat="server" CssClass="form-input text-xs py-2">
-                            <asp:ListItem Value="" Text="Universal (Any Industrial Machinery)"></asp:ListItem>
+                        <label class="form-label text-xs">Unit of Measure (UOM)</label>
+                        <asp:DropDownList ID="ddlModalUom" runat="server" CssClass="form-input text-xs">
+                            <asp:ListItem Value="Piece" Text="Piece (Single Unit)"></asp:ListItem>
+                            <asp:ListItem Value="Set" Text="Set (Paired Assembly)"></asp:ListItem>
+                            <asp:ListItem Value="Meter" Text="Meter (Length / Cable / Hose)"></asp:ListItem>
+                            <asp:ListItem Value="Pack" Text="Pack (Multi-unit Pack)"></asp:ListItem>
+                            <asp:ListItem Value="Box" Text="Box"></asp:ListItem>
+                            <asp:ListItem Value="Kg" Text="Kg (Weight / Raw Material)"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>
 
-                <div>
-                    <label class="form-label text-xs">Unit of Measure (UOM)</label>
-                    <asp:DropDownList ID="ddlModalUom" runat="server" CssClass="form-input text-xs py-2">
-                        <asp:ListItem Value="Piece" Text="Piece (Single Unit)"></asp:ListItem>
-                        <asp:ListItem Value="Set" Text="Set (Paired Assembly)"></asp:ListItem>
-                        <asp:ListItem Value="Meter" Text="Meter (Length / Cable / Hose)"></asp:ListItem>
-                        <asp:ListItem Value="Pack" Text="Pack (Multi-unit Pack)"></asp:ListItem>
-                        <asp:ListItem Value="Box" Text="Box"></asp:ListItem>
-                        <asp:ListItem Value="Kg" Text="Kg (Weight / Raw Material)"></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-
-                <div>
-                    <label class="form-label text-xs">Engineering Specifications &amp; Technical Attributes</label>
-                    <asp:TextBox ID="txtSpecs" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs py-2 font-mono" placeholder="Inner Dia: 50mm, Outer Dia: 90mm, Width: 20mm, Load: 45kN, IP65" />
-                </div>
-
-                <div>
-                    <label class="form-label text-xs">Application Scope &amp; Notes</label>
-                    <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs py-2" placeholder="Used in high-temperature drive shafts..." />
+                <!-- Section 3: Engineering Attributes -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-microchip"></i> 3. Technical Specifications &amp; Application Notes
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="form-label text-xs">Engineering Specifications &amp; Technical Attributes</label>
+                            <asp:TextBox ID="txtSpecs" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs font-mono" placeholder="Inner Dia: 50mm, Outer Dia: 90mm, Width: 20mm, Load: 45kN, IP65" />
+                            <span class="admin-form-hint">Physical tolerances, materials, electrical or thermal ratings.</span>
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Application Scope &amp; Maintenance Guidance</label>
+                            <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs" placeholder="Used in high-temperature drive shafts..." />
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelPart" runat="server" Text="Cancel" OnClick="btnClosePartModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSavePart" runat="server" Text="Save Part Record" OnClick="btnSavePart_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>

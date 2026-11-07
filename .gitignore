@@ -60,5 +60,20 @@ files/
 .playwright-mcp/
 sparefinder-ai-setup/
 
+# User uploads (keep directory structures via .gitkeep)
+Uploads/*
+!Uploads/**/
+!Uploads/**/.gitkeep
+Uploads/Avatars/*
+!Uploads/Avatars/.gitkeep
+Uploads/Attachments/*
+!Uploads/Attachments/.gitkeep
+Uploads/TechnicianDocuments/*
+!Uploads/TechnicianDocuments/.gitkeep
+Uploads/SupplierDocuments/*
+!Uploads/SupplierDocuments/.gitkeep
+
+
+
 
 

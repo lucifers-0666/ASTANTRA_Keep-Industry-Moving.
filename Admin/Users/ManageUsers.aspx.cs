@@ -315,6 +315,38 @@ namespace IndustrialSparePartPortal.Admin.Users
                         Request.UserHostAddress
                     );
 
+                    // Check for optional superadmin password reset
+                    string newPassword = txtEditPassword.Text.Trim();
+                    if (!string.IsNullOrEmpty(newPassword))
+                    {
+                        if (newPassword.Length < 6)
+                        {
+                            ShowAlert(false, "User details updated, but password reset failed: New password must be at least 6 characters.");
+                            return;
+                        }
+
+                        string pwdErr;
+                        bool pwdSuccess = _userLogic.resetUserPasswordByAdmin(userId, newPassword, out pwdErr);
+                        if (pwdSuccess)
+                        {
+                            _auditLogic.logAction(
+                                SessionHelper.UserId,
+                                "ADMIN_RESET_PASSWORD",
+                                "Users",
+                                userId,
+                                null,
+                                $"Admin reset password for user: {email}",
+                                Request.UserHostAddress
+                            );
+                        }
+                        else
+                        {
+                            ShowAlert(false, "User details updated, but password reset failed: " + pwdErr);
+                            return;
+                        }
+                    }
+
+                    txtEditPassword.Text = string.Empty;
                     pnlEditModal.Visible = false;
                     ShowAlert(true, $"User account #{userId} ({fullName}) updated successfully.");
                     LoadUsers();

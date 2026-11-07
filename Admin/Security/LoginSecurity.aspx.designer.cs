@@ -6,3 +6,4 @@ namespace IndustrialSparePartPortal.Admin.Security
         protected global::System.Web.UI.WebControls.GridView gvSecurityLogs;
     }
 }
+

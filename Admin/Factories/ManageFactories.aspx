@@ -136,81 +136,108 @@
     </div>
 
     <!-- MODAL 1: REGISTER NEW INDUSTRIAL PLANT -->
-    <asp:Panel ID="pnlAddModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-xl p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs">
+    <asp:Panel ID="pnlAddModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-xl shadow-2xl">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs shadow-xs border border-amber-200">
                         <i class="fa-solid fa-industry"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Register New Industrial Plant</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Register New Industrial Plant</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">BUYER PROCUREMENT ACCOUNT &amp; FACILITY PROVISIONING</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseAddModal" runat="server" OnClick="btnCloseAddModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseAddModal" runat="server" OnClick="btnCloseAddModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Company / Plant Name <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddCompanyName" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Gujarat Heavy Machinery Works" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">Industry Sector <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddIndustryType" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Petrochemical, Automotive, Steel" />
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Login Email <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddEmail" runat="server" TextMode="Email" CssClass="form-input text-xs py-2 font-mono" placeholder="procurement@plant.com" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">Initial Password <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddPassword" runat="server" TextMode="Password" CssClass="form-input text-xs py-2 font-mono" placeholder="Minimum 6 characters" />
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Authorized Contact Person <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddContactPerson" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Rajesh Shah (Plant Head)" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">Phone Number <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddPhone" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="+91 98250 12345" />
-                    </div>
-                </div>
-
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <!-- Section 1: Enterprise Profile -->
                 <div>
-                    <label class="form-label text-xs">Plant Facility Address</label>
-                    <asp:TextBox ID="txtAddAddress" runat="server" CssClass="form-input text-xs py-2" placeholder="Plot No. 42, GIDC Industrial Estate" />
-                </div>
-
-                <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="form-label text-xs">City <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtAddCity" runat="server" CssClass="form-input text-xs py-2" placeholder="Ahmedabad" />
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-building"></i> 1. Manufacturing Enterprise Identity
                     </div>
-                    <div>
-                        <label class="form-label text-xs">State</label>
-                        <asp:TextBox ID="txtAddState" runat="server" CssClass="form-input text-xs py-2" placeholder="Gujarat" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">Pincode</label>
-                        <asp:TextBox ID="txtAddPincode" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="382445" />
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label text-xs">Company / Plant Name <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddCompanyName" runat="server" CssClass="form-input text-xs" placeholder="e.g. Gujarat Heavy Machinery Works" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Industry Sector <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddIndustryType" runat="server" CssClass="form-input text-xs" placeholder="e.g. Petrochemical, Automotive, Steel" />
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <label class="form-label text-xs">GSTIN Tax Registration Number</label>
-                    <asp:TextBox ID="txtAddGstin" runat="server" CssClass="form-input text-xs py-2 font-mono uppercase" placeholder="24AAACG1234F1Z5" />
+                <!-- Section 2: Platform Credentials & Representative -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-user-lock"></i> 2. Platform Authentication &amp; Representative
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Login Email <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddEmail" runat="server" TextMode="Email" CssClass="form-input text-xs font-mono" placeholder="procurement@plant.com" />
+                            <span class="admin-form-hint">Used for primary login and RFQ dispatch alerts</span>
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Initial Password <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddPassword" runat="server" TextMode="Password" CssClass="form-input text-xs font-mono" placeholder="Minimum 6 characters" />
+                            <span class="admin-form-hint">Temporary credential; user can change after login</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label text-xs">Authorized Contact Person <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddContactPerson" runat="server" CssClass="form-input text-xs" placeholder="e.g. Rajesh Shah (Plant Head)" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Contact Phone Number <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddPhone" runat="server" CssClass="form-input text-xs font-mono" placeholder="+91 98250 12345" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Facility Location & Statutory Tax -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-location-dot"></i> 3. Facility Location &amp; Statutory GSTIN
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Plant Facility Address</label>
+                        <asp:TextBox ID="txtAddAddress" runat="server" CssClass="form-input text-xs" placeholder="Plot No. 42, GIDC Industrial Estate, Phase II" />
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">City <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddCity" runat="server" CssClass="form-input text-xs" placeholder="Ahmedabad" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">State</label>
+                            <asp:TextBox ID="txtAddState" runat="server" CssClass="form-input text-xs" placeholder="Gujarat" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Pincode</label>
+                            <asp:TextBox ID="txtAddPincode" runat="server" CssClass="form-input text-xs font-mono" placeholder="382445" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label text-xs">GSTIN Tax Registration Number</label>
+                        <asp:TextBox ID="txtAddGstin" runat="server" CssClass="form-input text-xs font-mono uppercase" placeholder="24AAACG1234F1Z5" />
+                        <span class="admin-form-hint">15-character statutory alphanumeric GST identifier</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelAdd" runat="server" Text="Cancel" OnClick="btnCloseAddModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSubmitAddFactory" runat="server" Text="Register Plant Facility" OnClick="btnSubmitAddFactory_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>
@@ -218,67 +245,91 @@
     </asp:Panel>
 
     <!-- MODAL 2: EDIT INDUSTRIAL PLANT -->
-    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-xl p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-xl shadow-2xl">
             <asp:HiddenField ID="hdnEditFactoryId" runat="server" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-amber-50 text-[#D97706] flex items-center justify-center text-xs shadow-xs border border-amber-200">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Edit Plant Profile</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Edit Plant Profile</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">UPDATE FACILITY SPECIFICATIONS &amp; STATUTORY DETAILS</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Company / Plant Name <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtEditCompanyName" runat="server" CssClass="form-input text-xs py-2" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">Industry Sector</label>
-                        <asp:TextBox ID="txtEditIndustryType" runat="server" CssClass="form-input text-xs py-2" />
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="form-label text-xs">Authorized Contact Person <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtEditContactPerson" runat="server" CssClass="form-input text-xs py-2" />
-                    </div>
-                    <div>
-                        <label class="form-label text-xs">GSTIN Tax Registration</label>
-                        <asp:TextBox ID="txtEditGstin" runat="server" CssClass="form-input text-xs py-2 font-mono uppercase" />
-                    </div>
-                </div>
-
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <!-- Section 1: Enterprise Profile -->
                 <div>
-                    <label class="form-label text-xs">Facility Address</label>
-                    <asp:TextBox ID="txtEditAddress" runat="server" CssClass="form-input text-xs py-2" />
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-building"></i> 1. Manufacturing Enterprise Identity
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label text-xs">Company / Plant Name <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtEditCompanyName" runat="server" CssClass="form-input text-xs" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Industry Sector</label>
+                            <asp:TextBox ID="txtEditIndustryType" runat="server" CssClass="form-input text-xs" />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="form-label text-xs">City <span class="text-rose-500">*</span></label>
-                        <asp:TextBox ID="txtEditCity" runat="server" CssClass="form-input text-xs py-2" />
+                <!-- Section 2: Contact & Tax -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-user-tie"></i> 2. Authorized Representative &amp; Compliance
                     </div>
-                    <div>
-                        <label class="form-label text-xs">State</label>
-                        <asp:TextBox ID="txtEditState" runat="server" CssClass="form-input text-xs py-2" />
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label text-xs">Authorized Contact Person <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtEditContactPerson" runat="server" CssClass="form-input text-xs" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">GSTIN Tax Registration</label>
+                            <asp:TextBox ID="txtEditGstin" runat="server" CssClass="form-input text-xs font-mono uppercase" />
+                        </div>
                     </div>
-                    <div>
-                        <label class="form-label text-xs">Pincode</label>
-                        <asp:TextBox ID="txtEditPincode" runat="server" CssClass="form-input text-xs py-2 font-mono" />
+                </div>
+
+                <!-- Section 3: Physical Location -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-location-dot"></i> 3. Facility Physical Location
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Facility Address</label>
+                        <asp:TextBox ID="txtEditAddress" runat="server" CssClass="form-input text-xs" />
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="form-label text-xs">City <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtEditCity" runat="server" CssClass="form-input text-xs" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">State</label>
+                            <asp:TextBox ID="txtEditState" runat="server" CssClass="form-input text-xs" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Pincode</label>
+                            <asp:TextBox ID="txtEditPincode" runat="server" CssClass="form-input text-xs font-mono" />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCloseEditModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSubmitEditFactory" runat="server" Text="Update Facility" OnClick="btnSubmitEditFactory_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>

@@ -22,6 +22,16 @@ namespace IndustrialSparePartPortal.MasterPages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// imgAdminAvatar control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image imgAdminAvatar;
+        
+        /// <summary>
+        /// lblAdminInitials control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblAdminInitials;
+
+        /// <summary>
         /// lblAdminName control.
         /// </summary>
         /// <remarks>

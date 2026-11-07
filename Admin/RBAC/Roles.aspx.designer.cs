@@ -6,3 +6,4 @@ namespace IndustrialSparePartPortal.Admin.RBAC
         protected global::System.Web.UI.WebControls.GridView gvRoles;
     }
 }
+

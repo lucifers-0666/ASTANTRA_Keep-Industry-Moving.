@@ -123,9 +123,10 @@
     </div>
 
     <!-- Main Split Section: Live Emergency Alerts & System Roster -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 admin-animate-enter admin-stagger-2">
-        <!-- Live Emergency SOS Monitor (High Priority Left/Top Column) -->
-        <div class="lg:col-span-7 space-y-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 admin-animate-enter admin-stagger-2 items-start">
+        <!-- Live Emergency SOS Monitor & System Registrations (High Priority Left Column - Expanded to 8 Cols) -->
+        <div class="lg:col-span-7 xl:col-span-8 space-y-6 min-w-0">
+            <!-- Emergency SOS Table -->
             <div class="table-container shadow-xs">
                 <div class="px-5 py-3.5 border-b border-[#CBD5E1] flex justify-between items-center bg-white">
                     <div class="flex items-center gap-2">
@@ -139,28 +140,30 @@
                     </a>
                 </div>
                 
-                <asp:GridView ID="gvEmergencies" runat="server" AutoGenerateColumns="false" CssClass="table-custom" GridLines="None" EmptyDataText="No active emergency breakdown alerts at this time. All factory lines operational.">
-                    <Columns>
-                        <asp:BoundField DataField="EmergencyRequestId" HeaderText="ID" HeaderStyle-CssClass="w-12 font-mono" ItemStyle-CssClass="font-mono text-xs font-bold" />
-                        <asp:BoundField DataField="FactoryCompany" HeaderText="Factory" ItemStyle-CssClass="font-semibold text-xs" />
-                        <asp:BoundField DataField="MachineName" HeaderText="Machine / Unit" ItemStyle-CssClass="text-xs font-mono" />
-                        <asp:TemplateField HeaderText="Priority">
-                            <ItemTemplate>
-                                <span class='<%# Eval("PriorityLevel").ToString() == "Critical" ? "status-pill status-pill-emergency font-bold text-[10px]" : "status-pill status-pill-stock text-[10px]" %>'>
-                                    <%# Eval("PriorityLevel") %>
-                                </span>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:BoundField DataField="LocationCity" HeaderText="City" ItemStyle-CssClass="text-xs" />
-                        <asp:TemplateField HeaderText="Status">
-                            <ItemTemplate>
-                                <span class="status-pill status-pill-pending text-[10px] font-mono">
-                                    <%# Eval("Status") %>
-                                </span>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                <div class="overflow-x-auto w-full">
+                    <asp:GridView ID="gvEmergencies" runat="server" AutoGenerateColumns="false" CssClass="table-custom min-w-[620px]" GridLines="None" EmptyDataText="No active emergency breakdown alerts at this time. All factory lines operational.">
+                        <Columns>
+                            <asp:BoundField DataField="EmergencyRequestId" HeaderText="ID" HeaderStyle-CssClass="w-12 font-mono" ItemStyle-CssClass="font-mono text-xs font-bold" />
+                            <asp:BoundField DataField="FactoryCompany" HeaderText="Factory" ItemStyle-CssClass="font-semibold text-xs whitespace-nowrap" />
+                            <asp:BoundField DataField="MachineName" HeaderText="Machine / Unit" ItemStyle-CssClass="text-xs font-mono whitespace-nowrap" />
+                            <asp:TemplateField HeaderText="Priority">
+                                <ItemTemplate>
+                                    <span class='<%# Eval("PriorityLevel").ToString() == "Critical" ? "status-pill status-pill-emergency font-bold text-[10px]" : "status-pill status-pill-stock text-[10px]" %>'>
+                                        <%# Eval("PriorityLevel") %>
+                                    </span>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="LocationCity" HeaderText="City" ItemStyle-CssClass="text-xs whitespace-nowrap" />
+                            <asp:TemplateField HeaderText="Status">
+                                <ItemTemplate>
+                                    <span class="status-pill status-pill-pending text-[10px] font-mono">
+                                        <%# Eval("Status") %>
+                                    </span>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
             </div>
 
             <!-- Platform Registered User Roster Table -->
@@ -174,33 +177,35 @@
                     </a>
                 </div>
                 
-                <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" CssClass="table-custom" GridLines="None">
-                    <Columns>
-                        <asp:BoundField DataField="UserId" HeaderText="ID" HeaderStyle-CssClass="w-12 font-mono" ItemStyle-CssClass="font-mono text-xs" />
-                        <asp:BoundField DataField="FullName" HeaderText="Full Name / Entity" ItemStyle-CssClass="font-bold text-xs" />
-                        <asp:BoundField DataField="Email" HeaderText="Email Address" ItemStyle-CssClass="font-mono text-xs text-[#64748B]" />
-                        <asp:TemplateField HeaderText="Role">
-                            <ItemTemplate>
-                                <span class="spec-tag spec-tag-blue text-[10px] font-mono">
-                                    <%# Eval("RoleName") %>
-                                </span>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Verification">
-                            <ItemTemplate>
-                                <span class='<%# Convert.ToBoolean(Eval("IsVerified")) ? "status-pill status-pill-verified text-[10px]" : "status-pill status-pill-demo text-[10px]" %>'>
-                                    <%# Convert.ToBoolean(Eval("IsVerified")) ? "Verified" : "Pending" %>
-                                </span>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:BoundField DataField="CreatedAt" HeaderText="Joined" DataFormatString="{0:dd MMM yyyy}" ItemStyle-CssClass="font-mono text-xs text-[#64748B]" />
-                    </Columns>
-                </asp:GridView>
+                <div class="overflow-x-auto w-full">
+                    <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" CssClass="table-custom min-w-[700px]" GridLines="None">
+                        <Columns>
+                            <asp:BoundField DataField="UserId" HeaderText="ID" HeaderStyle-CssClass="w-12 font-mono" ItemStyle-CssClass="font-mono text-xs font-bold" />
+                            <asp:BoundField DataField="FullName" HeaderText="Full Name / Entity" ItemStyle-CssClass="font-bold text-xs text-[#0F172A] whitespace-nowrap" />
+                            <asp:BoundField DataField="Email" HeaderText="Email Address" ItemStyle-CssClass="font-mono text-xs text-[#64748B] whitespace-nowrap" />
+                            <asp:TemplateField HeaderText="Role" HeaderStyle-CssClass="w-28">
+                                <ItemTemplate>
+                                    <span class="spec-tag spec-tag-blue text-[10px] font-mono whitespace-nowrap">
+                                        <%# Eval("RoleName") %>
+                                    </span>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Verification" HeaderStyle-CssClass="w-24">
+                                <ItemTemplate>
+                                    <span class='<%# Convert.ToBoolean(Eval("IsVerified")) ? "status-pill status-pill-verified text-[10px]" : "status-pill status-pill-demo text-[10px]" %>'>
+                                        <%# Convert.ToBoolean(Eval("IsVerified")) ? "Verified" : "Pending" %>
+                                    </span>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="CreatedAt" HeaderText="Joined" DataFormatString="{0:dd MMM yyyy}" HeaderStyle-CssClass="w-28 text-right font-mono" ItemStyle-CssClass="font-mono text-xs text-[#64748B] text-right whitespace-nowrap pr-4" />
+                        </Columns>
+                    </asp:GridView>
+                </div>
             </div>
         </div>
 
-        <!-- Right Side: Quick Governance Actions & ADO.NET Architecture Diagnostics -->
-        <div class="lg:col-span-5 space-y-6">
+        <!-- Right Side: Quick Governance Actions & ADO.NET Architecture Diagnostics (Compact 4 Cols) -->
+        <div class="lg:col-span-5 xl:col-span-4 space-y-6 min-w-0">
             <!-- Governance Quick Launch Grid -->
             <div class="surface-card p-5 space-y-4">
                 <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">

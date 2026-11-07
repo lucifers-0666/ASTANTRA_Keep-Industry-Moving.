@@ -83,43 +83,52 @@
     </div>
 
     <!-- EDIT SETTING MODAL -->
-    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-md p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
+    <asp:Panel ID="pnlEditModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-lg shadow-2xl">
             <asp:HiddenField ID="hdnEditSettingKey" runat="server" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs shadow-xs border border-blue-200">
                         <i class="fa-solid fa-sliders"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Modify Platform Parameter</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Modify Platform Parameter</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">SYSTEM RUNTIME CONFIGURATION VARIABLE</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseEditModal" runat="server" OnClick="btnCloseEditModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3 text-left">
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4 text-left">
                 <div>
-                    <label class="form-label text-xs">Parameter Identifier</label>
-                    <asp:TextBox ID="txtSettingKeyDisplay" runat="server" ReadOnly="true" CssClass="form-input text-xs py-2 bg-slate-100 font-mono font-bold" />
+                    <label class="form-label text-xs">Parameter Identifier Key</label>
+                    <asp:TextBox ID="txtSettingKeyDisplay" runat="server" ReadOnly="true" CssClass="form-input text-xs bg-slate-100 font-mono font-bold cursor-not-allowed text-slate-700" />
+                    <span class="admin-form-hint">Canonical configuration key consumed across application services.</span>
                 </div>
 
                 <div>
-                    <label class="form-label text-xs">Description</label>
-                    <p class="text-xs text-[#64748B] m-0 bg-slate-50 p-2.5 rounded border border-slate-200" id="lblSettingDesc" runat="server"></p>
+                    <label class="form-label text-xs">Operational Scope &amp; Function</label>
+                    <p class="text-xs text-[#64748B] m-0 bg-slate-50 p-3 rounded border border-slate-200" id="lblSettingDesc" runat="server"></p>
                 </div>
 
                 <div>
-                    <label class="form-label text-xs">New Parameter Value <span class="text-rose-500">*</span></label>
-                    <asp:TextBox ID="txtSettingValue" runat="server" CssClass="form-input text-xs py-2 font-mono" />
+                    <label class="form-label text-xs">Runtime Parameter Value <span class="text-rose-500">*</span></label>
+                    <asp:TextBox ID="txtSettingValue" runat="server" CssClass="form-input text-xs font-mono" />
+                    <span class="admin-form-hint">Applied immediately to runtime cached environment settings.</span>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCloseEditModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSaveSetting" runat="server" Text="Save Configuration" OnClick="btnSaveSetting_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>
         </div>
     </asp:Panel>
 </asp:Content>
+

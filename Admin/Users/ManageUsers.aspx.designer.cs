@@ -58,6 +58,7 @@ namespace IndustrialSparePartPortal.Admin.Users
         protected global::System.Web.UI.WebControls.TextBox txtEditEmail;
         protected global::System.Web.UI.WebControls.TextBox txtEditPhone;
         protected global::System.Web.UI.WebControls.DropDownList ddlEditRole;
+        protected global::System.Web.UI.WebControls.TextBox txtEditPassword;
         protected global::System.Web.UI.WebControls.CheckBox chkEditIsActive;
         protected global::System.Web.UI.WebControls.CheckBox chkEditIsVerified;
         protected global::System.Web.UI.WebControls.Button btnCancelEdit;

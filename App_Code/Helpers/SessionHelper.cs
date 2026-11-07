@@ -73,6 +73,18 @@ namespace IndustrialSparePartPortal.App_Code.Helpers
             }
         }
 
+        public static string ProfileImage
+        {
+            get
+            {
+                return HttpContext.Current.Session["ProfileImage"] != null ? HttpContext.Current.Session["ProfileImage"].ToString() : null;
+            }
+            set
+            {
+                HttpContext.Current.Session["ProfileImage"] = value;
+            }
+        }
+
         public static bool IsLoggedIn
         {
             get

@@ -3,6 +3,7 @@ using IndustrialSparePartPortal.App_Code.Helpers;
 using IndustrialSparePartPortal.App_Code.Logic;
 using System;
 using System.Data;
+using System.IO;
 
 namespace IndustrialSparePartPortal.Admin
 {
@@ -44,16 +45,173 @@ namespace IndustrialSparePartPortal.Admin
                     dispAdminEmail.InnerText = email;
                     dispAdminPhone.InnerText = !string.IsNullOrEmpty(phone) ? phone : "Not registered";
                     dispAdminJoined.InnerText = joined.ToString("dd MMM yyyy");
-                    dispUserId.InnerText = "#" + adminId;
+                    dispUserId.InnerText = "#" + adminId + " (Root)";
 
                     txtFullName.Text = fullName;
                     txtEmail.Text = email;
                     txtPhone.Text = phone;
+
+                    // Bind Avatar
+                    string profileImage = null;
+                    if (row.Table.Columns.Contains("ProfileImage") && row["ProfileImage"] != DBNull.Value)
+                    {
+                        profileImage = row["ProfileImage"].ToString().Trim();
+                    }
+
+                    if (!string.IsNullOrEmpty(profileImage))
+                    {
+                        imgProfilePreview.ImageUrl = ResolveUrl(profileImage) + "?v=" + DateTime.UtcNow.Ticks;
+                        imgProfilePreview.Visible = true;
+                        lblProfileInitials.Visible = false;
+                        btnRemoveAvatar.Visible = true;
+                        SessionHelper.ProfileImage = profileImage;
+                    }
+                    else
+                    {
+                        imgProfilePreview.Visible = false;
+                        lblProfileInitials.Visible = true;
+                        lblProfileInitials.InnerText = GetInitials(fullName);
+                        btnRemoveAvatar.Visible = false;
+                        SessionHelper.ProfileImage = null;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 ShowAlert(false, "Failed to load administrator profile: " + ex.Message);
+            }
+        }
+
+        protected void btnSaveAvatarDirect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int adminId = SessionHelper.UserId ?? 1;
+                string base64Data = hdnCroppedAvatarData.Value;
+
+                if (string.IsNullOrWhiteSpace(base64Data))
+                {
+                    ShowAlert(false, "No avatar image data received from cropping studio.");
+                    return;
+                }
+
+                // Parse data URI: data:image/jpeg;base64,....
+                int commaIndex = base64Data.IndexOf(',');
+                if (commaIndex >= 0)
+                {
+                    base64Data = base64Data.Substring(commaIndex + 1);
+                }
+
+                byte[] imageBytes = Convert.FromBase64String(base64Data);
+
+                // Sanity check byte array (Max 5MB)
+                if (imageBytes.Length == 0 || imageBytes.Length > 5 * 1024 * 1024)
+                {
+                    ShowAlert(false, "Image size exceeds 5MB or contains invalid data.");
+                    return;
+                }
+
+                // Prepare storage directory
+                string uploadDir = Server.MapPath("~/Uploads/Avatars");
+                if (!Directory.Exists(uploadDir))
+                {
+                    Directory.CreateDirectory(uploadDir);
+                }
+
+                // Generate clean unique filename
+                string filename = string.Format("avatar_admin_{0}_{1}.jpg", adminId, DateTime.UtcNow.Ticks);
+                string physicalPath = Path.Combine(uploadDir, filename);
+
+                File.WriteAllBytes(physicalPath, imageBytes);
+
+                string virtualPath = "~/Uploads/Avatars/" + filename;
+
+                // Update database
+                bool updated = _userLogic.updateUserProfileImage(adminId, virtualPath);
+                if (updated)
+                {
+                    SessionHelper.ProfileImage = virtualPath;
+
+                    _auditLogic.logAction(
+                        adminId,
+                        "UPDATE_AVATAR",
+                        "Users",
+                        adminId,
+                        null,
+                        "Administrator profile avatar cropped and saved: " + filename,
+                        Request.UserHostAddress
+                    );
+
+                    hdnCroppedAvatarData.Value = string.Empty;
+                    LoadAdminProfile();
+                    ShowAlert(true, "Profile portrait successfully cropped, saved, and synchronized across the administrator console.");
+                }
+                else
+                {
+                    ShowAlert(false, "Database update failed while storing avatar reference.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowAlert(false, "Error saving cropped avatar: " + ex.Message);
+            }
+        }
+
+        protected void btnRemoveAvatar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int adminId = SessionHelper.UserId ?? 1;
+
+                // Retrieve existing path to delete physical file safely
+                DataSet ds = _userLogic.getUserById(adminId);
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    DataRow row = ds.Tables[0].Rows[0];
+                    if (row.Table.Columns.Contains("ProfileImage") && row["ProfileImage"] != DBNull.Value)
+                    {
+                        string currentPath = row["ProfileImage"].ToString();
+                        if (!string.IsNullOrEmpty(currentPath) && currentPath.StartsWith("~/Uploads/Avatars/"))
+                        {
+                            try
+                            {
+                                string phys = Server.MapPath(currentPath);
+                                if (File.Exists(phys))
+                                {
+                                    File.Delete(phys);
+                                }
+                            }
+                            catch { /* non-fatal file clean-up */ }
+                        }
+                    }
+                }
+
+                bool updated = _userLogic.updateUserProfileImage(adminId, null);
+                if (updated)
+                {
+                    SessionHelper.ProfileImage = null;
+
+                    _auditLogic.logAction(
+                        adminId,
+                        "REMOVE_AVATAR",
+                        "Users",
+                        adminId,
+                        null,
+                        "Administrator profile avatar removed",
+                        Request.UserHostAddress
+                    );
+
+                    LoadAdminProfile();
+                    ShowAlert(true, "Profile portrait removed. The standard system initials badge is now active.");
+                }
+                else
+                {
+                    ShowAlert(false, "Could not reset profile image in the database.");
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowAlert(false, "Error removing avatar: " + ex.Message);
             }
         }
 
@@ -187,6 +345,13 @@ namespace IndustrialSparePartPortal.Admin
                 iconAlert.Attributes["class"] = "fa-solid fa-triangle-exclamation text-rose-600 text-sm";
             }
         }
+
+        private string GetInitials(string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(fullName)) return "SA";
+            string[] parts = fullName.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 1) return parts[0].Substring(0, Math.Min(2, parts[0].Length)).ToUpper();
+            return (parts[0][0].ToString() + parts[parts.Length - 1][0].ToString()).ToUpper();
+        }
     }
 }
-

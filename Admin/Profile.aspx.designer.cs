@@ -24,6 +24,16 @@ namespace IndustrialSparePartPortal.Admin {
         protected global::System.Web.UI.WebControls.LinkButton btnCloseAlert;
         
         /// <summary>
+        /// imgProfilePreview control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image imgProfilePreview;
+        
+        /// <summary>
+        /// lblProfileInitials control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblProfileInitials;
+        
+        /// <summary>
         /// dispAdminName control.
         /// </summary>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dispAdminName;
@@ -42,6 +52,11 @@ namespace IndustrialSparePartPortal.Admin {
         /// dispAdminJoined control.
         /// </summary>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dispAdminJoined;
+        
+        /// <summary>
+        /// btnRemoveAvatar control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnRemoveAvatar;
         
         /// <summary>
         /// dispUserId control.
@@ -87,6 +102,15 @@ namespace IndustrialSparePartPortal.Admin {
         /// btnChangePassword control.
         /// </summary>
         protected global::System.Web.UI.WebControls.Button btnChangePassword;
+        
+        /// <summary>
+        /// hdnCroppedAvatarData control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCroppedAvatarData;
+        
+        /// <summary>
+        /// btnSaveAvatarDirect control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnSaveAvatarDirect;
     }
 }
-

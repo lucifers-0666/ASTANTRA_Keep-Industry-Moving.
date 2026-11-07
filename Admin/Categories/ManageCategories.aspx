@@ -149,41 +149,44 @@
     </div>
 
     <!-- MODAL 1: ADD / EDIT CATEGORY -->
-    <asp:Panel ID="pnlCategoryModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-md p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
+    <asp:Panel ID="pnlCategoryModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-md shadow-2xl">
             <asp:HiddenField ID="hdnCategoryId" runat="server" Value="0" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-purple-50 text-purple-700 flex items-center justify-center text-xs">
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-purple-50 text-purple-700 flex items-center justify-center text-xs shadow-xs border border-purple-200">
                         <i class="fa-solid fa-folder-plus"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0" id="lblCatModalTitle" runat="server">Category Record</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0" id="lblCatModalTitle" runat="server">Category Record</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">SPARE-PART TAXONOMY &amp; HIERARCHY</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseCatModal" runat="server" OnClick="btnCloseCatModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseCatModal" runat="server" OnClick="btnCloseCatModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
+            <div class="admin-modal-body space-y-3">
                 <div>
                     <label class="form-label text-xs">Category Classification Name <span class="text-rose-500">*</span></label>
-                    <asp:TextBox ID="txtCategoryName" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. Bearings & Power Transmission" />
+                    <asp:TextBox ID="txtCategoryName" runat="server" CssClass="form-input text-xs" placeholder="e.g. Bearings & Power Transmission" />
                 </div>
 
                 <div>
                     <label class="form-label text-xs">Scope Description</label>
-                    <asp:TextBox ID="txtCategoryDesc" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs py-2" placeholder="Brief description of parts included..." />
+                    <asp:TextBox ID="txtCategoryDesc" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs" placeholder="Brief description of parts included..." />
                 </div>
 
                 <div>
                     <label class="form-label text-xs">FontAwesome Icon Class</label>
-                    <asp:TextBox ID="txtCategoryIcon" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="fa-solid fa-gear" />
-                    <span class="text-[10px] text-[#64748B] mt-0.5 block">e.g. fa-solid fa-gear, fa-solid fa-bolt, fa-solid fa-wrench</span>
+                    <asp:TextBox ID="txtCategoryIcon" runat="server" CssClass="form-input text-xs font-mono" placeholder="fa-solid fa-gear" />
+                    <span class="admin-form-hint">e.g. fa-solid fa-gear, fa-solid fa-bolt, fa-solid fa-wrench</span>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelCat" runat="server" Text="Cancel" OnClick="btnCloseCatModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSaveCategory" runat="server" Text="Save Category" OnClick="btnSaveCategory_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>
@@ -191,41 +194,44 @@
     </asp:Panel>
 
     <!-- MODAL 2: ADD / EDIT MACHINE -->
-    <asp:Panel ID="pnlMachineModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-md p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
+    <asp:Panel ID="pnlMachineModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-md shadow-2xl">
             <asp:HiddenField ID="hdnMachineId" runat="server" Value="0" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs shadow-xs border border-blue-200">
                         <i class="fa-solid fa-industry"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0" id="lblMacModalTitle" runat="server">Industrial Machine Profile</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0" id="lblMacModalTitle" runat="server">Industrial Machine Profile</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">COMPATIBLE MACHINERY ASSET PROFILE</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseMacModal" runat="server" OnClick="btnCloseMacModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseMacModal" runat="server" OnClick="btnCloseMacModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3">
+            <div class="admin-modal-body space-y-3">
                 <div>
                     <label class="form-label text-xs">Industrial Machine Name <span class="text-rose-500">*</span></label>
-                    <asp:TextBox ID="txtMachineName" runat="server" CssClass="form-input text-xs py-2" placeholder="e.g. CNC Lathe Machine X200" />
+                    <asp:TextBox ID="txtMachineName" runat="server" CssClass="form-input text-xs" placeholder="e.g. CNC Lathe Machine X200" />
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="form-label text-xs">Model Number</label>
-                        <asp:TextBox ID="txtMachineModel" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="X200-PRO" />
+                        <asp:TextBox ID="txtMachineModel" runat="server" CssClass="form-input text-xs font-mono" placeholder="X200-PRO" />
                     </div>
                     <div>
                         <label class="form-label text-xs">Manufacturer</label>
-                        <asp:TextBox ID="txtMachineMfg" runat="server" CssClass="form-input text-xs py-2" placeholder="Siemens / DMG Mori" />
+                        <asp:TextBox ID="txtMachineMfg" runat="server" CssClass="form-input text-xs" placeholder="Siemens / DMG Mori" />
                     </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelMac" runat="server" Text="Cancel" OnClick="btnCloseMacModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSaveMachine" runat="server" Text="Save Machine Model" OnClick="btnSaveMachine_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>

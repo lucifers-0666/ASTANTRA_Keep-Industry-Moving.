@@ -153,90 +153,114 @@
     </div>
 
     <!-- SUPPLIER INSPECTION & AUDIT DOSSIER MODAL -->
-    <asp:Panel ID="pnlInspectModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-xl p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+    <asp:Panel ID="pnlInspectModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-xl shadow-2xl">
             <asp:HiddenField ID="hdnInspectSupplierId" runat="server" />
             <asp:HiddenField ID="hdnInspectUserId" runat="server" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-emerald-50 text-[#059669] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-emerald-50 text-[#059669] flex items-center justify-center text-xs shadow-xs border border-emerald-200">
                         <i class="fa-solid fa-file-shield"></i>
                     </div>
                     <div>
                         <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Supplier Compliance Dossier</h3>
-                        <span class="text-[10px] font-mono text-[#64748B]">AUDIT TRAIL VERIFICATION RECORD</span>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">COMPLIANCE VERIFICATION &amp; AUDIT TRAIL RECORD</span>
                     </div>
                 </div>
-                <asp:LinkButton ID="btnCloseInspectModal" runat="server" OnClick="btnCloseInspectModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseInspectModal" runat="server" OnClick="btnCloseInspectModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <!-- Dossier Card Details -->
-            <div class="space-y-3 text-xs">
-                <div class="bg-slate-50 p-3.5 rounded border border-slate-200 space-y-2">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <span class="text-[10px] uppercase font-mono text-[#64748B] block">Enterprise Name</span>
-                            <span class="text-sm font-bold text-[#0F172A]" id="lblDossierCompanyName" runat="server">Company</span>
-                        </div>
-                        <span class="status-pill status-pill-pending text-[10px] font-mono" id="lblDossierStatus" runat="server">Pending</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
-                        <div>
-                            <span class="text-[10px] uppercase font-mono text-[#64748B] block">GSTIN Registration</span>
-                            <span class="font-mono font-bold text-[#0F172A]" id="lblDossierGstin" runat="server">GSTIN</span>
-                        </div>
-                        <div>
-                            <span class="text-[10px] uppercase font-mono text-[#64748B] block">Trade License #</span>
-                            <span class="font-mono text-[#0F172A]" id="lblDossierTradeReg" runat="server">REG</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded border border-slate-200">
-                    <div>
-                        <span class="text-[10px] uppercase font-mono text-[#64748B] block">Contact Representative</span>
-                        <span class="font-semibold text-[#0F172A]" id="lblDossierContact" runat="server">Contact</span>
-                        <span class="text-[10px] text-[#64748B] font-mono block mt-0.5" id="lblDossierEmail" runat="server">Email</span>
-                        <span class="text-[10px] text-[#64748B] font-mono block" id="lblDossierPhone" runat="server">Phone</span>
-                    </div>
-                    <div>
-                        <span class="text-[10px] uppercase font-mono text-[#64748B] block">Supply Hub City</span>
-                        <span class="font-semibold text-[#0F172A]" id="lblDossierLocation" runat="server">City, State</span>
-                        <div class="mt-2 flex items-center gap-1 text-amber-700 font-mono font-bold">
-                            <i class="fa-solid fa-star text-amber-500"></i>
-                            <span id="lblDossierRating" runat="server">4.8 Rating</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Compliance Checklist Checkmarks -->
-                <div class="bg-blue-50/60 p-3.5 rounded border border-blue-200 space-y-1.5">
-                    <span class="text-[10px] font-bold font-mono uppercase text-blue-900 tracking-wider">Automated Verification Checks</span>
-                    <div class="flex items-center gap-2 text-[11px] text-blue-900">
-                        <i class="fa-solid fa-check text-emerald-600"></i>
-                        <span>GSTIN syntax matches State Code pattern (24 = Gujarat)</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-[11px] text-blue-900">
-                        <i class="fa-solid fa-check text-emerald-600"></i>
-                        <span>Authenticated User Account bound to Supplier Profile</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-[11px] text-blue-900">
-                        <i class="fa-solid fa-check text-emerald-600"></i>
-                        <span>Audit logging enabled for Superadmin governance decisions</span>
-                    </div>
-                </div>
-
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <!-- Section 1: Enterprise Profile & Statutory Registration -->
                 <div>
-                    <label class="form-label text-xs">Governance Audit Remarks / Justification</label>
-                    <asp:TextBox ID="txtAuditRemarks" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs py-2" placeholder="e.g. Validated against GST Portal. Authorized for commercial quotation bidding." />
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-building-circle-check"></i> 1. Statutory Enterprise Credentials
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded border border-slate-200 space-y-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] uppercase font-mono text-[#64748B] block">Enterprise Name</span>
+                                <span class="text-sm font-bold text-[#0F172A]" id="lblDossierCompanyName" runat="server">Company</span>
+                            </div>
+                            <span class="status-pill status-pill-pending text-[10px] font-mono" id="lblDossierStatus" runat="server">Pending</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200">
+                            <div>
+                                <span class="text-[10px] uppercase font-mono text-[#64748B] block">GSTIN Registration</span>
+                                <span class="font-mono font-bold text-[#0F172A]" id="lblDossierGstin" runat="server">GSTIN</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase font-mono text-[#64748B] block">Trade License #</span>
+                                <span class="font-mono text-[#0F172A]" id="lblDossierTradeReg" runat="server">REG</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Contact & Operating Hub -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-address-book"></i> 2. Commercial Contact &amp; Hub Logistics
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded border border-slate-200">
+                        <div>
+                            <span class="text-[10px] uppercase font-mono text-[#64748B] block">Contact Representative</span>
+                            <span class="font-semibold text-[#0F172A]" id="lblDossierContact" runat="server">Contact</span>
+                            <span class="text-[10px] text-[#64748B] font-mono block mt-0.5" id="lblDossierEmail" runat="server">Email</span>
+                            <span class="text-[10px] text-[#64748B] font-mono block" id="lblDossierPhone" runat="server">Phone</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] uppercase font-mono text-[#64748B] block">Supply Hub City</span>
+                            <span class="font-semibold text-[#0F172A]" id="lblDossierLocation" runat="server">City, State</span>
+                            <div class="mt-2 flex items-center gap-1 text-amber-700 font-mono font-bold">
+                                <i class="fa-solid fa-star text-amber-500"></i>
+                                <span id="lblDossierRating" runat="server">4.8 Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Verification Checks -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-shield-halved"></i> 3. Automated Pre-Audit Checklist
+                    </div>
+                    <div class="bg-blue-50/60 p-3.5 rounded border border-blue-200 space-y-1.5">
+                        <div class="flex items-center gap-2 text-[11px] text-blue-900">
+                            <i class="fa-solid fa-check text-emerald-600"></i>
+                            <span>GSTIN syntax matches State Code pattern (24 = Gujarat)</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[11px] text-blue-900">
+                            <i class="fa-solid fa-check text-emerald-600"></i>
+                            <span>Authenticated User Account bound to Supplier Profile</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-[11px] text-blue-900">
+                            <i class="fa-solid fa-check text-emerald-600"></i>
+                            <span>Audit logging enabled for Superadmin governance decisions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Governance Remarks -->
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-pen-to-square"></i> 4. Audit Assessment &amp; Remarks
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Governance Audit Remarks / Justification</label>
+                        <asp:TextBox ID="txtAuditRemarks" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-input text-xs" placeholder="e.g. Validated against GST Portal. Authorized for commercial quotation bidding." />
+                        <span class="admin-form-hint">Recorded permanently in the platform governance audit trail.</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Modal Action Buttons -->
-            <div class="flex items-center justify-between pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCloseDossier" runat="server" Text="Close Dossier" OnClick="btnCloseInspectModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <div class="flex items-center gap-2">
                     <asp:Button ID="btnRejectDossier" runat="server" Text="Reject Supplier" OnClick="btnRejectDossier_Click" CssClass="px-3 py-2 text-xs font-bold rounded bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 cursor-pointer" />

@@ -29,11 +29,11 @@ body.admin-body-shell form#form1 {
 @keyframes adminEntrance {
     0% {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(6px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
     }
 }
 
@@ -77,11 +77,11 @@ body.admin-body-shell form#form1 {
     background: transparent;
 }
 .admin-nav-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.14);
     border-radius: 9999px;
 }
 .admin-nav-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.28);
 }
 .admin-viewport-scroll::-webkit-scrollbar-track {
     background: #F1F5F9;
@@ -92,16 +92,6 @@ body.admin-body-shell form#form1 {
 }
 .admin-viewport-scroll::-webkit-scrollbar-thumb:hover {
     background: #94A3B8;
-}
-
-/* Active navigation item styling */
-.admin-nav-item--active {
-    background: #1E293B !important;
-    color: #FFFFFF !important;
-    font-weight: 600 !important;
-    border-left: 3px solid #38BDF8 !important;
-    padding-left: 11px !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -120,9 +110,16 @@ body.admin-body-shell form#form1 {
 :root {
     --admin-bg: #F1F5F9;
     --admin-surface: #FFFFFF;
-    --admin-sidebar: #0F172A;
+    --admin-sidebar-bg: #0F172A;
+    --admin-sidebar-header: #0A1220;
+    --admin-sidebar-border: #1E293B;
     --admin-sidebar-hover: #1E293B;
-    --admin-sidebar-active: #2563EB;
+    --admin-sidebar-active: #1E293B;
+    --admin-sidebar-text: #CBD5E1;
+    --admin-sidebar-text-muted: #94A3B8;
+    --admin-sidebar-text-active: #FFFFFF;
+    --admin-sidebar-accent: #38BDF8;
+    --admin-sidebar-primary: #1769E0;
     --admin-border: #E2E8F0;
     --admin-border-dark: #CBD5E1;
     --admin-text-main: #0F172A;
@@ -131,6 +128,364 @@ body.admin-body-shell form#form1 {
     --admin-primary-hover: #1254B7;
     --admin-emergency: #EA580C;
     --admin-emerald: #059669;
+}
+
+/* ==========================================================================
+   1. AUTHORITATIVE ENTERPRISE SIDEBAR DESIGN SYSTEM (ASTANTRA)
+   Locked Institutional Dark Slate / Navy Palette (#0F172A / #0A1220)
+   100% Standalone & High Contrast — Zero Missing-Utility Dependencies
+   ========================================================================== */
+
+/* Sidebar Shell Container */
+.admin-sidebar {
+    width: 288px !important;
+    min-width: 288px !important;
+    max-width: 288px !important;
+    background-color: #0F172A !important;
+    background: #0F172A !important;
+    color: #CBD5E1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-shrink: 0 !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-right: 1px solid #1E293B !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25) !important;
+    user-select: none !important;
+    z-index: 40 !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+/* Sidebar Brand Header */
+.admin-sidebar-brand {
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 64px !important;
+    padding: 0 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background-color: #0A1220 !important;
+    background: #0A1220 !important;
+    border-bottom: 1px solid #1E293B !important;
+    flex-shrink: 0 !important;
+}
+
+.admin-sidebar-brand a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-decoration: none !important;
+}
+
+.admin-brand-icon-box {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 6px !important;
+    background: #0A1220 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(56, 189, 248, 0.25) !important;
+    flex-shrink: 0 !important;
+    transition: transform 150ms ease, border-color 150ms ease !important;
+}
+
+.admin-sidebar-brand a:hover .admin-brand-icon-box {
+    border-color: #38BDF8 !important;
+    transform: scale(1.05) !important;
+}
+
+.admin-sidebar-logo-text {
+    font-family: 'Archivo', sans-serif !important;
+    font-size: 14.5px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.08em !important;
+    color: #FFFFFF !important;
+    line-height: 1.2 !important;
+    display: block !important;
+}
+
+.admin-sidebar-badge-text {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    color: #38BDF8 !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    line-height: 1.2 !important;
+}
+
+/* Sidebar Navigation Menu */
+.admin-nav {
+    flex: 1 !important;
+    padding: 16px 12px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    background-color: #0F172A !important;
+}
+
+/* Navigation Section Groups */
+.admin-nav-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+}
+
+.admin-nav-group-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 4px 10px 6px 10px !important;
+    margin-bottom: 2px !important;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    font-size: 9.5px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #94A3B8 !important; /* Visible, high-contrast muted slate */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.admin-nav-group-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 9999px !important;
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+}
+
+/* Navigation Item Links */
+.admin-nav-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    color: #CBD5E1 !important; /* Crisp, easily readable light slate */
+    background: transparent !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    border: 1px solid transparent !important;
+    border-left: 3px solid transparent !important;
+    transition: background-color 140ms ease, color 140ms ease, border-left-color 140ms ease, box-shadow 140ms ease !important;
+    cursor: pointer !important;
+    position: relative !important;
+}
+
+/* Navigation Icon Wrapper */
+.admin-nav-icon-wrap {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 4px !important;
+    background-color: rgba(30, 41, 59, 0.75) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 11px !important;
+    flex-shrink: 0 !important;
+    transition: background-color 140ms ease, color 140ms ease !important;
+}
+
+.admin-nav-text {
+    flex: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    color: inherit !important;
+}
+
+/* Hover State: High-contrast slate navy container with pure bright white text & cyan accent line */
+.admin-nav-item:hover {
+    background-color: #1E293B !important;
+    background: #1E293B !important;
+    color: #FFFFFF !important;
+    border-left: 3px solid #38BDF8 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22) !important;
+}
+
+.admin-nav-item:hover .admin-nav-icon-wrap {
+    background-color: #27374D !important;
+    color: #38BDF8 !important;
+}
+
+.admin-nav-item:hover .admin-nav-text {
+    color: #FFFFFF !important;
+}
+
+/* Active State: Elevated slate navy with cyan left border and vivid white text */
+.admin-nav-item--active,
+.admin-nav-item.active {
+    background: linear-gradient(90deg, rgba(23, 105, 224, 0.22) 0%, rgba(30, 41, 59, 0.95) 100%) !important;
+    background-color: #1E293B !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-left: 3px solid #38BDF8 !important;
+    border-color: transparent transparent transparent #38BDF8 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.admin-nav-item--active .admin-nav-icon-wrap,
+.admin-nav-item.active .admin-nav-icon-wrap {
+    background-color: #1769E0 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.35) !important;
+}
+
+.admin-nav-item--active .admin-nav-text,
+.admin-nav-item.active .admin-nav-text {
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
+/* Accessible Focus Ring */
+.admin-nav-item:focus-visible {
+    outline: 2px solid #38BDF8 !important;
+    outline-offset: 2px !important;
+}
+
+/* Sidebar Profile Footbar */
+.admin-sidebar-footer {
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 64px !important;
+    padding: 0 16px !important;
+    border-top: 1px solid #1E293B !important;
+    background-color: #0A1220 !important;
+    background: #0A1220 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-shrink: 0 !important;
+}
+
+.admin-user-profile-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+    text-decoration: none !important;
+    flex: 1 !important;
+    margin-right: 8px !important;
+}
+
+.admin-user-avatar {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 9999px !important;
+    background-color: #1E293B !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    border: 1px solid #334155 !important;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    transition: background-color 140ms ease, border-color 140ms ease !important;
+}
+
+.admin-user-profile-link:hover .admin-user-avatar {
+    background-color: #1769E0 !important;
+    border-color: #38BDF8 !important;
+}
+
+.admin-user-info {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    text-align: left !important;
+}
+
+.admin-user-name {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    transition: color 140ms ease !important;
+}
+
+.admin-user-profile-link:hover .admin-user-name {
+    color: #38BDF8 !important;
+}
+
+.admin-user-role {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    color: #38BDF8 !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
+    display: block !important;
+}
+
+.admin-user-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.admin-action-btn {
+    color: #94A3B8 !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    transition: background-color 140ms ease, color 140ms ease !important;
+    font-size: 12px !important;
+}
+
+.admin-action-btn:hover {
+    color: #38BDF8 !important;
+    background-color: #1E293B !important;
+}
+
+.admin-action-btn-danger:hover {
+    color: #FB7185 !important;
+    background-color: rgba(225, 29, 72, 0.15) !important;
+}
+
+/* ==========================================================================
+   2. TOP ADMIN HEADER & VIEWPORT SHELL
+   Clean, institutional contrast between dark sidebar and bright content
+   ========================================================================== */
+
+.admin-top-header {
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 64px !important;
+    background-color: #FFFFFF !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+    padding: 0 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+.admin-main-viewport {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 24px 28px !important;
+    background-color: #F1F5F9 !important;
 }
 
 /* Page Container - Prevents infinite stretched tables */
@@ -511,80 +866,533 @@ body.admin-body-shell form#form1 {
     border-color: #F87171;
 }
 
-/* Modal and Drawer Dialogs */
-.admin-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(2px);
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
+/* ==========================================================================
+   MODAL DIALOG & OPERATION FORM ARCHITECTURE
+   Guaranteed Top-Header Clearance, Zero Stacking Overlaps, Responsive Scrolling
+   ========================================================================== */
+
+/* Universal Modal Overlay - Always Centered with Safe Top Clearance */
+.admin-modal-overlay:not(.admin-modal-hidden),
+.admin-modal-backdrop:not(.admin-modal-hidden),
+.admin-main-viewport div.fixed.inset-0:not(.admin-modal-hidden),
+.admin-content-container div.fixed.inset-0:not(.admin-modal-hidden),
+div[id$="Modal"].fixed:not(.admin-modal-hidden),
+div[id*="Modal"].fixed:not(.admin-modal-hidden) {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(15, 23, 42, 0.72) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 99999 !important; /* Above all sticky headers, viewports and sidebars */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important; /* CRITICAL: Aligns to top with safe padding, preventing top clipping */
+    padding: 32px 16px 48px 16px !important;
+    overflow-y: auto !important; /* Outer backdrop scrolls safely */
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
 }
 
-.admin-modal-card {
-    background: #FFFFFF;
-    border-radius: 6px;
-    width: 100%;
-    max-width: 640px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--admin-border);
+/* Modal Explicitly Hidden State - Always Wins Over Modal Overlay */
+.admin-modal-hidden,
+div.admin-modal-hidden,
+div[id*="Modal"].admin-modal-hidden,
+div[id$="Modal"].admin-modal-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
-.admin-modal-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--admin-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #F8FAFC;
+/* Modal Inner Card - Elevated Floating Command Container */
+.admin-modal-card,
+.admin-modal-dialog,
+.admin-main-viewport div.fixed.inset-0 > div,
+.admin-content-container div.fixed.inset-0 > div,
+div[id$="Modal"] > div.surface-card,
+div[id*="Modal"] > div {
+    background: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    width: 100% !important;
+    max-width: 660px !important;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(15, 23, 42, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin: 16px auto !important;
+    max-height: calc(100vh - 64px) !important;
+    overflow: hidden !important;
+    position: relative !important;
+    animation: adminModalScaleIn 200ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
 }
 
-.admin-modal-body {
-    padding: 20px;
+@keyframes adminModalScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
-.admin-modal-footer {
-    padding: 14px 20px;
-    border-top: 1px solid var(--admin-border);
-    background: #F8FAFC;
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+/* Modal Header Bar - Always Pinned to Top of Modal Card */
+.admin-modal-header,
+.admin-main-viewport div.fixed.inset-0 > div > div:first-child,
+div[id*="Modal"] > div > div:first-child {
+    padding: 16px 22px !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+    background: #F8FAFC !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-shrink: 0 !important;
 }
 
-/* Form Controls Inside Modals */
-.admin-form-group {
-    margin-bottom: 14px;
+.admin-modal-header h3,
+div[id*="Modal"] > div > div:first-child h3 {
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    font-family: 'Archivo', sans-serif !important;
+    color: #0F172A !important;
+    margin: 0 !important;
 }
 
+/* Modal Close Button */
+.admin-modal-close-btn,
+div[id*="Modal"] > div > div:first-child a {
+    color: #94A3B8 !important;
+    font-size: 14px !important;
+    padding: 6px 8px !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    transition: background-color 140ms ease, color 140ms ease !important;
+    cursor: pointer !important;
+}
+
+.admin-modal-close-btn:hover,
+div[id*="Modal"] > div > div:first-child a:hover {
+    color: #EF4444 !important;
+    background-color: #FEF2F2 !important;
+}
+
+/* Modal Scrollable Body Content */
+.admin-modal-body,
+.admin-main-viewport div.fixed.inset-0 > div > div:nth-child(2),
+div[id*="Modal"] > div > div.space-y-3,
+div[id*="Modal"] > div > div.space-y-4 {
+    padding: 22px 24px !important;
+    overflow-y: auto !important;
+    flex: 1 1 auto !important;
+    max-height: calc(100vh - 190px) !important;
+}
+
+.admin-modal-body::-webkit-scrollbar,
+div[id*="Modal"] > div > div.space-y-3::-webkit-scrollbar,
+div[id*="Modal"] > div > div.space-y-4::-webkit-scrollbar {
+    width: 6px;
+}
+.admin-modal-body::-webkit-scrollbar-thumb,
+div[id*="Modal"] > div > div.space-y-3::-webkit-scrollbar-thumb,
+div[id*="Modal"] > div > div.space-y-4::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+}
+.admin-modal-body::-webkit-scrollbar-thumb:hover,
+div[id*="Modal"] > div > div.space-y-3::-webkit-scrollbar-thumb:hover,
+div[id*="Modal"] > div > div.space-y-4::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* Modal Footer Bar - Always Pinned to Bottom of Modal Card */
+.admin-modal-footer,
+.admin-main-viewport div.fixed.inset-0 > div > div:last-child,
+div[id*="Modal"] > div > div:last-child {
+    padding: 14px 22px !important;
+    border-top: 1px solid #E2E8F0 !important;
+    background: #F8FAFC !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+/* ==========================================================================
+   PROFESSIONAL FORM CONTROLS & LABELS
+   Eliminates Congestion, Uneven Margins & Overlapping Inputs
+   ========================================================================== */
+
+/* Universal Form Labels */
+.form-label,
 .admin-form-label {
-    display: block;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--admin-text-main);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
+    display: block !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #334155 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    margin-bottom: 5px !important;
+    line-height: 1.2 !important;
 }
 
+/* Form Input & Select Controls */
+.form-input,
 .admin-form-input {
-    width: 100%;
-    font-size: 12px;
-    padding: 8px 12px;
-    border: 1px solid var(--admin-border);
-    border-radius: 4px;
-    outline: none;
-    color: var(--admin-text-main);
-    background: #FFFFFF;
+    width: 100% !important;
+    font-size: 12.5px !important;
+    padding: 8.5px 12px !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 4px !important;
+    outline: none !important;
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+    transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    min-height: 38px !important;
 }
 
+.form-input:focus,
 .admin-form-input:focus {
-    border-color: var(--admin-primary);
-    box-shadow: 0 0 0 2px rgba(23, 105, 224, 0.15);
+    border-color: #1769E0 !important;
+    background-color: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(23, 105, 224, 0.15) !important;
+}
+
+.form-input:disabled,
+.admin-form-input:disabled {
+    background-color: #F8FAFC !important;
+    color: #94A3B8 !important;
+    border-color: #E2E8F0 !important;
+    cursor: not-allowed !important;
+}
+
+/* Structured Form Field Grid Helpers */
+.admin-form-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+}
+
+@media (max-width: 640px) {
+    .admin-form-row {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.admin-form-row-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+}
+
+@media (max-width: 640px) {
+    .admin-form-row-3 {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Section Header Dividers inside Forms */
+.admin-form-section {
+    border-bottom: 1px solid #F1F5F9 !important;
+    padding-bottom: 8px !important;
+    margin-top: 14px !important;
+    margin-bottom: 12px !important;
+}
+
+.admin-form-section-title {
+    font-size: 10px !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: #1769E0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 !important;
+}
+
+/* Form Helper & Validation Hint */
+.admin-form-hint {
+    font-size: 10.5px !important;
+    color: #64748B !important;
+    margin-top: 3.5px !important;
+    display: block !important;
+    line-height: 1.3 !important;
+}
+
+/* Status Checkbox Cards */
+.admin-checkbox-card {
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    transition: border-color 140ms ease, background-color 140ms ease !important;
+    cursor: pointer !important;
+    flex: 1 !important;
+}
+
+.admin-checkbox-card:hover {
+    border-color: #CBD5E1 !important;
+    background: #FFFFFF !important;
+}
+
+.admin-checkbox-card input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    accent-color: #1769E0 !important;
+    margin-top: 2px !important;
+    cursor: pointer !important;
+}
+
+/* Tactile Loading State & Shimmer Animation */
+.admin-top-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1769E0 0%, #38BDF8 50%, #059669 100%);
+    background-size: 200% 100%;
+    animation: adminProgressAnim 1.2s infinite linear;
+    z-index: 100000;
+}
+
+@keyframes adminProgressAnim {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@keyframes adminShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.admin-loading-shimmer {
+    background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%) !important;
+    background-size: 200% 100% !important;
+    animation: adminShimmer 1.5s infinite !important;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.admin-spinner {
+    width: 13px !important;
+    height: 13px !important;
+    border: 2px solid rgba(255, 255, 255, 0.35) !important;
+    border-radius: 50% !important;
+    border-top-color: #FFFFFF !important;
+    animation: spin 0.6s linear infinite !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+/* ==========================================================================
+   3. ADMIN DATA GRIDS, STATUS PILLS & BUTTON ENHANCEMENTS
+   High contrast, professional enterprise styling for all admin views
+   ========================================================================== */
+
+/* Universal Table Container */
+.table-container {
+    background: #FFFFFF !important;
+    border: 1px solid var(--admin-border) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-width: 100% !important;
+    margin-bottom: 24px !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* High-Density Custom Table for Admin GridViews */
+.table-custom {
+    width: 100% !important;
+    min-width: 100%;
+    border-collapse: collapse !important;
+    font-size: 12px !important;
+    text-align: left !important;
+}
+
+.table-custom th {
+    background-color: #F8FAFC !important;
+    color: #475569 !important;
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace !important;
+    font-weight: 700 !important;
+    font-size: 10.5px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    padding: 10px 12px !important;
+    border-bottom: 1px solid var(--admin-border) !important;
+    white-space: nowrap !important;
+}
+
+.table-custom td {
+    padding: 11px 12px !important;
+    border-bottom: 1px solid #F1F5F9 !important;
+    color: #1E293B !important;
+    vertical-align: middle !important;
+    background-color: #FFFFFF !important;
+    transition: background-color 120ms ease !important;
+}
+
+.table-custom th:first-child,
+.table-custom td:first-child {
+    padding-left: 16px !important;
+}
+
+.table-custom th:last-child,
+.table-custom td:last-child {
+    padding-right: 16px !important;
+}
+
+.table-custom tbody tr:hover td {
+    background-color: #F8FAFC !important;
+}
+
+.table-custom tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* Status Pills */
+.status-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+}
+
+.status-pill-verified {
+    background-color: #ECFDF5 !important;
+    color: #065F46 !important;
+    border: 1px solid #A7F3D0 !important;
+}
+
+.status-pill-demo,
+.status-pill-pending {
+    background-color: #FFFBEB !important;
+    color: #92400E !important;
+    border: 1px solid #FDE68A !important;
+}
+
+.status-pill-emergency {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+    border: 1px solid #FED7AA !important;
+}
+
+.status-pill-stock {
+    background-color: #EFF6FF !important;
+    color: #1E40AF !important;
+    border: 1px solid #BFDBFE !important;
+}
+
+/* Spec Tags */
+.spec-tag {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 3px 8px !important;
+    border-radius: 4px !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
+    border: 1px solid transparent !important;
+}
+
+.spec-tag-blue {
+    background-color: #EFF6FF !important;
+    color: #1E40AF !important;
+    border-color: #BFDBFE !important;
+}
+
+.spec-tag-amber {
+    background-color: #FEF3C7 !important;
+    color: #92400E !important;
+    border-color: #FCD34D !important;
+}
+
+.spec-tag-orange {
+    background-color: #FFF7ED !important;
+    color: #C2410C !important;
+    border-color: #FED7AA !important;
+}
+
+.spec-tag-emerald {
+    background-color: #ECFDF5 !important;
+    color: #065F46 !important;
+    border-color: #A7F3D0 !important;
+}
+
+/* Standard Buttons for Admin Pages */
+.btn-primary {
+    background-color: var(--admin-primary) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    padding: 7px 14px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--admin-primary-hover) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: background-color 120ms ease, box-shadow 120ms ease, transform 120ms ease !important;
+    text-decoration: none !important;
+    box-shadow: 0 1px 2px rgba(23, 105, 224, 0.2) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--admin-primary-hover) !important;
+    box-shadow: 0 3px 8px rgba(23, 105, 224, 0.3) !important;
+    transform: translateY(-0.5px) !important;
+}
+
+.btn-secondary {
+    background-color: #FFFFFF !important;
+    color: #334155 !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    padding: 7px 12px !important;
+    border-radius: 4px !important;
+    border: 1px solid var(--admin-border-dark) !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: background-color 120ms ease, border-color 120ms ease !important;
+    text-decoration: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+.btn-secondary:hover {
+    background-color: #F8FAFC !important;
+    border-color: #94A3B8 !important;
+    color: #0F172A !important;
 }
 

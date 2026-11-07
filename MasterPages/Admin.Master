@@ -12,8 +12,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="<%= ResolveUrl("~/Content/images/brand/favicon-32.png") %>" />
     <link rel="icon" type="image/png" sizes="16x16" href="<%= ResolveUrl("~/Content/images/brand/favicon-16.png") %>" />
     <link rel="apple-touch-icon" sizes="180x180" href="<%= ResolveUrl("~/Content/images/brand/apple-touch-icon.png") %>" />
-    <!-- Core & Shell CSS -->
+    <!-- Authoritative Design Tokens & Shell CSS -->
+    <link href="<%= ResolveUrl("~/Content/css/tokens.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Content/css/site.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/css/site-shell.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Content/css/admin.css") %>?v=<%= DateTime.Now.Ticks %>" rel="stylesheet" type="text/css" />
     <!-- Icons and Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -25,200 +27,201 @@
 </head>
 <body class="admin-body-shell h-full m-0 p-0 font-['IBM_Plex_Sans',sans-serif] antialiased text-[#0F172A] bg-[#F1F5F9] flex overflow-hidden">
     <form id="form1" runat="server" class="flex w-full h-full m-0 p-0">
-        <!-- Sidebar Navigation (Authoritative Enterprise Navy #101B30) -->
-        <aside class="w-72 bg-[#101B30] text-slate-300 flex flex-col shrink-0 border-r border-[#17243A] shadow-xl select-none">
+        <!-- Sidebar Navigation (Authoritative Enterprise Navy #0F172A) -->
+        <aside class="admin-sidebar w-72 bg-[#0F172A] text-slate-300 flex flex-col shrink-0 border-r border-[#1E293B] shadow-xl select-none">
             <!-- Brand header (Flush top, height matched to main header) -->
-            <div class="h-16 px-6 flex items-center justify-between border-b border-[#17243A] bg-[#0A1220]">
-                <a href="~/Admin/Dashboard.aspx" runat="server" class="flex items-center gap-3 no-underline group">
-                    <div class="w-8 h-8 rounded-md bg-[#1769E0] flex items-center justify-center text-white font-black text-sm shadow-md group-hover:bg-[#1254B7] transition-colors">
-                        <i class="fa-solid fa-shield-halved"></i>
+            <div class="admin-sidebar-brand h-16 px-5 flex items-center justify-between border-b border-[#1E293B] bg-[#0A1220]">
+                <a href="~/Admin/Dashboard.aspx" runat="server" class="flex items-center gap-3 no-underline group" aria-label="ASTANTRA Admin Console">
+                    <div class="admin-brand-icon-box w-8 h-8 rounded-md bg-[#0F172A] border border-[#1E293B] flex items-center justify-center p-1.5 shadow-md group-hover:border-[#38BDF8] transition-colors">
+                        <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol-light.svg") %>" alt="ASTANTRA Symbol" class="w-full h-full object-contain" />
                     </div>
                     <div class="flex flex-col text-left">
-                        <span class="text-sm font-black font-['Archivo',sans-serif] tracking-wider text-white">ASTANTRA</span>
-                        <span class="text-[9px] font-mono tracking-widest text-[#38BDF8] uppercase font-bold">ADMIN CONSOLE</span>
+                        <span class="admin-sidebar-logo-text text-sm font-black font-['Archivo',sans-serif] tracking-wider text-white">ASTANTRA</span>
+                        <span class="admin-sidebar-badge-text text-[9px] font-mono tracking-widest text-[#38BDF8] uppercase font-bold">ADMIN CONSOLE</span>
                     </div>
                 </a>
             </div>
 
             <!-- Sidebar Links Menu (Grouped Enterprise Structure) -->
-            <nav class="flex-1 px-3 py-4 space-y-4 overflow-y-auto admin-nav-scroll text-left">
+            <nav class="admin-nav flex-1 px-3 py-4 space-y-4 overflow-y-auto admin-nav-scroll text-left">
                 <!-- Group 1: EXECUTIVE -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Executive</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8]"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-[#38BDF8]"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Dashboard.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-[#38BDF8]">
+                        <a href="~/Admin/Dashboard.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-[#38BDF8]">
                                 <i class="fa-solid fa-chart-line"></i>
                             </span>
-                            <span>Command Dashboard</span>
+                            <span class="admin-nav-text">Command Dashboard</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Group 2: IDENTITY & ACCESS -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Identity &amp; Access</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-blue-400"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Users/ManageUsers.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-blue-400">
+                        <a href="~/Admin/Users/ManageUsers.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-blue-400">
                                 <i class="fa-solid fa-users-gear"></i>
                             </span>
-                            <span>User Directory</span>
+                            <span class="admin-nav-text">User Directory</span>
                         </a>
-                        <a href="~/Admin/RBAC/Roles.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-cyan-400">
+                        <a href="~/Admin/RBAC/Roles.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-cyan-400">
                                 <i class="fa-solid fa-shield-halved"></i>
                             </span>
-                            <span>Roles &amp; Permissions</span>
+                            <span class="admin-nav-text">Roles &amp; Permissions</span>
                         </a>
-                        <a href="~/Admin/Security/LoginSecurity.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
+                        <a href="~/Admin/Security/LoginSecurity.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
                                 <i class="fa-solid fa-user-lock"></i>
                             </span>
-                            <span>Login &amp; Session Security</span>
+                            <span class="admin-nav-text">Login &amp; Session Security</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Group 3: BUSINESS DIRECTORY -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Business Directory</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-amber-400"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Factories/ManageFactories.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-amber-400">
+                        <a href="~/Admin/Factories/ManageFactories.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-amber-400">
                                 <i class="fa-solid fa-industry"></i>
                             </span>
-                            <span>Industrial Plant Buyers</span>
+                            <span class="admin-nav-text">Industrial Plant Buyers</span>
                         </a>
-                        <a href="~/Admin/Suppliers/Verification.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
+                        <a href="~/Admin/Suppliers/Verification.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
                                 <i class="fa-solid fa-warehouse"></i>
                             </span>
-                            <span>Suppliers &amp; Verification</span>
+                            <span class="admin-nav-text">Suppliers &amp; Verification</span>
                         </a>
-                        <a href="~/Admin/Technicians/ManageTechnicians.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-cyan-400">
+                        <a href="~/Admin/Technicians/ManageTechnicians.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-cyan-400">
                                 <i class="fa-solid fa-user-wrench"></i>
                             </span>
-                            <span>Service Technicians</span>
+                            <span class="admin-nav-text">Service Technicians</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Group 4: CATALOG & MACHINERY -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Catalog &amp; Machinery</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-purple-400"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Categories/ManageCategories.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-purple-400">
+                        <a href="~/Admin/Categories/ManageCategories.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-purple-400">
                                 <i class="fa-solid fa-diagram-project"></i>
                             </span>
-                            <span>Categories &amp; Machines</span>
+                            <span class="admin-nav-text">Categories &amp; Machines</span>
                         </a>
-                        <a href="~/Admin/SpareParts/ManageParts.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-orange-400">
+                        <a href="~/Admin/SpareParts/ManageParts.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-orange-400">
                                 <i class="fa-solid fa-boxes-stacked"></i>
                             </span>
-                            <span>Master Parts Catalog</span>
+                            <span class="admin-nav-text">Master Parts Catalog</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Group 5: PROCUREMENT & OPERATIONS -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Procurement &amp; Ops</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-rose-400"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Orders/Oversight.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
+                        <a href="~/Admin/Orders/Oversight.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
                                 <i class="fa-solid fa-truck-fast"></i>
                             </span>
-                            <span>Orders &amp; Emergency SOS</span>
+                            <span class="admin-nav-text">Orders &amp; Emergency SOS</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Group 6: GOVERNANCE & SYSTEM -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Governance &amp; System</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Audit/AuditLogs.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-rose-400">
+                        <a href="~/Admin/Audit/AuditLogs.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-rose-400">
                                 <i class="fa-solid fa-clipboard-check"></i>
                             </span>
-                            <span>Platform Audit Trail</span>
+                            <span class="admin-nav-text">Platform Audit Trail</span>
                         </a>
-                        <a href="~/Admin/System/DataIntegrity.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-teal-400">
+                        <a href="~/Admin/System/DataIntegrity.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-teal-400">
                                 <i class="fa-solid fa-database"></i>
                             </span>
-                            <span>Data Integrity Suite</span>
+                            <span class="admin-nav-text">Data Integrity Suite</span>
                         </a>
-                        <a href="~/Admin/System/SystemHealth.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
+                        <a href="~/Admin/System/SystemHealth.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-emerald-400">
                                 <i class="fa-solid fa-heart-pulse"></i>
                             </span>
-                            <span>System Health</span>
+                            <span class="admin-nav-text">System Health</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Group 7: ADMINISTRATION -->
-                <div>
-                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
+                <div class="admin-nav-group">
+                    <div class="admin-nav-group-header text-[9px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-1.5 font-mono flex items-center justify-between">
                         <span>Administration</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                        <span class="admin-nav-group-dot w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                     </div>
                     <div class="space-y-0.5">
-                        <a href="~/Admin/Settings/PlatformSettings.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-slate-400">
+                        <a href="~/Admin/Settings/PlatformSettings.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-slate-400">
                                 <i class="fa-solid fa-sliders"></i>
                             </span>
-                            <span>Platform Settings</span>
+                            <span class="admin-nav-text">Platform Settings</span>
                         </a>
-                        <a href="~/Admin/Profile.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#17243A] hover:text-white transition-all">
-                            <span class="w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-blue-400">
+                        <a href="~/Admin/Profile.aspx" runat="server" class="admin-nav-item flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded text-slate-300 hover:bg-[#1E293B] hover:text-white transition-all">
+                            <span class="admin-nav-icon-wrap w-5 h-5 rounded bg-slate-800/80 flex items-center justify-center text-xs shrink-0 text-blue-400">
                                 <i class="fa-solid fa-user-shield"></i>
                             </span>
-                            <span>Administrator Profile</span>
+                            <span class="admin-nav-text">Administrator Profile</span>
                         </a>
                     </div>
                 </div>
             </nav>
 
             <!-- Admin Profile Footbar (Comfortable Padding with Direct Profile Navigation) -->
-            <div class="h-16 px-4 py-3 border-t border-[#17243A] bg-[#0A1220] flex items-center justify-between text-left">
-                <a href="~/Admin/Profile.aspx" runat="server" class="flex items-center gap-3 overflow-hidden no-underline group flex-1 mr-2" title="View & Edit Admin Profile">
-                    <div class="w-8 h-8 rounded-full bg-slate-700 group-hover:bg-[#1769E0] text-white font-bold text-xs flex items-center justify-center shrink-0 border border-slate-600 transition-colors font-mono">
-                        SA
+            <div class="admin-sidebar-footer h-16 px-4 py-3 border-t border-[#1E293B] bg-[#0A1220] flex items-center justify-between text-left">
+                <a href="~/Admin/Profile.aspx" runat="server" class="admin-user-profile-link flex items-center gap-3 overflow-hidden no-underline group flex-1 mr-2" title="View & Edit Admin Profile">
+                    <div class="admin-user-avatar w-8 h-8 rounded-full bg-slate-700 group-hover:bg-[#1769E0] text-white font-bold text-xs flex items-center justify-center shrink-0 border border-slate-600 transition-colors font-mono overflow-hidden">
+                        <asp:Image ID="imgAdminAvatar" runat="server" CssClass="w-full h-full object-cover" Visible="false" />
+                        <span id="lblAdminInitials" runat="server">SA</span>
                     </div>
-                    <div class="truncate">
-                        <span class="text-xs font-bold text-white block truncate group-hover:text-[#38BDF8] transition-colors" id="lblAdminName" runat="server">Superadmin</span>
-                        <span class="text-[9px] font-mono text-[#38BDF8] block tracking-wider uppercase font-semibold">SUPERADMINISTRATOR</span>
+                    <div class="admin-user-info truncate">
+                        <span class="admin-user-name text-xs font-bold text-white block truncate group-hover:text-[#38BDF8] transition-colors" id="lblAdminName" runat="server">Superadmin</span>
+                        <span class="admin-user-role text-[9px] font-mono text-[#38BDF8] block tracking-wider uppercase font-semibold">SUPERADMINISTRATOR</span>
                     </div>
                 </a>
-                <div class="flex items-center gap-1">
-                    <a href="~/Admin/Profile.aspx" runat="server" class="text-slate-400 hover:text-[#38BDF8] transition-colors p-1.5 rounded hover:bg-slate-800/80" title="Admin Profile & Security Settings">
+                <div class="admin-user-actions flex items-center gap-1">
+                    <a href="~/Admin/Profile.aspx" runat="server" class="admin-action-btn text-slate-400 hover:text-[#38BDF8] transition-colors p-1.5 rounded hover:bg-slate-800/80" title="Admin Profile & Security Settings">
                         <i class="fa-solid fa-gear text-xs"></i>
                     </a>
-                    <a href="~/Account/Logout.aspx" runat="server" class="text-slate-400 hover:text-rose-400 transition-colors p-1.5 rounded hover:bg-slate-800/80" title="Sign Out">
+                    <a href="~/Account/Logout.aspx" runat="server" class="admin-action-btn admin-action-btn-danger text-slate-400 hover:text-rose-400 transition-colors p-1.5 rounded hover:bg-slate-800/80" title="Sign Out">
                         <i class="fa-solid fa-right-from-bracket text-xs"></i>
                     </a>
                 </div>
@@ -226,10 +229,16 @@
         </aside>
 
         <!-- Main Content Viewport -->
-        <div class="flex-1 flex flex-col overflow-hidden">
+        <div class="flex-1 flex flex-col overflow-hidden relative">
+            <!-- Indeterminate Top Progress Bar for Data & Operation Loading -->
+            <div id="adminTopProgressBar" class="admin-top-progress-bar" style="display:none;" aria-hidden="true"></div>
+
             <!-- Top Admin Header -->
-            <header class="h-16 bg-white border-b border-[#E2E8F0] px-6 lg:px-8 flex items-center justify-between shrink-0 shadow-xs">
+            <header class="admin-top-header h-16 bg-white border-b border-[#E2E8F0] px-6 lg:px-8 flex items-center justify-between shrink-0 shadow-xs">
                 <div class="flex items-center gap-3 text-left">
+                    <div class="w-7 h-7 rounded bg-slate-50 border border-slate-200 flex items-center justify-center p-1 shadow-2xs">
+                        <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol.svg") %>" alt="ASTANTRA" class="w-full h-full object-contain" />
+                    </div>
                     <span class="text-xs font-bold font-mono uppercase text-[#64748B] tracking-wider">ASTANTRA GOVERNANCE</span>
                     <span class="text-[#CBD5E1]">/</span>
                     <h1 class="text-sm font-bold text-[#0F172A] m-0" id="lblPageHeader" runat="server">Console</h1>
@@ -245,10 +254,27 @@
             </header>
 
             <!-- Scrollable Page Content Area -->
-            <main class="flex-1 overflow-y-auto p-6 lg:p-8 bg-[#F1F5F9] admin-viewport-scroll">
-                <div class="admin-content-container admin-animate-enter">
+            <main class="admin-main-viewport flex-1 overflow-y-auto p-6 lg:p-8 bg-[#F1F5F9] admin-viewport-scroll">
+                <div class="admin-content-container">
                     <asp:ContentPlaceHolder ID="MainContent" runat="server">
                     </asp:ContentPlaceHolder>
+
+                    <!-- Global Governance Footer with Official Project Identity -->
+                    <footer class="mt-12 pt-6 pb-6 border-t border-[#CBD5E1] flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#64748B] font-mono gap-3 select-none">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded bg-white border border-slate-200 flex items-center justify-center p-0.5 shadow-2xs">
+                                <img src="<%= ResolveUrl("~/Content/images/brand/logo-symbol.svg") %>" alt="ASTANTRA Symbol" class="w-full h-full object-contain" />
+                            </div>
+                            <span class="font-bold text-[#0F172A] font-['Archivo',sans-serif] tracking-wider">ASTANTRA</span>
+                            <span>— Industrial Spare-Part Telemetry &amp; Procurement Platform</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-200/60 text-slate-700 text-[10px] font-bold">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> GOVERNANCE v2.4
+                            </span>
+                            <span>&copy; <%= DateTime.Now.Year %> ASTANTRA</span>
+                        </div>
+                    </footer>
                 </div>
             </main>
         </div>
@@ -268,6 +294,19 @@
                     }
                 }
             });
+
+            // Enterprise Loading Progress Feedback
+            var topBar = document.getElementById('adminTopProgressBar');
+            window.addEventListener('beforeunload', function() {
+                if (topBar) topBar.style.display = 'block';
+            });
+
+            var adminForm = document.getElementById('adminForm');
+            if (adminForm) {
+                adminForm.addEventListener('submit', function() {
+                    if (topBar) topBar.style.display = 'block';
+                });
+            }
         })();
     </script>
     <asp:ContentPlaceHolder ID="ScriptsContent" runat="server">

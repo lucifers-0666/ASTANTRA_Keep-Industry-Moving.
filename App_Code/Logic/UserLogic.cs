@@ -16,7 +16,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             {
                 string sql = @"
                     SELECT u.UserId, u.RoleId, r.RoleName, u.Email, u.PasswordHash, u.Salt, 
-                           u.FullName, u.PhoneNumber, u.IsActive, u.IsVerified, u.CreatedAt
+                           u.FullName, u.PhoneNumber, u.IsActive, u.IsVerified, u.CreatedAt, u.ProfileImage
                     FROM Users u
                     INNER JOIN Roles r ON u.RoleId = r.RoleId
                     WHERE u.Email = @Email";
@@ -40,7 +40,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             {
                 string sql = @"
                     SELECT u.UserId, u.RoleId, r.RoleName, u.Email, u.PasswordHash, u.Salt, 
-                           u.FullName, u.PhoneNumber, u.IsActive, u.IsVerified, u.CreatedAt
+                           u.FullName, u.PhoneNumber, u.IsActive, u.IsVerified, u.CreatedAt, u.ProfileImage
                     FROM Users u
                     INNER JOIN Roles r ON u.RoleId = r.RoleId
                     WHERE u.UserId = @UserId";
@@ -491,6 +491,26 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             }
         }
 
+        public bool updateUserProfileImage(int userId, string profileImagePath)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    UPDATE Users 
+                    SET ProfileImage = @ProfileImage, 
+                        UpdatedAt = GETDATE()
+                    WHERE UserId = @UserId";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@ProfileImage", SqlDbType.NVarChar, 350) { Value = (object)profileImagePath ?? DBNull.Value });
+                    cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
         public bool changeUserPassword(int userId, string oldPassword, string newPassword, out string errorMessage)
         {
             errorMessage = string.Empty;
@@ -515,6 +535,33 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             if (!PasswordHasher.VerifyPassword(oldPassword, storedHash, storedSalt))
             {
                 errorMessage = "Current password verification failed. Please check your password.";
+                return false;
+            }
+
+            string newSalt = PasswordHasher.GenerateSalt();
+            string newHash = PasswordHasher.HashPassword(newPassword, newSalt);
+
+            using (SqlConnection con = getcon())
+            {
+                string sql = "UPDATE Users SET PasswordHash = @PasswordHash, Salt = @Salt, UpdatedAt = GETDATE() WHERE UserId = @UserId";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@PasswordHash", SqlDbType.VarChar, 255) { Value = newHash });
+                    cmd.Parameters.Add(new SqlParameter("@Salt", SqlDbType.VarChar, 100) { Value = newSalt });
+                    cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool resetUserPasswordByAdmin(int userId, string newPassword, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(newPassword) || newPassword.Length < 6)
+            {
+                errorMessage = "New password must be at least 6 characters long.";
                 return false;
             }
 

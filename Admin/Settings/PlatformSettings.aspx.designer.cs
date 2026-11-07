@@ -17,3 +17,4 @@ namespace IndustrialSparePartPortal.Admin.Settings
         protected global::System.Web.UI.WebControls.Button btnSaveSetting;
     }
 }
+

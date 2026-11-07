@@ -20,3 +20,4 @@ BEGIN
     PRINT 'INFO: Column Address already exists on Technicians table.';
 END
 GO
+

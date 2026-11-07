@@ -229,41 +229,67 @@
     </div>
 
     <!-- MODAL 1: EMERGENCY SOS TRIAGE STATUS -->
-    <asp:Panel ID="pnlSosModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-md p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
+    <asp:Panel ID="pnlSosModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-lg shadow-2xl">
             <asp:HiddenField ID="hdnSosRequestId" runat="server" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-orange-50 text-[#EA580C] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-orange-50 text-[#EA580C] flex items-center justify-center text-xs shadow-xs border border-orange-200">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Triage Emergency Incident</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Triage Emergency Breakdown Incident</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">CRITICAL INDUSTRIAL SOS DISPATCH OVERSIGHT</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseSosModal" runat="server" OnClick="btnCloseSosModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseSosModal" runat="server" OnClick="btnCloseSosModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3 text-xs">
-                <div class="bg-slate-50 p-3 rounded border border-slate-200 space-y-1">
-                    <div>Facility: <strong class="text-[#0F172A]" id="lblSosPlant" runat="server">Plant</strong></div>
-                    <div>Equipment: <strong class="text-[#0F172A]" id="lblSosMachine" runat="server">Machine</strong></div>
-                    <div>Priority: <strong class="text-[#EA580C]" id="lblSosPriority" runat="server">Critical</strong></div>
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <div>
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-circle-info"></i> 1. Facility &amp; Equipment Context
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded border border-slate-200 space-y-1.5 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] uppercase font-mono text-[#64748B]">Affected Facility:</span>
+                            <strong class="text-[#0F172A]" id="lblSosPlant" runat="server">Plant</strong>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] uppercase font-mono text-[#64748B]">Production Machinery:</span>
+                            <strong class="text-[#0F172A]" id="lblSosMachine" runat="server">Machine</strong>
+                        </div>
+                        <div class="flex justify-between items-center pt-1 border-t border-slate-200">
+                            <span class="text-[10px] uppercase font-mono text-[#64748B]">Severity Level:</span>
+                            <strong class="text-[#EA580C] font-mono" id="lblSosPriority" runat="server">Critical</strong>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="form-label text-xs">Triage Dispatch Status <span class="text-rose-500">*</span></label>
-                    <asp:DropDownList ID="ddlSosStatus" runat="server" CssClass="form-input text-xs py-2 font-semibold">
-                        <asp:ListItem Value="Open" Text="Open (Awaiting Technician Response)"></asp:ListItem>
-                        <asp:ListItem Value="Dispatched" Text="Dispatched (Technician En Route)"></asp:ListItem>
-                        <asp:ListItem Value="InProgress" Text="In Progress (Repair Underway)"></asp:ListItem>
-                        <asp:ListItem Value="Resolved" Text="Resolved (Line Restored)"></asp:ListItem>
-                    </asp:DropDownList>
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-truck-fast"></i> 2. Dispatch Resolution Workflow
+                    </div>
+                    <div>
+                        <label class="form-label text-xs">Triage Dispatch Status <span class="text-rose-500">*</span></label>
+                        <asp:DropDownList ID="ddlSosStatus" runat="server" CssClass="form-input text-xs font-semibold">
+                            <asp:ListItem Value="Open" Text="Open (Awaiting Technician Response)"></asp:ListItem>
+                            <asp:ListItem Value="Dispatched" Text="Dispatched (Technician En Route)"></asp:ListItem>
+                            <asp:ListItem Value="InProgress" Text="In Progress (Repair Underway)"></asp:ListItem>
+                            <asp:ListItem Value="Resolved" Text="Resolved (Line Restored)"></asp:ListItem>
+                        </asp:DropDownList>
+                        <span class="admin-form-hint">Updates real-time status across both plant and technician dashboards.</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelSos" runat="server" Text="Cancel" OnClick="btnCloseSosModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSaveSosStatus" runat="server" Text="Update Incident Status" OnClick="btnSaveSosStatus_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>
@@ -271,47 +297,75 @@
     </asp:Panel>
 
     <!-- MODAL 2: ORDER STATUS & WAYBILL TRACKING -->
-    <asp:Panel ID="pnlOrderModal" runat="server" Visible="false" CssClass="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-        <div class="surface-card w-full max-w-md p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95">
+    <asp:Panel ID="pnlOrderModal" runat="server" Visible="false" CssClass="admin-modal-overlay">
+        <div class="admin-modal-dialog surface-card w-full max-w-lg shadow-2xl">
             <asp:HiddenField ID="hdnOrderId" runat="server" />
 
-            <div class="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                <div class="flex items-center gap-2">
-                    <div class="w-7 h-7 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs">
+            <!-- Modal Pinned Header -->
+            <div class="admin-modal-header border-b border-[#E2E8F0]">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded bg-blue-50 text-[#1769E0] flex items-center justify-center text-xs shadow-xs border border-blue-200">
                         <i class="fa-solid fa-truck-ramp-box"></i>
                     </div>
-                    <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Update Consignment Fulfillment</h3>
+                    <div>
+                        <h3 class="text-sm font-bold font-['Archivo',sans-serif] text-[#0F172A] m-0">Update Consignment Fulfillment</h3>
+                        <span class="text-[10px] font-mono text-[#64748B] block mt-0.5">LOGISTICS DISPATCH &amp; WAYBILL TRACKING GOVERNANCE</span>
+                    </div>
                 </div>
-                <asp:LinkButton ID="btnCloseOrderModal" runat="server" OnClick="btnCloseOrderModal_Click" CssClass="text-slate-400 hover:text-slate-600 text-sm">
+                <asp:LinkButton ID="btnCloseOrderModal" runat="server" OnClick="btnCloseOrderModal_Click" CssClass="admin-modal-close-btn" ToolTip="Close dialog">
                     <i class="fa-solid fa-xmark"></i>
                 </asp:LinkButton>
             </div>
 
-            <div class="space-y-3 text-xs">
-                <div class="bg-slate-50 p-3 rounded border border-slate-200 space-y-1">
-                    <div>Order: <strong class="text-[#1769E0] font-mono" id="lblModalOrderNo" runat="server">ORD-123</strong></div>
-                    <div>Buyer: <span id="lblModalBuyer" runat="server">Plant</span></div>
-                    <div>Supplier: <span id="lblModalSupplier" runat="server">Vendor</span></div>
+            <!-- Modal Scrollable Body -->
+            <div class="admin-modal-body space-y-4">
+                <div>
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-receipt"></i> 1. Purchase Order Summary
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded border border-slate-200 space-y-1.5 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] uppercase font-mono text-[#64748B]">PO Number:</span>
+                            <strong class="text-[#1769E0] font-mono" id="lblModalOrderNo" runat="server">ORD-123</strong>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] uppercase font-mono text-[#64748B]">Buyer Enterprise:</span>
+                            <span class="font-medium text-[#0F172A]" id="lblModalBuyer" runat="server">Plant</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] uppercase font-mono text-[#64748B]">Supplier Hub:</span>
+                            <span class="font-medium text-[#0F172A]" id="lblModalSupplier" runat="server">Vendor</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="form-label text-xs">Fulfillment Status <span class="text-rose-500">*</span></label>
-                    <asp:DropDownList ID="ddlOrderStatus" runat="server" CssClass="form-input text-xs py-2 font-semibold">
-                        <asp:ListItem Value="Placed" Text="Placed (Confirmed by Buyer)"></asp:ListItem>
-                        <asp:ListItem Value="Processing" Text="Processing (Stock Packed at Hub)"></asp:ListItem>
-                        <asp:ListItem Value="Shipped" Text="Shipped (In Transit)"></asp:ListItem>
-                        <asp:ListItem Value="Delivered" Text="Delivered (Received at Plant)"></asp:ListItem>
-                        <asp:ListItem Value="Cancelled" Text="Cancelled"></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
+                <div class="pt-2">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-dolly"></i> 2. Fulfillment Status &amp; Tracking Dossier
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="form-label text-xs">Fulfillment Lifecycle Status <span class="text-rose-500">*</span></label>
+                            <asp:DropDownList ID="ddlOrderStatus" runat="server" CssClass="form-input text-xs font-semibold">
+                                <asp:ListItem Value="Placed" Text="Placed (Confirmed by Buyer)"></asp:ListItem>
+                                <asp:ListItem Value="Processing" Text="Processing (Stock Packed at Hub)"></asp:ListItem>
+                                <asp:ListItem Value="Shipped" Text="Shipped (In Transit)"></asp:ListItem>
+                                <asp:ListItem Value="Delivered" Text="Delivered (Received at Plant)"></asp:ListItem>
+                                <asp:ListItem Value="Cancelled" Text="Cancelled"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
 
-                <div>
-                    <label class="form-label text-xs">Consignment Waybill / Tracking Number</label>
-                    <asp:TextBox ID="txtTrackingNumber" runat="server" CssClass="form-input text-xs py-2 font-mono" placeholder="e.g. BLUEDART-88992314" />
+                        <div>
+                            <label class="form-label text-xs">Consignment Waybill / Logistics Tracking Number</label>
+                            <asp:TextBox ID="txtTrackingNumber" runat="server" CssClass="form-input text-xs font-mono" placeholder="e.g. BLUEDART-88992314 or VRL-901827" />
+                            <span class="admin-form-hint">Enables one-click carrier telemetry for the purchasing buyer.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E2E8F0]">
+            <!-- Modal Pinned Footer -->
+            <div class="admin-modal-footer border-t border-[#E2E8F0]">
                 <asp:Button ID="btnCancelOrder" runat="server" Text="Cancel" OnClick="btnCloseOrderModal_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
                 <asp:Button ID="btnSaveOrderStatus" runat="server" Text="Update Fulfillment" OnClick="btnSaveOrderStatus_Click" CssClass="btn-primary text-xs py-2 px-4 cursor-pointer" />
             </div>
