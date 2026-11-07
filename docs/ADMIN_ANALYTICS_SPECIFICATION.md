@@ -136,3 +136,4 @@ To prevent misleading vanity statistics, financial and operational metrics follo
 ### 4. Backup & Recovery
 - **Status:** Database integrity audit and reconciliation implemented in `Admin/System/DataIntegrity.aspx`.
 - **Architecture Plan:** In a LocalDB environment, scripted backup procedures (`BACKUP DATABASE IndustrialSparePartDB TO DISK = ...`) should be managed via automated administrative batch scripts rather than raw web interface execution for security isolation.
+

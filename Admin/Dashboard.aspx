@@ -2,6 +2,35 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        .analytics-grid-row-1 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .analytics-grid-row-1 {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        .analytics-grid-row-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+        @media (min-width: 640px) {
+            .analytics-grid-row-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .analytics-grid-row-2 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
         .chart-card {
             background: #FFFFFF;
             border: 1px solid #E2E8F0;
@@ -11,6 +40,9 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
         }
         .chart-header {
             display: flex;
@@ -40,7 +72,8 @@
         .chart-canvas-container {
             position: relative;
             flex: 1;
-            min-height: 240px;
+            height: 280px;
+            min-height: 280px;
             width: 100%;
         }
         .timeframe-pill {
@@ -117,13 +150,13 @@
                 <asp:LinkButton ID="btnTimeframe7" runat="server" OnClick="btnTimeframe_Click" CommandArgument="7" CssClass="timeframe-pill" ToolTip="Filter last 7 days">
                     <span>7 Days</span>
                 </asp:LinkButton>
-                <asp:LinkButton ID="btnTimeframe30" runat="server" OnClick="btnTimeframe_Click" CommandArgument="30" CssClass="timeframe-pill active" ToolTip="Filter last 30 days">
+                <asp:LinkButton ID="btnTimeframe30" runat="server" OnClick="btnTimeframe_Click" CommandArgument="30" CssClass="timeframe-pill" ToolTip="Filter last 30 days">
                     <span>30 Days</span>
                 </asp:LinkButton>
                 <asp:LinkButton ID="btnTimeframe90" runat="server" OnClick="btnTimeframe_Click" CommandArgument="90" CssClass="timeframe-pill" ToolTip="Filter last 90 days">
                     <span>90 Days</span>
                 </asp:LinkButton>
-                <asp:LinkButton ID="btnTimeframeAll" runat="server" OnClick="btnTimeframe_Click" CommandArgument="all" CssClass="timeframe-pill" ToolTip="Show all-time records">
+                <asp:LinkButton ID="btnTimeframeAll" runat="server" OnClick="btnTimeframe_Click" CommandArgument="all" CssClass="timeframe-pill active" ToolTip="Show all-time records">
                     <span>All Time</span>
                 </asp:LinkButton>
             </div>
@@ -322,10 +355,11 @@
         </asp:Panel>
     </div>
 
-    <!-- SECTION 3: INTERACTIVE ANALYTICS VISUALIZATION SUITE (5 Charts in Cohesive Grid) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 admin-animate-enter admin-stagger-2">
-        <!-- Chart 1: Procurement & Transaction Activity Trend (Span 8 Cols) -->
-        <div class="chart-card lg:col-span-8">
+    <!-- SECTION 3: INTERACTIVE ANALYTICS VISUALIZATION SUITE -->
+    <!-- Row 1: Procurement Dual-Axis Trend (2/3 width) & Order Fulfillment Status (1/3 width) -->
+    <div class="analytics-grid-row-1 admin-animate-enter admin-stagger-2">
+        <!-- Chart 1: Procurement & Transaction Activity Trend -->
+        <div class="chart-card">
             <div class="chart-header">
                 <div>
                     <div class="chart-title">
@@ -367,8 +401,8 @@
             </details>
         </div>
 
-        <!-- Chart 2: Order Fulfillment Pipeline Status (Span 4 Cols) -->
-        <div class="chart-card lg:col-span-4">
+        <!-- Chart 2: Order Fulfillment Pipeline Status -->
+        <div class="chart-card">
             <div class="chart-header">
                 <div>
                     <div class="chart-title">
@@ -392,9 +426,12 @@
                 </a>
             </div>
         </div>
+    </div>
 
-        <!-- Chart 3: Ecosystem Identity Distribution (Span 4 Cols) -->
-        <div class="chart-card lg:col-span-4">
+    <!-- Row 2: Ecosystem Identity Share, Emergency Priority Triage & RFQ Pipeline Funnel (3 equal cols) -->
+    <div class="analytics-grid-row-2 admin-animate-enter admin-stagger-2">
+        <!-- Chart 3: Ecosystem Identity Distribution -->
+        <div class="chart-card">
             <div class="chart-header">
                 <div>
                     <div class="chart-title">
@@ -415,8 +452,8 @@
             </div>
         </div>
 
-        <!-- Chart 4: Emergency Severity Triage (Span 4 Cols) -->
-        <div class="chart-card lg:col-span-4">
+        <!-- Chart 4: Emergency Severity Triage -->
+        <div class="chart-card">
             <div class="chart-header">
                 <div>
                     <div class="chart-title text-orange-700">
@@ -442,8 +479,8 @@
             </div>
         </div>
 
-        <!-- Chart 5: RFQ Conversion Pipeline Funnel (Span 4 Cols) -->
-        <div class="chart-card lg:col-span-4">
+        <!-- Chart 5: RFQ Conversion Pipeline Funnel -->
+        <div class="chart-card">
             <div class="chart-header">
                 <div>
                     <div class="chart-title">

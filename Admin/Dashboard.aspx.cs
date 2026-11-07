@@ -25,7 +25,7 @@ namespace IndustrialSparePartPortal.Admin
         {
             if (!IsPostBack)
             {
-                ViewState["Timeframe"] = "30";
+                ViewState["Timeframe"] = "all";
                 LoadDashboard();
             }
         }
@@ -58,7 +58,7 @@ namespace IndustrialSparePartPortal.Admin
         {
             try
             {
-                string timeframe = ViewState["Timeframe"] as string ?? "30";
+                string timeframe = ViewState["Timeframe"] as string ?? "all";
                 UpdateTimeframeButtonsUI(timeframe);
 
                 DateTime? startDate = null;
