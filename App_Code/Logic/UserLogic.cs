@@ -270,9 +270,12 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
             DataRow row = ds.Tables[0].Rows[0];
             bool isActive = Convert.ToBoolean(row["IsActive"]);
+            int targetUserId = Convert.ToInt32(row["UserId"]);
+
             if (!isActive)
             {
                 errorMessage = "Your account has been deactivated. Please contact platform administration.";
+                LogAuthEvent(targetUserId, "AUTH_LOGIN_DEACTIVATED", email, errorMessage);
                 return false;
             }
 
@@ -282,10 +285,11 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             if (!PasswordHasher.VerifyPassword(password, storedHash, storedSalt))
             {
                 errorMessage = "Invalid email or password.";
+                LogAuthEvent(targetUserId, "AUTH_LOGIN_FAILED", email, "Invalid password attempt");
                 return false;
             }
 
-            userId = Convert.ToInt32(row["UserId"]);
+            userId = targetUserId;
             roleName = row["RoleName"].ToString();
             fullName = row["FullName"].ToString();
             isVerified = Convert.ToBoolean(row["IsVerified"]);
@@ -297,7 +301,27 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             SessionHelper.FullName = fullName;
             SessionHelper.IsVerified = isVerified;
 
+            LogAuthEvent(userId, "AUTH_LOGIN_SUCCESS", email, string.Format("Signed in successfully as {0}", roleName));
+
             return true;
+        }
+
+        private void LogAuthEvent(int? userId, string actionType, string email, string details)
+        {
+            try
+            {
+                string ip = "127.0.0.1";
+                if (System.Web.HttpContext.Current != null && System.Web.HttpContext.Current.Request != null)
+                {
+                    ip = System.Web.HttpContext.Current.Request.UserHostAddress ?? "127.0.0.1";
+                }
+                var audit = new AuditLogic();
+                audit.logAction(userId, actionType, "Users", userId, null, string.Format("{0}: {1}", email, details), ip);
+            }
+            catch
+            {
+                // Non-fatal telemetry logging
+            }
         }
 
         public DataSet searchUsers(string searchKeyword = null, string roleFilter = null, string statusFilter = null)
@@ -408,7 +432,7 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                 {
                     try
                     {
-                        // Clean up child dependencies safely
+                        // Clean up ephemeral notifications safely
                         string sqlDelTokens = "DELETE FROM Notifications WHERE UserId = @UserId";
                         using (SqlCommand cmd = new SqlCommand(sqlDelTokens, con, tx))
                         {
@@ -416,8 +440,17 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                             cmd.ExecuteNonQuery();
                         }
 
-                        string sqlDelAudit = "DELETE FROM AuditLogs WHERE UserId = @UserId";
-                        using (SqlCommand cmd = new SqlCommand(sqlDelAudit, con, tx))
+                        // PRESERVE AUDIT TRAIL: Decouple user reference without destroying historical audit log records
+                        string sqlPreserveAudit = "UPDATE AuditLogs SET UserId = NULL WHERE UserId = @UserId";
+                        using (SqlCommand cmd = new SqlCommand(sqlPreserveAudit, con, tx))
+                        {
+                            cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Decouple system settings last-updated reference if any
+                        string sqlPreserveSettings = "UPDATE SystemSettings SET LastUpdatedBy = NULL WHERE LastUpdatedBy = @UserId";
+                        using (SqlCommand cmd = new SqlCommand(sqlPreserveSettings, con, tx))
                         {
                             cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = userId });
                             cmd.ExecuteNonQuery();
@@ -437,6 +470,196 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                     catch
                     {
                         tx.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Atomically creates a platform user account and their role-specific business profile inside a single SQL transaction.
+        /// Validates email uniqueness and business fields, using PBKDF2 cryptography.
+        /// </summary>
+        public bool registerUserWithProfileAtomic(
+            int roleId,
+            string fullName,
+            string email,
+            string phone,
+            string plainPassword,
+            bool isActive,
+            bool isVerified,
+            // Factory profile details
+            string factoryCompany,
+            string factoryIndustry,
+            string factoryGstin,
+            string factoryAddress,
+            string factoryCity,
+            string factoryState,
+            string factoryPincode,
+            string factoryContact,
+            // Supplier profile details
+            string supplierCompany,
+            string supplierRegNo,
+            string supplierGstin,
+            string supplierAddress,
+            string supplierCity,
+            string supplierState,
+            string supplierPincode,
+            // Technician profile details
+            string techSkills,
+            int techExpYears,
+            decimal techHourlyRate,
+            string techAddress,
+            string techCity,
+            string techState,
+            string techPincode,
+            bool techIsAvailable,
+            out int newUserId,
+            out string errorMessage)
+        {
+            newUserId = 0;
+            errorMessage = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                errorMessage = "Full Name / Contact Person is required.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
+            {
+                errorMessage = "A valid Email Address is required.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(plainPassword) || plainPassword.Length < 6)
+            {
+                errorMessage = "Initial password must contain at least 6 characters.";
+                return false;
+            }
+
+            using (SqlConnection con = getcon())
+            {
+                // 1. Check for email uniqueness before starting transaction
+                string checkSql = "SELECT COUNT(*) FROM Users WHERE Email = @Email";
+                using (SqlCommand checkCmd = new SqlCommand(checkSql, con))
+                {
+                    checkCmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = email.Trim() });
+                    int existing = Convert.ToInt32(checkCmd.ExecuteScalar());
+                    if (existing > 0)
+                    {
+                        errorMessage = string.Format("An account with email '{0}' already exists in the system.", email);
+                        return false;
+                    }
+                }
+
+                // 2. Execute atomic user and role profile creation
+                using (SqlTransaction tx = con.BeginTransaction())
+                {
+                    try
+                    {
+                        string salt = PasswordHasher.GenerateSalt();
+                        string hash = PasswordHasher.HashPassword(plainPassword, salt);
+
+                        string sqlUser = @"
+                            INSERT INTO Users (RoleId, Email, PasswordHash, Salt, FullName, PhoneNumber, IsActive, IsVerified, CreatedAt)
+                            VALUES (@RoleId, @Email, @PasswordHash, @Salt, @FullName, @PhoneNumber, @IsActive, @IsVerified, GETDATE());
+                            SELECT SCOPE_IDENTITY();";
+
+                        using (SqlCommand cmdUser = new SqlCommand(sqlUser, con, tx))
+                        {
+                            cmdUser.Parameters.Add(new SqlParameter("@RoleId", SqlDbType.Int) { Value = roleId });
+                            cmdUser.Parameters.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100) { Value = email.Trim() });
+                            cmdUser.Parameters.Add(new SqlParameter("@PasswordHash", SqlDbType.VarChar, 255) { Value = hash });
+                            cmdUser.Parameters.Add(new SqlParameter("@Salt", SqlDbType.VarChar, 100) { Value = salt });
+                            cmdUser.Parameters.Add(new SqlParameter("@FullName", SqlDbType.NVarChar, 100) { Value = fullName.Trim() });
+                            cmdUser.Parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.VarChar, 20) { Value = string.IsNullOrWhiteSpace(phone) ? (object)DBNull.Value : phone.Trim() });
+                            cmdUser.Parameters.Add(new SqlParameter("@IsActive", SqlDbType.Bit) { Value = isActive });
+                            cmdUser.Parameters.Add(new SqlParameter("@IsVerified", SqlDbType.Bit) { Value = isVerified });
+
+                            object res = cmdUser.ExecuteScalar();
+                            newUserId = Convert.ToInt32(res);
+                        }
+
+                        // Insert Role Profile
+                        if (roleId == 2) // Factory
+                        {
+                            string comp = !string.IsNullOrWhiteSpace(factoryCompany) ? factoryCompany.Trim() : fullName.Trim();
+                            string cont = !string.IsNullOrWhiteSpace(factoryContact) ? factoryContact.Trim() : fullName.Trim();
+
+                            string sqlFactory = @"
+                                INSERT INTO Factories (UserId, CompanyName, IndustryType, Address, City, State, Pincode, Gstin, ContactPerson, CreatedAt)
+                                VALUES (@UserId, @CompanyName, @IndustryType, @Address, @City, @State, @Pincode, @Gstin, @ContactPerson, GETDATE())";
+
+                            using (SqlCommand cmdFact = new SqlCommand(sqlFactory, con, tx))
+                            {
+                                cmdFact.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = newUserId });
+                                cmdFact.Parameters.Add(new SqlParameter("@CompanyName", SqlDbType.NVarChar, 150) { Value = comp });
+                                cmdFact.Parameters.Add(new SqlParameter("@IndustryType", SqlDbType.NVarChar, 100) { Value = string.IsNullOrWhiteSpace(factoryIndustry) ? (object)DBNull.Value : factoryIndustry.Trim() });
+                                cmdFact.Parameters.Add(new SqlParameter("@Address", SqlDbType.NVarChar, 255) { Value = string.IsNullOrWhiteSpace(factoryAddress) ? (object)DBNull.Value : factoryAddress.Trim() });
+                                cmdFact.Parameters.Add(new SqlParameter("@City", SqlDbType.NVarChar, 50) { Value = string.IsNullOrWhiteSpace(factoryCity) ? (object)DBNull.Value : factoryCity.Trim() });
+                                cmdFact.Parameters.Add(new SqlParameter("@State", SqlDbType.NVarChar, 50) { Value = string.IsNullOrWhiteSpace(factoryState) ? (object)DBNull.Value : factoryState.Trim() });
+                                cmdFact.Parameters.Add(new SqlParameter("@Pincode", SqlDbType.VarChar, 10) { Value = string.IsNullOrWhiteSpace(factoryPincode) ? (object)DBNull.Value : factoryPincode.Trim() });
+                                cmdFact.Parameters.Add(new SqlParameter("@Gstin", SqlDbType.VarChar, 20) { Value = string.IsNullOrWhiteSpace(factoryGstin) ? (object)DBNull.Value : factoryGstin.Trim() });
+                                cmdFact.Parameters.Add(new SqlParameter("@ContactPerson", SqlDbType.NVarChar, 100) { Value = cont });
+                                cmdFact.ExecuteNonQuery();
+                            }
+                        }
+                        else if (roleId == 3) // Supplier
+                        {
+                            string comp = !string.IsNullOrWhiteSpace(supplierCompany) ? supplierCompany.Trim() : fullName.Trim();
+                            string verStatus = isVerified ? "Verified" : "Pending";
+
+                            string sqlSupplier = @"
+                                INSERT INTO Suppliers (UserId, CompanyName, BusinessRegistrationNo, Gstin, Address, City, State, Pincode, VerificationStatus, Rating, CreatedAt)
+                                VALUES (@UserId, @CompanyName, @BusinessRegistrationNo, @Gstin, @Address, @City, @State, @Pincode, @VerificationStatus, 4.50, GETDATE())";
+
+                            using (SqlCommand cmdSupp = new SqlCommand(sqlSupplier, con, tx))
+                            {
+                                cmdSupp.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = newUserId });
+                                cmdSupp.Parameters.Add(new SqlParameter("@CompanyName", SqlDbType.NVarChar, 150) { Value = comp });
+                                cmdSupp.Parameters.Add(new SqlParameter("@BusinessRegistrationNo", SqlDbType.VarChar, 50) { Value = string.IsNullOrWhiteSpace(supplierRegNo) ? (object)DBNull.Value : supplierRegNo.Trim() });
+                                cmdSupp.Parameters.Add(new SqlParameter("@Gstin", SqlDbType.VarChar, 20) { Value = string.IsNullOrWhiteSpace(supplierGstin) ? (object)DBNull.Value : supplierGstin.Trim() });
+                                cmdSupp.Parameters.Add(new SqlParameter("@Address", SqlDbType.NVarChar, 255) { Value = string.IsNullOrWhiteSpace(supplierAddress) ? (object)DBNull.Value : supplierAddress.Trim() });
+                                cmdSupp.Parameters.Add(new SqlParameter("@City", SqlDbType.NVarChar, 50) { Value = string.IsNullOrWhiteSpace(supplierCity) ? (object)DBNull.Value : supplierCity.Trim() });
+                                cmdSupp.Parameters.Add(new SqlParameter("@State", SqlDbType.NVarChar, 50) { Value = string.IsNullOrWhiteSpace(supplierState) ? (object)DBNull.Value : supplierState.Trim() });
+                                cmdSupp.Parameters.Add(new SqlParameter("@Pincode", SqlDbType.VarChar, 10) { Value = string.IsNullOrWhiteSpace(supplierPincode) ? (object)DBNull.Value : supplierPincode.Trim() });
+                                cmdSupp.Parameters.Add(new SqlParameter("@VerificationStatus", SqlDbType.VarChar, 20) { Value = verStatus });
+                                cmdSupp.ExecuteNonQuery();
+                            }
+                        }
+                        else if (roleId == 4) // Technician
+                        {
+                            string skills = !string.IsNullOrWhiteSpace(techSkills) ? techSkills.Trim() : "Industrial Machinery Maintenance";
+                            string verStatus = isVerified ? "Verified" : "Pending";
+
+                            string sqlTech = @"
+                                INSERT INTO Technicians (UserId, SkillSummary, ExperienceYears, HourlyRate, Address, City, State, Pincode, IsAvailable, VerificationStatus, CreatedAt)
+                                VALUES (@UserId, @SkillSummary, @ExperienceYears, @HourlyRate, @Address, @City, @State, @Pincode, @IsAvailable, @VerificationStatus, GETDATE())";
+
+                            using (SqlCommand cmdTech = new SqlCommand(sqlTech, con, tx))
+                            {
+                                cmdTech.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = newUserId });
+                                cmdTech.Parameters.Add(new SqlParameter("@SkillSummary", SqlDbType.NVarChar, 255) { Value = skills });
+                                cmdTech.Parameters.Add(new SqlParameter("@ExperienceYears", SqlDbType.Int) { Value = techExpYears > 0 ? techExpYears : 1 });
+                                cmdTech.Parameters.Add(new SqlParameter("@HourlyRate", SqlDbType.Decimal) { Value = techHourlyRate > 0 ? techHourlyRate : 500.00m });
+                                cmdTech.Parameters.Add(new SqlParameter("@Address", SqlDbType.NVarChar, 255) { Value = string.IsNullOrWhiteSpace(techAddress) ? (object)DBNull.Value : techAddress.Trim() });
+                                cmdTech.Parameters.Add(new SqlParameter("@City", SqlDbType.NVarChar, 50) { Value = string.IsNullOrWhiteSpace(techCity) ? (object)DBNull.Value : techCity.Trim() });
+                                cmdTech.Parameters.Add(new SqlParameter("@State", SqlDbType.NVarChar, 50) { Value = string.IsNullOrWhiteSpace(techState) ? (object)DBNull.Value : techState.Trim() });
+                                cmdTech.Parameters.Add(new SqlParameter("@Pincode", SqlDbType.VarChar, 10) { Value = string.IsNullOrWhiteSpace(techPincode) ? (object)DBNull.Value : techPincode.Trim() });
+                                cmdTech.Parameters.Add(new SqlParameter("@IsAvailable", SqlDbType.Bit) { Value = techIsAvailable });
+                                cmdTech.Parameters.Add(new SqlParameter("@VerificationStatus", SqlDbType.VarChar, 20) { Value = verStatus });
+                                cmdTech.ExecuteNonQuery();
+                            }
+                        }
+
+                        tx.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        tx.Rollback();
+                        errorMessage = "Transaction aborted: " + ex.Message;
                         return false;
                     }
                 }

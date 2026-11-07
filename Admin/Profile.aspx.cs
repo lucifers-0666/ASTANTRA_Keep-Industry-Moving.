@@ -29,7 +29,12 @@ namespace IndustrialSparePartPortal.Admin
         {
             try
             {
-                int adminId = SessionHelper.UserId ?? 1;
+                if (!SessionHelper.UserId.HasValue)
+                {
+                    Response.Redirect("~/Account/Login.aspx?returnUrl=" + Server.UrlEncode(Request.RawUrl), true);
+                    return;
+                }
+                int adminId = SessionHelper.UserId.Value;
                 DataSet ds = _userLogic.getUserById(adminId);
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -86,7 +91,12 @@ namespace IndustrialSparePartPortal.Admin
         {
             try
             {
-                int adminId = SessionHelper.UserId ?? 1;
+                if (!SessionHelper.UserId.HasValue)
+                {
+                    ShowAlert(false, "Session expired. Please sign in again.");
+                    return;
+                }
+                int adminId = SessionHelper.UserId.Value;
                 string base64Data = hdnCroppedAvatarData.Value;
 
                 if (string.IsNullOrWhiteSpace(base64Data))
@@ -104,10 +114,22 @@ namespace IndustrialSparePartPortal.Admin
 
                 byte[] imageBytes = Convert.FromBase64String(base64Data);
 
-                // Sanity check byte array (Max 5MB)
-                if (imageBytes.Length == 0 || imageBytes.Length > 5 * 1024 * 1024)
+                // Sanity check byte array (Max 5MB, Min 16 bytes)
+                if (imageBytes.Length < 16 || imageBytes.Length > 5 * 1024 * 1024)
                 {
-                    ShowAlert(false, "Image size exceeds 5MB or contains invalid data.");
+                    ShowAlert(false, "Invalid image data: File must be between 16 bytes and 5MB.");
+                    return;
+                }
+
+                // Security: Magic bytes validation for authentic raster image headers
+                bool isValidRaster = (imageBytes[0] == 0xFF && imageBytes[1] == 0xD8 && imageBytes[2] == 0xFF) || // JPEG
+                                     (imageBytes[0] == 0x89 && imageBytes[1] == 0x50 && imageBytes[2] == 0x4E && imageBytes[3] == 0x47) || // PNG
+                                     (imageBytes[0] == 0x47 && imageBytes[1] == 0x49 && imageBytes[2] == 0x46) || // GIF
+                                     (imageBytes[0] == 0x52 && imageBytes[1] == 0x49 && imageBytes[2] == 0x46 && imageBytes[3] == 0x46); // WEBP/RIFF
+
+                if (!isValidRaster)
+                {
+                    ShowAlert(false, "Security Policy: Uploaded file does not contain valid raster image signatures.");
                     return;
                 }
 
@@ -122,7 +144,22 @@ namespace IndustrialSparePartPortal.Admin
                 string filename = string.Format("avatar_admin_{0}_{1}.jpg", adminId, DateTime.UtcNow.Ticks);
                 string physicalPath = Path.Combine(uploadDir, filename);
 
-                File.WriteAllBytes(physicalPath, imageBytes);
+                // Security: Server-side decode & re-encode via System.Drawing.Bitmap to sanitize metadata and strip embedded payloads
+                using (var ms = new MemoryStream(imageBytes))
+                {
+                    using (var srcImage = System.Drawing.Image.FromStream(ms))
+                    {
+                        using (var cleanBmp = new System.Drawing.Bitmap(srcImage.Width, srcImage.Height))
+                        {
+                            using (var g = System.Drawing.Graphics.FromImage(cleanBmp))
+                            {
+                                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                                g.DrawImage(srcImage, 0, 0, srcImage.Width, srcImage.Height);
+                            }
+                            cleanBmp.Save(physicalPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        }
+                    }
+                }
 
                 string virtualPath = "~/Uploads/Avatars/" + filename;
 
@@ -138,13 +175,13 @@ namespace IndustrialSparePartPortal.Admin
                         "Users",
                         adminId,
                         null,
-                        "Administrator profile avatar cropped and saved: " + filename,
+                        "Administrator profile avatar cropped, re-encoded and saved: " + filename,
                         Request.UserHostAddress
                     );
 
                     hdnCroppedAvatarData.Value = string.Empty;
                     LoadAdminProfile();
-                    ShowAlert(true, "Profile portrait successfully cropped, saved, and synchronized across the administrator console.");
+                    ShowAlert(true, "Profile portrait successfully verified, sanitized, and synchronized across the administrator console.");
                 }
                 else
                 {
@@ -161,7 +198,12 @@ namespace IndustrialSparePartPortal.Admin
         {
             try
             {
-                int adminId = SessionHelper.UserId ?? 1;
+                if (!SessionHelper.UserId.HasValue)
+                {
+                    ShowAlert(false, "Session expired. Please sign in again.");
+                    return;
+                }
+                int adminId = SessionHelper.UserId.Value;
 
                 // Retrieve existing path to delete physical file safely
                 DataSet ds = _userLogic.getUserById(adminId);
@@ -219,7 +261,12 @@ namespace IndustrialSparePartPortal.Admin
         {
             try
             {
-                int adminId = SessionHelper.UserId ?? 1;
+                if (!SessionHelper.UserId.HasValue)
+                {
+                    ShowAlert(false, "Session expired. Please sign in again.");
+                    return;
+                }
+                int adminId = SessionHelper.UserId.Value;
                 string fullName = txtFullName.Text.Trim();
                 string email = txtEmail.Text.Trim();
                 string phone = txtPhone.Text.Trim();
@@ -269,7 +316,12 @@ namespace IndustrialSparePartPortal.Admin
         {
             try
             {
-                int adminId = SessionHelper.UserId ?? 1;
+                if (!SessionHelper.UserId.HasValue)
+                {
+                    ShowAlert(false, "Session expired. Please sign in again.");
+                    return;
+                }
+                int adminId = SessionHelper.UserId.Value;
                 string currentPassword = txtCurrentPassword.Text.Trim();
                 string newPassword = txtNewPassword.Text.Trim();
                 string confirmPassword = txtConfirmPassword.Text.Trim();

@@ -41,8 +41,14 @@ namespace IndustrialSparePartPortal.Admin.Security
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error loading security events: " + ex.Message);
+                pnlAlert.Visible = true;
+                lblAlertMessage.Text = "Failed to load authentication security stream: " + ex.Message;
             }
+        }
+
+        protected void btnCloseAlert_Click(object sender, EventArgs e)
+        {
+            pnlAlert.Visible = false;
         }
     }
 }

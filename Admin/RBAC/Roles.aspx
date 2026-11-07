@@ -31,6 +31,7 @@
 
         <asp:GridView ID="gvRoles" runat="server" AutoGenerateColumns="False" 
             CssClass="table-custom" GridLines="None" 
+            DataKeyNames="RoleId,RoleName" OnRowCommand="gvRoles_RowCommand"
             EmptyDataText="No role definitions found.">
             <Columns>
                 <asp:BoundField DataField="RoleId" HeaderText="Role #" HeaderStyle-CssClass="w-16 font-mono" ItemStyle-CssClass="font-mono text-xs font-bold text-[#1769E0]" />
@@ -66,6 +67,77 @@
                         <span class="spec-tag spec-tag-blue text-[10px] font-mono">
                             BasePage.RequiredRole = <%# Eval("RoleId") %>
                         </span>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Action" HeaderStyle-CssClass="text-right" ItemStyle-CssClass="text-right">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnInspectRole" runat="server" CommandName="InspectRole" CommandArgument="<%# Container.DataItemIndex %>" CssClass="btn-secondary text-xs py-1 px-2.5">
+                            <i class="fa-solid fa-list-check mr-1"></i> Permissions
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+
+    <!-- Alert / Feedback Banner -->
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+            <asp:Label ID="lblAlertMessage" runat="server"></asp:Label>
+        </div>
+        <asp:LinkButton ID="btnCloseAlert" runat="server" OnClick="btnCloseAlert_Click" CssClass="text-emerald-600 hover:text-emerald-800">
+            <i class="fa-solid fa-xmark"></i>
+        </asp:LinkButton>
+    </asp:Panel>
+
+    <!-- Granular Permission Assignment Panel -->
+    <div class="surface-card p-5 shadow-xs mb-8 border border-[#CBD5E1] admin-animate-enter admin-stagger-2">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 pb-3 border-b border-[#E2E8F0]">
+            <div>
+                <span class="text-[10px] font-mono font-bold text-[#64748B] uppercase">GRANULAR RBAC PERMISSION CLEARANCES</span>
+                <h3 class="text-sm font-bold text-[#0F172A] m-0 flex items-center gap-2">
+                    <i class="fa-solid fa-key text-[#1769E0]"></i> Managing Clearances for: <span id="lblSelectedRoleTitle" runat="server" class="text-[#1769E0]">Administrator (Role #1)</span>
+                </h3>
+            </div>
+            <asp:HiddenField ID="hdnSelectedRoleId" runat="server" Value="1" />
+            <div class="text-xs font-mono text-[#64748B]">
+                Assigned: <asp:Label ID="lblGrantedPermCount" runat="server" Text="0" CssClass="font-bold text-[#0F172A]"></asp:Label> / <asp:Label ID="lblTotalPermCount" runat="server" Text="0"></asp:Label> Clearances
+            </div>
+        </div>
+
+        <asp:GridView ID="gvPermissions" runat="server" AutoGenerateColumns="False"
+            CssClass="table-custom" GridLines="None"
+            DataKeyNames="PermissionId,PermissionKey,DisplayName,IsGranted" OnRowCommand="gvPermissions_RowCommand"
+            EmptyDataText="No permissions configured in the platform catalog.">
+            <Columns>
+                <asp:BoundField DataField="Module" HeaderText="Module Scope" HeaderStyle-CssClass="w-36 font-mono text-[11px]" ItemStyle-CssClass="font-mono text-xs font-bold text-[#334155]" />
+                
+                <asp:TemplateField HeaderText="Permission Clearance &amp; System Key">
+                    <ItemTemplate>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-xs text-[#0F172A]"><%# Eval("DisplayName") %></span>
+                            <span class="text-[11px] font-mono text-[#64748B]"><%# Eval("PermissionKey") %></span>
+                            <span class="text-[10px] text-[#94A3B8]"><%# Eval("Description") %></span>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Clearance State" HeaderStyle-CssClass="w-28 text-center" ItemStyle-CssClass="text-center">
+                    <ItemTemplate>
+                        <%# Convert.ToInt32(Eval("IsGranted")) == 1 
+                            ? "<span class='status-pill status-pill-verified text-[10px] font-mono'><i class='fa-solid fa-check mr-1'></i> GRANTED</span>" 
+                            : "<span class='status-pill text-[10px] font-mono bg-slate-100 text-slate-500 border border-slate-200'><i class='fa-solid fa-xmark mr-1'></i> REVOKED</span>" %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Authorization Toggle" HeaderStyle-CssClass="w-32 text-right" ItemStyle-CssClass="text-right">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnTogglePerm" runat="server" CommandName="TogglePerm" CommandArgument="<%# Container.DataItemIndex %>"
+                            CssClass='<%# Convert.ToInt32(Eval("IsGranted")) == 1 ? "btn-secondary text-xs py-1 px-2.5 text-rose-700 hover:bg-rose-50" : "btn-primary text-xs py-1 px-2.5" %>'>
+                            <%# Convert.ToInt32(Eval("IsGranted")) == 1 ? "<i class='fa-solid fa-lock mr-1'></i> Revoke" : "<i class='fa-solid fa-key mr-1'></i> Grant" %>
+                        </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

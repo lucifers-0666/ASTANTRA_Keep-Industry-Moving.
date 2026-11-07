@@ -208,6 +208,33 @@ namespace IndustrialSparePartPortal.Admin.Users
             ddlAddRole.SelectedIndex = 1; // Default to Factory
             chkAddIsActive.Checked = true;
             chkAddIsVerified.Checked = true;
+
+            txtAddFactoryCompany.Text = string.Empty;
+            txtAddFactoryIndustry.Text = string.Empty;
+            txtAddFactoryGstin.Text = string.Empty;
+            txtAddFactoryAddress.Text = string.Empty;
+            txtAddFactoryCity.Text = string.Empty;
+            txtAddFactoryState.Text = string.Empty;
+            txtAddFactoryPincode.Text = string.Empty;
+            txtAddFactoryContact.Text = string.Empty;
+
+            txtAddSupplierCompany.Text = string.Empty;
+            txtAddSupplierRegNo.Text = string.Empty;
+            txtAddSupplierGstin.Text = string.Empty;
+            txtAddSupplierAddress.Text = string.Empty;
+            txtAddSupplierCity.Text = string.Empty;
+            txtAddSupplierState.Text = string.Empty;
+            txtAddSupplierPincode.Text = string.Empty;
+
+            txtAddTechSkills.Text = string.Empty;
+            txtAddTechExp.Text = "3";
+            txtAddTechRate.Text = "650";
+            txtAddTechAddress.Text = string.Empty;
+            txtAddTechCity.Text = string.Empty;
+            txtAddTechState.Text = string.Empty;
+            txtAddTechPincode.Text = string.Empty;
+            chkAddTechAvailable.Checked = true;
+
             pnlAddModal.Visible = true;
         }
 
@@ -234,41 +261,71 @@ namespace IndustrialSparePartPortal.Admin.Users
 
             try
             {
-                int newUserId = _userLogic.insertNewUser(fullName, email, phone, password, roleId, isActive, isVerified);
-                if (newUserId > 0)
-                {
-                    // Automatically provision corresponding entity profile if role is Factory, Supplier, or Technician
-                    if (roleId == 2)
-                    {
-                        _userLogic.insertFactoryProfile(newUserId, fullName, "Industrial Manufacturing", "Factory Plant Premises", "Ahmedabad", "Gujarat", "380001", "24AAAAA0000A1Z5", fullName);
-                    }
-                    else if (roleId == 3)
-                    {
-                        _userLogic.insertSupplierProfile(newUserId, fullName, "REG-" + newUserId, "24AABCS" + (1000 + newUserId) + "A1Z1", "Ahmedabad Central Hub", "Ahmedabad", "Gujarat", "380001");
-                    }
-                    else if (roleId == 4)
-                    {
-                        _userLogic.insertTechnicianProfile(newUserId, "Certified Industrial Machinery Specialist", 3, 750, "Central Workshop", "Ahmedabad", "Gujarat", "380001");
-                    }
+                int techExp = 3;
+                int.TryParse(txtAddTechExp.Text.Trim(), out techExp);
+                decimal techRate = 650.00m;
+                decimal.TryParse(txtAddTechRate.Text.Trim(), out techRate);
 
+                int newUserId;
+                string errMsg;
+                bool success = _userLogic.registerUserWithProfileAtomic(
+                    roleId,
+                    fullName,
+                    email,
+                    phone,
+                    password,
+                    isActive,
+                    isVerified,
+                    // Factory fields
+                    txtAddFactoryCompany.Text.Trim(),
+                    txtAddFactoryIndustry.Text.Trim(),
+                    txtAddFactoryGstin.Text.Trim(),
+                    txtAddFactoryAddress.Text.Trim(),
+                    txtAddFactoryCity.Text.Trim(),
+                    txtAddFactoryState.Text.Trim(),
+                    txtAddFactoryPincode.Text.Trim(),
+                    txtAddFactoryContact.Text.Trim(),
+                    // Supplier fields
+                    txtAddSupplierCompany.Text.Trim(),
+                    txtAddSupplierRegNo.Text.Trim(),
+                    txtAddSupplierGstin.Text.Trim(),
+                    txtAddSupplierAddress.Text.Trim(),
+                    txtAddSupplierCity.Text.Trim(),
+                    txtAddSupplierState.Text.Trim(),
+                    txtAddSupplierPincode.Text.Trim(),
+                    // Technician fields
+                    txtAddTechSkills.Text.Trim(),
+                    techExp,
+                    techRate,
+                    txtAddTechAddress.Text.Trim(),
+                    txtAddTechCity.Text.Trim(),
+                    txtAddTechState.Text.Trim(),
+                    txtAddTechPincode.Text.Trim(),
+                    chkAddTechAvailable.Checked,
+                    out newUserId,
+                    out errMsg
+                );
+
+                if (success)
+                {
                     _auditLogic.logAction(
                         SessionHelper.UserId,
                         "CREATE_USER",
                         "Users",
                         newUserId,
                         null,
-                        $"{fullName} ({email}, Role: {roleId})",
+                        $"{fullName} ({email}, Role: {roleId}) with profile provisions",
                         Request.UserHostAddress
                     );
 
                     pnlAddModal.Visible = false;
-                    ShowAlert(true, $"User '{fullName}' (#{newUserId}) registered successfully into the platform.");
+                    ShowAlert(true, $"User '{fullName}' (#{newUserId}) and profile provisioned atomically into the platform.");
                     LoadUsers();
                     LoadRoleMetrics();
                 }
                 else
                 {
-                    ShowAlert(false, "Failed to register user. An account with this email address may already exist.");
+                    ShowAlert(false, !string.IsNullOrEmpty(errMsg) ? errMsg : "Failed to register user. An account with this email address may already exist.");
                 }
             }
             catch (Exception ex)

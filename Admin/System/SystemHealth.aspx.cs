@@ -24,9 +24,31 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
 
         protected void btnTestDb_Click(object sender, EventArgs e)
         {
-            LoadHealthTelemetry();
-            pnlAlert.Visible = true;
-            lblAlertMessage.Text = "Database connection test successful. Engine returned ping in 4ms. LocalDB transaction pipeline fully operational.";
+            try
+            {
+                string sqlVersion;
+                int totalTables, totalDbRows;
+                bool isOperational;
+                long latencyMs;
+
+                _adminLogic.getSystemHealthMetrics(out sqlVersion, out totalTables, out totalDbRows, out isOperational, out latencyMs);
+                LoadHealthTelemetry();
+
+                pnlAlert.Visible = true;
+                if (isOperational)
+                {
+                    lblAlertMessage.Text = $"Live database ping test successful: Query engine round-trip latency measured at {latencyMs}ms across {totalTables} system tables and {totalDbRows:N0} live rows. LocalDB transaction pipeline verified operational.";
+                }
+                else
+                {
+                    lblAlertMessage.Text = "Database connection test failed. SQL Server engine unresponsive.";
+                }
+            }
+            catch (Exception ex)
+            {
+                pnlAlert.Visible = true;
+                lblAlertMessage.Text = "Database connection test exception: " + ex.Message;
+            }
         }
 
         private void LoadHealthTelemetry()
@@ -36,8 +58,9 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
                 string sqlVersion;
                 int totalTables, totalDbRows;
                 bool isOperational;
+                long latencyMs;
 
-                _adminLogic.getSystemHealthMetrics(out sqlVersion, out totalTables, out totalDbRows, out isOperational);
+                _adminLogic.getSystemHealthMetrics(out sqlVersion, out totalTables, out totalDbRows, out isOperational, out latencyMs);
 
                 lblTotalTables.InnerText = totalTables.ToString();
                 lblTotalRows.InnerText = totalDbRows.ToString("N0");
@@ -47,7 +70,8 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error loading system health: " + ex.Message);
+                pnlAlert.Visible = true;
+                lblAlertMessage.Text = "Error loading system telemetry: " + ex.Message;
             }
         }
     }

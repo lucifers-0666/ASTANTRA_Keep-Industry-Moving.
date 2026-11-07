@@ -93,8 +93,14 @@ namespace IndustrialSparePartPortal.Admin
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error in Admin Dashboard Page_Load: " + ex.Message);
+                pnlAlert.Visible = true;
+                lblAlertMessage.Text = "Database telemetry retrieval exception: " + ex.Message;
             }
+        }
+
+        protected void btnCloseAlert_Click(object sender, EventArgs e)
+        {
+            pnlAlert.Visible = false;
         }
     }
 }

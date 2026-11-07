@@ -811,10 +811,19 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
         public void getSystemHealthMetrics(out string sqlVersion, out int totalTables, out int totalDbRows, out bool isOperational)
         {
+            long latency;
+            getSystemHealthMetrics(out sqlVersion, out totalTables, out totalDbRows, out isOperational, out latency);
+        }
+
+        public void getSystemHealthMetrics(out string sqlVersion, out int totalTables, out int totalDbRows, out bool isOperational, out long latencyMs)
+        {
             sqlVersion = ".NET Framework 4.8 / SQL Server LocalDB";
             totalTables = 0;
             totalDbRows = 0;
             isOperational = false;
+            latencyMs = 0;
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
 
             using (SqlConnection con = getcon())
             {
@@ -841,6 +850,99 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                     }
                 }
             }
+
+            sw.Stop();
+            latencyMs = sw.ElapsedMilliseconds;
+        }
+
+        public DataSet selectAllPermissions()
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = "SELECT PermissionId, PermissionKey, Module, DisplayName, Description FROM Permissions ORDER BY Module ASC, PermissionKey ASC";
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public DataSet selectPermissionsForRole(int roleId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT p.PermissionId, p.PermissionKey, p.Module, p.DisplayName, p.Description,
+                           CASE WHEN rp.PermissionId IS NOT NULL THEN 1 ELSE 0 END AS IsGranted
+                    FROM Permissions p
+                    LEFT JOIN RolePermissions rp ON p.PermissionId = rp.PermissionId AND rp.RoleId = @RoleId
+                    ORDER BY p.Module ASC, p.DisplayName ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@RoleId", SqlDbType.Int) { Value = roleId });
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public bool toggleRolePermission(int roleId, int permissionId, bool grant, int adminUserId)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql;
+                if (grant)
+                {
+                    sql = @"
+                        IF NOT EXISTS (SELECT 1 FROM RolePermissions WHERE RoleId = @RoleId AND PermissionId = @PermissionId)
+                        BEGIN
+                            INSERT INTO RolePermissions (RoleId, PermissionId, GrantedAt, GrantedBy)
+                            VALUES (@RoleId, @PermissionId, GETDATE(), @AdminId)
+                        END";
+                }
+                else
+                {
+                    sql = "DELETE FROM RolePermissions WHERE RoleId = @RoleId AND PermissionId = @PermissionId";
+                }
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@RoleId", SqlDbType.Int) { Value = roleId });
+                    cmd.Parameters.Add(new SqlParameter("@PermissionId", SqlDbType.Int) { Value = permissionId });
+                    cmd.Parameters.Add(new SqlParameter("@AdminId", SqlDbType.Int) { Value = adminUserId });
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+        }
+
+        public bool hasRolePermission(int roleId, string permissionKey)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT COUNT(*) FROM RolePermissions rp
+                    INNER JOIN Permissions p ON rp.PermissionId = p.PermissionId
+                    WHERE rp.RoleId = @RoleId AND p.PermissionKey = @Key";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@RoleId", SqlDbType.Int) { Value = roleId });
+                    cmd.Parameters.Add(new SqlParameter("@Key", SqlDbType.VarChar, 80) { Value = permissionKey });
+                    int cnt = Convert.ToInt32(cmd.ExecuteScalar());
+                    return cnt > 0;
+                }
+            }
         }
 
         public DataSet selectAllSystemSettings()
@@ -862,6 +964,41 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
         public bool updateSystemSetting(string settingKey, string settingValue, int adminUserId)
         {
+            string err;
+            return updateSystemSetting(settingKey, settingValue, adminUserId, out err);
+        }
+
+        public bool updateSystemSetting(string settingKey, string settingValue, int adminUserId, out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(settingKey))
+            {
+                errorMessage = "Setting key cannot be empty.";
+                return false;
+            }
+
+            // Validation rules per setting
+            if (string.Equals(settingKey, "EmergencyBroadcastRadiusKm", StringComparison.OrdinalIgnoreCase))
+            {
+                int radius;
+                if (!int.TryParse(settingValue, out radius) || radius < 5 || radius > 1000)
+                {
+                    errorMessage = "Emergency Broadcast Radius must be an integer between 5 and 1000 km.";
+                    return false;
+                }
+            }
+            else if (string.Equals(settingKey, "PlatformMaintenanceMode", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(settingKey, "SupplierVerificationMandatory", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!string.Equals(settingValue, "True", StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(settingValue, "False", StringComparison.OrdinalIgnoreCase))
+                {
+                    errorMessage = "Boolean configuration must be 'True' or 'False'.";
+                    return false;
+                }
+            }
+
             using (SqlConnection con = getcon())
             {
                 string sql = @"
@@ -873,11 +1010,81 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
-                    cmd.Parameters.Add(new SqlParameter("@SettingValue", SqlDbType.NVarChar, -1) { Value = settingValue });
+                    cmd.Parameters.Add(new SqlParameter("@SettingValue", SqlDbType.NVarChar, -1) { Value = settingValue.Trim() });
                     cmd.Parameters.Add(new SqlParameter("@UserId", SqlDbType.Int) { Value = adminUserId });
                     cmd.Parameters.Add(new SqlParameter("@SettingKey", SqlDbType.VarChar, 50) { Value = settingKey });
 
                     return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool repairDataIntegrity(out int repairedCount, out string repairSummary)
+        {
+            repairedCount = 0;
+            repairSummary = string.Empty;
+
+            using (SqlConnection con = getcon())
+            {
+                using (SqlTransaction tx = con.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Repair orphaned Factory users
+                        string sqlFixFactories = @"
+                            INSERT INTO Factories (UserId, CompanyName, IndustryType, Address, City, State, Pincode, Gstin, ContactPerson, CreatedAt)
+                            SELECT u.UserId, u.FullName, 'Industrial Plant', 'Registered Plant Premises', 'Gujarat', 'Gujarat', '380001', '24AAAAA0000A1Z5', u.FullName, GETDATE()
+                            FROM Users u
+                            WHERE u.RoleId = 2 AND NOT EXISTS (SELECT 1 FROM Factories f WHERE f.UserId = u.UserId)";
+                        using (SqlCommand cmd = new SqlCommand(sqlFixFactories, con, tx))
+                        {
+                            repairedCount += cmd.ExecuteNonQuery();
+                        }
+
+                        // 2. Repair orphaned Supplier users
+                        string sqlFixSuppliers = @"
+                            INSERT INTO Suppliers (UserId, CompanyName, BusinessRegistrationNo, Gstin, Address, City, State, Pincode, VerificationStatus, Rating, CreatedAt)
+                            SELECT u.UserId, u.FullName, 'REG-' + CAST(u.UserId AS VARCHAR), '24AABCS0000A1Z1', 'Stocking Hub Premises', 'Gujarat', 'Gujarat', '380001', 'Pending', 4.50, GETDATE()
+                            FROM Users u
+                            WHERE u.RoleId = 3 AND NOT EXISTS (SELECT 1 FROM Suppliers s WHERE s.UserId = u.UserId)";
+                        using (SqlCommand cmd = new SqlCommand(sqlFixSuppliers, con, tx))
+                        {
+                            repairedCount += cmd.ExecuteNonQuery();
+                        }
+
+                        // 3. Repair orphaned Technician users
+                        string sqlFixTechs = @"
+                            INSERT INTO Technicians (UserId, SkillSummary, ExperienceYears, HourlyRate, Address, City, State, Pincode, IsAvailable, VerificationStatus, CreatedAt)
+                            SELECT u.UserId, 'Certified Field Specialist', 3, 650.00, 'Regional Service Depot', 'Gujarat', 'Gujarat', '380001', 1, 'Verified', GETDATE()
+                            FROM Users u
+                            WHERE u.RoleId = 4 AND NOT EXISTS (SELECT 1 FROM Technicians t WHERE t.UserId = u.UserId)";
+                        using (SqlCommand cmd = new SqlCommand(sqlFixTechs, con, tx))
+                        {
+                            repairedCount += cmd.ExecuteNonQuery();
+                        }
+
+                        // 4. Synchronize inconsistent verification flags between Users and Suppliers
+                        string sqlSyncVer = @"
+                            UPDATE u
+                            SET u.IsVerified = 1
+                            FROM Users u
+                            INNER JOIN Suppliers s ON u.UserId = s.UserId
+                            WHERE s.VerificationStatus = 'Verified' AND u.IsVerified = 0";
+                        using (SqlCommand cmd = new SqlCommand(sqlSyncVer, con, tx))
+                        {
+                            repairedCount += cmd.ExecuteNonQuery();
+                        }
+
+                        tx.Commit();
+                        repairSummary = string.Format("Integrity reconciliation completed. {0} entities/consistency points aligned.", repairedCount);
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        tx.Rollback();
+                        repairSummary = "Integrity repair error: " + ex.Message;
+                        return false;
+                    }
                 }
             }
         }

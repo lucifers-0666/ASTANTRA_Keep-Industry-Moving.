@@ -19,6 +19,9 @@ namespace IndustrialSparePartPortal.Admin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOpenRfqs;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalOrders;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalGmv;
+        protected global::System.Web.UI.WebControls.Panel pnlAlert;
+        protected global::System.Web.UI.WebControls.Label lblAlertMessage;
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseAlert;
         protected global::System.Web.UI.WebControls.GridView gvEmergencies;
         protected global::System.Web.UI.WebControls.GridView gvUsers;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSessionUser;

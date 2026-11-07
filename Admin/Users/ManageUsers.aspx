@@ -268,9 +268,9 @@
                         </div>
                         <div>
                             <label class="form-label text-xs">Assigned System Role <span class="text-rose-500">*</span></label>
-                            <asp:DropDownList ID="ddlAddRole" runat="server" CssClass="form-input text-xs">
+                            <asp:DropDownList ID="ddlAddRole" runat="server" CssClass="form-input text-xs" onchange="toggleRoleProfileFields();">
                                 <asp:ListItem Value="1" Text="1 - System Administrator"></asp:ListItem>
-                                <asp:ListItem Value="2" Text="2 - Factory Procurement Buyer"></asp:ListItem>
+                                <asp:ListItem Value="2" Text="2 - Factory Procurement Buyer" Selected="True"></asp:ListItem>
                                 <asp:ListItem Value="3" Text="3 - Stocking Spare-Part Supplier"></asp:ListItem>
                                 <asp:ListItem Value="4" Text="4 - Field Service Technician"></asp:ListItem>
                             </asp:DropDownList>
@@ -279,10 +279,141 @@
                     </div>
                 </div>
 
-                <!-- Section 2: Platform Privileges & Verification Status -->
-                <div class="pt-2">
+                <!-- Section 2: Role-Specific Business Entity Profile -->
+                <!-- 2A. Factory Profile Fields -->
+                <div id="pnlAddFactoryFields" class="pt-2 border-t border-[#E2E8F0]">
                     <div class="admin-form-section-title">
-                        <i class="fa-solid fa-shield-halved"></i> 2. Platform Access &amp; Compliance Status
+                        <i class="fa-solid fa-industry"></i> 2. Manufacturing Plant &amp; Buyer Profile
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Company / Plant Title <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddFactoryCompany" runat="server" CssClass="form-input text-xs" placeholder="e.g. Gujarat Heavy Engineering Works" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Industry Sector</label>
+                            <asp:TextBox ID="txtAddFactoryIndustry" runat="server" CssClass="form-input text-xs" placeholder="e.g. Heavy Machinery, Automotive, Chemicals" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">GSTIN Identifier</label>
+                            <asp:TextBox ID="txtAddFactoryGstin" runat="server" CssClass="form-input text-xs font-mono uppercase" placeholder="24AAAAA0000A1Z5" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Plant Contact Person</label>
+                            <asp:TextBox ID="txtAddFactoryContact" runat="server" CssClass="form-input text-xs" placeholder="e.g. Plant Manager / Engineer" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Plant Physical Address</label>
+                        <asp:TextBox ID="txtAddFactoryAddress" runat="server" CssClass="form-input text-xs" placeholder="Plot / GIDC Industrial Estate address" />
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="form-label text-xs">City</label>
+                            <asp:TextBox ID="txtAddFactoryCity" runat="server" CssClass="form-input text-xs" placeholder="City" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">State</label>
+                            <asp:TextBox ID="txtAddFactoryState" runat="server" CssClass="form-input text-xs" placeholder="State" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Pincode</label>
+                            <asp:TextBox ID="txtAddFactoryPincode" runat="server" CssClass="form-input text-xs font-mono" placeholder="Pincode" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2B. Supplier Profile Fields -->
+                <div id="pnlAddSupplierFields" class="pt-2 border-t border-[#E2E8F0]" style="display: none;">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-warehouse"></i> 2. Stocking Vendor &amp; Supplier Profile
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Enterprise Name <span class="text-rose-500">*</span></label>
+                            <asp:TextBox ID="txtAddSupplierCompany" runat="server" CssClass="form-input text-xs" placeholder="e.g. Apex Industrial Spares &amp; Bearings" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Trade Registration No.</label>
+                            <asp:TextBox ID="txtAddSupplierRegNo" runat="server" CssClass="form-input text-xs font-mono" placeholder="e.g. REG-GJ-2024-8871" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">GSTIN Identifier</label>
+                        <asp:TextBox ID="txtAddSupplierGstin" runat="server" CssClass="form-input text-xs font-mono uppercase" placeholder="24AABCS1234A1Z1" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Hub / Warehouse Address</label>
+                        <asp:TextBox ID="txtAddSupplierAddress" runat="server" CssClass="form-input text-xs" placeholder="Central stocking depot address" />
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="form-label text-xs">City</label>
+                            <asp:TextBox ID="txtAddSupplierCity" runat="server" CssClass="form-input text-xs" placeholder="City" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">State</label>
+                            <asp:TextBox ID="txtAddSupplierState" runat="server" CssClass="form-input text-xs" placeholder="State" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Pincode</label>
+                            <asp:TextBox ID="txtAddSupplierPincode" runat="server" CssClass="form-input text-xs font-mono" placeholder="Pincode" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2C. Technician Profile Fields -->
+                <div id="pnlAddTechFields" class="pt-2 border-t border-[#E2E8F0]" style="display: none;">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-wrench"></i> 2. Field Service Technician Profile
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Skills &amp; Machinery Specialization <span class="text-rose-500">*</span></label>
+                        <asp:TextBox ID="txtAddTechSkills" runat="server" CssClass="form-input text-xs" placeholder="e.g. CNC Lathe Calibration, Hydraulic Press Overhaul" />
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">Experience (Years)</label>
+                            <asp:TextBox ID="txtAddTechExp" runat="server" TextMode="Number" CssClass="form-input text-xs font-mono" placeholder="3" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Hourly Service Rate (₹)</label>
+                            <asp:TextBox ID="txtAddTechRate" runat="server" TextMode="Number" CssClass="form-input text-xs font-mono" placeholder="650" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-xs">Workshop / Base Address</label>
+                        <asp:TextBox ID="txtAddTechAddress" runat="server" CssClass="form-input text-xs" placeholder="Workshop / Service depot address" />
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 mb-3">
+                        <div>
+                            <label class="form-label text-xs">City</label>
+                            <asp:TextBox ID="txtAddTechCity" runat="server" CssClass="form-input text-xs" placeholder="City" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">State</label>
+                            <asp:TextBox ID="txtAddTechState" runat="server" CssClass="form-input text-xs" placeholder="State" />
+                        </div>
+                        <div>
+                            <label class="form-label text-xs">Pincode</label>
+                            <asp:TextBox ID="txtAddTechPincode" runat="server" CssClass="form-input text-xs font-mono" placeholder="Pincode" />
+                        </div>
+                    </div>
+                    <label class="admin-checkbox-card flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-slate-800">
+                        <asp:CheckBox ID="chkAddTechAvailable" runat="server" Checked="true" />
+                        <div>
+                            <span class="block text-xs font-bold text-[#0F172A]">Available on Duty</span>
+                            <span class="block text-[10px] text-[#64748B]">Ready for emergency machine breakdown dispatch</span>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Section 3: Platform Privileges & Verification Status -->
+                <div class="pt-2 border-t border-[#E2E8F0]">
+                    <div class="admin-form-section-title">
+                        <i class="fa-solid fa-shield-halved"></i> 3. Platform Access &amp; Compliance Status
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <label class="admin-checkbox-card flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-slate-800">
@@ -403,4 +534,24 @@
             </div>
         </div>
     </asp:Panel>
+
+    <script>
+        function toggleRoleProfileFields() {
+            var ddl = document.getElementById('<%= ddlAddRole.ClientID %>');
+            if (!ddl) return;
+            var roleVal = ddl.value;
+
+            var pnlFactory = document.getElementById('pnlAddFactoryFields');
+            var pnlSupplier = document.getElementById('pnlAddSupplierFields');
+            var pnlTech = document.getElementById('pnlAddTechFields');
+
+            if (pnlFactory) pnlFactory.style.display = (roleVal === "2") ? "block" : "none";
+            if (pnlSupplier) pnlSupplier.style.display = (roleVal === "3") ? "block" : "none";
+            if (pnlTech) pnlTech.style.display = (roleVal === "4") ? "block" : "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            toggleRoleProfileFields();
+        });
+    </script>
 </asp:Content>

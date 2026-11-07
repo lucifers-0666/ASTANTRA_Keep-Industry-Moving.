@@ -46,8 +46,14 @@ namespace IndustrialSparePartPortal.Admin.Audit
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error in LoadAuditLogs: " + ex.Message);
+                pnlAlert.Visible = true;
+                lblAlertMessage.Text = "Failed to load audit trail: " + ex.Message;
             }
+        }
+
+        protected void btnCloseAlert_Click(object sender, EventArgs e)
+        {
+            pnlAlert.Visible = false;
         }
 
         protected void FilterChanged(object sender, EventArgs e)

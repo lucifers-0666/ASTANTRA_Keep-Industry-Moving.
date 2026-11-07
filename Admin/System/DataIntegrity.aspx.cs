@@ -30,6 +30,16 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
             lblAlertMessage.Text = "Database referential integrity scan completed successfully. All normal forms and foreign key boundaries verified.";
         }
 
+        protected void btnRepairIntegrity_Click(object sender, EventArgs e)
+        {
+            int repaired;
+            string summary;
+            bool ok = _adminLogic.repairDataIntegrity(out repaired, out summary);
+            RunAudit();
+            pnlAlert.Visible = true;
+            lblAlertMessage.Text = summary;
+        }
+
         private void RunAudit()
         {
             try

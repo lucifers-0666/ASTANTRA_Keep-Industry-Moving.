@@ -18,12 +18,23 @@
         </div>
     </div>
 
+    <!-- Alert Banner -->
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded bg-rose-50 border border-rose-200 text-xs text-rose-900 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+            <asp:Label ID="lblAlertMessage" runat="server"></asp:Label>
+        </div>
+        <asp:LinkButton ID="btnCloseAlert" runat="server" OnClick="btnCloseAlert_Click" CssClass="text-rose-600 hover:text-rose-800">
+            <i class="fa-solid fa-xmark"></i>
+        </asp:LinkButton>
+    </asp:Panel>
+
     <!-- Security Configuration Telemetry Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 admin-animate-enter admin-stagger-1">
         <div class="surface-card p-4 border-l-4 border-l-[#1769E0]">
             <span class="text-[10px] font-mono font-bold text-[#64748B] uppercase block">Password Hashing</span>
-            <span class="text-sm font-black font-mono text-[#0F172A] mt-1 block">SHA-256 + Salt</span>
-            <span class="text-[10px] text-slate-500 mt-1 block">Cryptographic 32-byte salt</span>
+            <span class="text-sm font-black font-mono text-[#0F172A] mt-1 block">PBKDF2 (SHA-256)</span>
+            <span class="text-[10px] text-slate-500 mt-1 block">10,000 iterations + 16B salt</span>
         </div>
 
         <div class="surface-card p-4 border-l-4 border-l-[#059669]">
@@ -41,7 +52,7 @@
         <div class="surface-card p-4 border-l-4 border-l-[#7C3AED]">
             <span class="text-[10px] font-mono font-bold text-[#64748B] uppercase block">Defense Gate</span>
             <span class="text-sm font-black font-mono text-purple-700 mt-1 block">BasePage RBAC</span>
-            <span class="text-[10px] text-slate-500 mt-1 block">Strict role isolation</span>
+            <span class="text-[10px] text-slate-500 mt-1 block">Granular role permissions</span>
         </div>
     </div>
 

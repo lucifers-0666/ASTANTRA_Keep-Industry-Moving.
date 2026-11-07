@@ -2,6 +2,7 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
 {
     public partial class DataIntegrity
     {
+        protected global::System.Web.UI.WebControls.Button btnRepairIntegrity;
         protected global::System.Web.UI.WebControls.Button btnRunAudit;
         protected global::System.Web.UI.WebControls.Panel pnlAlert;
         protected global::System.Web.UI.WebControls.Label lblAlertMessage;

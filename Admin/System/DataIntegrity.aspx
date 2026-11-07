@@ -12,6 +12,7 @@
             <p class="text-xs text-[#64748B] m-0">Live referential integrity audit, orphaned record diagnostics, and normal form consistency across SQL Server LocalDB.</p>
         </div>
         <div class="flex items-center gap-2">
+            <asp:Button ID="btnRepairIntegrity" runat="server" Text="Reconcile Discrepancies" OnClick="btnRepairIntegrity_Click" CssClass="btn-secondary text-xs py-2 px-3 cursor-pointer" />
             <asp:Button ID="btnRunAudit" runat="server" Text="Execute Integrity Audit" OnClick="btnRunAudit_Click" CssClass="btn-primary text-xs py-2 px-3 cursor-pointer" />
         </div>
     </div>

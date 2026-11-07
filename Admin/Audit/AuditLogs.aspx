@@ -18,6 +18,17 @@
         </div>
     </div>
 
+    <!-- Alert Banner -->
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded bg-rose-50 border border-rose-200 text-xs text-rose-900 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+            <asp:Label ID="lblAlertMessage" runat="server"></asp:Label>
+        </div>
+        <asp:LinkButton ID="btnCloseAlert" runat="server" OnClick="btnCloseAlert_Click" CssClass="text-rose-600 hover:text-rose-800">
+            <i class="fa-solid fa-xmark"></i>
+        </asp:LinkButton>
+    </asp:Panel>
+
     <!-- Filter & Search Toolbar (Standard Reusable Pattern) -->
     <div class="admin-toolbar rounded-md mb-6 admin-animate-enter admin-stagger-1">
         <div class="admin-filter-group" style="width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
@@ -25,9 +36,15 @@
                 <span class="text-[11px] font-mono font-bold text-slate-500 uppercase">Filters:</span>
                 <asp:DropDownList ID="ddlActionFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterChanged" CssClass="admin-filter-select">
                     <asp:ListItem Value="" Text="All Action Types"></asp:ListItem>
+                    <asp:ListItem Value="AUTH_LOGIN_SUCCESS" Text="AUTH_LOGIN_SUCCESS"></asp:ListItem>
+                    <asp:ListItem Value="AUTH_LOGIN_FAILED" Text="AUTH_LOGIN_FAILED"></asp:ListItem>
+                    <asp:ListItem Value="AUTH_LOGOUT" Text="AUTH_LOGOUT"></asp:ListItem>
+                    <asp:ListItem Value="AUTH_ACCESS_DENIED" Text="AUTH_ACCESS_DENIED"></asp:ListItem>
                     <asp:ListItem Value="CREATE_USER" Text="CREATE_USER"></asp:ListItem>
                     <asp:ListItem Value="UPDATE_USER" Text="UPDATE_USER"></asp:ListItem>
                     <asp:ListItem Value="DELETE_USER" Text="DELETE_USER"></asp:ListItem>
+                    <asp:ListItem Value="CHANGE_PASSWORD" Text="CHANGE_PASSWORD"></asp:ListItem>
+                    <asp:ListItem Value="ADMIN_RESET_PASSWORD" Text="ADMIN_RESET_PASSWORD"></asp:ListItem>
                     <asp:ListItem Value="TOGGLE_STATUS" Text="TOGGLE_STATUS"></asp:ListItem>
                     <asp:ListItem Value="CREATE_FACTORY" Text="CREATE_FACTORY"></asp:ListItem>
                     <asp:ListItem Value="UPDATE_FACTORY" Text="UPDATE_FACTORY"></asp:ListItem>

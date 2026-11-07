@@ -45,6 +45,34 @@ namespace IndustrialSparePartPortal.Admin.Users
         protected global::System.Web.UI.WebControls.TextBox txtAddPhone;
         protected global::System.Web.UI.WebControls.TextBox txtAddPassword;
         protected global::System.Web.UI.WebControls.DropDownList ddlAddRole;
+
+        // Role-Specific Profile Controls
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryCompany;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryIndustry;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryGstin;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryContact;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryAddress;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryCity;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryState;
+        protected global::System.Web.UI.WebControls.TextBox txtAddFactoryPincode;
+
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierCompany;
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierRegNo;
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierGstin;
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierAddress;
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierCity;
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierState;
+        protected global::System.Web.UI.WebControls.TextBox txtAddSupplierPincode;
+
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechSkills;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechExp;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechRate;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechAddress;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechCity;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechState;
+        protected global::System.Web.UI.WebControls.TextBox txtAddTechPincode;
+        protected global::System.Web.UI.WebControls.CheckBox chkAddTechAvailable;
+
         protected global::System.Web.UI.WebControls.CheckBox chkAddIsActive;
         protected global::System.Web.UI.WebControls.CheckBox chkAddIsVerified;
         protected global::System.Web.UI.WebControls.Button btnCancelAdd;

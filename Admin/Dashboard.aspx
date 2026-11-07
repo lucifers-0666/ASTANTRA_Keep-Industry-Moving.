@@ -21,6 +21,17 @@
         </div>
     </div>
 
+    <!-- Alert / Feedback Banner -->
+    <asp:Panel ID="pnlAlert" runat="server" Visible="false" CssClass="p-3.5 mb-5 rounded bg-rose-50 border border-rose-200 text-xs text-rose-900 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+            <asp:Label ID="lblAlertMessage" runat="server"></asp:Label>
+        </div>
+        <asp:LinkButton ID="btnCloseAlert" runat="server" OnClick="btnCloseAlert_Click" CssClass="text-rose-600 hover:text-rose-800">
+            <i class="fa-solid fa-xmark"></i>
+        </asp:LinkButton>
+    </asp:Panel>
+
     <!-- Executive KPI Grid (8 Cards, High Density 4x2) -->
     <div class="admin-kpi-grid admin-animate-enter admin-stagger-1">
         <!-- 1. Registered Users -->

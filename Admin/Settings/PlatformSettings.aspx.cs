@@ -64,14 +64,22 @@ namespace IndustrialSparePartPortal.Admin.Settings
         {
             try
             {
+                if (!SessionHelper.UserId.HasValue)
+                {
+                    pnlAlert.Visible = true;
+                    lblAlertMessage.Text = "Authentication required: Session expired.";
+                    return;
+                }
+                int adminId = SessionHelper.UserId.Value;
+
                 string key = hdnEditSettingKey.Value;
                 string val = txtSettingValue.Text.Trim();
-                int adminId = SessionHelper.UserId ?? 1;
 
-                bool success = _adminLogic.updateSystemSetting(key, val, adminId);
+                string errorMsg;
+                bool success = _adminLogic.updateSystemSetting(key, val, adminId, out errorMsg);
                 if (success)
                 {
-                    _auditLogic.logAction(adminId, "UPDATE_SETTING", "SystemSettings", null, null, key + "=" + val, Request.UserHostAddress);
+                    _auditLogic.logAction(adminId, "UPDATE_SETTING", "SystemSettings", null, null, key + " -> " + val, Request.UserHostAddress);
                     pnlEditModal.Visible = false;
                     pnlAlert.Visible = true;
                     lblAlertMessage.Text = "System setting [" + key + "] updated to [" + val + "] successfully.";
@@ -80,7 +88,7 @@ namespace IndustrialSparePartPortal.Admin.Settings
                 else
                 {
                     pnlAlert.Visible = true;
-                    lblAlertMessage.Text = "Failed to update system setting.";
+                    lblAlertMessage.Text = !string.IsNullOrEmpty(errorMsg) ? errorMsg : "Failed to update system setting.";
                 }
             }
             catch (Exception ex)

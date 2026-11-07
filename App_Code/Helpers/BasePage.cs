@@ -27,6 +27,15 @@ namespace IndustrialSparePartPortal.App_Code.Helpers
             {
                 if (!string.Equals(SessionHelper.UserRole, RequiredRole, StringComparison.OrdinalIgnoreCase))
                 {
+                    try
+                    {
+                        var audit = new Logic.AuditLogic();
+                        audit.logAction(SessionHelper.UserId, "AUTH_ACCESS_DENIED", "Security", null, null, 
+                            string.Format("Role access denied for {0} to {1}. Required: {2}, UserRole: {3}", SessionHelper.UserEmail, Request.RawUrl, RequiredRole, SessionHelper.UserRole), 
+                            Request.UserHostAddress);
+                    }
+                    catch { }
+
                     Response.Redirect("~/Account/AccessDenied.aspx", true);
                     return;
                 }
