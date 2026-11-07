@@ -45,7 +45,7 @@ namespace IndustrialSparePartPortal.Admin.Categories
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading taxonomy data: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load equipment taxonomy data"));
             }
         }
 
@@ -113,7 +113,7 @@ namespace IndustrialSparePartPortal.Admin.Categories
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Category Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to modify spare part category"));
             }
         }
 
@@ -213,7 +213,7 @@ namespace IndustrialSparePartPortal.Admin.Categories
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Machine Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to modify machinery model"));
             }
         }
 

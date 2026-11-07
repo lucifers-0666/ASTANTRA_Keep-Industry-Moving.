@@ -42,7 +42,7 @@ namespace IndustrialSparePartPortal.Admin.Factories
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading factories: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load industrial plants roster"));
             }
         }
 
@@ -172,7 +172,7 @@ namespace IndustrialSparePartPortal.Admin.Factories
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Registration Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to register industrial plant"));
             }
         }
         #endregion
@@ -227,7 +227,7 @@ namespace IndustrialSparePartPortal.Admin.Factories
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Update Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to update factory profile"));
             }
         }
         #endregion

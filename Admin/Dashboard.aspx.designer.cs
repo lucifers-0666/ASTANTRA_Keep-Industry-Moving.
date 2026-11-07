@@ -11,19 +11,35 @@ namespace IndustrialSparePartPortal.Admin
 {
     public partial class Dashboard
     {
+        protected global::System.Web.UI.WebControls.HiddenField hdnChartData;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblLastRefreshed;
+        protected global::System.Web.UI.WebControls.LinkButton btnTimeframe7;
+        protected global::System.Web.UI.WebControls.LinkButton btnTimeframe30;
+        protected global::System.Web.UI.WebControls.LinkButton btnTimeframe90;
+        protected global::System.Web.UI.WebControls.LinkButton btnTimeframeAll;
+        protected global::System.Web.UI.WebControls.LinkButton btnRefresh;
+        protected global::System.Web.UI.WebControls.Panel pnlAlert;
+        protected global::System.Web.UI.WebControls.Label lblAlertMessage;
+        protected global::System.Web.UI.WebControls.LinkButton btnCloseAlert;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalGmv;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblRealizedRevenue;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalOrders;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblActiveEmergency;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDelayedOrders;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalUsers;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblVerifiedSuppliers;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblActiveFactories;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblActiveTechnicians;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblActiveEmergency;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblRfqConversionRate;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOpenRfqs;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalOrders;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotalGmv;
-        protected global::System.Web.UI.WebControls.Panel pnlAlert;
-        protected global::System.Web.UI.WebControls.Label lblAlertMessage;
-        protected global::System.Web.UI.WebControls.LinkButton btnCloseAlert;
+        protected global::System.Web.UI.WebControls.Repeater rptOperationalAlerts;
+        protected global::System.Web.UI.WebControls.Panel pnlNoAlerts;
         protected global::System.Web.UI.WebControls.GridView gvEmergencies;
+        protected global::System.Web.UI.WebControls.Panel pnlNoEmergencies;
+        protected global::System.Web.UI.WebControls.Repeater rptAuditActivity;
+        protected global::System.Web.UI.WebControls.Panel pnlNoAuditActivity;
         protected global::System.Web.UI.WebControls.GridView gvUsers;
+        protected global::System.Web.UI.WebControls.Panel pnlNoUsers;
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSessionUser;
     }
 }

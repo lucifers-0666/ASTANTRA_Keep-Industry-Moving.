@@ -161,6 +161,11 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
         public DataSet selectOpenEmergencies()
         {
+            return selectOpenEmergenciesForAdmin();
+        }
+
+        public DataSet selectOpenEmergenciesForAdmin()
+        {
             using (SqlConnection con = getcon())
             {
                 string sql = @"
@@ -168,10 +173,42 @@ namespace IndustrialSparePartPortal.App_Code.Logic
                            f.CompanyName AS FactoryCompany
                     FROM EmergencyRequests e
                     INNER JOIN Factories f ON e.FactoryId = f.FactoryId
+                    WHERE e.Status NOT IN ('Resolved', 'Closed')
                     ORDER BY e.CreatedAt DESC";
 
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
+        public DataSet selectOpenEmergenciesByFactory(int factoryId)
+        {
+            if (factoryId <= 0)
+            {
+                throw new ArgumentException("A valid positive factoryId is required for tenant-isolated emergency retrieval.", "factoryId");
+            }
+
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT e.EmergencyRequestId, e.MachineName, e.PriorityLevel, e.LocationCity, e.Status, e.CreatedAt,
+                           f.CompanyName AS FactoryCompany
+                    FROM EmergencyRequests e
+                    INNER JOIN Factories f ON e.FactoryId = f.FactoryId
+                    WHERE e.FactoryId = @FactoryId
+                      AND e.Status NOT IN ('Resolved', 'Closed')
+                    ORDER BY e.CreatedAt DESC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@FactoryId", SqlDbType.Int) { Value = factoryId });
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         DataSet ds = new DataSet();
@@ -791,7 +828,8 @@ namespace IndustrialSparePartPortal.App_Code.Logic
 
                 // Table row counts & health
                 string sqlTables = @"
-                    SELECT t.name AS TableName, p.rows AS RecordCount
+                    SELECT t.name AS TableName, p.rows AS RecordCount,
+                           (SELECT COUNT(*) FROM sys.foreign_keys fk WHERE fk.parent_object_id = t.object_id) AS ForeignKeyCount
                     FROM sys.tables t
                     INNER JOIN sys.partitions p ON t.object_id = p.object_id AND p.index_id IN (0, 1)
                     WHERE t.is_ms_shipped = 0

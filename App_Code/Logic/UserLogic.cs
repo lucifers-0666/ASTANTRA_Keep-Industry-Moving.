@@ -191,6 +191,30 @@ namespace IndustrialSparePartPortal.App_Code.Logic
             }
         }
 
+        public DataSet selectRecentUsers(int topCount = 8)
+        {
+            using (SqlConnection con = getcon())
+            {
+                string sql = @"
+                    SELECT TOP (@TopCount) u.UserId, u.Email, u.FullName, u.PhoneNumber, u.IsActive, u.IsVerified, u.CreatedAt,
+                           r.RoleName
+                    FROM Users u
+                    INNER JOIN Roles r ON u.RoleId = r.RoleId
+                    ORDER BY u.CreatedAt DESC, u.UserId DESC";
+
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@TopCount", SqlDbType.Int) { Value = topCount > 0 ? topCount : 8 });
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
+
         public bool updateUserStatus(int userId, bool isActive)
         {
             using (SqlConnection con = getcon())

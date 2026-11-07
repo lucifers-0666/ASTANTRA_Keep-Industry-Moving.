@@ -53,7 +53,7 @@ namespace IndustrialSparePartPortal.Admin.Orders
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading oversight telemetry: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load oversight telemetry"));
             }
         }
 
@@ -116,7 +116,7 @@ namespace IndustrialSparePartPortal.Admin.Orders
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "SOS Update Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to update emergency SOS ticket status"));
             }
         }
         #endregion
@@ -183,7 +183,7 @@ namespace IndustrialSparePartPortal.Admin.Orders
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Order Update Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to update purchase order fulfillment status"));
             }
         }
         #endregion

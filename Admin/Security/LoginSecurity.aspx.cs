@@ -42,7 +42,7 @@ namespace IndustrialSparePartPortal.Admin.Security
             catch (Exception ex)
             {
                 pnlAlert.Visible = true;
-                lblAlertMessage.Text = "Failed to load authentication security stream: " + ex.Message;
+                lblAlertMessage.Text = AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load authentication security stream");
             }
         }
 

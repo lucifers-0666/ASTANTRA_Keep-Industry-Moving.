@@ -47,7 +47,7 @@ namespace IndustrialSparePartPortal.Admin.Audit
             catch (Exception ex)
             {
                 pnlAlert.Visible = true;
-                lblAlertMessage.Text = "Failed to load audit trail: " + ex.Message;
+                lblAlertMessage.Text = AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load platform audit trail");
             }
         }
 

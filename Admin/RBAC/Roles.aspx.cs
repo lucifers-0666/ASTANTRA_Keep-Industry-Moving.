@@ -40,7 +40,7 @@ namespace IndustrialSparePartPortal.Admin.RBAC
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading security roles: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load platform security roles"));
             }
         }
 
@@ -73,7 +73,7 @@ namespace IndustrialSparePartPortal.Admin.RBAC
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading granular permissions: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load granular role permissions"));
             }
         }
 

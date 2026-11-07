@@ -50,7 +50,7 @@ namespace IndustrialSparePartPortal.Admin.Suppliers
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading suppliers: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load supplier verification dossier"));
             }
         }
 

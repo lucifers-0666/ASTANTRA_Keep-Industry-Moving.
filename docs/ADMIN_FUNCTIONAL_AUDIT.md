@@ -16,20 +16,32 @@ This document presents the complete control-by-control, page-by-page functional 
 
 ## 2. Page-by-Page Interactive Control Inventory
 
-### Page 1: Command Dashboard (`Admin/Dashboard.aspx`)
+### Page 1: Command & Analytics Dashboard (`Admin/Dashboard.aspx`)
 | Control ID | Type | User Action / Input | Validation / Business Rule | Backend Event / Method | Database Table(s) | Expected Output | Verification Status |
 |---|---|---|---|---|---|---|---|
-| `lblTotalUsers` | HtmlGenericControl | View live total user count | System calculates active user count | `AdminLogic.getExecutiveKpis` | `Users` | Displays real integer count of active accounts | PASS |
-| `lblVerifiedSuppliers` | HtmlGenericControl | View verified vendor count | `VerificationStatus = 'Verified'` | `AdminLogic.getExecutiveKpis` | `Suppliers` | Displays verified stocking vendors count | PASS |
-| `lblActiveFactories` | HtmlGenericControl | View active manufacturing plants | Plant accounts registered | `AdminLogic.getExecutiveKpis` | `Factories` | Displays registered factories count | PASS |
-| `lblActiveTechnicians` | HtmlGenericControl | View available technicians | `IsAvailable = 1` | `AdminLogic.getExecutiveKpis` | `Technicians` | Displays ready-for-dispatch engineers | PASS |
-| `lblActiveEmergency` | HtmlGenericControl | View emergency machine breakdown tickets | `Status = 'Open'` | `AdminLogic.getExecutiveKpis` | `EmergencyRequests` | Real-time open SOS tickets count | PASS |
-| `lblOpenRfqs` | HtmlGenericControl | View pending commercial RFQs | `Status = 'Pending'` | `AdminLogic.getExecutiveKpis` | `QuotationRequests` | Open bids awaiting response count | PASS |
-| `lblTotalOrders` | HtmlGenericControl | View purchase consignment orders | Orders created in platform | `AdminLogic.getExecutiveKpis` | `Orders` | Total orders count | PASS |
-| `lblTotalGmv` | HtmlGenericControl | View platform procurement volume | Sum of confirmed orders | `AdminLogic.getExecutiveKpis` | `Orders` | Tabular formatted GMV in INR (`₹`) | PASS |
-| `gvEmergencies` | GridView | Live stream of critical breakdown alerts | Displays latest SOS tickets | `AdminLogic.selectOpenEmergencies` | `EmergencyRequests`, `Factories` | Factory, machine, priority, city, status | PASS |
-| `gvUsers` | GridView | Stream of recently registered accounts | Top 8 registered accounts | `UserLogic.selectAllUsers` | `Users`, `Roles` | Name, email, assigned role, joined date | PASS |
-| `pnlAlert` | Panel | Error / warning feedback | Dismissible banner | `btnCloseAlert_Click` | N/A | Human-readable diagnostic alert | PASS |
+| `btnTimeframe7` to `btnTimeframeAll` | LinkButtons | Select 7d, 30d, 90d, or All Time | Parameterized date filter | `btnTimeframe_Click` | `Orders`, `EmergencyRequests`, `QuotationRequests` | Rerenders telemetry and Chart.js datasets for selected window | PASS |
+| `btnRefresh` | LinkButton | Force data rebind & telemetry poll | Live database refresh | `btnRefresh_Click` | All Core Relational Tables | Refreshes all KPIs, charts, and tables with fresh timestamp | PASS |
+| `lblTotalGmv` | HtmlGenericControl | View gross order commitments | Non-cancelled orders sum | `AdminAnalyticsLogic.getExecutiveMetrics` | `Orders` | Tabular formatted GMV in INR (`₹`) | PASS |
+| `lblRealizedRevenue` | HtmlGenericControl | View completed revenue turnover | Orders where `OrderStatus = 'Delivered'` | `AdminAnalyticsLogic.getExecutiveMetrics` | `Orders` | Realized revenue turnover in INR (`₹`) | PASS |
+| `lblTotalOrders` | HtmlGenericControl | View total purchase orders | Orders in selected window | `AdminAnalyticsLogic.getExecutiveMetrics` | `Orders` | Integer count of contracted consignments | PASS |
+| `lblActiveEmergency` | HtmlGenericControl | View open machine breakdown tickets | `Status NOT IN ('Resolved', 'Closed')` | `AdminAnalyticsLogic.getExecutiveMetrics` | `EmergencyRequests` | Real-time open SOS tickets count | PASS |
+| `lblDelayedOrders` | HtmlGenericControl | View orders exceeding 3-day SLA | Pending orders older than 3 days | `AdminAnalyticsLogic.getExecutiveMetrics` | `Orders` | Integer count of delayed consignments | PASS |
+| `lblTotalUsers` | HtmlGenericControl | View live total active user count | `IsActive = 1` | `AdminAnalyticsLogic.getExecutiveMetrics` | `Users` | Integer count of active ecosystem accounts | PASS |
+| `lblVerifiedSuppliers` | HtmlGenericControl | View verified vendor count | `VerificationStatus = 'Verified'` | `AdminAnalyticsLogic.getExecutiveMetrics` | `Suppliers` | GSTIN-compliant vendor count | PASS |
+| `lblActiveFactories` | HtmlGenericControl | View active manufacturing plants | Plant buyer units | `AdminAnalyticsLogic.getExecutiveMetrics` | `Factories` | Industrial plants count | PASS |
+| `lblActiveTechnicians` | HtmlGenericControl | View available technicians | `IsAvailable = 1` | `AdminAnalyticsLogic.getExecutiveMetrics` | `Technicians` | Available service engineers | PASS |
+| `lblRfqConversionRate` | HtmlGenericControl | View commercial conversion % | `(Accepted RFQs / Total RFQs) * 100` | `AdminAnalyticsLogic.getExecutiveMetrics` | `QuotationRequests`, `QuotationResponses` | Formatted conversion percentage (e.g. `25.0%`) | PASS |
+| `hdnChartData` | HiddenField | Supplies serialized JSON data to Chart.js | JavaScriptSerializer encoding | `SerializeAnalyticsChartData` | `Orders`, `Users`, `Roles`, `EmergencyRequests`, `QuotationRequests` | Clean JSON payload for 5 Chart.js instances | PASS |
+| `canvasProcurementActivity` | Canvas Element | Interactive procurement trend | Dual-axis line & bar chart | Client Chart.js 4.4.4 UMD | `Orders` | Responsive order volume & ₹ value trend over time | PASS |
+| `canvasOrderStatus` | Canvas Element | Fulfillment pipeline breakdown | Horizontal bar chart | Client Chart.js 4.4.4 UMD | `Orders` | Status distribution (Pending to Delivered) | PASS |
+| `canvasRoleDistribution` | Canvas Element | User ecosystem role share | 65% cutout doughnut chart | Client Chart.js 4.4.4 UMD | `Roles`, `Users` | Proportional user role segmentation | PASS |
+| `canvasEmergencyPriority` | Canvas Element | Emergency breakdown severity triage | Severity-coded bar chart | Client Chart.js 4.4.4 UMD | `EmergencyRequests` | Priority distribution (Critical to Low) | PASS |
+| `canvasRfqFunnel` | Canvas Element | Commercial RFQ conversion funnel | 4-stage pipeline bar chart | Client Chart.js 4.4.4 UMD | `QuotationRequests`, `QuotationResponses`, `Orders` | Pipeline attrition and conversion stages | PASS |
+| `rptOperationalAlerts` | Repeater | View critical operational alerts | Urgent machine stoppage / pending KYC | `AdminAnalyticsLogic.getCriticalOperationalAlerts` | `EmergencyRequests`, `Suppliers`, `Factories` | Alert title, description, timestamp, resolve link | PASS |
+| `gvEmergencies` | GridView | Live stream of critical breakdown alerts | Platform-wide open emergencies | `AdminLogic.selectOpenEmergenciesForAdmin` | `EmergencyRequests`, `Factories` | ID, Factory & Machine, Priority, City, Status | PASS |
+| `gvUsers` | GridView | Stream of recently registered accounts | Optimized `TOP (@TopCount)` query | `UserLogic.selectRecentUsers(8)` | `Users`, `Roles` | User Name, Email, Role, Status | PASS |
+| `rptAuditActivity` | Repeater | Recent administrative audit stream | Latest platform operations | `AuditLogic.selectAuditLogs(null, null, 6)` | `AuditLogs`, `Users`, `Roles` | Action, Target, Actor Email, IP, Timestamp | PASS |
+| `pnlAlert` | Panel | Error / warning feedback | Dismissible banner with sanitized ref ID | `btnCloseAlert_Click` | N/A | Human-readable diagnostic alert with `ERR-XXXXXXXX` | PASS |
 
 ---
 

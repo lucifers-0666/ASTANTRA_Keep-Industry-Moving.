@@ -42,7 +42,7 @@ namespace IndustrialSparePartPortal.Admin.Technicians
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading technician roster: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load technician roster"));
             }
         }
 
@@ -196,7 +196,7 @@ namespace IndustrialSparePartPortal.Admin.Technicians
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Registration Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to register field service engineer"));
             }
         }
         #endregion
@@ -254,7 +254,7 @@ namespace IndustrialSparePartPortal.Admin.Technicians
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Update Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to update technician credentials"));
             }
         }
         #endregion

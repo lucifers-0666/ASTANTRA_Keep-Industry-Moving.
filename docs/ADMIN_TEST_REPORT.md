@@ -95,6 +95,29 @@ An automated authenticated test suite executed across all 15 administrative page
 - **Profile Avatar Verification:** `Admin/Profile.aspx.cs` validates file size (<= 2MB), extension whitelist (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`), and magic-byte header validation.
 - **Metadata Stripping:** Decodes binary into `System.Drawing.Bitmap` and re-encodes to clean JPEG, eliminating embedded polyglot scripts or EXIF exploitation payloads.
 
+### F. Cross-Tenant Emergency Request Isolation
+- **Tenant Segmentation:** Split emergency data access into `selectOpenEmergenciesForAdmin()` and `selectOpenEmergenciesByFactory(int factoryId)`.
+- **Identity Safeguards:** Removed insecure `return 1` fallback in `Factory/Dashboard.aspx.cs`. Unauthenticated or unmapped factory requests redirect immediately to `AccessDenied.aspx`.
+- **Regression Verification:**
+  - Automated test created temporary Factory B (`Baroda Forge Plant B`) and emergency tickets.
+  - Verified Admin saw open emergencies from both Factory A and Factory B.
+  - Verified Factory A saw strictly Factory A tickets.
+  - Verified Factory B saw strictly Factory B tickets.
+  - Verified closed/resolved tickets are excluded from both views.
+  - Verified invalid `factoryId <= 0` throws `ArgumentException`.
+  - All temporary test entities cleaned up with 100% database integrity maintained.
+
+### G. Admin Analytics & Chart.js Integration
+- **Local Asset Stability:** Pinned Chart.js 4.4.4 UMD bundle stored locally in `Content/lib/chartjs/chart.umd.min.js` (205 KB).
+- **Timeframe Aggregations:** Tested 7-day, 30-day, 90-day, and All-Time parameterized filters.
+- **Safe JSON Delivery:** Chart data serialized safely from C# data layer via `JavaScriptSerializer` into `<asp:HiddenField ID="hdnChartData">`. 0 SQL queries in clientside JS.
+- **Accounting Integrity:** Verified Gross Order Value (₹85,000) excludes cancelled orders, and Completed Revenue (₹0) strictly counts Delivered consignments.
+- **PostBack Lifecycle:** Tested partial and full postback re-initialization with clean instance teardown (`chart.destroy()`).
+
+### H. Centralized Sanitized Error Handling
+- **AppErrorHandler.cs:** Centralized helper catches and logs detailed technical exceptions server-side while presenting safe, user-friendly messages with unique reference IDs (`ERR-XXXXXXXX`).
+- **Zero Information Leakage:** Verified across all 15 Admin pages: 0 instances of raw `ex.Message`, stack traces, or SQL syntax exposed in UI alerts.
+
 ---
 
 ## 5. Viva Evaluation Defense Highlights

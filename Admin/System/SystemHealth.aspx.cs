@@ -47,7 +47,7 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
             catch (Exception ex)
             {
                 pnlAlert.Visible = true;
-                lblAlertMessage.Text = "Database connection test exception: " + ex.Message;
+                lblAlertMessage.Text = AppErrorHandler.FormatSafeErrorMessage(ex, "Database connection ping test encountered an error");
             }
         }
 
@@ -71,7 +71,7 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
             catch (Exception ex)
             {
                 pnlAlert.Visible = true;
-                lblAlertMessage.Text = "Error loading system telemetry: " + ex.Message;
+                lblAlertMessage.Text = AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load system runtime telemetry");
             }
         }
     }

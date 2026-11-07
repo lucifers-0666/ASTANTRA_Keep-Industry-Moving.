@@ -64,7 +64,9 @@ namespace IndustrialSparePartPortal.Admin.SystemGovernance
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error running data integrity audit: " + ex.Message);
+                lblAlertMessage.Text = AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to execute database schema integrity audit");
+                pnlAlert.CssClass = "p-4 mb-6 rounded-md border border-rose-300 bg-rose-50 text-rose-900 text-xs flex items-center justify-between shadow-xs admin-animate-enter";
+                pnlAlert.Visible = true;
             }
         }
     }

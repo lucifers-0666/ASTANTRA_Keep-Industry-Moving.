@@ -67,7 +67,7 @@ namespace IndustrialSparePartPortal.Admin.SpareParts
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading taxonomy dropdowns: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load equipment taxonomy selectors"));
             }
         }
 
@@ -93,7 +93,7 @@ namespace IndustrialSparePartPortal.Admin.SpareParts
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading parts catalog: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load master parts catalog"));
             }
         }
 
@@ -266,7 +266,7 @@ namespace IndustrialSparePartPortal.Admin.SpareParts
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Part Operation Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to execute spare part operation"));
             }
         }
         #endregion

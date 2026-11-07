@@ -1,8 +1,8 @@
 # ASTANTRA Platform — Master Project Status & Inventory
 
 **Last Updated:** November 7, 2026  
-**Active Development Branch:** `feature/admin-completion`  
-**Base Truth Branch:** `main`  
+**Active Development Branch:** `feature/admin-analytics-dashboard`  
+**Base Truth Branch:** `main` (Base Commit: `a136dd1` on `feature/admin-completion`)  
 **Platform Architecture:** Three-Tier ASP.NET Web Forms (.NET Framework 4.8, C# 7.3)  
 **Database Catalog:** SQL Server LocalDB (`IndustrialSparePartDB`) with Parameterized ADO.NET  
 **Total Physical ASPX Pages:** **38 Pages**

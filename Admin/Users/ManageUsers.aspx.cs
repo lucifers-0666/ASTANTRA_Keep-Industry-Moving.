@@ -82,7 +82,7 @@ namespace IndustrialSparePartPortal.Admin.Users
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Error loading users: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to load platform user directory"));
             }
         }
 
@@ -330,7 +330,7 @@ namespace IndustrialSparePartPortal.Admin.Users
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Registration Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to register user account"));
             }
         }
         #endregion
@@ -416,7 +416,7 @@ namespace IndustrialSparePartPortal.Admin.Users
             }
             catch (Exception ex)
             {
-                ShowAlert(false, "Update Exception: " + ex.Message);
+                ShowAlert(false, AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to update user profile"));
             }
         }
         #endregion

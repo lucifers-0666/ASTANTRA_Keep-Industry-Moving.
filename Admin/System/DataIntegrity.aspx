@@ -104,10 +104,10 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Referential Health">
+                <asp:TemplateField HeaderText="Constraint Architecture">
                     <ItemTemplate>
-                        <span class="status-pill status-pill-verified text-[10px] font-mono">
-                            <i class="fa-solid fa-check text-[9px] mr-1"></i> Normal Form Validated
+                        <span class='<%# Convert.ToInt32(Eval("ForeignKeyCount")) > 0 ? "status-pill status-pill-verified text-[10px] font-mono" : "spec-tag spec-tag-blue text-[10px] font-mono" %>'>
+                            <%# Convert.ToInt32(Eval("ForeignKeyCount")) > 0 ? "FK Enforced (" + Eval("ForeignKeyCount") + " Constraints)" : "Master / Reference Entity" %>
                         </span>
                     </ItemTemplate>
                 </asp:TemplateField>

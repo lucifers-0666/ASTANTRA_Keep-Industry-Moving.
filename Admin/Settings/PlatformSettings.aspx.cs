@@ -94,7 +94,7 @@ namespace IndustrialSparePartPortal.Admin.Settings
             catch (Exception ex)
             {
                 pnlAlert.Visible = true;
-                lblAlertMessage.Text = "Error: " + ex.Message;
+                lblAlertMessage.Text = AppErrorHandler.FormatSafeErrorMessage(ex, "Failed to update platform system setting");
             }
         }
 

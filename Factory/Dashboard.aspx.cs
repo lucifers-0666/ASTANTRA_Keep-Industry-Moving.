@@ -57,9 +57,9 @@ namespace IndustrialSparePartPortal.Factory
                 }
             }
 
-            lblUserCompany.InnerText = SessionHelper.FullName ?? "Industrial Plant Buyer";
-            lblPlantLocation.InnerText = "Regional Manufacturing Plant";
-            return 1;
+            // Reject unmapped or unauthorized direct identity requests
+            Response.Redirect("~/Account/AccessDenied.aspx");
+            return 0;
         }
 
         private void LoadPartsDropdown()
@@ -139,7 +139,14 @@ namespace IndustrialSparePartPortal.Factory
 
         private void LoadEmergencyRequests(int factoryId)
         {
-            DataSet ds = _adminLogic.selectOpenEmergencies();
+            if (factoryId <= 0)
+            {
+                rptEmergency.Visible = false;
+                pnlNoEmergency.Visible = true;
+                return;
+            }
+
+            DataSet ds = _adminLogic.selectOpenEmergenciesByFactory(factoryId);
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 rptEmergency.DataSource = ds.Tables[0];
